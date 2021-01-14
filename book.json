@@ -1,6 +1,7 @@
 {
   "title": "Code an OS Handbook",
   "author": "Hanabi",
+  "language": "zh-hans",
   "plugins": [
     "-lunr",
     "-search",
@@ -15,21 +16,7 @@
     "expandable-chapters-small"
   ],
   "pluginsConfig": {
-    "search-pro": {
-      "cutWordLib": "nodejieba",
-      "defineWord": [
-        "搜索"
-      ]
-    },
     "sharing": {
-      "douban": true,
-      "facebook": true,
-      "google": true,
-      "pocket": true,
-      "qq": true,
-      "qzone": true,
-      "twitter": true,
-      "weibo": true,
       "all": [
         "douban",
         "facebook",
@@ -38,7 +25,6 @@
         "linkedin",
         "twitter",
         "weibo",
-        "messenger",
         "qq",
         "qzone",
         "viber",

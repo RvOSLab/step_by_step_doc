@@ -1,0 +1,69 @@
+{
+  "title": "Code an OS Handbook",
+  "author": "Hanabi",
+  "plugins": [
+    "-lunr",
+    "-search",
+    "search-pro",
+    "-sharing",
+    "sharing-plus",
+    "github-buttons",
+    "anchor-navigation-ex",
+    "page-footer-ex",
+    "splitter",
+    "copy-code-button",
+    "expandable-chapters-small"
+  ],
+  "pluginsConfig": {
+    "search-pro": {
+      "cutWordLib": "nodejieba",
+      "defineWord": [
+        "搜索"
+      ]
+    },
+    "sharing": {
+      "douban": true,
+      "facebook": true,
+      "google": true,
+      "pocket": true,
+      "qq": true,
+      "qzone": true,
+      "twitter": true,
+      "weibo": true,
+      "all": [
+        "douban",
+        "facebook",
+        "google",
+        "instapaper",
+        "linkedin",
+        "twitter",
+        "weibo",
+        "messenger",
+        "qq",
+        "qzone",
+        "viber",
+        "whatsapp"
+      ]
+    },
+    "anchor-navigation-ex": {
+      "showLevel": false
+    },
+    "github-buttons": {
+      "buttons": [
+        {
+          "user": "LZU-OSLab",
+          "repo": "step_by_step_doc",
+          "type": "star",
+          "size": "small",
+          "count": true
+        }
+      ]
+    },
+    "page-footer-ex": {
+      "copyright": "By [Hanabi](https://github.com/ytf4425)，使用[署名-非商业性使用-相同方式共享 4.0 国际](http://creativecommons.org/licenses/by-nc-sa/4.0/)发布",
+      "markdown": true,
+      "update_label": "此页面修订于：",
+      "update_format": "YYYY-MM-DD HH:mm:ss"
+    }
+  }
+}

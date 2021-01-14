@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "14.15.4"
+  - "10"
 cache: npm
 
 notifications:
@@ -23,7 +23,7 @@ after_script:
   - git remote add origin https://${REF}
   - git add .
   - git commit -m "Updated By Travis-CI With Build $TRAVIS_BUILD_NUMBER For Github Pages"
-  - git push --force --quiet "https://${TOKEN}@${REF}" main:gh-pages
+  - git push --force --quiet "https://${TOKEN}@${REF}" master:gh-pages
 
 branches:
   only:

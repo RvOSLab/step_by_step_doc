@@ -8,9 +8,9 @@
 sudo apt install -y git build-essential pkg-config libglib2.0-dev libpixman-1-dev binutils libgtk-3-dev texinfo make libncurses5-dev tmux gcc-riscv64-linux-gnu
 ```
 
-Ubuntu 的软件源中没有支持模拟RISC-V的QEMU和支持调试RISC-V的GDB，需要我们自行编译源码安装。下载 [QEMU 5.1.0](https://gitee.com/Hanabichan/lzu-oslab-resource/attach_files/521696/download/qemu-5.1.0.tar.xz) 和 [GDB 10.1](https://gitee.com/Hanabichan/lzu-oslab-resource/attach_files/521695/download/gdb-10.1.tar.xz) 的源码包，可以选择官网下载，也可以下载前面给出的我们放在 gitee 上的源码包（国内下载稍快些）。
+Ubuntu 的软件源中没有支持模拟RISC-V的QEMU和支持调试RISC-V的GDB，需要我们自行编译源码安装。下载 [QEMU 5.1.0](https://gitee.com/Hanabichan/lzu-oslab-resource/attach_files/521696/download/qemu-5.1.0.tar.xz) 和 [GDB 10.1](https://gitee.com/Hanabichan/lzu-oslab-resource/attach_files/521695/download/gdb-10.1.tar.xz) 的源码包，可以选择官网下载，也可以下载前面给出的我们放在 gitee 上的源码包（国内下载稍快些）。选择这两个版本也没有什么原因，就是系统编写时的最新稳定版罢了，其中 QEMU 5.1.0 恰好也比 QEMU 5.0.0 多了OpenSBI中对 `HART_STATE_EXTENTION` 的支持。
 
-下载完成后解压即可
+下载完成后解压即可：
 
 ```shell
 tar xJf qemu-5.1.0.tar.xz		#解压qemu包
@@ -42,15 +42,18 @@ qemu-system-riscv64 --version	# 打印qemu版本信息
 
 应该能看到这样的信息：
 
-> QEMU emulator version 5.1.0  
+```
+QEMU emulator version 5.1.0
 Copyright (c) 2003-2020 Fabrice Bellard and the QEMU Project developers
+```
 
-
-> GNU gdb (GDB) 10.1  
-Copyright (C) 2020 Free Software Foundation, Inc.  
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>  
-This is free software: you are free to change and redistribute it.  
+```
+GNU gdb (GDB) 10.1
+Copyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
+```
 
 执行 `qemu-system-riscv64 -machine virt -nographic`，可以看到如下输出：
 

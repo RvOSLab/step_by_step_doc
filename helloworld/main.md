@@ -93,9 +93,9 @@ main()
 }
 ```
 
-根据前面的说明，我们很容易读通这个程序，它所做的不过就是检测`TIMER_EXTENTION`（时钟）、`SHUT_DOWN_EXTENTION`（关机）、`HART_STATE_EXTENTION`（硬件级线程）这几个 sbi 扩展是否可用 (available) ，检测当前 sbi 的实现，最后输出"Hello LZU OS"，随后**陷入死循环**。
+根据前面的说明，我们很容易读通这个程序，它所做的不过就是检测`TIMER_EXTENTION`（时钟）、`SHUT_DOWN_EXTENTION`（关机）、`HART_STATE_EXTENTION`（硬件级线程，这一拓展我们实际并不会使用，只是单纯的检测一下）这几个 sbi 扩展是否可用 (available) ，检测当前 sbi 的实现，最后输出"Hello LZU OS"，随后**陷入死循环**。
 
-> **HART 硬件级线程**  
+> **小知识：HART 硬件级线程**  
 >
 > hart 是硬件线程(hardware thread)的缩略形式。 我们用该术语将它们与大多数程序员熟悉的软件线程区分开来。软件线程在 harts 上进行分时复用。 大多数处理器核都只有一个hart。  
 > *—— 摘自[《RISC-V 手册》](http://riscvbook.com/chinese/RISC-V-Reader-Chinese-v2p1.pdf)*

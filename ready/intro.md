@@ -26,7 +26,7 @@ RISC-V 处理器通常有 3 个特权级，由高到底分别为 M 模式（mach
 
 QEMU 是一个很棒的模拟器，可以通过动态的二进制转换，模拟CPU，因此能够让我们在 x86 的电脑上模拟出 RISC-V 的运行环境，便于我们的开发测试，还可以和 GDB 联动调试，非常方便。我们的系统很小很简单，因此也完全不需要考虑性能之类的问题，只要能跑起来就可以了。
 
-此外，QEMU 还内置了一套 OpenSBI（SBI的一个开源实现），在我们编译好的可以模拟 64 位 RISC-V 的 QEMU 5.1 中内置的是 OpenSBI v0.7，指令集支持到了 RV64ACDFIMSU。
+此外，QEMU 还内置了一套 OpenSBI（SBI的一种开源实现），在我们编译好的可以模拟 64 位 RISC-V 的 QEMU 5.1 中内置的是 OpenSBI v0.7，指令集支持到了 RV64ACDFIMSU。
 
 RV64ACDFIMSU：
 

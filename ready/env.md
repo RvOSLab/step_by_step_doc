@@ -17,7 +17,7 @@ tar xJf qemu-5.1.0.tar.xz		#解压qemu包
 tar xJf gdb-10.1.tar.xz			#解压gdb包
 ```
 
-进入解压后的 QEMU 源码目录，使用如下配置编译安装，这里配置了 QEMU 的模拟目标架构是32位和64位的 RISC-V，同时编译 GTK 图形界面模式。
+进入解压后的 QEMU 源码目录，使用如下配置编译安装，这里配置了 QEMU 的模拟目标架构是32位和64位的 RISC-V，同时编译图形界面（使用 GTK 图形界面库，一个 Linux 下主流的图形界面库）。
 
 ```shell
 ./configure --target-list=riscv32-softmmu,riscv64-softmmu --enable-gtk
@@ -81,4 +81,6 @@ PMP0    : 0x0000000080000000-0x000000008001ffff (A)
 PMP1    : 0x0000000000000000-0xffffffffffffffff (A,R,W,X)
 ```
 
-表示QEMU可正常使用。退出可以使用快捷键 Ctrl+A ，随后输入 x 。
+表示QEMU可正常使用。
+
+Qemu 可以使用 Ctrl + A 再按下 x 退出（注意要松开 Ctrl 和 A 再单独按x，这是一套组合按键，并不是只按 Ctrl + A 就可以的）。

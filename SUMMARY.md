@@ -6,4 +6,6 @@
   * [环境部署](ready/env.md)
 * [你好，世界](helloworld/README.md)
   * [“主”函数的编写](helloworld/main.md)
+  * [ecall 指令的封装](helloworld/packaging.md)
   * [操作系统的启动](helloworld/boot.md)
+  * [拼搭我们的系统](helloworld/make.md)

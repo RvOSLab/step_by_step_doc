@@ -117,7 +117,7 @@ SBI 只是一个规范，根据这个规范，不同的厂家（或程序员）�
 
 QEMU 是一个很棒的模拟器，可以通过动态的二进制转换，模拟CPU，因此能够让我们在 x86 的电脑上模拟出 RISC-V 的运行环境，便于我们的开发测试，还可以和 GDB 联动调试，非常方便。我们的系统很小很简单，因此也完全不需要考虑性能之类的问题，只要能跑起来就可以了。
 
-此外，QEMU 还内置了 OpenSBI，在我们编译好的可以模拟 64 位 RISC-V 的 QEMU 5.1 中内置的是 OpenSBI v0.7，指令集支持到了 RV64ACDFIMSU。
+QEMU 所模拟的 64位 RISC-V 指令集支持到了 RV64ACDFIMSU。
 
 RV64ACDFIMSU：
 
@@ -131,6 +131,8 @@ RV64ACDFIMSU：
   - M 模式（machine mode）
   - S 模式（supervisor mode）
   - U 模式（user mode）
+
+QEMU 自带 OpenSBI，但因为有问题，启动后寻址不正确，因此我们使用 [OpenSBI 的官方 v0.9 版本](https://github.com/riscv/opensbi/releases/tag/v0.9)。
 
 ## 参考资料
 

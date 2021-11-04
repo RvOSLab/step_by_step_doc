@@ -13,7 +13,8 @@
     "page-footer-ex",
     "splitter",
     "copy-code-button",
-    "expandable-chapters-small"
+    "expandable-chapters-small",
+    "katex"
   ],
   "pluginsConfig": {
     "sharing": {

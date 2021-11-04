@@ -4,6 +4,8 @@
 
 这份文档所对应的代码都可以在 [LZU-OSLab/lzu_oslab: A simple OS running on RISC-V for education](https://github.com/LZU-OSLab/lzu_oslab) 中找到。
 
+本教程最主要用到的参考资料是 *[RISC-V Reader Chinese v2.1](reference/RISC-V-Reader-Chinese-v2p1.pdf)*
+
 > **小知识**  
 > 有时候文档里会出现此类带有**小知识**标题的引用块，只是做一些相关的介绍，感兴趣的同学可以看一看作为补充知识，不了解也不影响相关任务。
 

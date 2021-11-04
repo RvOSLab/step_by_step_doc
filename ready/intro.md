@@ -136,6 +136,8 @@ RV64ACDFIMSU：
 
 QEMU 自带 OpenSBI，但因为有问题，启动后寻址不正确，因此我们使用 [OpenSBI 的官方 v0.9 版本](https://github.com/riscv/opensbi/releases/tag/v0.9)，配合 OpenSBI 官方仓库打包好的固件即可。
 
+若不指定参数，模拟 RISC-V 环境的 QEMU virt 虚拟机的默认物理内存大小为 128 MiB，我们就采用这个大小，不做修改。
+
 ## 参考资料
 
 理解 SBI：

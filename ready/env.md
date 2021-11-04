@@ -8,7 +8,7 @@
 sudo apt install -y build-essential gettext pkg-config libglib2.0-dev python3-dev libpixman-1-dev binutils libgtk-3-dev texinfo make gcc-riscv64-linux-gnu libncurses5-dev ninja-build tmux axel git
 ```
 
-Ubuntu 的软件源中没有支持模拟RISC-V的QEMU和支持调试RISC-V的GDB，需要我们自行编译源码安装。下载 [QEMU 6.0.0](https://download.qemu.org/qemu-6.0.0.tar.xz) 和 [GDB 10.2](https://mirror.lzu.edu.cn/gnu/gdb/gdb-10.2.tar.xz) 的源码包。选择这两个版本也没有什么原因，就是系统编写时的最新稳定版罢了，其中 QEMU 6.0.0 恰好也比 QEMU 5.0.0 多了OpenSBI中对 `HART_STATE_EXTENTION` 的支持。
+Ubuntu 的软件源中没有支持模拟RISC-V的QEMU和支持调试RISC-V的GDB，需要我们自行编译源码安装。下载 [QEMU 6.0.0](https://download.qemu.org/qemu-6.0.0.tar.xz) 和 [GDB 10.2](https://mirror.lzu.edu.cn/gnu/gdb/gdb-10.2.tar.xz) 的源码包。选择这两个版本也没有什么原因，就是系统编写时的最新稳定版罢了。
 
 下载完成后解压即可：
 

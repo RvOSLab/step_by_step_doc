@@ -13,5 +13,6 @@
 * [物理内存管理]
 * [虚拟内存管理](virtualmm/README.md)
   * [基础介绍](virtualmm/intro.md)
+  * [基础头文件准备](virtualmm/header.md)
   * [初始化过程](virtualmm/init.md)
   * [其他管理过程](virtualmm/manage.md)

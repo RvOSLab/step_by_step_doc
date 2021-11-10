@@ -245,9 +245,18 @@ boot_stack_top:
 boot_pg_dir:
     .zero 2 * 8
     .quad (0x80000000 >> 2) | 0x0F
-    .quad (0x80000000 >> 2) | 0x0F
     .zero 508 * 8
 ```
+
+> 前面提到，全局变量、函数的地址在编译时已经确定，我们这里取到的地址的值应该与 readelf 读取到的地址完全一样，但实际上并非如此。符号的地址是固定的，取地址的方式却有多种，取决于编译使用的*代码模型*和编译选项。
+> 
+> 假设程序中有一个变量`global`，地址是 1000，编译器生成访问`global`的代码时有多种选择：
+> 
+> - 硬编码地址：直接将地址 1000 写死到程序中
+> - PC 相对寻址：将`global`地址到访问它的指令地址的差值 Offset 写入程序中，通过 PC + Offset 获取地址 1000,
+> - 位置无关代码：将`global`的地址存放到某个固定的地址中，访问时加载器查找`global`的地址并将其写入，程序从这个地址取出（通常是 PC 相对寻址）`global`的地址，再读写`global`。
+> 
+> 位置无关代码一般用于*动态链接*的可执行文件，某些 Linux 发行版上的 GCC 在编译时加入了特定的参数，总是生成*位置无关可执行文件*，为了确保所有的地址都通过 PC-relative 寻址获取。本内核使用 medany 代码模型，并使用 -fno-pie 禁止生成位置无关可执行文件。
 
 ## 从大页到小页
 
@@ -256,6 +265,8 @@ boot_pg_dir:
 `main` 函数的代码沿用上一个实验的代码不变，但是 `mem_init()` 函数和 `mem_test()` 函数肯定需要有所变化。
 
 在 `mem_init()` 初始化完物理内存的管理之后，我们就需要开始建立 Sv39 的三级页表，即进入小页模式。整体的规划就是先分配一个空闲物理页，随后把它作为一级页表，建立二、三级页表，建立内核部分虚拟内存到物理内存的完整映射，最后激活新的页表即可。
+
+我们先设置一个全局变量 `pg_dir` 指向当前页目录（一级页表）的虚拟地址，并且赋值指向先前建立的大页页表，之后所有和页表有关的函数，都通过 `pg_dir` 来处理页表。
 
 因此我们可以写出如下代码框架：
 
@@ -269,11 +280,110 @@ map_kernel();
 active_mapping();
 ```
 
-其中 `pg_dir` 就是一级页表的虚拟地址，我们将会在很多函数中使用到它，因此将它作为全局变量在 `memory.c` 的开头声明它，并且赋值指向先前建立的大页页表。
-
-有了这样一个框架，我们要做的自然就是补全其中的函数。`get_free_page()` 函数是上一个实验所讲内容，不再赘述。
+有了这样一个框架，我们要做的自然就是补全其中的函数。上面的 `get_free_page()` 函数是上一个实验所讲内容，不再赘述。
 
 ### 建立内核的内存映射
+
+在这里我们需要完善 `map_kernel()` 函数，映射内核物理内存有两个部分需要考虑：
+
+- 真实的内存所在地址空间
+  - 物理地址空间：`[MEM_START, MEM_END)`
+  - 虚拟地址起始处：`MEM_START + LINEAR_OFFSET`
+  - 标志位：为方便内核访问，设为可读可写可执行且有效 `KERN_RWX | PAGE_VALID`
+- 设备 MMIO 地址空间
+  - 物理地址空间：`[DEVICE_START, DEVICE_END)`
+  - 虚拟地址起始处：`MEM_START + LINEAR_OFFSET`
+  - 标志位：可读可写且有效 `KERN_RW | PAGE_VALID`
+
+我们用函数 `map_pages()` 来完成：
+
+```c
+/**
+ * @brief 建立所有进程共有的内核映射
+ *
+ * 所有进程发生系统调用、中断、异常后都会进入到内核态，因此所有进程的虚拟地址空间
+ * 都要包含内核的部分。
+ *
+ * 本函数仅创建映射，不会修改 mem_map[] 引用计数
+ */
+void map_kernel()
+{
+    map_pages(DEVICE_START, DEVICE_END, DEVICE_ADDRESS, KERN_RW | PAGE_VALID);
+    map_pages(MEM_START, MEM_END, KERNEL_ADDRESS, KERN_RWX | PAGE_VALID);
+}
+```
+
+随后便是实现 `map_pages()` 函数，使用循环从物理地址空间从头循环到尾，利用 `put_page()` 对地址空间内的每一页，都将其物理地址映射到虚拟地址上，即创建页表，填写对应的页表项：
+
+```c
+/**
+ * @brief 将物理地址区域映射到虚拟地址区域
+ *
+ * @param paddr_start 起始物理地址
+ * @param paddr_end 结束物理地址
+ * @param vaddr 起始虚拟地址
+ * @param flag PTE 标志位
+ * @note
+ *      - 地址必须按页对齐
+ *      - 仅建立映射，不修改物理页引用计数
+ */
+static inline void map_pages(uint64_t paddr_start, uint64_t paddr_end, uint64_t vaddr, uint8_t flag)
+{
+    while (paddr_start < paddr_end) {
+        put_page(paddr_start, vaddr, flag);
+        paddr_start += PAGE_SIZE;
+        vaddr += PAGE_SIZE;
+    }
+}
+```
+
+在层层封装之后，我们终于来到最内层，要实现 `put_page()` 函数了。函数创建映射的过程就是遍历页表，若页表不存在就创建，直到最后一级页表，将物理页号和标志位写进 PTE。
+
+1. 在映射之前我们首先要判定物理地址是否按页对齐
+   - 即某物理地址是否能作为一页的开始，不按页对齐无法使用页表项来表示映射。
+2. 根据虚拟地址空间起始地址获取三级虚页号。
+3. 从页目录开始，以虚页号为索引，查询在第一、第二级页表中对应的页表项是否有效（不存在即为 0）。若无效，则申请一页空闲物理页用于存放下一级页表，并将其物理地址写入页表项，将有效位置位。随后根据当前页表项进入下一级页表，重复 3
+4. 将第三级页表的页表项的物理地址域设置为待映射的物理地址，标志位设置为给定标志位
+5. 返回完成映射的物理地址（这一返回值暂未被使用，为以后预留）
+
+注意：第三步中，根据当前页表项进入下一级页表时，需要将页表项中的物理页号扩展到完整物理地址并转成虚拟地址，因为虽然 CPU 的 MMU（内存处理单元）每次读取下一级页表地址时将其视作物理地址，但是我们这里是人工访问这一地址，并未借助 MMU 自动处理页表的机制，且整个系统已经开启了虚拟分页，所有访问的地址都是按照虚拟地址处理，所以将其转为虚拟地址后才能访问到正确位置。
+
+代码如下，其中 `tmp >> 2` 是 `tmp >> 12 << 10` 的缩写，原因请参考 [页表项](intro.md#sv39) 的格式，`page >> 2` 同：
+
+```c
+/**
+ * @brief 建立物理地址和虚拟地址间的映射
+ *
+ * 本函数仅仅建立映射，不修改物理页引用计数
+ * 当分配物理页失败（创建页表）时 panic，因此不需要检测返回值。
+ *
+ * @param page   物理地址
+ * @param addr   虚拟地址
+ * @param flag   标志位
+ * @return 物理地址 page
+ * @see panic(), map_kernel()
+ */
+uint64_t put_page(uint64_t page, uint64_t addr, uint8_t flag)
+{
+    assert((page & (PAGE_SIZE - 1)) == 0,
+           "put_page(): Try to put unaligned page %p to %p", page, addr);
+    uint64_t vpns[3] = { GET_VPN1(addr), GET_VPN2(addr), GET_VPN3(addr) };
+    uint64_t *page_table = pg_dir;
+    for (size_t level = 0; level < 2; ++level) {
+        uint64_t idx = vpns[level];
+        if (!(page_table[idx] & PAGE_VALID)) {
+            uint64_t tmp;
+            assert(tmp = get_free_page(),
+                   "put_page(): Memory exhausts");
+            page_table[idx] = (tmp >> 2) | PAGE_VALID;
+        }
+        page_table =
+            (uint64_t *)VIRTUAL(GET_PAGE_ADDR(page_table[idx]));
+    }
+    page_table[vpns[2]] = (page >> 2) | flag;
+    return page;
+}
+```
 
 ### 激活新页表
 

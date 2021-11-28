@@ -9,7 +9,9 @@
   * [ecall 指令的封装](helloworld/packaging.md)
   * [操作系统的启动](helloworld/boot.md)
   * [拼搭我们的系统](helloworld/make.md)
-* [中断]
+* [中断](interrupt/README.md)
+  * [移植至哪吒 D1](interrupt/sunxi.md)
+  * [驱动全志哪吒 D1 的 RTC](interrupt/sunxi_RTC.md)
 * [物理内存管理]
 * [虚拟内存管理](virtualmm/README.md)
   * [基础介绍](virtualmm/intro.md)

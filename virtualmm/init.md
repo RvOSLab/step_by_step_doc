@@ -288,11 +288,11 @@ active_mapping();
 
 - 真实的内存所在地址空间
   - 物理地址空间：`[MEM_START, MEM_END)`
-  - 虚拟地址起始处：`MEM_START + LINEAR_OFFSET`
+  - 虚拟地址起始处：`KERNEL_ADDRESS`
   - 标志位：为方便内核访问，设为可读可写可执行且有效 `KERN_RWX | PAGE_VALID`
 - 设备 MMIO 地址空间
   - 物理地址空间：`[DEVICE_START, DEVICE_END)`
-  - 虚拟地址起始处：`MEM_START + LINEAR_OFFSET`
+  - 虚拟地址起始处：`DEVICE_ADDRESS`
   - 标志位：可读可写且有效 `KERN_RW | PAGE_VALID`
 
 我们用函数 `map_pages()` 来完成：

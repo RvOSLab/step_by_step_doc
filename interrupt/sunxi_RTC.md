@@ -79,7 +79,9 @@ sunxi_rtc 没有年、月计数器，因此需要通过日计数器来计算，�
 
 阅读 3.14.6 节寄存器描述，会发现我们需要用的寄存器都是 32bit 的，因此可以使用 `uint32_t` 作为各个寄存器变量的类型。但是注意这些寄存器之间是不连续的，因此要在不连续的部分插入占位成员变量，以确保结构体的布局与真实硬件端口地址偏移的布局是相同的。
 
-代码如下（注：不要随意混合使用 `uint32_t` 与 `uint64_t`，避免出现对齐错误）：
+代码如下：
+
+注：混合使用 `uint32_t` 与 `uint64_t` 可能会因为内存对齐导致编译器自动填充未对齐的部分，如果使用 gcc 编译器，可以使用 `struct __attribute__((__packed__)) sunxi_rtc_regs` 来禁用对齐，这里建议全部使用 `uint32_t` 添加占位成员变量。*（参考 [Structure padding and packing](https://stackoverflow.com/questions/4306186/structure-padding-and-packing) ）*
 
 ```c
 struct sunxi_rtc_regs {

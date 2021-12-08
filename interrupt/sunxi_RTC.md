@@ -241,7 +241,7 @@ writel(1, ALM0_IRQ_EN);
 while(readl(ALM0_IRQ_STA));
 ```
 
-根据文档，写出读写闹钟、处理中断以及关闹钟（中断）的函数，注意，`alarm0_irq_sta_reg` 寄存器是 W1C（Write 1 to clear, 写 1 来清零）的：
+根据文档，写出读写闹钟、处理中断以及关闹钟（中断）的函数，注意，`alarm0_irq_sta_reg` 寄存器是 W1C（Write 1 to clear, 写 1 来清零）的，另外 sunxi_rtc 是在从 x 秒跳到 x+1 秒的那一刹那才会触发设置在 x 秒的闹钟，需要在闹钟设置里面提前一秒：
 
 ```c
 void sunxi_rtc_set_alarm(uint64_t alarm)
@@ -261,7 +261,7 @@ void sunxi_rtc_set_alarm(uint64_t alarm)
     // 根据布局修改 ALARM0_DAY_SET_REG
     regs->alarm0_day_set_reg = (uint64_t)day;
     // 根据布局修改 ALARM0_HH-MM-SS_SET_REG
-    regs->alarm0_cur_vlu_reg = hh << 16 | mm << 8 | ss;
+    regs->alarm0_cur_vlu_reg = hh << 16 | mm << 8 | (ss - 1);
     // 写入 ALARM0_ENABLE_REG 以启用 alarm 0 功能
     regs->alarm0_enable_reg = 1;
 }

@@ -85,27 +85,20 @@ sunxi_rtc 没有年、月计数器，因此需要通过日计数器来计算，�
 
 ```c
 struct sunxi_rtc_regs {
-	uint32_t losc_ctrl_reg; // 0x00, losc control register
-	uint32_t losc_auto_swt_sta_reg; // 0x04, losc auto switch status register
-	uint32_t intosc_clk_prescal_reg; // 0x08, intosc clock prescaler register
-	uint32_t padding1; // 0x0c, padding
-	uint32_t rtc_day_reg; // 0x10, rtc day register
-	uint32_t rtc_hh_mm_ss_reg; // 0x14, rtc hour, minute, second register
-	uint32_t padding2; // 0x18, padding
-	uint32_t padding3; // 0x1c, padding
-	uint32_t alarm0_day_set_reg; // 0x20, alarm0 day set register
-	uint32_t alarm0_cur_vlu_reg; // 0x24, alarm0 current value register
-	uint32_t alarm0_enable_reg; // 0x28, alarm0 enable register
-	uint32_t alarm0_irq_en; // 0x2c, alarm0 interrupt enable register
-	uint32_t alarm0_irq_sta_reg; // 0x30, alarm0 interrupt status register
-	uint32_t padding4; // 0x34, padding
-	uint32_t padding5; // 0x38, padding
-	uint32_t padding6; // 0x3c, padding
-	uint32_t padding7; // 0x40, padding
-	uint32_t padding8; // 0x44, padding
-	uint32_t padding9; // 0x48, padding
-	uint32_t padding10; // 0x4c, padding
-	uint32_t alarm_config_reg; // 0x50, alarm configuration register
+    uint32_t losc_ctrl_reg; // 0x00, losc control register
+    uint32_t losc_auto_swt_sta_reg; // 0x04, losc auto switch status register
+    uint32_t intosc_clk_prescal_reg; // 0x08, intosc clock prescaler register
+    uint32_t padding1; // 0x0c, padding
+    uint32_t rtc_day_reg; // 0x10, rtc day register
+    uint32_t rtc_hh_mm_ss_reg; // 0x14, rtc hour, minute, second register
+    uint32_t padding2[2]; // 0x18, padding
+    uint32_t alarm0_day_set_reg; // 0x20, alarm0 day set register
+    uint32_t alarm0_cur_vlu_reg; // 0x24, alarm0 current value register
+    uint32_t alarm0_enable_reg; // 0x28, alarm0 enable register
+    uint32_t alarm0_irq_en; // 0x2c, alarm0 interrupt enable register
+    uint32_t alarm0_irq_sta_reg; // 0x30, alarm0 interrupt status register, Write 1 to clear
+    uint32_t padding3[7]; // 0x34, padding
+    uint32_t alarm_config_reg; // 0x50, alarm configuration register
 };
 ```
 
@@ -115,7 +108,7 @@ struct sunxi_rtc_regs {
 
 ### 时间转换
 
-由于sunxi_rtc使用了日历型时钟，因此我们需要写两个UNIX时间戳与日历型时钟相互转换的函数，这里的原理就略去，直接给出代码：
+由于 sunxi_rtc 使用了日历型时钟，因此我们需要写两个 UNIX 时间戳与日历型时钟相互转换的函数，这里的原理就略去，直接给出代码：
 
 ```c
 #define SEC_PER_DAY 86400
@@ -200,7 +193,7 @@ void sunxi_rtc_set_time(uint64_t now)
     timestamp_to_day_hh_mm_ss(now, &day, &hh, &mm, &ss);
     // 首先检测 LOSC_CTRL_REG 的位 [8:7] 是否为 0
     if (regs->losc_ctrl_reg & 0x180) {
-        // 如果不为0，报错
+        // 如果不为 0，报错
         kprintf("LOSC_CTRL_REG[8:7] is not 0, cannot set time\n");
         return;
     } else {
@@ -217,9 +210,9 @@ void sunxi_rtc_set_time(uint64_t now)
 
 1. 通过写 `ALARM0_IRQ_EN` 启用 alram0 中断。
 
-2. 设置时钟比较器：向 `ALARM0_DAY_SET_REG` 与 `ALARM0_HH-MM-SS_SET_REG` (下图中为 `ALARM_CUR_VLE_REG`)写入闹钟的日、小时、分钟、秒。
+2. 设置时钟比较器：向 `ALARM0_DAY_SET_REG` 与 `ALARM0_HH-MM-SS_SET_REG` （下图中为 `ALARM_CUR_VLE_REG`) 写入闹钟的日、小时、分钟、秒。
 
-3. 写入 `ALARM0_ENABLE_REG` 以启用 alarm 0 功能，然后可以通过 `ALARM0_DAY_SET_REG` 和 `ALARM0_HH-MM-SS_SET_REG` (下图中为 `ALARM_CUR_VLE_REG`) 实时查询闹钟时间。当设置时间达到时，`ALARM0_IRQ_STA_REG` 将被置 1 以生成中断。
+3. 写入 `ALARM0_ENABLE_REG` 以启用 alarm 0 功能，然后可以通过 `ALARM0_DAY_SET_REG` 和 `ALARM0_HH-MM-SS_SET_REG` （下图中为 `ALARM_CUR_VLE_REG`) 实时查询闹钟时间。当设置时间达到时，`ALARM0_IRQ_STA_REG` 将被置 1 以生成中断。
 
 4. 在进入中断处理程序后，写入 `ALARM0_IRQ_STA_REG` 以清除中断，并执行中断处理程序。
 
@@ -237,7 +230,6 @@ void sunxi_rtc_set_time(uint64_t now)
 
 ![ALARM0_CONF_REG](sunxi_RTC/ALARM0_CONF_REG.png)  
 
-
 ```c
 // D1 文档给出的示例伪代码
 irq_request(GIC_SRC_R_Alarm0, Alm0_handler); irq_enable(GIC_SRC_R_Alarm0);
@@ -249,7 +241,7 @@ writel(1, ALM0_IRQ_EN);
 while(readl(ALM0_IRQ_STA));
 ```
 
-根据文档，写出读写闹钟、处理中断以及关闹钟（中断）的函数：
+根据文档，写出读写闹钟、处理中断以及关闹钟（中断）的函数，注意，`alarm0_irq_sta_reg` 寄存器是 W1C（Write 1 to clear, 写 1 来清零）的：
 
 ```c
 void sunxi_rtc_set_alarm(uint64_t alarm)
@@ -278,7 +270,7 @@ uint64_t sunxi_rtc_read_alarm()
 {
     struct sunxi_rtc_regs *regs = (struct sunxi_rtc_regs *)SUNXI_RTC_START_ADDR;
 
-    // 可以通过 ALARM0_DAY_SET_REG 和 ALARM0_HH-MM-SS_SET_REG (下图中为 ALARM_CUR_VLE_REG) 实时查询闹钟时间。
+    // 可以通过 ALARM0_DAY_SET_REG 和 ALARM0_HH-MM-SS_SET_REG （下图中为 ALARM_CUR_VLE_REG) 实时查询闹钟时间。
     uint32_t day = regs->alarm0_day_set_reg;
     uint32_t hh_mm_ss = regs->alarm0_cur_vlu_reg;
     return day_hh_mm_ss_to_timestamp(day, (hh_mm_ss >> 16) & 0x1f,
@@ -289,21 +281,21 @@ void sunxi_rtc_interrupt_handler()
 {
     struct sunxi_rtc_regs *regs = (struct sunxi_rtc_regs *)SUNXI_RTC_START_ADDR;
     // 在进入中断处理程序后，写入 ALARM0_IRQ_STA_REG 以清除中断，并执行中断处理程序。
-    regs->alarm0_irq_sta_reg = 0;
+    regs->alarm0_irq_sta_reg = 1;
 }
 
 void sunxi_rtc_clear_alarm()
 {
     struct sunxi_rtc_regs *regs = (struct sunxi_rtc_regs *)SUNXI_RTC_START_ADDR;
     regs->alarm0_irq_en = 0;
-    regs->alarm0_irq_sta_reg = 0;
+    regs->alarm0_irq_sta_reg = 1;
     regs->alarm0_enable_reg = 0;
 }
 ```
 
 ### 注册设备
 
-最后和 goldfish_rtc 一样，我们也要将sunxi_rtc 注册到接口上以便调用。
+最后和 goldfish_rtc 一样，我们也要将 sunxi_rtc 注册到接口上以便调用。
 
 ```c
 static const struct rtc_class_ops sunxi_rtc_ops = {

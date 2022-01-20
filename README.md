@@ -9,4 +9,4 @@
 > **小知识**  
 > 有时候文档里会出现此类带有**小知识**标题的引用块，只是做一些相关的介绍，感兴趣的同学可以看一看作为补充知识，不了解也不影响相关任务。
 
-*本网站使用 Gitbook 创建，开源在 [Github](https://github.com/LZU-OSLab/step_by_step_doc) 上，使用 [Travis CI](travis-ci.com) 自动构建，在线阅读链接：https://lzu-oslab.github.io/step_by_step_doc/*
+*本网站使用 Gitbook 创建，开源在 [Github](https://github.com/LZU-OSLab/step_by_step_doc) 上，使用 [Github Actions](https://github.com/features/actions) 自动构建，在线阅读链接：https://lzu-oslab.github.io/step_by_step_doc/*

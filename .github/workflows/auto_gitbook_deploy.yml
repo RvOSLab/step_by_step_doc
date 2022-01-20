@@ -1,0 +1,44 @@
+name: Gitbook Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-pages:
+    name: Deploy Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install nodejs
+        uses: actions/setup-node@v1
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-npm-cache
+      - name: Install Dependencies
+        run: |
+          npm install -g gitbook-cli
+          gitbook install
+      - name: Build
+        run: |
+          gitbook build
+      - name: Deploy
+        env:
+          TOKEN: ${{ secrets.CI_TOKEN }}
+          REF: github.com/${{github.repository}}
+          MYEMAIL: 93yutf@gmail.com
+          MYNAME: ${{github.repository_owner}}
+        run: |
+          cd _book
+          git config --global user.email "${MYEMAIL}"
+          git config --global user.name "${MYNAME}"
+          git init
+          git branch -m main
+          git remote add origin https://${REF}
+          git add .
+          git commit -m "Updated By Github Actions With Build ${{github.run_number}} of ${{github.workflow}} For Github Pages"
+          git push --force --quiet "https://${TOKEN}@${REF}" main:gh-pages

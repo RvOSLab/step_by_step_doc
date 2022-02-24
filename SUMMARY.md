@@ -9,6 +9,7 @@
   * [ecall 指令的封装](helloworld/packaging.md)
   * [操作系统的启动](helloworld/boot.md)
   * [拼搭我们的系统](helloworld/make.md)
+  * [附录：链接脚本 Linker Script](helloworld/linker_script.md)
 * [中断](interrupt/README.md)
   * [PLIC](interrupt/plic.md)
   * [UART](interrupt/uart.md)

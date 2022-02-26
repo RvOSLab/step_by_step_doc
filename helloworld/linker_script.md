@@ -392,7 +392,7 @@ SECTIONS
 
 而 `int * a = & foo;` 查找符号表中的符号`foo`，获取其地址，然后将此地址复制到与变量`a`关联的内存块中（即赋值给`a`）。
 
-相比之下，链接脚本符号声明命令会在符号表中创建一个条目，但不为它们分配任何内存。因此，它们是一个没有值的地址。例如，链接脚本定义 `foo = 1000;` 将会在符号表中创建一个名为“foo”的条目，该条目保存内存位置1000的地址，但在地址1000处未存储任何特殊内容。这意味着无法访问链接脚本定义的符号的值（它没有值），所能做的就是访问链接脚本定义的符号的地址。
+相比之下，链接脚本符号声明命令会在符号表中创建一个条目，但不为它们分配任何内存。因此，它们是一个没有值的地址。例如，链接脚本定义 `foo = 1000;` 将会在符号表中创建一个名为`foo`的条目，该条目保存内存位置1000的地址，但在地址1000处未存储任何特殊内容。这意味着无法访问链接脚本定义的符号的值（它没有值），所能做的就是访问链接脚本定义的符号的地址。
 
 因此，当在源代码中使用链接脚本定义的符号时，应该始终获取符号的地址，而不要使用其值。例如要将`.ROM`节的内容复制到`.FLASH`，且链接脚本中包含这些声明：
 
@@ -420,7 +420,188 @@ memcpy (start_of_FLASH, start_of_ROM, end_of_ROM - start_of_ROM);
 
 ## SECTIONS 命令
 
+`SECTIONS` 命令告诉链接器如何将输入节映射到输出节，以及如何将输出节放入内存。
 
+`SECTIONS` 命令的格式为：
+
+```linker-script
+SECTIONS
+{
+  sections-command
+  sections-command
+  …
+}
+```
+
+每个 `sections-command` 可以是以下命令之一：
+
+- `ENTRY` 命令（参见[输入命令](https://sourceware.org/binutils/docs/ld/Entry-Point.html)）
+- 符号赋值（请参见[赋值](#为符号赋值)）
+- 输出节描述
+- 覆盖描述
+
+为了方便在这些命令中使用位置计数器，允许在 `SECTIONS` 命令中使用 `ENTRY` 命令和符号赋值。这还可以使链接脚本更容易理解，因为在输出文件布局中有意义的地方可以使用这些命令。
+
+输出节描述和覆盖描述如下：
+
+如果在链接脚本中不使用 `SECTIONS` 命令，链接器将按照在输入文件中首先遇到的顺序，将每个输入节放入一个同名的输出节中。例如，如果第一个文件中存在所有输入节，则输出文件中节的顺序将与第一个输入文件中的顺序匹配。第一个节将在地址 0 处。
+
+### 输出节描述
+
+一个完整的输出节描述如下：
+
+```linker-script
+section [address] [(type)] :
+  [AT(lma)]
+  [ALIGN(section_align) | ALIGN_WITH_INPUT]
+  [SUBALIGN(subsection_align)]
+  [constraint]
+  {
+    output-section-command
+    output-section-command
+    …
+  } [>region] [AT>lma_region] [:phdr :phdr …] [=fillexp] [,]
+```
+
+大多数节属性并不会被广泛使用。
+
+`section` 是节的名字，必须满足输出的目标文件的格式限制。在仅支持有限数量节的格式中，名称必须是该格式支持的名称之一（例如，`a.out` 格式的输出文件只允许使用`.text`、`.data`或`.bss`）。
+
+如果输出目标文件的格式支持任意数量的节，但只有数字（就像 `Oasys` 的情况一样），则名称应作为带引号的数字字符串提供。节名可以由任何字符序列组成，但包含任何不寻常字符（如逗号）的名称必须加引号。`/DISCARD/` 是个特殊的名字，参见[输出节丢弃](#输出节丢弃)。
+
+`section` 两边的空白符是必须的，以保证节的名字不会混淆。冒号和花括号也是必须的。当使用了 `fillexp` 且下一个 `sections-command` 看起来像表达式的延续时需要结尾的逗号，换行和其他空白符是可选的。
+
+每个 `output-section-command` 可以是以下命令之一：
+
+- 符号赋值（请参阅[赋值](#为符号赋值)）
+- 输入节描述（参见[输入节](#输入节)）
+- 直接包含的数据值（请参阅输出节数据）
+- 特殊输出节关键字（请参阅输出节关键词）
+
+### 输出节地址
+
+上一部分中，`address` 是输出节的VMA（虚拟内存地址）的表达式。此地址是可选的，但如果提供了此地址，则输出地址将完全照此设置。
+
+如果未指定输出地址，则将根据下面的方法中尝试。此时地址会被调整以符合对齐要求。输出节的对齐要求是所有输入节中含有的对齐要求中最严格的一个。
+
+- 如果为该区域设置了输出内存区域（上面的 `region` 字段），那么它将被添加到该区域，其地址将是该区域中的下一个空闲地址。
+- 如果使用 `MEMORY` 命令创建一个内存区域列表，那么将选择具有与该节兼容的属性的第一个区域来包含它。该节的输出地址将是该区域的下一个空闲地址;。
+- 如果没有指定内存区域，或者没有匹配节，则输出地址将基于当前位置计数器的值。
+
+例如 `.text . : { *(.text) }` 和 `.text : { *(.text) }` 有些许不同，前一个将设置输出节的地址为当前位置计数器的值，而后一个将设置输出节的地址为当前位置计数器的值经过对齐后的值。
+
+`address` 也可以是任意表达式。例如，如果想在 0x10 字节边界上对齐节，使节地址的最低四位为零，可以使用 `.text ALIGN(0x10) : { *(.text) }`，其中 `ALIGN` 返回当前位置计数器向上对齐至指定值。
+
+指定节的 `address` 将更改位置计数器的值，前提是这一节是非空的。（空节会被忽略）。
+
+### 输入节
+
+输入节描述是最基本的链接脚本操作。输出节告诉链接器如何在内存中放置程序，而输入节描述告诉链接器如何将输入文件映射到内存布局中。
+
+#### 输入节基础
+
+输入节描述由文件名（可选）和括号中的节名列表组成。
+
+文件名和节名可以是通配符模式（请参阅[输入节通配符](#输入节通配符)）
+
+最常见的输入节描述是在输出节中包含具有特定名称的所有输入节。例如，包含所有输入文件的`.text`节：`*(.text)`。
+
+这里 `*` 是一个匹配任何文件名的通配符。要从匹配文件名通配符中排除一些文件，则可以使用 `EXCLUDE_FILE` 排除。例如：`EXCLUDE_FILE (*crtend.o *otherfile.o) *(.ctors)` 将会包含除了 `crtend.o` 和 `otherfile.o` 之外的所有输入文件中的 `.ctors` 节。也可以放入节列表，如 `*(EXCLUDE_FILE (*crtend.o *otherfile.o) .ctors)` ，结果是相同的。如果有节列表有多个节，`EXCLUDE_FILE` 的两种语法就很有用了。
+
+有两种方法可以包含多个输入节：
+
+- 使用空格分隔节名列表，例如 `*(.text .rdata)`；
+- 使用括号分隔节名列表，例如 `*(.text) *(.rdata)`。
+
+这两者之间的区别在于 ‘.text’ 和 ‘.rdata’ 输入节放置在输出节中的顺序。前者将混在一起，出现的顺序与它们在链接器输入中出现的顺序相同。后者会先放所有的 `.text` 节，然后放所有的 `.rdata` 节。
+
+当将 `EXCLUDE_FILE` 与多个节一起使用时，如果使用在节列表中，则排除仅适用于紧接着的节，例如 `*(EXCLUDE_FILE (*somefile.o) .text .rdata)` 会排除 `somefile.o` 中的 `.text` 节，但是会包含所有文件的 `.rdata` 节。如想同时排除 `somefile.o` 中的 `.rdata` 节，则可以使用 `*(EXCLUDE_FILE (*somefile.o) .text EXCLUDE_FILE (*somefile.o) .rdata)`，或者把 `EXCLUDE_FILE` 放在节列表外，例如 `EXCLUDE_FILE (*somefile.o) *(.text .rdata)`。
+
+如果某些文件特定位置的特殊数据需要包含在内存中，则可以指定文件名以包含来自特定文件的节。例如：`data.o(.data)` 将会包含 `data.o` 中的 `.data` 节。
+
+使用 `INPUT_SECTION_FLAGS` 可以通过输入节的节标志(section flags)来选择节，比如我们可以使用 ELF 节的节头标志(Section header flags)：
+
+```linker-script
+SECTIONS {
+  .text : { INPUT_SECTION_FLAGS (SHF_MERGE & SHF_STRINGS) *(.text) }
+  .text2 :  { INPUT_SECTION_FLAGS (!SHF_WRITE) *(.text) }
+}
+```
+
+在此示例中，输出部分 `.text` 将由匹配名称 `*(.text)` 且节头标志设置了 `SHF_MERGE` 与 `SHF_STRINGS` 标志的所有输入节组成。输出部分 `.text2` 将由匹配名称 `*(.text)` 且节头标志未设置 `SHF_WRITE` 标志的所有输入节组成。
+
+还可以通过编写与库文件匹配的模式来指定文件，项目中未使用，如有需要请参考[Input Section Basics](https://sourceware.org/binutils/docs/ld/Input-Section-Basics.html)
+
+如果没有指定节列表而直接使用文件名，则输入文件中的所有节都将包含在输出节中。这不常见，但有时可能有用。例如：
+
+`data.o`
+
+当使用的文件名不是`archive:file`说明符且不包含任何通配符时，链接器将首先查看是否还在链接器命令行或输入命令中指定了文件名。如果没有，链接器将尝试将该文件作为输入文件打开，就像它出现在命令行上一样。请注意，这与 `INPUT` 命令不同，因为链接器不会在库搜索路径中搜索文件。
+
+#### 输入节通配符
+
+在输入节描述中，文件名和节名都可以用通配符。在许多示例中看到的 `*` 文件名是简单的通配符模式。
+
+- `*` 匹配任何文件名。
+- `?` 匹配任何单字符。
+- `[chars]` 匹配任何字符集合中的一个元素，其中 `-` 符号可以用来表示一个范围，如 `[a-z]` 匹配所有的小写字母。
+- `\` 可以用来转义字符，如 `\*` 匹配 `*`。
+
+文件名通配符只匹配在命令行或 `INPUT` 命令上明确指定的文件。链接器不搜索目录以扩展通配符。
+
+如果文件名与多个通配符模式匹配成功，或者如果文件名被显式地指定且同时由通配符模式匹配成功，则链接器将使用链接脚本中的第一个匹配项。例如，以下命令可能出错，因为 `data.o` 规则不会被使用：
+
+```linker-script
+.data : { *(.data) }
+.data1 : { data.o(.data) }
+```
+
+通常，链接器将以在链接期间发现的顺序排列通配符匹配的文件和节。 `SORT_BY_NAME`（或`SORT`)关键词可以更改这一顺序，该关键字放置在括号中的通配符模式前（例如 `SORT_BY_NAME(.text*)`）。使用 `SORT_BY_NAME` 关键字时，链接器会按文件或节名升序排序放入输出文件。
+
+同样的，`SORT_BY_ALIGNMENT` 会将节按对齐方式降序排列，大的对齐被放在小的对齐前面可以减少所需的填充量。
+
+`SORT_BY_INIT_PRIORITY` 按照编码在节名中的 `GCC init_priority` 属性升序排列节，在 `.init_array.NNNNN` 和 `.fini_array.NNNNN` 中，`NNNNN` 就是 `init_priority`。在 `.ctors.NNNNN` 和 `.dtors.NNNNN` 中，`NNNNN` 是 65535 减去 `init_priority`.
+
+当链接器脚本中有嵌套节排序命令时，最多可以嵌套一层：
+
+- `SORT_BY_NAME (SORT_BY_ALIGNMENT (wildcard section pattern))` 先按名，同名时再按对齐方式排序。
+- `SORT_BY_ALIGNMENT (SORT_BY_NAME (wildcard section pattern))` 先按对齐方式，同对齐时再按名排序。
+- `SORT_BY_NAME (SORT_BY_NAME (wildcard section pattern))` 和单层 `SORT_BY_NAME` 相同。
+- `SORT_BY_ALIGNMENT (SORT_BY_ALIGNMENT (wildcard section pattern))` 和单层 `SORT_BY_ALIGNMENT` 相同。
+- 其他嵌套方式均无效。
+
+当命令行排序选项和脚本排序选项同时使用时，脚本排序选项优先。
+
+#### 输入节通用符号
+
+请参考[Input Section for Common Symbols](https://sourceware.org/binutils/docs/ld/Input-Section-Common.html)
+
+#### 输入节与垃圾回收
+
+当使用链接时垃圾回收功能 `--gc-sections` 时，通常应标记不应删除的节，此时请使用 `KEEP()`，比如 `KEEP(*(.init))` 或 `KEEP(SORT_BY_NAME(*)(.ctors)).`
+
+#### 输入节示例
+
+请参考[Input Section Example](https://sourceware.org/binutils/docs/ld/Input-Section-Example.html)
+
+### 输出节数据
+
+项目中暂时用不到，可以参考[文档](https://sourceware.org/binutils/docs/ld/Output-Section-Data.html)自行理解。
+
+### 输出节关键词
+
+项目中暂时用不到，可以参考[文档](https://sourceware.org/binutils/docs/ld/Output-Section-Keywords.html)自行理解。
+
+### 输出节丢弃
+
+项目中暂时用不到，可以参考[文档](https://sourceware.org/binutils/docs/ld/Output-Section-Discarding.html)自行理解。
+
+### 输出节属性
+
+项目中暂时用不到，可以参考[文档](https://sourceware.org/binutils/docs/ld/Output-Section-Attributes.html)自行理解。
+
+### 覆盖描述
+项目中暂时用不到，可以参考[文档](https://sourceware.org/binutils/docs/ld/Overlay-Description.html)自行理解。
 
 ## 其余命令
 

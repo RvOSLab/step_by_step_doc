@@ -572,6 +572,28 @@ SECTIONS {
 
 当命令行排序选项和脚本排序选项同时使用时，脚本排序选项优先。
 
+如果链接脚本没有排序嵌套，命令行选项也可能导致排序的嵌套：
+
+- `SORT_BY_NAME(wildcard section pattern)` 与 `--sort-sections alignment` 共用等价于 `SORT_BY_NAME (SORT_BY_ALIGNMENT (wildcard section pattern))`
+- `SORT_BY_ALIGNMENT(wildcard section pattern)` 与 `--sort-section name` 共用等价于 `SORT_BY_ALIGNMENT (SORT_BY_NAME (wildcard section pattern))`
+
+如果链接脚本中的排序命令已经发生嵌套，则将忽略命令行选项。
+
+使用 `SORT_NONE` 可以忽略命令行节排序选项。
+
+如果对输入节在输出文件中的布局感到困惑，请使用`-M`链接器选项生成 map 文件。map 文件精确地显示了如何将输入节映射到输出节。
+
+下面这个例子中，链接器会将所有输入的 `.text` 节放入输出 `.text` 节，并且将所有输入的 `.bss` 节放入输出 `.bss` 节。所有大写字母开头的输入文件中的 `.data` 节都会被放入输出 `.DATA` 节。对于其他文件，链接器会将它们的 `.data` 节放入输出 `.data` 节。
+
+```linker-script
+SECTIONS {
+  .text : { *(.text) }
+  .DATA : { [A-Z]*(.data) }
+  .data : { *(.data) }
+  .bss : { *(.bss) }
+}
+```
+
 #### 输入节通用符号
 
 请参考[Input Section for Common Symbols](https://sourceware.org/binutils/docs/ld/Input-Section-Common.html)

@@ -22,3 +22,5 @@
   * [基础头文件准备](virtualmm/header.md)
   * [初始化过程](virtualmm/init.md)
   * [其他管理过程](virtualmm/manage.md)
+* [进程管理](process/README.md)
+  * [初始化 0 号进程](process/task0_init.md)

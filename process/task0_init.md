@@ -11,7 +11,7 @@
 
 ## 中断发生
 
-我们在保存上下文之前不可随意修改通用寄存器，以免数据丢失。首先将 `sscratch` 与 `sp` 交换，随后通过 `sp` 的值判断中断发生前处于何种状态(注：CSR寄存器不可直接使用条件判断指令，需要读出至通用寄存器判断)。
+我们在保存上下文之前不可随意修改通用寄存器，以免数据丢失。因为 CSR 寄存器不可直接使用条件判断指令，需要读出至通用寄存器判断，所以我们首先将 `sscratch` 与 `sp` 交换，随后通过 `sp` 的值判断中断发生前处于何种状态。
 
 - 若中断前是内核态，则将 `sscratch` 值（交换后为 `sp` 的值，即中断发生前的内核栈地址）重新读回 `sp`
   - 此时 `sp` 为内核栈地址，`sscratch` 也为内核栈地址
@@ -20,7 +20,7 @@
 
 随后和前面的实验一样，扩张内核栈空间（模拟压入栈），保存所有通用寄存器的值至内核栈上，除了 x2（即sp）寄存器，sp 本应保存的是发生中断前的值，这个值目前被交换到了 `sscratch` 中，因此留到后面处理。
 
-在保存完所有通用寄存器后，这些寄存器已可被随意使用，此时读取 `sscratch` 到 `s0`，再赋 `sscratch = 0`（在内核态中，需要确保 `sscratch` 为 0，借 `s0` 中转 `sscratch` 内的中断前栈地址存至内核栈上）。
+在保存完所有通用寄存器后，这些寄存器已可被随意使用，此时读取 `sscratch` 到 `s0`，再赋 `sscratch = 0`（在内核态中，需要确保 `sscratch` 为 0，借 `s0` 中转 `sscratch` 内的中断前栈地址存至内核栈上）。同样的，借 `s1` 至 `s4` 寄存器中转其他需要的 CSR 寄存器至内存中，方便后续读取。
 
 `SAVE_ALL` 宏完整代码如下：
 
@@ -166,8 +166,6 @@ _to_kernel:
 .endm
 ```
 
-思考：为什么保存上下文时不用 `sstatus.SPP` 判断中断前状态？
-
 # 系统调用
 
 从用户态主动进入内核态的方式就是通过系统调用进行。它在指令集层面的实现原理是在 U 态发出 `ecall` 指令，这时 CPU 会收到一个 `CAUSE_USER_ECALL` 异常，进入内核态处理异常。
@@ -253,7 +251,57 @@ static struct trapframe* syscall_handler(struct trapframe* tf)
 
 # 初始化 0 号进程
 
-我们需要首先尝试将特权级切换至 U 态（以下也成用户态，不做区分），这里我们采用伪造中断发生的方法来实现。
+## 初始化 0 号进程 PCB
+
+所有用户进程都是从 0 号进程 fork 出来的，因此我们需要手动构建 0 号进程所需的相关数据，最主要的就是进程的 PCB。
+
+在这里我们直接构建一个 PCB 的结构体变量，将进程 0 的一部分必要信息填入，并将该 PCB 的地址存入进程数组中，顺便把进程数组的其他进程清空（理论上来说全局变量默认值为 0，不清空也没关系），最后把当前进程设为进程 0：
+
+```c
+/**
+ * @brief 初始化进程模块
+ *
+ * 主要负责初始化进程 0
+ */
+void sched_init()
+{
+    tasks[0] = (struct task_struct*)&init_task;
+    init_task.task = (struct task_struct) {
+        .state = TASK_RUNNING,
+        .counter = 15,
+        .priority = 15,
+        .start_time = ticks /* 0 */,
+        // .start_code = START_CODE,
+        // .start_stack = START_STACK,
+        // .start_kernel = START_KERNEL,
+        // .start_rodata = (uint64_t)&rodata_start - (0xC0200000 - 0x00010000),
+        .start_data = (uint64_t)data_start - ((uint64_t)kernel_start - START_CODE),
+        .end_data = (uint64_t)kernel_end - ((uint64_t)kernel_start - START_CODE),
+        .brk = (uint64_t)kernel_end - ((uint64_t)kernel_start - START_CODE),
+        .pg_dir = pg_dir,
+    };
+
+    current = &init_task.task;
+}
+```
+
+现在我们有三个地址空间：
+
+1. 物理地址空间：
+   - 物理内存在 `0x80000000` 往后的空间，其中 `0x80000000` - `0x80200000` 属于 SBI，`0x80200000` 起属于系统部分
+2. 进入用户态（执行 `init_task0`）之前的虚拟地址空间：
+   - 内存空间从 `0xC0000000` 开始，其中 `0xC0000000` - `0xC0200000` 属于 SBI，`0xC0200000` 起属于系统部分
+3. 进入用户态（执行 `init_task0`）之后的虚拟地址空间：
+   - 从 `0x10000` 起属于用户代码段部分，随后依次是静态数据区、动态数据区以及用户栈
+   - 内核内存空间从 `0xC0000000` 开始，其中 `0xC0000000` - `0xC0200000` 属于 SBI，`0xC0200000` 起属于系统部分
+
+可以看到在 PCB 中，进程 0 的内存布局（数据段的起始地址与数据段、堆的结束地址）和页表（暂时沿用内核的页表，将在 0 号系统调用中被重新映射）已经被指定。
+
+这里的 `init_task` 结构体是个全局变量，不能使用局部变量，以避免因函数结束导致变量生命周期结束。
+
+## 切换至用户态
+
+创建完进程 0 的相关数据结构并切换到进程 0 之后，我们需要将特权级切换至 U 态（以下也成用户态，不做区分），这里采用伪造中断发生的方法来实现。
 
 我们假设，我们正运行在用户态，`sscratch` 按照规定设置为内核栈地址。此时通过 `ecall` 指令**陷入内核态**请求一个系统调用，这时候 CPU 会自动将部分寄存器改写：
 
@@ -265,7 +313,7 @@ static struct trapframe* syscall_handler(struct trapframe* tf)
 - sepc: 被设置为异常发生时的 pc 值
 - pc: 被设置为 stvec(`__alltraps`)
 
-因此我们要想**伪造**一个从用户态发出的系统调用，我们就需要伪造上述 CSR 的变化。此外，由于系统调用至少需要一个参数提供调用号，而我们不是通过真正执行 `syscall` 函数进入系统调用的，因此我们也需要伪造这个参数。
+因此我们要想**伪造**一个从用户态发出的系统调用，我们就需要伪造上述 CSR 的变化。此外，由于系统调用至少需要一个参数提供调用号，而我们不是通过真正执行 `syscall` 函数进入系统调用的，因此我们也需要伪造这个参数，这里我们需要提前写好一个系统调用处理函数，并绑定系统调用号（0号）。
 
 我们可以直接将值写入各寄存器后用 call 指令跳转至 `__alltraps` 处，避免函数调用影响栈。
 
@@ -298,9 +346,115 @@ static struct trapframe* syscall_handler(struct trapframe* tf)
 
 其中较为复杂的部分是 `sepc` 和 `sscratch` 值的确定。
 
-思考：为什么 `init_task0` 要用宏实现？
+### 内核栈的设定
 
-因为需要避免函数调用返回时弹栈（此时用户栈是空的）
+`sscratch` 值在中断发生前存的是内核栈地址，因此我们就需要开辟一块内存空间用于内核栈存放，这里我们设定 PCB 所在的页同时用作内核栈使用，PCB 存于该页低地址处，而内核栈从该页高地址处往低地址增长。
+
+### 返回地址的设置
+
+模拟中断返回时应该是返回到中断发生前的下一条语句，由于我们不知道编译完成后 `call __alltraps` 的下一条指令的地址，我们在这里定义一个标签，随后便可以使用 `&&` 运算符获取其地址。这里的获取到地址根据链接脚本来确定，在 `0xc02000**` 段，但是之后的代码在用户态的虚拟内存地址映射中并不是处于 `0xc02000**` 段，因此我们还需要对它稍加运算，获得真正的在用户态的虚拟地址值。
+
+## 0 号系统调用
+
+在 0 号系统调用中，我们主要完成与进程 0 内存相关的部分，如新页表的映射与启用、用户栈的分配。
+
+### 通过页表映射用户进程各段
+
+对于用户进程，由于每一个段的权限都不同，因此需要被单独映射。
+
+由于我们并没有实际上的 0 号进程的代码和数据，我们将内核的代码和数据映射至用户程序的内存空间，当做 0 号进程的代码和数据使用。从 `linker.ld` 文件可知，我们的代码与数据主要分为四段，依次为：
+
+- 代码段(text)：
+  - 从 `text_start` 到 `rodata_start`
+  - 用户态只读和执行
+- 只读数据段(rodata)：
+  - 从 `rodata_start` 到 `data_start`
+  - 用户态只读
+- 数据段(含 data 与 bss 段)：
+  - 从 `data_start` 到 `kernel_end`
+  - 用户态可读可写
+
+请注意，这里仅仅是把内核的代码和数据充当进程 0 的代码和数据，并不取消原内核内存空间的映射。相当于两个虚拟地址映射到同一段物理地址上，因此在新映射建立后物理页的引用计数需要加 1.
+
+可以写一个函数循环调用 `put_page` 函数以方便映射段。注意两端虚拟地址的差值，同时做好物理内存页面引用计数的管理：
+
+```c
+/**
+ * @brief 创建进程 0 各段的映射
+ *
+ * @param start 虚拟地址起始
+ * @param end 虚拟地址结束
+ * @param flag 权限位
+ */
+static void map_segment(uint64_t start, uint64_t end, uint16_t flag)
+{
+    uint64_t physical = PHYSICAL(start);
+    start -= VIRTUAL(SBI_END) - START_CODE;
+    end -= VIRTUAL(SBI_END) - START_CODE;
+    while (start != end) {
+        put_page(physical, start, flag);
+        start += PAGE_SIZE;
+        ++mem_map[MAP_NR(physical)];
+        physical += PAGE_SIZE;
+    }
+}
+```
+
+### 分配用户栈
+
+随后我们先分配一页空间作为进程的用户态栈（若以后不够用可以通过页错误异常处理程序自动扩张），刷新 TLB，并将现内核态栈（地址存于 `sp` 寄存器）的数据复制过去，最后将上下文中的栈指针（`sp` 与 `s0`）设置为用户栈地址，这样返回用户态时恢复上下文后就能使用新的用户栈了。
+
+完成这些任务后，将“伪”中断中保存的上下文数据地址存入 PCB 中，以备后续 `switch_to` 函数使用。
+
+我们规定栈顶从 `0xBFFFFFF0` 开始向低地址扩展，因此我们需要在虚拟地址 `START_STACK - PAGE_SIZE` 处申请新页，并且是用户态可读可写，可以使用 `get_empty_page` 函数完成。
+
+注意：`sp` 理论上不能仅简单设置为 `START_STACK - PAGE_SIZE`，因为从内核栈复制过来的用户栈已经有有用的数据（如局部变量）了，需要通过计算“伪”中断前的内核栈栈顶与 `boot_stack_top` 的差值（即内核栈已用空间）来计算出真正的 `sp` 值。
+
+同样需要注意的是这里参与计算的 `sp` 值不能是当前 `sp` 寄存器的值，因为在进入“伪”中断后 `sp` 由于需要存放上下文被修改过，内核栈在中断返回时会被恢复，但 `tf` 中的我们手动修改的用户栈并不会，这样回到用户态后栈上会有多余的“伪”中断时的保存的上下文。
+
+GCC 使用 `s0` 寄存器来查找栈上的局部变量，它指向当前栈帧起始地址（高地址），由于我们是在 `main` 函数中执行的 `init_task0`，因此在执行前栈帧只有一个，就是 `main` 函数的栈帧，因此栈帧顶就是 `START_STACK`，需要将 `tf` 中的 `s0` 设置成 `START_STACK`。
+
+另外还需注意，复制过来的用户栈中有函数调用信息，但是里面的返回地址（绝对地址）在内核区，用户态无法访问，因此函数调用信息不可被使用，也正因如此，`init_task0` 不能使用函数调用的方式访问，必须使用宏，并且直接放在 main 函数中，不可由其他函数调用，否则会出现返回至内核区的错误，并且还会导致 `s0` 被设置成错误的地址，导致局部变量存取出错。
+
+可以直接使用在 `mm.h` 中引入的链接脚本中的符号来确定各个段的起始地址：
+
+```c
+/**
+ * @brief 初始化进程 0
+ *
+ * 创建用户态进程零，将内核移入进程中。
+ * @see init_task0()
+ * @note 只有在发生中断时才能保存处理器状态，
+ *       因此让 sys_init() 占据系统调用号 0,
+ *       但是实际上 sys_init() 被内核调用，并
+ *       不是系统调用。
+ */
+int64_t sys_init(struct trapframe* tf)
+{
+    /* 创建指向内核代码/数据的用户态映射 */
+    map_segment((uint64_t)text_start, (uint64_t)rodata_start, USER_RX | PAGE_VALID);
+    map_segment((uint64_t)rodata_start, (uint64_t)data_start, USER_R | PAGE_VALID);
+    map_segment((uint64_t)data_start, (uint64_t)kernel_end, USER_RW | PAGE_VALID);
+
+    /*
+     * 创建进程 0 堆栈（从 0xBFFFFFF0 开始）
+     *
+     * 内核堆栈已使用的空间远小于一页，因此仅为用户态堆栈分配一页虚拟页。
+     * 为了确保切换到应用态后正确执行，将内核态堆栈的数据全部拷贝到用用户态堆栈中。
+     */
+    get_empty_page(START_STACK - PAGE_SIZE, USER_RW);
+    get_empty_page(START_STACK, USER_RW);
+    invalidate();
+    memcpy((void*)((uint64_t)START_STACK - PAGE_SIZE), (const void*)FLOOR(tf->gpr.sp), PAGE_SIZE);
+    tf->gpr.sp = START_STACK - ((uint64_t)boot_stack_top - tf->gpr.sp);
+    /* GCC 使用 s0 指向函数栈帧起始地址（高地址），因此这里也要修改，否则切换到进程0会访问到内核区 */
+    tf->gpr.s0 = START_STACK;
+    save_context(tf);
+    return 0;
+}
+```
+
+在完成 0 号系统调用后，CPU 就通过 `sret` 指令根据第二部伪造的中断进入了用户态，继续执行 `main` 函数中的语句。
 
 # 附录
 

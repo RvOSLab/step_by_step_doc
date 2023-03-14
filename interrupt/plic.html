@@ -1,0 +1,678 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>PLIC · Code an OS Handbook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Hanabi">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="uart.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Code an OS Project
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ready/">
+            
+                <a href="../ready/">
+            
+                    
+                    准备
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ready/intro.html">
+            
+                <a href="../ready/intro.html">
+            
+                    
+                    总体介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ready/env.html">
+            
+                <a href="../ready/env.html">
+            
+                    
+                    环境部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../helloworld/">
+            
+                <a href="../helloworld/">
+            
+                    
+                    你好，世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../helloworld/main.html">
+            
+                <a href="../helloworld/main.html">
+            
+                    
+                    “主”函数的编写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../helloworld/packaging.html">
+            
+                <a href="../helloworld/packaging.html">
+            
+                    
+                    ecall 指令的封装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../helloworld/boot.html">
+            
+                <a href="../helloworld/boot.html">
+            
+                    
+                    操作系统的启动
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../helloworld/make.html">
+            
+                <a href="../helloworld/make.html">
+            
+                    
+                    拼搭我们的系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../helloworld/linker_script.html">
+            
+                <a href="../helloworld/linker_script.html">
+            
+                    
+                    附录：链接脚本 Linker Script
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    中断
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.4.1" data-path="plic.html">
+            
+                <a href="plic.html">
+            
+                    
+                    PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="uart.html">
+            
+                <a href="uart.html">
+            
+                    
+                    UART
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="goldfish_RTC.html">
+            
+                <a href="goldfish_RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="sunxi_plic.html">
+            
+                <a href="sunxi_plic.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="sunxi_RTC.html">
+            
+                <a href="sunxi_RTC.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    [物理内存管理]
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../virtualmm/">
+            
+                <a href="../virtualmm/">
+            
+                    
+                    虚拟内存管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../virtualmm/intro.html">
+            
+                <a href="../virtualmm/intro.html">
+            
+                    
+                    基础介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../virtualmm/header.html">
+            
+                <a href="../virtualmm/header.html">
+            
+                    
+                    基础头文件准备
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../virtualmm/init.html">
+            
+                <a href="../virtualmm/init.html">
+            
+                    
+                    初始化过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../virtualmm/manage.html">
+            
+                <a href="../virtualmm/manage.html">
+            
+                    
+                    其他管理过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../process/">
+            
+                <a href="../process/">
+            
+                    
+                    进程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../process/task0_init.html">
+            
+                <a href="../process/task0_init.html">
+            
+                    
+                    初始化 0 号进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >PLIC</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#plic-&#x89C4;&#x8303;"><b></b>PLIC &#x89C4;&#x8303;</a></li><ul><li><span class="title-icon "></span><a href="#risc-v-plic-&#x64CD;&#x4F5C;&#x53C2;&#x6570;"><b></b>RISC-V PLIC &#x64CD;&#x4F5C;&#x53C2;&#x6570;</a></li><li><span class="title-icon "></span><a href="#&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;"><b></b>&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;</a></li><li><span class="title-icon "></span><a href="#&#x7B49;&#x5F85;&#xFF08;&#x5F85;&#x5904;&#x7406;&#xFF09;&#x4E2D;&#x65AD;&#x4F4D;"><b></b>&#x7B49;&#x5F85;&#xFF08;&#x5F85;&#x5904;&#x7406;&#xFF09;&#x4E2D;&#x65AD;&#x4F4D;</a></li><li><span class="title-icon "></span><a href="#&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;"><b></b>&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</a></li><li><span class="title-icon "></span><a href="#&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;"><b></b>&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;</a></li><li><span class="title-icon "></span><a href="#&#x4E2D;&#x65AD;&#x54CD;&#x5E94;&#x8FC7;&#x7A0B;"><b></b>&#x4E2D;&#x65AD;&#x54CD;&#x5E94;&#x8FC7;&#x7A0B;</a></li><li><span class="title-icon "></span><a href="#&#x4E2D;&#x65AD;&#x5B8C;&#x6210;"><b></b>&#x4E2D;&#x65AD;&#x5B8C;&#x6210;</a></li></ul></ul></div><a href="#plic-&#x89C4;&#x8303;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="plic-&#x89C4;&#x8303;"><a name="plic-&#x89C4;&#x8303;" class="anchor-navigation-ex-anchor" href="#plic-&#x89C4;&#x8303;"><i class="fa fa-link" aria-hidden="true"></i></a>PLIC &#x89C4;&#x8303;</h1>
+<p><a href="https://github.com/riscv/riscv-plic-spec/blob/master/riscv-plic.adoc" target="_blank">RISC-V Platform-Level Interrupt Controller Specification</a></p>
+<p>&#x8FD9;&#x4E2A;&#x6587;&#x6863;&#x5305;&#x542B;&#x4E86; RISC-V &#x5E73;&#x53F0;&#x7EA7;&#x4E2D;&#x65AD;&#x63A7;&#x5236;&#x5668; (PLIC) &#x89C4;&#x8303;&#xFF0C;&#x5B83;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x4E13;&#x95E8;&#x8BBE;&#x8BA1;&#x7528;&#x4E8E;&#x5728; RISC-V &#x7CFB;&#x7EDF;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x5DE5;&#x4F5C;&#x7684;&#x4E2D;&#x65AD;&#x63A7;&#x5236;&#x5668;&#x3002;PLIC &#x591A;&#x8DEF;&#x590D;&#x7528;&#x5404;&#x79CD;&#x8BBE;&#x5907;&#x5728; HART &#x4E0A;&#x4E0B;&#x6587;&#x7684;&#x5916;&#x90E8;&#x4E2D;&#x65AD;&#x884C;&#x4E2D;&#x65AD;&#xFF0C;&#x5177;&#x6709;&#x7528;&#x4E8E;&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;&#x7684;&#x786C;&#x4EF6;&#x652F;&#x6301;&#x3002;</p>
+<p>&#x672C;&#x89C4;&#x8303;&#x5B9A;&#x4E49;&#x4E86;&#x5E38;&#x89C4; PLIC &#x67B6;&#x6784;&#x548C;&#x64CD;&#x4F5C;&#x53C2;&#x6570;&#x3002;PLIC &#x652F;&#x6301;&#x9AD8;&#x8FBE; 1023 &#x4E2A;&#x4E2D;&#x65AD;&#xFF08;0 &#x4FDD;&#x7559;&#xFF09;&#x548C; 15872 &#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x4F46;&#x5B9E;&#x9645;&#x7684;&#x4E2D;&#x65AD;&#x6570;&#x91CF;&#x548C;&#x4E0A;&#x4E0B;&#x6587;&#x53D6;&#x51B3;&#x4E8E; PLIC &#x5B9E;&#x73B0;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x4E2D;&#x6BCF;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x9700;&#x8981;&#x9075;&#x5FAA;&#x6807;&#x51C6;&#x3002;&#x58F0;&#x79F0;&#x7B26;&#x5408;&#x6807;&#x51C6;&#x7684; PLIC &#x5E94;&#x9075;&#x5FAA;&#x4EE5;&#x4E0B;&#x90E8;&#x5206;&#x4E2D;&#x63D0;&#x5230;&#x7684;&#x5B9E;&#x73B0;&#x3002;</p>
+<blockquote>
+<p>&#x6240;&#x8C13;<strong>&#x4E0A;&#x4E0B;&#x6587;</strong>&#x662F;&#x6307;&#x5728;&#x7279;&#x5B9A; RISC-V &#x5904;&#x7406;&#x5668;&#x5B9E;&#x4F8B;&#x4E2D;&#x7684;&#x7279;&#x5B9A; HART &#x4E2D;&#x7684;&#x7279;&#x5B9A;&#x6743;&#x9650;&#x6A21;&#x5F0F;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5728;&#x5177;&#x6709;&#x53CC;&#x8DEF;&#x8D85;&#x7EBF;&#x7A0B;&#x7684; 4 &#x6838;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x60A8;&#x6709; 8 &#x4E2A; HART&#xFF0C;&#x5E76;&#x4E14;&#x6BCF;&#x4E2A; HART &#x53EF;&#x80FD;&#x81F3;&#x5C11;&#x6709;&#x4E24;&#x79CD;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#xFF1A;M &#x6A21;&#x5F0F;&#x548C; S &#x6A21;&#x5F0F;&#x3002;&#xFF08;<a href="https://github.com/torvalds/linux/blob/5bfc75d92efd494db37f5c4c173d3639d4772966/Documentation/devicetree/bindings/interrupt-controller/sifive%2Cplic-1.0.0.yaml" target="_blank">&#x5F15;&#x7528;</a>&#xFF09;</p>
+<p>PLIC &#x5982;&#x4F55;&#x7EC4;&#x7EC7;&#x4E0A;&#x4E0B;&#x6587;&#xFF08;HART &#x548C;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#xFF09;&#x7684;&#x4E2D;&#x65AD;&#x8D85;&#x51FA;&#x4E86; RISC-V PLIC &#x89C4;&#x8303;&#x8303;&#x56F4;&#xFF0C;&#x4F46;&#x5B83;&#x5FC5;&#x987B;&#x5728;&#x5382;&#x5BB6;&#x7684; PLIC &#x89C4;&#x8303;&#x4E2D;&#x89C4;&#x5B9A;&#x3002;</p>
+</blockquote>
+<h2 id="risc-v-plic-&#x64CD;&#x4F5C;&#x53C2;&#x6570;"><a name="risc-v-plic-&#x64CD;&#x4F5C;&#x53C2;&#x6570;" class="anchor-navigation-ex-anchor" href="#risc-v-plic-&#x64CD;&#x4F5C;&#x53C2;&#x6570;"><i class="fa fa-link" aria-hidden="true"></i></a>RISC-V PLIC &#x64CD;&#x4F5C;&#x53C2;&#x6570;</h2>
+<p>&#x672C;&#x89C4;&#x8303;&#x4E2D;&#x5B9A;&#x4E49;&#x4E86;&#x901A;&#x7528; PLIC &#x64CD;&#x4F5C;&#x53C2;&#x6570;&#x5BC4;&#x5B58;&#x5668;&#x5757;&#xFF0C;&#x5B83;&#x4EEC;&#x662F;&#xFF1A;</p>
+<ul>
+<li>&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;&#x914D;&#x7F6E;&#x5BC4;&#x5B58;&#x5668;&#xFF1A;&#x6BCF;&#x4E2A;&#x4E2D;&#x65AD;&#x6E90;&#x7684;&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;&#x3002;</li>
+<li>&#x4E2D;&#x65AD;&#x7B49;&#x5F85;&#x4F4D;&#x5BC4;&#x5B58;&#x5668;&#xFF1A;&#x6BCF;&#x4E2A;&#x4E2D;&#x65AD;&#x6E90;&#x7684;&#x4E2D;&#x65AD;&#x7B49;&#x5F85;&#xFF08;&#x5F85;&#x5904;&#x7406;&#xFF09;&#x72B6;&#x6001;&#x3002;</li>
+<li>&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;&#x5BC4;&#x5B58;&#x5668;&#xFF1A;&#x8BBE;&#x7F6E;&#x542F;&#x7528;&#x6BCF;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#x4E2D;&#x65AD;&#x6E90;&#x3002;</li>
+<li>&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;&#x5BC4;&#x5B58;&#x5668;&#xFF1A;&#x6BCF;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;&#x3002;</li>
+<li>&#x4E2D;&#x65AD;&#x8BF7;&#x6C42;&#x5BC4;&#x5B58;&#x5668;&#xFF1A;&#x53EF;&#x8BFB;&#x53D6;&#x6BCF;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#x4E2D;&#x65AD;&#x6E90; ID&#x3002;</li>
+<li>&#x4E2D;&#x65AD;&#x5B8C;&#x6210;&#x5BC4;&#x5B58;&#x5668;&#xFF1A;&#x4E2D;&#x65AD;&#x5B8C;&#x6210;&#x540E;&#x5411;&#x76F8;&#x5173;&#x5BC4;&#x5B58;&#x5668;&#x5199;&#x5165;&#x4FE1;&#x606F;&#x3002;</li>
+</ul>
+<p>&#x8FD9;&#x4E9B;&#x5BC4;&#x5B58;&#x5668;&#x90FD;&#x662F; 32 &#x4F4D;&#x5BBD;&#x3002;</p>
+<h2 id="&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;"><a name="&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;" class="anchor-navigation-ex-anchor" href="#&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;</h2>
+<p>&#x5982;&#x679C; PLIC &#x652F;&#x6301;&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5199;&#x5165;&#x5176;&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;&#x914D;&#x7F6E;&#x5BC4;&#x5B58;&#x5668;&#x6765;&#x4E3A;&#x6BCF;&#x4E2A; PLIC &#x4E2D;&#x65AD;&#x6E90;&#x5206;&#x914D;&#x4F18;&#x5148;&#x7EA7;&#x3002;&#x4F18;&#x5148;&#x7EA7;&#x503C;&#x4E3A; 0 &#x88AB;&#x4FDD;&#x7559;&#x4E3A;&#x7981;&#x7528;&#x4E2D;&#x65AD;&#x3002;&#x4F18;&#x5148;&#x7EA7; 1 &#x662F;&#x6700;&#x4F4E;&#x4F18;&#x5148;&#x7EA7;&#xFF0C;&#x800C;&#x6700;&#x5927;&#x4F18;&#x5148;&#x7EA7;&#x53D6;&#x51B3;&#x4E8E; PLIC &#x5B9E;&#x73B0;&#x3002;&#x5168;&#x5C40;&#x4E2D;&#x65AD;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x76F8;&#x540C;&#x65F6;&#xFF0C;&#x4E2D;&#x65AD;&#x6E90; ID &#x5C0F;&#x7684;&#x5177;&#x6709;&#x66F4;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x3002;</p>
+<p>&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;&#x914D;&#x7F6E;&#x5BC4;&#x5B58;&#x5668;&#x7EC4;&#x76F8;&#x5BF9;&#x4E8E; PLIC &#x57FA;&#x5730;&#x5740;&#x7684;&#x504F;&#x79FB;&#x662F; 0&#xFF0C;&#x7EC4;&#x4E2D;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x4E2A;&#x6570;&#x4E0E;&#x4E2D;&#x65AD;&#x6E90;&#x4E2A;&#x6570;&#x76F8;&#x540C;&#xFF0C;&#x7B2C; n &#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x4E2D;&#x7684;&#x6570;&#x5B57;&#x5373;&#x4E3A; n &#x53F7;&#x4E2D;&#x65AD;&#x6E90;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x3002;</p>
+<h2 id="&#x7B49;&#x5F85;&#xFF08;&#x5F85;&#x5904;&#x7406;&#xFF09;&#x4E2D;&#x65AD;&#x4F4D;"><a name="&#x7B49;&#x5F85;&#xFF08;&#x5F85;&#x5904;&#x7406;&#xFF09;&#x4E2D;&#x65AD;&#x4F4D;" class="anchor-navigation-ex-anchor" href="#&#x7B49;&#x5F85;&#xFF08;&#x5F85;&#x5904;&#x7406;&#xFF09;&#x4E2D;&#x65AD;&#x4F4D;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7B49;&#x5F85;&#xFF08;&#x5F85;&#x5904;&#x7406;&#xFF09;&#x4E2D;&#x65AD;&#x4F4D;</h2>
+<p>&#x67D0;&#x4E00;&#x4E2D;&#x65AD;&#x6E90;&#x7684;&#x7B49;&#x5F85;&#x72B6;&#x6001;&#x53EF;&#x4EE5;&#x4ECE;&#x7B49;&#x5F85;&#x5BC4;&#x5B58;&#x5668;&#x7EC4;&#x4E2D;&#x8BFB;&#x51FA;&#xFF0C;&#x8BFB;&#x53D6;&#x65B9;&#x6CD5;&#x662F;&#x5C06;&#x6240;&#x6709;&#x7B49;&#x5F85;&#x5BC4;&#x5B58;&#x5668;&#x8FDE;&#x8D77;&#x6765;&#x89C6;&#x4F5C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x5927;&#x5C0F;&#x4E3A; 1 &#x4F4D;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x7B2C; n &#x53F7;&#x4E2D;&#x65AD;&#x6E90;&#x7684;&#x5F85;&#x5904;&#x7406;&#x4F4D;&#x5B58;&#x50A8;&#x5728;&#x7B2C; <code>n / 32</code> &#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x7B2C; <code>n % 32</code> &#x4F4D;&#x4E2D;&#x3002;&#xFF08;&#x5176;&#x4E2D;&#x7B2C; 0 &#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x4F4D; 0 &#x8868;&#x793A;&#x4E0D;&#x5B58;&#x5728;&#x4E2D;&#x65AD;&#x6E90; 0&#xFF0C;&#x88AB;&#x786C;&#x8FDE;&#x7EBF;&#x4E3A; 0&#x3002;&#xFF09;</p>
+<ul>
+<li>&#x5F53; IP &#x4F4D;&#x4E3A; 1 &#x65F6;&#xFF0C;&#x8868;&#x793A;&#x5F53;&#x524D;&#x8BE5;&#x5916;&#x90E8;&#x4E2D;&#x65AD;&#x6E90;&#x5B58;&#x5728;&#x7B49;&#x5F85;&#x54CD;&#x5E94;&#x7684;&#x4E2D;&#x65AD;&#x3002;&#x8BE5;&#x4F4D;&#x53EF;&#x901A;&#x8FC7;&#x5185;&#x5B58;&#x5B58;&#x50A8;&#x6307;&#x4EE4; (SW &#x6307;&#x4EE4;&#xFF09; &#x7F6E; 1&#x3002;&#x5728;&#x5BF9;&#x5E94;&#x4E2D;&#x65AD;&#x6E90;&#x91C7;&#x6837;&#x903B;&#x8F91;&#x91C7;&#x6837;&#x5230;&#x6709;&#x6548;&#x7535;&#x5E73;&#x6216;&#x8109;&#x51B2;&#x4E2D;&#x65AD;&#x540E;&#x4E5F;&#x4F1A;&#x5C06;&#x8BE5;&#x4F4D;&#x7F6E; 1&#x3002;</li>
+<li>&#x5F53; IP &#x4F4D;&#x4E3A; 0 &#x65F6;&#xFF0C;&#x8868;&#x793A;&#x5F53;&#x524D;&#x8BE5;&#x5916;&#x90E8;&#x4E2D;&#x65AD;&#x6E90;&#x6CA1;&#x6709;&#x7B49;&#x5F85;&#x54CD;&#x5E94;&#x7684;&#x4E2D;&#x65AD;&#x3002;&#x8BE5;&#x4F4D;&#x53EF;&#x901A;&#x8FC7;&#x5185;&#x5B58;&#x5B58;&#x50A8;&#x6307;&#x4EE4; (SW &#x6307;&#x4EE4;&#xFF09;&#x6E05; 0&#x3002;&#x5F53;&#x4E2D;&#x65AD;&#x88AB;&#x54CD;&#x5E94;&#x540E;&#xFF0C;PLIC &#x4E5F;&#x4F1A;&#x5C06;&#x5BF9;&#x5E94;&#x4E2D;&#x65AD;&#x7684; IP &#x4F4D;&#x6E05;&#x9664;&#x3002;</li>
+</ul>
+<p>&#x4E2D;&#x65AD;&#x7B49;&#x5F85;&#x5BC4;&#x5B58;&#x5668;&#x7EC4;&#x76F8;&#x5BF9;&#x4E8E; PLIC &#x57FA;&#x5730;&#x5740;&#x7684;&#x504F;&#x79FB;&#x662F; 0x001000&#x3002;</p>
+<h2 id="&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;"><a name="&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;" class="anchor-navigation-ex-anchor" href="#&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</h2>
+<p>&#x901A;&#x8FC7;&#x5728;&#x4F7F;&#x80FD;&#x5BC4;&#x5B58;&#x5668;&#x4E2D;&#x8BBE;&#x7F6E;&#x76F8;&#x5E94;&#x7684;&#x4F4D;&#xFF0C;&#x53EF;&#x4EE5;&#x542F;&#x7528;&#x5404;&#x4E2A;&#x5168;&#x5C40;&#x4E2D;&#x65AD;&#x3002;&#x4F7F;&#x80FD;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x8BBF;&#x95EE;&#x65B9;&#x5F0F;&#x4E0E;&#x7B49;&#x5F85;&#x5BC4;&#x5B58;&#x5668;&#x76F8;&#x540C;&#x3002;&#xFF08;&#x5176;&#x4E2D;&#x7B2C; 0 &#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x4F4D; 0 &#x8868;&#x793A;&#x4E0D;&#x5B58;&#x5728;&#x4E2D;&#x65AD;&#x6E90; 0&#xFF0C;&#x88AB;&#x786C;&#x8FDE;&#x7EBF;&#x4E3A; 0&#x3002;&#xFF09; PLIC &#x5177;&#x6709; 15872 &#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;&#x5BC4;&#x5B58;&#x5668;&#x7EC4;&#x3002;</p>
+<ul>
+<li>&#x5F53; IE &#x4F4D;&#x4E3A; 1 &#x65F6;&#xFF0C;&#x8868;&#x793A;&#x4E2D;&#x65AD;&#x5BF9;&#x8BE5;&#x76EE;&#x6807;&#x4F7F;&#x80FD;&#x3002;</li>
+<li>&#x5F53; IE &#x4F4D;&#x4E3A; 0 &#x65F6;&#xFF0C;&#x8868;&#x793A;&#x4E2D;&#x65AD;&#x5BF9;&#x8BE5;&#x76EE;&#x6807;&#x5C4F;&#x853D;&#x3002;</li>
+</ul>
+<p>&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;&#x5BC4;&#x5B58;&#x5668;&#x7EC4;&#x76F8;&#x5BF9;&#x4E8E; PLIC &#x57FA;&#x5730;&#x5740;&#x7684;&#x504F;&#x79FB;&#x662F; 0x002000&#xFF0C;&#x4E14;&#x9996;&#x5148;&#x662F;&#x4E0A;&#x4E0B;&#x6587; 0 &#x7684;&#x6240;&#x6709;&#x4E2D;&#x65AD;&#x6E90;&#x7684;&#x4F7F;&#x80FD;&#x4F4D;&#xFF0C;&#x968F;&#x540E;&#x662F;&#x6309;&#x987A;&#x5E8F;&#x4E0A;&#x4E0B;&#x6587; 1 &#x5230;&#x4E0A;&#x4E0B;&#x6587; 15871 &#x7684;&#x6240;&#x6709;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;&#x4F4D;&#x3002;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>0x002000: Interrupt Source #0 to #31 Enable Bits on context 0
+...
+0x00207F: Interrupt Source #992 to #1023 Enable Bits on context 0
+0x002080: Interrupt Source #0 to #31 Enable Bits on context 1
+...
+0x0020FF: Interrupt Source #992 to #1023 Enable Bits on context 1
+0x002100: Interrupt Source #0 to #31 Enable Bits on context 2
+...
+0x00217F: Interrupt Source #992 to #1023 Enable Bits on context 2
+0x002180: Interrupt Source #0 to #31 Enable Bits on context 3
+...
+0x0021FF: Interrupt Source #992 to #1023 Enable Bits on context 3
+...
+0x1F1F80: Interrupt Source #0 to #31 on context 15871
+...
+0x1F1F80: Interrupt Source #992 to #1023 on context 15871
+</code></pre><p>&#x6211;&#x4EEC;&#x7684;&#x5F00;&#x53D1;&#x677F; D1 &#x53EA;&#x6709;&#x5355;&#x6838;&#x5355;&#x7EBF;&#x7A0B;&#xFF0C;2 &#x79CD;&#x4E2D;&#x65AD;&#x7684;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#xFF0C;&#x56E0;&#x6B64;&#x6709; 2 &#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x867D;&#x7136;&#x53EA;&#x652F;&#x6301;&#x6700;&#x591A; 256 &#x4E2A;&#x4E2D;&#x65AD;&#x6E90;&#xFF0C;&#x4F46;&#x662F;&#x7531;&#x4E8E;&#x8981;&#x548C; PLIC &#x6807;&#x51C6;&#x6240;&#x89C4;&#x5B9A;&#x7684;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x4E00;&#x81F4;&#xFF0C;&#x56E0;&#x6B64; 1 &#x53F7;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#x4F7F;&#x80FD;&#x5BC4;&#x5B58;&#x5668;&#x7EC4;&#xFF08;<code>PLIC Superuser Mode Interrupt Enable Register n</code>&#xFF09;&#x7684;&#x504F;&#x79FB;&#x4F9D;&#x7136;&#x9700;&#x8981;&#x4ECE; 0x2080 &#x5F00;&#x59CB;&#x3002;</p>
+<h2 id="&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;"><a name="&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;" class="anchor-navigation-ex-anchor" href="#&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;</h2>
+<p>PLIC &#x63D0;&#x4F9B;&#x57FA;&#x4E8E;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#x4E2D;&#x65AD;&#x9608;&#x503C;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x7528;&#x4E8E;&#x6BCF;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;&#x7684;&#x8BBE;&#x7F6E;&#x3002;&#x9608;&#x503C;&#x5BC4;&#x5B58;&#x5668;&#x662F;&#x4E00;&#x4E2A; WARL &#x5B57;&#x6BB5;&#x3002;PLIC &#x5C06;&#x5C4F;&#x853D;&#x4F18;&#x5148;&#x7EA7;&#x5C0F;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;&#x9608;&#x503C;&#x7684;&#x6240;&#x6709; PLIC &#x4E2D;&#x65AD;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x9608;&#x503C;&#x4E3A; 0 &#x610F;&#x5473;&#x7740;&#x5141;&#x8BB8;&#x6240;&#x6709;&#x975E;&#x96F6;&#x4F18;&#x5148;&#x7EA7;&#x4E2D;&#x65AD;&#x3002;</p>
+<blockquote>
+<p>WARL &#x5B57;&#x6BB5;&#xFF1A;&#x6307;&#x8FD9;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x53EF;&#x4EE5;&#x5199;&#x4EFB;&#x610F;&#x503C;&#xFF0C;&#x4F46;&#x53EA;&#x6709;&#x5728;&#x503C;&#x5408;&#x6CD5;&#x7684;&#x65F6;&#x5019;&#x624D;&#x4F1A;&#x88AB;&#x771F;&#x6B63;&#x5199;&#x5165;&#x3002;</p>
+</blockquote>
+<p>&#x4E2D;&#x65AD;&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;&#x5BC4;&#x5B58;&#x5668;&#x7EC4;&#x76F8;&#x5BF9;&#x4E8E; PLIC &#x57FA;&#x5730;&#x5740;&#x7684;&#x504F;&#x79FB;&#x662F; 0x200000&#xFF0C;&#x5E76;&#x4E14;&#x6BCF;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x8981;&#x6C42; 4K &#x5BF9;&#x9F50;&#xFF08;&#x5B9E;&#x9645;&#x6765;&#x8BF4;&#xFF0C;&#x5C31;&#x662F;&#x6BCF;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x5730;&#x5740;&#x662F;&#x524D;&#x4E00;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x52A0; 0x1000&#xFF09;&#x3002;</p>
+<p>&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>0x200000: Priority threshold for context 0
+0x201000: Priority threshold for context 1
+0x202000: Priority threshold for context 2
+0x203000: Priority threshold for context 3
+...
+0x3FFF000: Priority threshold for context 15871
+</code></pre><h2 id="&#x4E2D;&#x65AD;&#x54CD;&#x5E94;&#x8FC7;&#x7A0B;"><a name="&#x4E2D;&#x65AD;&#x54CD;&#x5E94;&#x8FC7;&#x7A0B;" class="anchor-navigation-ex-anchor" href="#&#x4E2D;&#x65AD;&#x54CD;&#x5E94;&#x8FC7;&#x7A0B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E2D;&#x65AD;&#x54CD;&#x5E94;&#x8FC7;&#x7A0B;</h2>
+<p>&#x5F53; PLIC &#x5BF9;&#x7279;&#x5B9A;&#x4E2D;&#x65AD;&#x76EE;&#x6807;&#x5B58;&#x5728;&#x6709;&#x6548;&#x4E2D;&#x65AD;&#x8BF7;&#x6C42;&#xFF0C;&#x4E14;&#x4F18;&#x5148;&#x7EA7;&#x5927;&#x4E8E;&#x8BE5;&#x4E2D;&#x65AD;&#x76EE;&#x6807;&#x7684;&#x4E2D;&#x65AD;&#x9608;&#x503C;&#x65F6;&#xFF0C;&#x4F1A;&#x5411;&#x8BE5;&#x4E2D;&#x65AD;&#x76EE;&#x6807;&#x53D1;&#x8D77;&#x4E2D;&#x65AD;&#x8BF7;&#x6C42;&#x3002;</p>
+<p>&#x5F53;&#x8BE5;&#x4E2D;&#x65AD;&#x76EE;&#x6807;&#x6536;&#x5230;&#x4E2D;&#x65AD;&#x8BF7;&#x6C42;&#xFF0C;&#x4E14;&#x53EF;&#x54CD;&#x5E94;&#x8BE5;&#x4E2D;&#x65AD;&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x5411; PLIC &#x53D1;&#x9001;&#x4E2D;&#x65AD;&#x54CD;&#x5E94;&#x6D88;&#x606F;&#x3002;&#x4E2D;&#x65AD;&#x54CD;&#x5E94;&#x673A;&#x5236;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x4E2D;&#x65AD;&#x76EE;&#x6807;&#xFF08;&#x5373;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x67D0;&#x4E00; HART &#x7684;&#x67D0;&#x4E00;&#x7279;&#x6743;&#x7EA7;&#xFF09;&#x5411;&#x5176;&#x5BF9;&#x5E94;&#x7684;&#x4E2D;&#x65AD;&#x54CD;&#x5E94;/&#x5B8C;&#x6210;&#x5BC4;&#x5B58;&#x5668;&#x53D1;&#x8D77;&#x4E00;&#x4E2A;&#x8BFB;&#x64CD;&#x4F5C;&#x3002;&#x8BE5;&#x8BFB;&#x64CD;&#x4F5C;&#x5C06;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; ID&#xFF0C;&#x8868;&#x793A;&#x5F53;&#x524D; PLIC &#x4EF2;&#x88C1;&#x51FA;&#x7684;&#x4E2D;&#x65AD; ID&#x3002;&#x4E2D;&#x65AD;&#x76EE;&#x6807;&#x6839;&#x636E;&#x6240;&#x83B7;&#x5F97;&#x7684; ID &#x8FDB;&#x884C;&#x4E0B;&#x4E00;&#x6B65;&#x5904;&#x7406;&#x3002;&#x5982;&#x679C;&#x83B7;&#x5F97;&#x7684;&#x4E2D;&#x65AD; ID &#x4E3A; 0&#xFF0C;&#x8868;&#x793A;&#x6CA1;&#x6709;&#x6709;&#x6548;&#x4E2D;&#x65AD;&#x8BF7;&#x6C42;&#xFF0C;&#x4E2D;&#x65AD;&#x76EE;&#x6807;&#x7ED3;&#x675F;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x3002;</li>
+<li>&#x5F53; PLIC &#x6536;&#x5230;&#x4E2D;&#x65AD;&#x76EE;&#x6807;&#x53D1;&#x8D77;&#x7684;&#x8BFB;&#x64CD;&#x4F5C;&#xFF0C;&#x4E14;&#x8FD4;&#x56DE;&#x76F8;&#x5E94; ID &#x540E;&#xFF0C;&#x4F1A;&#x5C06;&#x8BE5; ID &#x5BF9;&#x5E94;&#x7684;&#x4E2D;&#x65AD;&#x6E90;&#x7B49;&#x5F85;&#x4F4D;&#x6E05; 0&#xFF0C;&#x4E14;&#x5728;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x5B8C;&#x6210;&#x4E4B;&#x524D;&#x5C4F;&#x853D;&#x8BE5;&#x4E2D;&#x65AD;&#x6E90;&#x7684;&#x540E;&#x7EED;&#x91C7;&#x6837;&#x3002;</li>
+</ul>
+<p>PLIC &#x53EF;&#x4EE5;&#x968F;&#x65F6;&#x6267;&#x884C;&#x54CD;&#x5E94;&#x8FC7;&#x7A0B;&#xFF0C;&#x5E76;&#x4E14;&#x54CD;&#x5E94;&#x64CD;&#x4F5C;&#x4E0D;&#x53D7;&#x4F18;&#x5148;&#x7EA7;&#x9608;&#x503C;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x8BBE;&#x7F6E;&#x7684;&#x5F71;&#x54CD;&#xFF08;&#x6B64;&#x65F6;&#x76F8;&#x5F53;&#x4E8E;&#x624B;&#x52A8;&#x8F6E;&#x8BE2;&#x6240;&#x6709;&#x53EF;&#x4E2D;&#x65AD;&#x5916;&#x8BBE;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x771F;&#x6B63;&#x7684;&#x4E2D;&#x65AD;&#xFF09;&#x3002;</p>
+<p>&#x4E2D;&#x65AD;&#x54CD;&#x5E94;&#x5BC4;&#x5B58;&#x5668;&#x7EC4;&#x662F;&#x57FA;&#x4E8E;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#xFF0C;&#x76F8;&#x5BF9;&#x4E8E; PLIC &#x57FA;&#x5730;&#x5740;&#x7684;&#x504F;&#x79FB;&#x662F; 0x200000&#xFF0C;&#x5E76;&#x4E14;&#x6BCF;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x8981;&#x6C42; 4K &#x5BF9;&#x9F50;&#x540E;+4&#xFF08;&#x5B9E;&#x9645;&#x6765;&#x8BF4;&#xFF0C;&#x5C31;&#x662F;&#x6BCF;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x5730;&#x5740;&#x662F;&#x524D;&#x4E00;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x52A0; 0x1000&#xFF0C;&#x4E14;&#x7B2C;&#x4E00;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x504F;&#x79FB;&#x4E3A; 0x200004&#xFF09;</p>
+<h2 id="&#x4E2D;&#x65AD;&#x5B8C;&#x6210;"><a name="&#x4E2D;&#x65AD;&#x5B8C;&#x6210;" class="anchor-navigation-ex-anchor" href="#&#x4E2D;&#x65AD;&#x5B8C;&#x6210;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E2D;&#x65AD;&#x5B8C;&#x6210;</h2>
+<p>&#x5B8C;&#x6210;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x540E;&#xFF0C;&#x4E2D;&#x65AD;&#x76EE;&#x6807;&#x5411;&#x4E2D;&#x65AD;&#x54CD;&#x5E94;/&#x5B8C;&#x6210;&#x5BC4;&#x5B58;&#x5668;&#x53D1;&#x8D77;&#x5199;&#x64CD;&#x4F5C;&#xFF0C;&#x5199;&#x5165;&#x672C;&#x6B21;&#x5B8C;&#x6210;&#x7684;&#x4E2D;&#x65AD; ID&#x3002;&#x5982;&#x679C;&#x4E2D;&#x65AD;&#x7C7B;&#x578B;&#x4E3A;&#x7535;&#x5E73;&#x4E2D;&#x65AD;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x6B64;&#x4E4B;&#x524D;&#x6E05;&#x9664;&#x5916;&#x8BBE;&#x4E2D;&#x65AD;&#x6E90;&#x7684;&#x6709;&#x6548;&#x4E2D;&#x65AD;&#x4FE1;&#x606F;&#x3002;</p>
+<p>PLIC &#x6536;&#x5230;&#x8BE5;&#x4E2D;&#x65AD;&#x5B8C;&#x6210;&#x8BF7;&#x6C42;&#x540E;&#xFF0C;&#x66F4;&#x65B0;&#x4E2D;&#x65AD;&#x54CD;&#x5E94;/&#x5B8C;&#x6210;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x89E3;&#x9664; ID &#x5BF9;&#x5E94;&#x7684;&#x4E2D;&#x65AD;&#x6E90;&#x91C7;&#x6837;&#x5C4F;&#x853D;&#xFF0C;&#x7ED3;&#x675F;&#x6574;&#x4E2A;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x8FC7;&#x7A0B;&#x3002;</p>
+<p>PLIC &#x4E0D;&#x68C0;&#x67E5;&#x5B8C;&#x6210;&#x7684;&#x4E2D;&#x65AD;&#x53F7;&#x662F;&#x5426;&#x4E0E;&#x8BE5;&#x76EE;&#x6807;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x54CD;&#x5E94;&#x7684;&#x4E2D;&#x65AD;&#x53F7;&#x76F8;&#x540C;&#x3002;&#x5982;&#x679C;&#x5B8C;&#x6210;&#x7684;&#x4E2D;&#x65AD;&#x53F7;&#x4E0E;&#x8BE5;&#x76EE;&#x6807;&#x7684;&#x5DF2;&#x5F00;&#x542F;&#x4E2D;&#x65AD;&#x53F7;&#x4E0D;&#x5339;&#x914D;&#xFF0C;&#x5219;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#x3002;</p>
+<p>&#x4E2D;&#x65AD;&#x5B8C;&#x6210;&#x5BC4;&#x5B58;&#x5668;&#x662F;&#x57FA;&#x4E8E;&#x4E0A;&#x4E0B;&#x6587;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x4E0E;&#x4E2D;&#x65AD;&#x54CD;&#x5E94;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#x5730;&#x5740;&#x76F8;&#x540C;&#x3002;</p>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/ytf4425" target="_blank">Hanabi</a>&#xFF0C;&#x4F7F;&#x7528;<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">&#x7F72;&#x540D;-&#x975E;&#x5546;&#x4E1A;&#x6027;&#x4F7F;&#x7528;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0 &#x56FD;&#x9645;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2023-03-14 01:12:40 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 中断">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="uart.html" class="navigation navigation-next " aria-label="Next page: UART">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"PLIC","level":"1.4.1","depth":2,"next":{"title":"UART","level":"1.4.2","depth":2,"path":"interrupt/uart.md","ref":"interrupt/uart.md","articles":[]},"previous":{"title":"中断","level":"1.4","depth":1,"path":"interrupt/README.md","ref":"interrupt/README.md","articles":[{"title":"PLIC","level":"1.4.1","depth":2,"path":"interrupt/plic.md","ref":"interrupt/plic.md","articles":[]},{"title":"UART","level":"1.4.2","depth":2,"path":"interrupt/uart.md","ref":"interrupt/uart.md","articles":[]},{"title":"RTC","level":"1.4.3","depth":2,"path":"interrupt/goldfish_RTC.md","ref":"interrupt/goldfish_RTC.md","articles":[]},{"title":"驱动全志哪吒 D1 开发板的 PLIC","level":"1.4.4","depth":2,"path":"interrupt/sunxi_plic.md","ref":"interrupt/sunxi_plic.md","articles":[]},{"title":"驱动全志哪吒 D1 开发板的 RTC","level":"1.4.5","depth":2,"path":"interrupt/sunxi_RTC.md","ref":"interrupt/sunxi_RTC.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","sharing-plus","github-buttons","anchor-navigation-ex","page-footer-ex","splitter","copy-code-button","expandable-chapters-small","katex"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-footer-ex":{"copyright":"By [Hanabi](https://github.com/ytf4425)，使用[署名-非商业性使用-相同方式共享 4.0 国际](http://creativecommons.org/licenses/by-nc-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"github-buttons":{"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{"all":["douban","facebook","google","instapaper","linkedin","twitter","weibo","qq","qzone","viber","whatsapp"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Hanabi","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Code an OS Handbook","language":"zh-hans","gitbook":"*"},"file":{"path":"interrupt/plic.md","mtime":"2023-03-14T01:12:40.446Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-14T01:13:16.286Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

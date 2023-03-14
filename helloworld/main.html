@@ -1,0 +1,693 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>“主”函数的编写 · Code an OS Handbook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Hanabi">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="packaging.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Code an OS Project
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ready/">
+            
+                <a href="../ready/">
+            
+                    
+                    准备
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ready/intro.html">
+            
+                <a href="../ready/intro.html">
+            
+                    
+                    总体介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ready/env.html">
+            
+                <a href="../ready/env.html">
+            
+                    
+                    环境部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    你好，世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="main.html">
+            
+                <a href="main.html">
+            
+                    
+                    “主”函数的编写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="packaging.html">
+            
+                <a href="packaging.html">
+            
+                    
+                    ecall 指令的封装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="boot.html">
+            
+                <a href="boot.html">
+            
+                    
+                    操作系统的启动
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="make.html">
+            
+                <a href="make.html">
+            
+                    
+                    拼搭我们的系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="linker_script.html">
+            
+                <a href="linker_script.html">
+            
+                    
+                    附录：链接脚本 Linker Script
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../interrupt/">
+            
+                <a href="../interrupt/">
+            
+                    
+                    中断
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../interrupt/plic.html">
+            
+                <a href="../interrupt/plic.html">
+            
+                    
+                    PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../interrupt/uart.html">
+            
+                <a href="../interrupt/uart.html">
+            
+                    
+                    UART
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../interrupt/goldfish_RTC.html">
+            
+                <a href="../interrupt/goldfish_RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../interrupt/sunxi_plic.html">
+            
+                <a href="../interrupt/sunxi_plic.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../interrupt/sunxi_RTC.html">
+            
+                <a href="../interrupt/sunxi_RTC.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    [物理内存管理]
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../virtualmm/">
+            
+                <a href="../virtualmm/">
+            
+                    
+                    虚拟内存管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../virtualmm/intro.html">
+            
+                <a href="../virtualmm/intro.html">
+            
+                    
+                    基础介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../virtualmm/header.html">
+            
+                <a href="../virtualmm/header.html">
+            
+                    
+                    基础头文件准备
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../virtualmm/init.html">
+            
+                <a href="../virtualmm/init.html">
+            
+                    
+                    初始化过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../virtualmm/manage.html">
+            
+                <a href="../virtualmm/manage.html">
+            
+                    
+                    其他管理过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../process/">
+            
+                <a href="../process/">
+            
+                    
+                    进程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../process/task0_init.html">
+            
+                <a href="../process/task0_init.html">
+            
+                    
+                    初始化 0 号进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >“主”函数的编写</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x4E3B;&#x51FD;&#x6570;&#x7684;&#x7F16;&#x5199;"><b></b>&#x201C;&#x4E3B;&#x201D;&#x51FD;&#x6570;&#x7684;&#x7F16;&#x5199;</a></li><ul><li><span class="title-icon "></span><a href="#&#x5173;&#x4E8E;&#x4E3B;&#x51FD;&#x6570;&#x7684;&#x4E00;&#x4E9B;&#x8BF4;&#x660E;"><b></b>&#x5173;&#x4E8E;&#x201C;&#x4E3B;&#x201D;&#x51FD;&#x6570;&#x7684;&#x4E00;&#x4E9B;&#x8BF4;&#x660E;</a></li><li><span class="title-icon "></span><a href="#&#x76F8;&#x5173;&#x51FD;&#x6570;&#x7684;&#x4ECB;&#x7ECD;"><b></b>&#x76F8;&#x5173;&#x51FD;&#x6570;&#x7684;&#x4ECB;&#x7ECD;</a></li><li><span class="title-icon "></span><a href="#&#x4E3B;&#x51FD;&#x6570;&#x4EE3;&#x7801;&#x4E0E;&#x529F;&#x80FD;&#x4ECB;&#x7ECD;"><b></b>&#x201C;&#x4E3B;&#x201D;&#x51FD;&#x6570;&#x4EE3;&#x7801;&#x4E0E;&#x529F;&#x80FD;&#x4ECB;&#x7ECD;</a></li></ul></ul></div><a href="#&#x4E3B;&#x51FD;&#x6570;&#x7684;&#x7F16;&#x5199;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x4E3B;&#x51FD;&#x6570;&#x7684;&#x7F16;&#x5199;"><a name="&#x4E3B;&#x51FD;&#x6570;&#x7684;&#x7F16;&#x5199;" class="anchor-navigation-ex-anchor" href="#&#x4E3B;&#x51FD;&#x6570;&#x7684;&#x7F16;&#x5199;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x201C;&#x4E3B;&#x201D;&#x51FD;&#x6570;&#x7684;&#x7F16;&#x5199;</h1>
+<h2 id="&#x5173;&#x4E8E;&#x4E3B;&#x51FD;&#x6570;&#x7684;&#x4E00;&#x4E9B;&#x8BF4;&#x660E;"><a name="&#x5173;&#x4E8E;&#x4E3B;&#x51FD;&#x6570;&#x7684;&#x4E00;&#x4E9B;&#x8BF4;&#x660E;" class="anchor-navigation-ex-anchor" href="#&#x5173;&#x4E8E;&#x4E3B;&#x51FD;&#x6570;&#x7684;&#x4E00;&#x4E9B;&#x8BF4;&#x660E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5173;&#x4E8E;&#x201C;&#x4E3B;&#x201D;&#x51FD;&#x6570;&#x7684;&#x4E00;&#x4E9B;&#x8BF4;&#x660E;</h2>
+<p>&#x901A;&#x5E38;&#x6211;&#x4EEC;&#x7684; C &#x8BED;&#x8A00;&#x7A0B;&#x5E8F;&#x90FD;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x4E3B;&#x51FD;&#x6570;&#xFF08;main &#x51FD;&#x6570;&#xFF09;&#x4F5C;&#x4E3A;&#x7A0B;&#x5E8F;&#x7684;&#x5165;&#x53E3;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x4E5F;&#x5148;&#x5199;&#x4E00;&#x4E2A; main &#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x6211;&#x4EEC;&#x7684;&#x5185;&#x6838;&#x7684;&#x201C;&#x4E3B;&#x201D;&#x51FD;&#x6570;&#xFF0C;&#x4E4B;&#x6240;&#x4EE5;&#x5728;&#x201C;&#x4E3B;&#x201D;&#x51FD;&#x6570;&#x4E0A;&#x52A0;&#x5F15;&#x53F7;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x5B9E;&#x9645;&#x4E0A;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5E76;&#x4E0D;&#x662F;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x771F;&#x6B63;&#x7684;&#x5165;&#x53E3;&#xFF0C;&#x800C; main &#x7684;&#x540D;&#x5B57;&#x4E5F;&#x662F;&#x53EF;&#x4EE5;&#x4EFB;&#x610F;&#x53D6;&#x7684;&#xFF0C;&#x8FD9;&#x4E00;&#x7EC6;&#x8282;&#x540E;&#x7EED;&#x8FD8;&#x4F1A;&#x518D;&#x63D0;&#x5230;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x8FD8;&#x662F;&#x9075;&#x5FAA;&#x6211;&#x4EEC;&#x7684;&#x4E60;&#x60EF;&#xFF0C;&#x5C06;&#x5B83;&#x53D6;&#x540D;&#x4E3A; main&#x3002;</p>
+<h2 id="&#x76F8;&#x5173;&#x51FD;&#x6570;&#x7684;&#x4ECB;&#x7ECD;"><a name="&#x76F8;&#x5173;&#x51FD;&#x6570;&#x7684;&#x4ECB;&#x7ECD;" class="anchor-navigation-ex-anchor" href="#&#x76F8;&#x5173;&#x51FD;&#x6570;&#x7684;&#x4ECB;&#x7ECD;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x76F8;&#x5173;&#x51FD;&#x6570;&#x7684;&#x4ECB;&#x7ECD;</h2>
+<p>&#x5728;&#x7F16;&#x5199;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x65F6;&#x662F;&#x6709;&#x5F88;&#x591A;&#x5730;&#x65B9;&#x4E0E;&#x7F16;&#x5199;&#x666E;&#x901A;&#x7A0B;&#x5E8F;&#x6709;&#x5F88;&#x5927;&#x7684;&#x4E0D;&#x540C;&#x7684;&#xFF0C;&#x9996;&#x5148;&#x5C31;&#x662F;&#x5199;&#x4EE3;&#x7801;&#x7684;&#x65F6;&#x5019;&#x65E0;&#x6CD5;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x5E38;&#x7528;&#x7684;&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x5982; <code>stdio.h</code>, <code>stdlib.h</code> &#x7B49;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E9B;&#x5934;&#x6587;&#x4EF6;&#x662F;&#x4F9D;&#x8D56;&#x4E8E;&#x7CFB;&#x7EDF;&#x7684;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x8FD9;&#x4E9B;&#x5934;&#x6587;&#x4EF6;&#x7684;&#x529F;&#x80FD;&#x5E76;&#x4E0D;&#x662F; C &#x8BED;&#x8A00;&#x6216;&#x7F16;&#x8BD1;&#x5668;&#x5929;&#x751F;&#x5C31;&#x5177;&#x5907;&#x7684;&#xFF0C;&#x800C;&#x662F;&#x7531;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x63D0;&#x4F9B;&#x4E86;&#x5E95;&#x5C42;&#x652F;&#x6301;&#xFF0C;&#x7531;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5B8C;&#x6210;&#x4E86;&#x5185;&#x90E8;&#x7684;&#x4E00;&#x4E9B;&#x51FD;&#x6570;&#x548C;&#x5B9A;&#x4E49;&#x3002;</p>
+<p>&#x65E2;&#x7136;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x65E0;&#x6CD5;&#x4F7F;&#x7528; <code>printf</code>, <code>scanf</code>, <code>puts</code>, <code>gets</code>, <code>putchar</code>, <code>getchar</code> &#x4E4B;&#x7C7B;&#x7684;&#x51FD;&#x6570;&#x3002;&#x597D;&#x5728;&#xFF0C;sbi &#x4E3A;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E9B;&#x5B57;&#x7B26;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x7684;&#x73AF;&#x5883;&#x8C03;&#x7528;&#x529F;&#x80FD;&#xFF0C;&#x4F46;&#x662F;&#x9700;&#x8981;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#x6765;&#x8C03;&#x7528;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x4F1A;&#x5BF9;&#x8FD9;&#x4E9B;&#x529F;&#x80FD;&#x505A; C &#x8BED;&#x8A00;&#x7684;&#x51FD;&#x6570;&#x5C01;&#x88C5;&#xFF0C;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x5C31;&#x80FD;&#x501F;&#x52A9;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x5C01;&#x88C5;&#x7684; C &#x8BED;&#x8A00;&#x51FD;&#x6570;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x4E86;&#x3002;</p>
+<p>&#x5728; <code>main</code> &#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x4E86;&#x8FD9;&#x51E0;&#x4E2A;&#x5C01;&#x88C5;&#xFF1A;</p>
+<ul>
+<li>sbi_probe_extension<ul>
+<li>&#x63A2;&#x6D4B; SBI &#x6269;&#x5C55;&#x7684;&#x53EF;&#x7528;&#x60C5;&#x51B5;</li>
+</ul>
+</li>
+<li>sbi_console_putchar<ul>
+<li>&#x6253;&#x5370;&#x5B57;&#x7B26;</li>
+</ul>
+</li>
+<li>sbi_get_impl_id<ul>
+<li>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x7684; SBI&#xFF08;Supervisor &#x4E8C;&#x8FDB;&#x5236;&#x63A5;&#x53E3;&#xFF09;&#x5B9E;&#x73B0; ID</li>
+</ul>
+</li>
+</ul>
+<p>&#x540C;&#x6837;&#x6211;&#x4EEC;&#x4E5F;&#x81EA;&#x5DF1;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x7B26;&#x5408; sbi &#x6807;&#x51C6;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#x7C7B;&#x578B;<code>struct sbiret</code>&#xFF0C;&#x7528;&#x4E8E;&#x8868;&#x793A;&#x4E00;&#x4E9B; sbi &#x73AF;&#x5883;&#x8C03;&#x7528;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x3002;&#x5728; <code>main</code> &#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x4E3B;&#x8981;&#x662F; <code>sbi_probe_extension</code> &#x51FD;&#x6570;&#x4F7F;&#x7528;&#x4E86;&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x503C;&#x4E2D;&#x82E5;&#x6210;&#x5458; value &#x7684;&#x503C;&#x4E0D;&#x4E3A;0&#xFF0C;&#x5219;&#x8868;&#x793A;&#x529F;&#x80FD;&#x6269;&#x5C55;&#x53EF;&#x7528;&#xFF0C;&#x8FD9;&#x4E9B;&#x6807;&#x51C6;&#x90FD;&#x4F1A;&#x5728;&#x540E;&#x7EED;&#x4ECB;&#x7ECD;&#x5230;&#xFF0C;&#x6B64;&#x5904;&#x6682;&#x4E14;&#x4E0D;&#x63D0;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#x6211;&#x4EEC;&#x53C8;&#x5BF9; <code>sbi_console_putchar</code> &#x505A;&#x4E86;&#x8FDB;&#x4E00;&#x6B65;&#x5C01;&#x88C5;&#xFF0C;&#x5C01;&#x88C5;&#x540E;&#x51FD;&#x6570;&#x540D;&#x4E3A; <code>kputs</code>&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8F93;&#x51FA;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5E76;&#x5728;&#x6700;&#x540E;&#x8F93;&#x51FA;&#x6362;&#x884C;&#xFF0C;&#x5C01;&#x88C5;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span>
+<span class="hljs-title">kputs</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *msg)</span>
+</span>{
+    <span class="hljs-keyword">for</span> ( ; *msg != <span class="hljs-string">&apos;\0&apos;</span>; ++msg )
+    {
+        sbi_console_putchar(*msg);
+    }
+    sbi_console_putchar(<span class="hljs-string">&apos;\n&apos;</span>);
+}
+</code></pre>
+<h2 id="&#x4E3B;&#x51FD;&#x6570;&#x4EE3;&#x7801;&#x4E0E;&#x529F;&#x80FD;&#x4ECB;&#x7ECD;"><a name="&#x4E3B;&#x51FD;&#x6570;&#x4EE3;&#x7801;&#x4E0E;&#x529F;&#x80FD;&#x4ECB;&#x7ECD;" class="anchor-navigation-ex-anchor" href="#&#x4E3B;&#x51FD;&#x6570;&#x4EE3;&#x7801;&#x4E0E;&#x529F;&#x80FD;&#x4ECB;&#x7ECD;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x201C;&#x4E3B;&#x201D;&#x51FD;&#x6570;&#x4EE3;&#x7801;&#x4E0E;&#x529F;&#x80FD;&#x4ECB;&#x7ECD;</h2>
+<p>&#x5728;&#x8FD9;&#x91CC;&#x7ED9;&#x51FA; <code>main</code> &#x51FD;&#x6570;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">int</span> 
+<span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">struct</span> sbiret ret;
+    ret = sbi_probe_extension(TIMER_EXTENTION);
+    <span class="hljs-keyword">if</span> (ret.value != <span class="hljs-number">0</span>)
+        kputs(<span class="hljs-string">&quot;TIMER_EXTENTION: available&quot;</span>);
+    <span class="hljs-keyword">else</span> 
+        kputs(<span class="hljs-string">&quot;TIMER_EXTENTION: unavailable&quot;</span>);
+
+    ret = sbi_probe_extension(SHUT_DOWN_EXTENTION);
+    <span class="hljs-keyword">if</span> (ret.value != <span class="hljs-number">0</span>)
+        kputs(<span class="hljs-string">&quot;SHUT_DOWN_EXTENTION: available&quot;</span>);
+    <span class="hljs-keyword">else</span> 
+        kputs(<span class="hljs-string">&quot;SHUT_DOWN_EXTENTION: unavailable&quot;</span>);
+
+    ret = sbi_probe_extension(HART_STATE_EXTENTION);
+    <span class="hljs-keyword">if</span> (ret.value != <span class="hljs-number">0</span>)
+        kputs(<span class="hljs-string">&quot;HART_STATE_EXTENTION: available&quot;</span>);
+    <span class="hljs-keyword">else</span> 
+        kputs(<span class="hljs-string">&quot;HART_STATE_EXTENTION: unavailable&quot;</span>);
+
+    ret = sbi_get_impl_id();
+    <span class="hljs-keyword">switch</span> (ret.value)
+    {
+        <span class="hljs-keyword">case</span> BERKELY_BOOT_LOADER:
+            kputs(<span class="hljs-string">&quot;Implemention ID: Berkely boot loader&quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> OPENSBI:
+            kputs(<span class="hljs-string">&quot;Implemention ID: OpenSBI&quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> XVISOR:
+            kputs(<span class="hljs-string">&quot;Implemention ID: XVISOR&quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> KVM:
+            kputs(<span class="hljs-string">&quot;Implemention ID: KVM&quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> RUSTSBI:
+            kputs(<span class="hljs-string">&quot;Implemention ID: RustSBI&quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> DIOSIX:
+            kputs(<span class="hljs-string">&quot;Implemention ID: DIOSIX&quot;</span>);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            kputs(<span class="hljs-string">&quot;Implemention ID: Unkonwn&quot;</span>);
+    }
+    kputs(<span class="hljs-string">&quot;Hello LZU OS&quot;</span>);
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)
+        ; <span class="hljs-comment">/* infinite loop */</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>&#x6839;&#x636E;&#x524D;&#x9762;&#x7684;&#x8BF4;&#x660E;&#xFF0C;&#x6211;&#x4EEC;&#x5F88;&#x5BB9;&#x6613;&#x8BFB;&#x901A;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#xFF0C;&#x5B83;&#x6240;&#x505A;&#x7684;&#x4E0D;&#x8FC7;&#x5C31;&#x662F;&#x68C0;&#x6D4B;<code>TIMER_EXTENTION</code>&#xFF08;&#x65F6;&#x949F;&#xFF09;&#x3001;<code>SHUT_DOWN_EXTENTION</code>&#xFF08;&#x5173;&#x673A;&#xFF09;&#x3001;<code>HART_STATE_EXTENTION</code>&#xFF08;&#x786C;&#x4EF6;&#x7EA7;&#x7EBF;&#x7A0B;&#xFF0C;&#x8FD9;&#x4E00;&#x62D3;&#x5C55;&#x6211;&#x4EEC;&#x5B9E;&#x9645;&#x5E76;&#x4E0D;&#x4F1A;&#x4F7F;&#x7528;&#xFF0C;&#x53EA;&#x662F;&#x5355;&#x7EAF;&#x7684;&#x68C0;&#x6D4B;&#x4E00;&#x4E0B;&#xFF09;&#x8FD9;&#x51E0;&#x4E2A; sbi &#x6269;&#x5C55;&#x662F;&#x5426;&#x53EF;&#x7528; (available) &#xFF0C;&#x68C0;&#x6D4B;&#x5F53;&#x524D; sbi &#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x6700;&#x540E;&#x8F93;&#x51FA;&quot;Hello LZU OS&quot;&#xFF0C;&#x968F;&#x540E;<strong>&#x9677;&#x5165;&#x6B7B;&#x5FAA;&#x73AF;</strong>&#x3002;</p>
+<blockquote>
+<p><strong>&#x5C0F;&#x77E5;&#x8BC6;&#xFF1A;HART &#x786C;&#x4EF6;&#x7EA7;&#x7EBF;&#x7A0B;</strong>  </p>
+<p>hart &#x662F;&#x786C;&#x4EF6;&#x7EBF;&#x7A0B;(hardware thread)&#x7684;&#x7F29;&#x7565;&#x5F62;&#x5F0F;&#x3002; &#x6211;&#x4EEC;&#x7528;&#x8BE5;&#x672F;&#x8BED;&#x5C06;&#x5B83;&#x4EEC;&#x4E0E;&#x5927;&#x591A;&#x6570;&#x7A0B;&#x5E8F;&#x5458;&#x719F;&#x6089;&#x7684;&#x8F6F;&#x4EF6;&#x7EBF;&#x7A0B;&#x533A;&#x5206;&#x5F00;&#x6765;&#x3002;&#x8F6F;&#x4EF6;&#x7EBF;&#x7A0B;&#x5728; harts &#x4E0A;&#x8FDB;&#x884C;&#x5206;&#x65F6;&#x590D;&#x7528;&#x3002; &#x5927;&#x591A;&#x6570;&#x5904;&#x7406;&#x5668;&#x6838;&#x90FD;&#x53EA;&#x6709;&#x4E00;&#x4E2A;hart&#x3002;<br><em>&#x2014;&#x2014; &#x6458;&#x81EA;<a href="http://riscvbook.com/chinese/RISC-V-Reader-Chinese-v2p1.pdf" target="_blank">&#x300A;RISC-V &#x624B;&#x518C;&#x300B;</a></em></p>
+<p>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x90E8;&#x4EF6;&#x5305;&#x542B;&#x4E86;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x53D6;&#x6307;&#x4EE4;&#x5355;&#x5143;&#xFF0C;&#x5219;&#x8BE5;&#x90E8;&#x4EF6;&#x88AB;&#x79F0;&#x4E3A;&#x6838;&#x5FC3;(core)&#x3002;&#x4E00;&#x4E2A;RiscV&#x517C;&#x5BB9;&#x7684;&#x6838;&#x5FC3;&#x80FD;&#x591F;&#x901A;&#x8FC7;&#x591A;&#x7EBF;&#x7A0B;&#x6280;&#x672F;(&#x6216;&#x8005;&#x8BF4;&#x8D85;&#x7EBF;&#x7A0B;&#x6280;&#x672F;)&#x652F;&#x6301;&#x591A;&#x4E2A;RiscV&#x517C;&#x5BB9;&#x786C;&#x4EF6;&#x7EBF;&#x7A0B;(harts)&#xFF0C;harts&#x8FD9;&#x513F;&#x5C31;&#x662F;&#x6307;&#x786C;&#x4EF6;&#x7EBF;&#x7A0B;&#xFF0C; hardware thread&#x7684;&#x610F;&#x601D;&#x3002;&#x6240;&#x8C13;&#x8D85;&#x7EBF;&#x7A0B;&#x6280;&#x672F;&#xFF0C;&#x5C31;&#x662F;&#x5728;&#x4E00;&#x4E2A;&#x786C;&#x4EF6;&#x6838;&#x4E2D;&#xFF0C;&#x5B9E;&#x73B0;&#x591A;&#x4EFD;&#x786C;&#x4EF6;&#x7EBF;&#x7A0B;&#xFF0C;&#x6BCF;&#x4E2A;&#x786C;&#x4EF6;&#x7EBF;&#x7A0B;&#x90FD;&#x6709;&#x81EA;&#x5DF1;&#x72EC;&#x7ACB;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#x7EC4;&#x7B49;&#x4E0A;&#x4E0B;&#x6587;&#x8D44;&#x6E90;&#xFF0C;&#x4F46;&#x5927;&#x591A;&#x6570;&#x7684;&#x8FD0;&#x7B97;&#x8D44;&#x6E90;&#x90FD;&#x88AB;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x590D;&#x7528;&#xFF0C;&#x56E0;&#x6B64;&#x9762;&#x79EF;&#x6548;&#x7387;&#x5F88;&#x9AD8;&#x3002;&#x8D85;&#x7EBF;&#x7A0B;&#x6700;&#x65E9;&#x51FA;&#x73B0;&#x662F;&#x5728;Intel&#x7684;&#x5904;&#x7406;&#x5668;&#x4E2D;&#x3002;<br><em>&#x2014;&#x2014; &#x6458;&#x81EA; <a href="https://www.cnblogs.com/mikewolf2002/p/11177988.html" target="_blank">Risc-V&#x7B80;&#x8981;&#x6982;&#x62EC;</a> ( <a href="https://archive.is/nckyI" target="_blank">archive.is&#x4E92;&#x8054;&#x7F51;&#x5B58;&#x6863;</a> )</em>  </p>
+<p>&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF0C;&#x786C;&#x4EF6;&#x7EA7;&#x7EBF;&#x7A0B;&#x548C;&#x73B0;&#x5728;&#x5E38;&#x89C1;&#x7684; x86 &#x5904;&#x7406;&#x5668;&#x4E0A;&#x7684;&#x201C;m &#x6838; n &#x7EBF;&#x7A0B;&#x201D;&#x4E2D;&#x7684;&#x201C;n &#x7EBF;&#x7A0B;&#x201D;&#x5BF9;&#x5E94;&#xFF0C;&#x82E5;&#x5904;&#x7406;&#x5668;&#x8BBE;&#x8BA1;&#x65F6;&#x6CA1;&#x6709;&#x505A;&#x8D85;&#x7EBF;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#x4E00;&#x4E2A;&#x6838;&#x5FC3;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x786C;&#x4EF6;&#x53CA;&#x7EBF;&#x7A0B;&#xFF0C;&#x82E5;&#x6709;&#x505A;&#x8D85;&#x7EBF;&#x7A0B;&#xFF0C;&#x90A3;&#x4E48;&#x67D0;&#x4E9B;&#x6838;&#x5FC3;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x3002;</p>
+</blockquote>
+<p>&#x4E3A;&#x4EC0;&#x4E48; main &#x51FD;&#x6570;&#x5230;&#x6700;&#x540E;&#x662F;&#x9677;&#x5165;&#x6B7B;&#x5FAA;&#x73AF;&#x800C;&#x4E0D;&#x662F;&#x9000;&#x51FA;&#x5462;&#xFF1F;&#x6211;&#x4EEC;&#x5728;&#x8BB2;&#x5B8C;&#x5B8C;&#x6574;&#x7684;&#x542F;&#x52A8;&#x6D41;&#x7A0B;&#x540E;&#x518D;&#x6765;&#x56DE;&#x987E;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/ytf4425" target="_blank">Hanabi</a>&#xFF0C;&#x4F7F;&#x7528;<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">&#x7F72;&#x540D;-&#x975E;&#x5546;&#x4E1A;&#x6027;&#x4F7F;&#x7528;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0 &#x56FD;&#x9645;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2023-03-14 01:12:40 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 你好，世界">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="packaging.html" class="navigation navigation-next " aria-label="Next page: ecall 指令的封装">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"“主”函数的编写","level":"1.3.1","depth":2,"next":{"title":"ecall 指令的封装","level":"1.3.2","depth":2,"path":"helloworld/packaging.md","ref":"helloworld/packaging.md","articles":[]},"previous":{"title":"你好，世界","level":"1.3","depth":1,"path":"helloworld/README.md","ref":"helloworld/README.md","articles":[{"title":"“主”函数的编写","level":"1.3.1","depth":2,"path":"helloworld/main.md","ref":"helloworld/main.md","articles":[]},{"title":"ecall 指令的封装","level":"1.3.2","depth":2,"path":"helloworld/packaging.md","ref":"helloworld/packaging.md","articles":[]},{"title":"操作系统的启动","level":"1.3.3","depth":2,"path":"helloworld/boot.md","ref":"helloworld/boot.md","articles":[]},{"title":"拼搭我们的系统","level":"1.3.4","depth":2,"path":"helloworld/make.md","ref":"helloworld/make.md","articles":[]},{"title":"附录：链接脚本 Linker Script","level":"1.3.5","depth":2,"path":"helloworld/linker_script.md","ref":"helloworld/linker_script.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","sharing-plus","github-buttons","anchor-navigation-ex","page-footer-ex","splitter","copy-code-button","expandable-chapters-small","katex"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-footer-ex":{"copyright":"By [Hanabi](https://github.com/ytf4425)，使用[署名-非商业性使用-相同方式共享 4.0 国际](http://creativecommons.org/licenses/by-nc-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"github-buttons":{"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{"all":["douban","facebook","google","instapaper","linkedin","twitter","weibo","qq","qzone","viber","whatsapp"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Hanabi","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Code an OS Handbook","language":"zh-hans","gitbook":"*"},"file":{"path":"helloworld/main.md","mtime":"2023-03-14T01:12:40.446Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-14T01:13:16.286Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

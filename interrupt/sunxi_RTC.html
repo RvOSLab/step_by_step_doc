@@ -1,0 +1,844 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>驱动全志哪吒 D1 开发板的 RTC · Code an OS Handbook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Hanabi">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="sunxi_plic.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Code an OS Project
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ready/">
+            
+                <a href="../ready/">
+            
+                    
+                    准备
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ready/intro.html">
+            
+                <a href="../ready/intro.html">
+            
+                    
+                    总体介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ready/env.html">
+            
+                <a href="../ready/env.html">
+            
+                    
+                    环境部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../helloworld/">
+            
+                <a href="../helloworld/">
+            
+                    
+                    你好，世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../helloworld/main.html">
+            
+                <a href="../helloworld/main.html">
+            
+                    
+                    “主”函数的编写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../helloworld/packaging.html">
+            
+                <a href="../helloworld/packaging.html">
+            
+                    
+                    ecall 指令的封装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../helloworld/boot.html">
+            
+                <a href="../helloworld/boot.html">
+            
+                    
+                    操作系统的启动
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../helloworld/make.html">
+            
+                <a href="../helloworld/make.html">
+            
+                    
+                    拼搭我们的系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../helloworld/linker_script.html">
+            
+                <a href="../helloworld/linker_script.html">
+            
+                    
+                    附录：链接脚本 Linker Script
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    中断
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="plic.html">
+            
+                <a href="plic.html">
+            
+                    
+                    PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="uart.html">
+            
+                <a href="uart.html">
+            
+                    
+                    UART
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="goldfish_RTC.html">
+            
+                <a href="goldfish_RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="sunxi_plic.html">
+            
+                <a href="sunxi_plic.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.5" data-path="sunxi_RTC.html">
+            
+                <a href="sunxi_RTC.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    [物理内存管理]
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../virtualmm/">
+            
+                <a href="../virtualmm/">
+            
+                    
+                    虚拟内存管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../virtualmm/intro.html">
+            
+                <a href="../virtualmm/intro.html">
+            
+                    
+                    基础介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../virtualmm/header.html">
+            
+                <a href="../virtualmm/header.html">
+            
+                    
+                    基础头文件准备
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../virtualmm/init.html">
+            
+                <a href="../virtualmm/init.html">
+            
+                    
+                    初始化过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../virtualmm/manage.html">
+            
+                <a href="../virtualmm/manage.html">
+            
+                    
+                    其他管理过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../process/">
+            
+                <a href="../process/">
+            
+                    
+                    进程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../process/task0_init.html">
+            
+                <a href="../process/task0_init.html">
+            
+                    
+                    初始化 0 号进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >驱动全志哪吒 D1 开发板的 RTC</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x9A71;&#x52A8;&#x5168;&#x5FD7;&#x54EA;&#x5412;-d1-&#x5F00;&#x53D1;&#x677F;&#x7684;-rtc"><b></b>&#x9A71;&#x52A8;&#x5168;&#x5FD7;&#x54EA;&#x5412; D1 &#x5F00;&#x53D1;&#x677F;&#x7684; RTC</a></li><ul><li><span class="title-icon "></span><a href="#&#x4ECB;&#x7ECD;"><b></b>&#x4ECB;&#x7ECD;</a></li><ul><li><span class="title-icon "></span><a href="#&#x5DE5;&#x4F5C;&#x539F;&#x7406;"><b></b>&#x5DE5;&#x4F5C;&#x539F;&#x7406;</a></li></ul><li><span class="title-icon "></span><a href="#&#x5BC4;&#x5B58;&#x5668;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;"><b></b>&#x5BC4;&#x5B58;&#x5668;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;</a></li><li><span class="title-icon "></span><a href="#&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"><b></b>&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;</a></li><ul><li><span class="title-icon "></span><a href="#&#x65F6;&#x95F4;&#x8F6C;&#x6362;"><b></b>&#x65F6;&#x95F4;&#x8F6C;&#x6362;</a></li><li><span class="title-icon "></span><a href="#&#x65F6;&#x949F;&#x6E90;&#x63A7;&#x5236;"><b></b>&#x65F6;&#x949F;&#x6E90;&#x63A7;&#x5236;</a></li><li><span class="title-icon "></span><a href="#&#x65F6;&#x949F;&#x63A7;&#x5236;"><b></b>&#x65F6;&#x949F;&#x63A7;&#x5236;</a></li><li><span class="title-icon "></span><a href="#alarm0-&#x95F9;&#x949F;&#x63A7;&#x5236;"><b></b>ALARM0 &#x95F9;&#x949F;&#x63A7;&#x5236;</a></li><li><span class="title-icon "></span><a href="#&#x6CE8;&#x518C;&#x8BBE;&#x5907;"><b></b>&#x6CE8;&#x518C;&#x8BBE;&#x5907;</a></li></ul></ul></ul></div><a href="#&#x9A71;&#x52A8;&#x5168;&#x5FD7;&#x54EA;&#x5412;-d1-&#x5F00;&#x53D1;&#x677F;&#x7684;-rtc" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x9A71;&#x52A8;&#x5168;&#x5FD7;&#x54EA;&#x5412;-d1-&#x5F00;&#x53D1;&#x677F;&#x7684;-rtc"><a name="&#x9A71;&#x52A8;&#x5168;&#x5FD7;&#x54EA;&#x5412;-d1-&#x5F00;&#x53D1;&#x677F;&#x7684;-rtc" class="anchor-navigation-ex-anchor" href="#&#x9A71;&#x52A8;&#x5168;&#x5FD7;&#x54EA;&#x5412;-d1-&#x5F00;&#x53D1;&#x677F;&#x7684;-rtc"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9A71;&#x52A8;&#x5168;&#x5FD7;&#x54EA;&#x5412; D1 &#x5F00;&#x53D1;&#x677F;&#x7684; RTC</h1>
+<h2 id="&#x4ECB;&#x7ECD;"><a name="&#x4ECB;&#x7ECD;" class="anchor-navigation-ex-anchor" href="#&#x4ECB;&#x7ECD;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4ECB;&#x7ECD;</h2>
+<p>&#x5728;<em>D1_User_Manual_V0.1(Draft Version)</em>&#x4E2D;&#xFF0C;&#x4E0E; RTC &#x6709;&#x5173;&#x7684;&#x90E8;&#x5206;&#x4E3B;&#x8981;&#x662F; 3.14 &#x8282;&#x5BF9; RTC &#x7684;&#x7AEF;&#x53E3;&#x4E0E;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#x7684;&#x5177;&#x4F53;&#x8BF4;&#x660E;&#x3002;&#x56E0;&#x6B64;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x4E3B;&#x8981;&#x8FD8;&#x662F;&#x5BF9;&#x6587;&#x6863;&#x7684;&#x7FFB;&#x8BD1;&#x4E0E;&#x8BF4;&#x660E;&#xFF0C;&#x5176;&#x6B21;&#x662F;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E2D;&#x7F16;&#x5199;&#x7B26;&#x5408;&#x63A5;&#x53E3;&#x89C4;&#x8303;&#x7684;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x54EA;&#x5412; D1 &#x4F7F;&#x7528;&#x4E86;&#x5168;&#x5957;&#x5168;&#x5FD7;&#x7684; sunxi &#x786C;&#x4EF6;&#x8BBE;&#x5907;&#xFF0C;RTC &#x6A21;&#x5757;&#x88AB;&#x79F0;&#x4E3A; sunxi-rtc&#x3002;</p>
+<p>&#x9605;&#x8BFB;&#x6587;&#x6863; 3.14.1 &#x8282;&#xFF0C;&#x53EF;&#x4EE5;&#x4E86;&#x89E3;&#x5230;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x8BB0;&#x5F55;&#x65E5;&#x5386;&#x578B;&#x65F6;&#x95F4;&#x7684; RTC &#x8BBE;&#x5907;&#xFF0C;&#x8FD9;&#x4E0E; QEMU &#x4E0A;&#x4F7F;&#x7528;&#x7684; Goldfish RTC &#x6240;&#x91C7;&#x7528;&#x7684;&#x8BB0;&#x5F55; UNIX &#x65F6;&#x95F4;&#x6233;&#x7684; RTC &#x6709;&#x5F88;&#x5927;&#x7684;&#x4E0D;&#x540C;&#x3002;</p>
+<blockquote>
+<p>&#x5B9E;&#x65F6;&#x65F6;&#x949F;&#xFF08;RTC&#xFF09;&#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x65F6;&#x95F4;&#x8BA1;&#x6570;&#x5668;&#x548C;&#x5B9A;&#x65F6;&#x5524;&#x9192;&#x529F;&#x80FD;&#x3002;RTC &#x53EF;&#x4EE5;&#x5B9E;&#x65F6;&#x663E;&#x793A;&#x5E74;&#x3001;&#x6708;&#x3001;&#x65E5;&#x3001;&#x5468;&#x3001;&#x65F6;&#x3001;&#x5206;&#x3001;&#x79D2;&#x3002;RTC &#x6709;&#x72EC;&#x7ACB;&#x7684;&#x7535;&#x6E90;&#x5728;&#x7CFB;&#x7EDF;&#x65AD;&#x7535;&#x65F6;&#x7EE7;&#x7EED;&#x5DE5;&#x4F5C;&#x3002;</p>
+<p>RTC &#x5177;&#x6709;&#x4EE5;&#x4E0B;&#x529F;&#x80FD;&#xFF1A;</p>
+<ul>
+<li>&#x63D0;&#x4F9B;&#x7528;&#x4E8E;&#x8BA1;&#x65E5;&#x7684; 16 &#x4F4D;&#x8BA1;&#x6570;&#x5668;&#xFF0C;&#x8BA1;&#x5C0F;&#x65F6;&#x7684; 5 &#x4F4D;&#x8BA1;&#x6570;&#x5668;&#xFF0C;&#x8BA1;&#x5206;&#x949F;&#x7684; 6 &#x4F4D;&#x8BA1;&#x6570;&#x5668;&#xFF0C;&#x8BA1;&#x79D2;&#x7684; 6 &#x4F4D;&#x8BA1;&#x6570;&#x5668;</li>
+<li>&#x5916;&#x90E8;&#x8FDE;&#x63A5;&#x4E00;&#x4E2A; 32.768 kHz &#x4F4E;&#x9891;&#x632F;&#x8361;&#x5668;&#xFF0C;&#x7528;&#x4E8E;&#x8BA1;&#x65F6;</li>
+<li>&#x5B9A;&#x65F6;&#x5668;&#x9891;&#x7387;&#x4E3A; 1 kHz</li>
+<li>&#x968F;&#x65F6;&#x53EF;&#x901A;&#x8FC7;&#x8F6F;&#x4EF6;&#x914D;&#x7F6E;&#x521D;&#x59CB;&#x503C;</li>
+<li>&#x652F;&#x6301;&#x5B9A;&#x65F6;&#x8B66;&#x62A5;&#xFF0C;&#x5E76;&#x751F;&#x6210;&#x4E2D;&#x65AD;&#xFF0C;&#x5524;&#x9192;&#x5916;&#x90E8;&#x8BBE;&#x5907;</li>
+<li>8 &#x4E2A; 32 &#x4F4D;&#x7528;&#x6237;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x50A8; &#x5173;&#x673A;&#x4FE1;&#x606F;</li>
+</ul>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;RTC &#x7684;&#x5BC4;&#x5B58;&#x5668;&#x914D;&#x7F6E;&#x662F; AHB &#x603B;&#x7EBF;&#xFF0C;&#x5B83;&#x53EA;&#x53EF;&#x4EE5;&#x652F;&#x6301;&#x6309;&#x5B57;&#x64CD;&#x4F5C;&#xFF0C;&#x4E0D;&#x53EF;&#x6309;&#x5B57;&#x8282;&#x64CD;&#x4F5C;&#x548C;&#x534A;&#x5B57;&#x64CD;&#x4F5C;</strong></p>
+<p><strong>&#x5C0F;&#x77E5;&#x8BC6;</strong></p>
+<p>D1 &#x7684; RTC &#x65F6;&#x949F;&#x6811;</p>
+<p><img src="sunxi_RTC/rtc_clock_tree.png" alt="rtc clock tree"> </p>
+<p>LOSC_SRC_SEL:</p>
+<p>LOSC &#x6709; 2 &#x4E2A;&#x65F6;&#x949F;&#x6E90;&#xFF1A;&#x5185;&#x90E8; RC &#x4E0E;&#x5916;&#x90E8;&#x4F4E;&#x9891;&#x6676;&#x632F;&#x3002;&#x542F;&#x52A8;&#x65F6;&#x9ED8;&#x8BA4;&#x9009;&#x62E9;&#x5185;&#x90E8; RC&#xFF0C;&#x4E5F;&#x53EF;&#x901A;&#x8FC7;&#x8F6F;&#x4EF6;&#x9009;&#x62E9;&#x5916;&#x90E8;&#x4F4E;&#x9891;&#x6676;&#x632F;&#x4EE5;&#x63D0;&#x4F9B;&#x66F4;&#x7CBE;&#x786E;&#x7684;&#x65F6;&#x949F;&#x3002;LOSC &#x7684;&#x65F6;&#x949F;&#x7CBE;&#x786E;&#x4E0E;&#x5916;&#x90E8;&#x4F4E;&#x9891;&#x6676;&#x632F;&#x7684;&#x7CBE;&#x786E;&#x6709;&#x5173;&#x3002;&#x901A;&#x5E38;&#x9009;&#x62E9; 32.768 kHz &#x5177;&#x6709; &#xB1;20 ppm &#x9891;&#x7387;&#x516C;&#x5DEE;&#x7684;&#x6676;&#x632F;&#x3002;&#x4F7F;&#x7528;&#x5185;&#x90E8; RC &#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x66F4;&#x6539;&#x5206;&#x9891;&#x6BD4;&#x7387;&#xFF08;&#x56FE;&#x4E2D;<code>/N</code>&#xFF09;&#x6765;&#x66F4;&#x6539;&#x65F6;&#x949F;&#x3002;&#x4F7F;&#x7528;&#x5916;&#x90E8;&#x65F6;&#x949F;&#x65F6;&#xFF0C;&#x65E0;&#x6CD5;&#x66F4;&#x6539;&#x65F6;&#x949F;&#x3002;</p>
+<p>RTC&#xFF1A;</p>
+<p>RTC &#x7684;&#x65F6;&#x949F;&#x6E90;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x76F8;&#x5173;&#x5F00;&#x5173;&#x9009;&#x62E9;&#xFF0C;&#x5305;&#x62EC;&#x7531;&#x5185;&#x90E8; 16 MHz RC &#x5206;&#x9891;&#x6240;&#x5F97;&#x7684; 32K &#x4FE1;&#x53F7;&#x3001;&#x5916;&#x90E8; DCXO &#x5206;&#x9891;&#x6240;&#x5F97;&#x7684; 32K &#x4FE1;&#x53F7;&#x4E0E;&#x5916;&#x90E8; 32.768 kHz &#x6676;&#x632F;&#x4EA7;&#x751F;&#x7684;&#x4FE1;&#x53F7;&#x3002;&#x968F;&#x540E;&#x88AB;&#x56FE;&#x4E2D;<code>/32</code>&#x5206;&#x9891;&#x5668;&#x5206;&#x9891;<strong>&#x5F97;&#x5230; 1kHz &#x7684;&#x8F93;&#x5165;&#x4FE1;&#x53F7;</strong></p>
+<p>System 32K&#xFF1A;</p>
+<p>&#x7CFB;&#x7EDF; 32K &#x7684;&#x65F6;&#x949F;&#x6E90;&#x6765;&#x81EA;&#x5916;&#x90E8; 32.768 kHz &#x6676;&#x632F;&#x4FE1;&#x53F7;&#xFF0C;&#x6216;&#x5185;&#x90E8; 16 MHz &#x5206;&#x9891;&#x51FA;&#x7684; 32K &#x4FE1;&#x53F7;&#x3002;</p>
+<p>RTC_32K_FANOUT&#xFF1A;</p>
+<p>RTC_32K_FANOUT &#x7684;&#x65F6;&#x949F;&#x6E90;&#x53EF;&#x4EE5;&#x9009;&#x62E9; CLK32K&#xFF08;&#x7CFB;&#x7EDF; 32K &#x7684;&#x6765;&#x6E90;&#xFF09;&#x3001;&#x5916;&#x90E8; 32.768 kHz &#x6676;&#x632F;&#x6216;&#x5916;&#x90E8; DCXO &#x5206;&#x9891;&#x6240;&#x5F97;&#x7684; 32k &#x4FE1;&#x53F7;&#x3002;&#x968F;&#x540E;&#x901A;&#x8FC7;&#x5F15;&#x811A;&#x76F4;&#x63A5;&#x5F15;&#x51FA;&#x3002;</p>
+</blockquote>
+<h3 id="&#x5DE5;&#x4F5C;&#x539F;&#x7406;"><a name="&#x5DE5;&#x4F5C;&#x539F;&#x7406;" class="anchor-navigation-ex-anchor" href="#&#x5DE5;&#x4F5C;&#x539F;&#x7406;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5DE5;&#x4F5C;&#x539F;&#x7406;</h3>
+<h4 id="&#x65F6;&#x949F;"><a name="&#x65F6;&#x949F;" class="anchor-navigation-ex-anchor" href="#&#x65F6;&#x949F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x65F6;&#x949F;</h4>
+<p><img src="sunxi_RTC/rtc_1khz_counter_step_structure.png" alt="rtc 1khz counter step structure">  </p>
+<p>RTC &#x6A21;&#x5757;&#x4ECE;&#x5916;&#x90E8;&#x83B7;&#x5F97; 1kHz &#x7684;&#x8F93;&#x5165;&#x6E90;&#xFF0C;&#x968F;&#x540E;&#x5728;&#x6A21;&#x5757;&#x5185;&#x8BA1;&#x6570;&#xFF0C;&#x6BCF;&#x8BA1;&#x6570; 1000 &#x6B21;&#x5728;&#x8BA1;&#x79D2;&#x8BA1;&#x6570;&#x5668;&#x4E0A;&#x52A0; 1&#xFF0C;&#x968F;&#x540E;&#x6309;&#x5C42;&#x7EA7;&#x4F9D;&#x6B21;&#x66F4;&#x65B0;&#x8BA1;&#x5206;&#x8BA1;&#x6570;&#x5668;&#x3001;&#x8BA1;&#x5C0F;&#x65F6;&#x8BA1;&#x6570;&#x5668;&#x3001;&#x8BA1;&#x65E5;&#x8BA1;&#x6570;&#x5668;&#x3002;&#x8FD9;&#x4E9B;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x8303;&#x56F4;&#x5206;&#x522B;&#x4E3A; [0,59]&#x3001;[0,59]&#x3001;[0,23]&#x3001;[0,65535]&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x8FD9;&#x4E9B;&#x8BA1;&#x6570;&#x5668;&#x6CA1;&#x6709;&#x786C;&#x4EF6;&#x7EA0;&#x9519;&#x673A;&#x5236;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x5E94;&#x8BE5;&#x5411;&#x5176;&#x4E2D;&#x5199;&#x5165;&#x4E0D;&#x5408;&#x7406;&#x7684;&#x503C;&#x3002;</p>
+<p>sunxi_rtc &#x6CA1;&#x6709;&#x5E74;&#x3001;&#x6708;&#x8BA1;&#x6570;&#x5668;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x65E5;&#x8BA1;&#x6570;&#x5668;&#x6765;&#x8BA1;&#x7B97;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x7684; RTC &#x63A5;&#x53E3;&#x8BBE;&#x5B9A;&#x4E0E;&#x8BFB;&#x53D6;&#x65E5;&#x671F;&#x7684;&#x53C2;&#x6570;&#x90FD;&#x662F;&#x65F6;&#x95F4;&#x6233;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x8BBE;&#x8BA1;&#x65F6;&#x4E0D;&#x9700;&#x8981;&#x8003;&#x8651;&#x5E74;&#x6708;&#x7684;&#x8BA1;&#x7B97;&#x3002;</p>
+<h4 id="&#x95F9;&#x949F;"><a name="&#x95F9;&#x949F;" class="anchor-navigation-ex-anchor" href="#&#x95F9;&#x949F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x95F9;&#x949F;</h4>
+<p>&#x95F9;&#x949F;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x4E00;&#x4E2A;&#x6BD4;&#x8F83;&#x5668;&#xFF0C;&#x5F53;&#x65F6;&#x949F;&#x8FBE;&#x5230;&#x95F9;&#x949F;&#x8BBE;&#x5B9A;&#x503C;&#x65F6;&#xFF0C;&#x95F9;&#x949F;&#x5C31;&#x4F1A;&#x53D1;&#x51FA;&#x4E2D;&#x65AD;&#x4FE1;&#x53F7;&#xFF0C;&#x6216;&#x8005;&#x901A;&#x8FC7; NMI &#x5F15;&#x811A;&#x8F93;&#x51FA;&#x4F4E;&#x7EA7;&#x4FE1;&#x53F7;&#x5524;&#x9192;&#x7535;&#x6E90;&#x7BA1;&#x7406;&#x82AF;&#x7247;&#xFF08;&#x53EF;&#x7528;&#x4E8E;&#x5B9A;&#x65F6;&#x5F00;&#x673A;&#xFF09;&#x3002;</p>
+<p>&#x6BCF;&#x6B21;&#x4E2D;&#x65AD;&#x53D1;&#x751F;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x91CD;&#x8BBE;&#x95F9;&#x949F;&#x65F6;&#x95F4;&#x624D;&#x80FD;&#x7EE7;&#x7EED;&#x53D1;&#x51FA;&#x4E0B;&#x4E00;&#x6B21;&#x4E2D;&#x65AD;&#x3002;</p>
+<blockquote>
+<p><strong>&#x5C0F;&#x77E5;&#x8BC6;</strong></p>
+<p>&#x5173;&#x673A;&#x65F6;&#x4FE1;&#x606F;&#x5B58;&#x50A8;&#xFF1A;</p>
+<p>RTC &#x63D0;&#x4F9B; 8 &#x4E2A; 32 &#x4F4D;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x6765;&#x5B58;&#x50A8;&#x65AD;&#x7535;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x7531;&#x4E8E; VCC-RTC &#x51B7;&#x542F;&#x52A8;&#x540E;&#x59CB;&#x7EC8;&#x4FDD;&#x6301;&#x975E;&#x65AD;&#x7535;&#x72B6;&#x6001;&#xFF0C;&#x56E0;&#x6B64;&#x5F53;&#x7CFB;&#x7EDF;&#x5904;&#x4E8E;&#x5173;&#x673A;&#x6216;&#x5F85;&#x673A;&#x72B6;&#x6001;&#x65F6;&#xFF0C;CPU &#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5B58;&#x50A8;&#x4FE1;&#x606F;&#x5224;&#x65AD;&#x8F6F;&#x4EF6;&#x8FDB;&#x7A0B;&#x3002;</p>
+</blockquote>
+<h2 id="&#x5BC4;&#x5B58;&#x5668;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;"><a name="&#x5BC4;&#x5B58;&#x5668;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;" class="anchor-navigation-ex-anchor" href="#&#x5BC4;&#x5B58;&#x5668;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5BC4;&#x5B58;&#x5668;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;</h2>
+<p>&#x8FD9;&#x91CC;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#x6307;&#x7684;&#x662F;&#x786C;&#x4EF6;&#x7684;<strong>&#x7AEF;&#x53E3;</strong>&#x3002;</p>
+<p>&#x5BC4;&#x5B58;&#x5668;&#x53C2;&#x8003; D1 &#x6587;&#x6863;&#x7B2C; 3.14.5 &#x8282;&#x5BC4;&#x5B58;&#x5668;&#x5217;&#x8868;&#x4E0E; 3.14.6 &#x8282;&#x5BC4;&#x5B58;&#x5668;&#x63CF;&#x8FF0;&#xFF0C;&#x5176;&#x4E2D;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x4F7F;&#x7528;&#x4ECE;&#x504F;&#x79FB; <code>0x0000</code> &#x5F00;&#x59CB;&#x7684; <code>LOSC_CTRL_REG</code> &#x5BC4;&#x5B58;&#x5668;&#x5230; <code>0x0050</code> &#x5F00;&#x59CB;&#x7684; <code>ALARM_CONFIG_REG</code> &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5176;&#x4F59;&#x5BC4;&#x5B58;&#x5668;&#x591A;&#x4E3A;&#x7535;&#x5668;&#x53C2;&#x6570;&#x63A7;&#x5236;&#x548C;&#x5176;&#x4ED6;&#x786C;&#x4EF6;&#x53C2;&#x6570;&#x76F8;&#x5173;&#x7684;&#x63A7;&#x5236;&#xFF0C;&#x6211;&#x4EEC;&#x7528;&#x4E0D;&#x5230;&#xFF0C;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x3002;</p>
+<p>&#x548C; goldfish_rtc &#x7684;&#x8BBE;&#x8BA1;&#x4E00;&#x6837;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x662F;&#x7528;&#x7ED3;&#x6784;&#x4F53;&#x6765;&#x8868;&#x793A;&#x8FD9;&#x4E9B;&#x5BC4;&#x5B58;&#x5668;&#x504F;&#x79FB;&#x3002;</p>
+<p>&#x9605;&#x8BFB; 3.14.6 &#x8282;&#x5BC4;&#x5B58;&#x5668;&#x63CF;&#x8FF0;&#xFF0C;&#x4F1A;&#x53D1;&#x73B0;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7528;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#x90FD;&#x662F; 32bit &#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>uint32_t</code> &#x4F5C;&#x4E3A;&#x5404;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x53D8;&#x91CF;&#x7684;&#x7C7B;&#x578B;&#x3002;&#x4F46;&#x662F;&#x6CE8;&#x610F;&#x8FD9;&#x4E9B;&#x5BC4;&#x5B58;&#x5668;&#x4E4B;&#x95F4;&#x662F;&#x4E0D;&#x8FDE;&#x7EED;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x8981;&#x5728;&#x4E0D;&#x8FDE;&#x7EED;&#x7684;&#x90E8;&#x5206;&#x63D2;&#x5165;&#x5360;&#x4F4D;&#x6210;&#x5458;&#x53D8;&#x91CF;&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x7ED3;&#x6784;&#x4F53;&#x7684;&#x5E03;&#x5C40;&#x4E0E;&#x771F;&#x5B9E;&#x786C;&#x4EF6;&#x7AEF;&#x53E3;&#x5730;&#x5740;&#x504F;&#x79FB;&#x7684;&#x5E03;&#x5C40;&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;</p>
+<p>&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>&#x6CE8;&#xFF1A;&#x6DF7;&#x5408;&#x4F7F;&#x7528; <code>uint32_t</code> &#x4E0E; <code>uint64_t</code> &#x53EF;&#x80FD;&#x4F1A;&#x56E0;&#x4E3A;&#x5185;&#x5B58;&#x5BF9;&#x9F50;&#x5BFC;&#x81F4;&#x7F16;&#x8BD1;&#x5668;&#x81EA;&#x52A8;&#x586B;&#x5145;&#x672A;&#x5BF9;&#x9F50;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528; gcc &#x7F16;&#x8BD1;&#x5668;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>struct __attribute__((__packed__)) sunxi_rtc_regs</code> &#x6765;&#x7981;&#x7528;&#x5BF9;&#x9F50;&#xFF0C;&#x8FD9;&#x91CC;&#x5EFA;&#x8BAE;&#x5168;&#x90E8;&#x4F7F;&#x7528; <code>uint32_t</code> &#x6DFB;&#x52A0;&#x5360;&#x4F4D;&#x6210;&#x5458;&#x53D8;&#x91CF;&#x3002;<em>&#xFF08;&#x53C2;&#x8003; <a href="https://stackoverflow.com/questions/4306186/structure-padding-and-packing" target="_blank">Structure padding and packing</a> &#xFF09;</em></p>
+<pre><code class="lang-c"><span class="hljs-keyword">struct</span> sunxi_rtc_regs {
+    <span class="hljs-keyword">uint32_t</span> losc_ctrl_reg; <span class="hljs-comment">// 0x00, losc control register</span>
+    <span class="hljs-keyword">uint32_t</span> losc_auto_swt_sta_reg; <span class="hljs-comment">// 0x04, losc auto switch status register</span>
+    <span class="hljs-keyword">uint32_t</span> intosc_clk_prescal_reg; <span class="hljs-comment">// 0x08, intosc clock prescaler register</span>
+    <span class="hljs-keyword">uint32_t</span> padding1; <span class="hljs-comment">// 0x0c, padding</span>
+    <span class="hljs-keyword">uint32_t</span> rtc_day_reg; <span class="hljs-comment">// 0x10, rtc day register</span>
+    <span class="hljs-keyword">uint32_t</span> rtc_hh_mm_ss_reg; <span class="hljs-comment">// 0x14, rtc hour, minute, second register</span>
+    <span class="hljs-keyword">uint32_t</span> padding2[<span class="hljs-number">2</span>]; <span class="hljs-comment">// 0x18, padding</span>
+    <span class="hljs-keyword">uint32_t</span> alarm0_day_set_reg; <span class="hljs-comment">// 0x20, alarm0 day set register</span>
+    <span class="hljs-keyword">uint32_t</span> alarm0_cur_vlu_reg; <span class="hljs-comment">// 0x24, alarm0 current value register</span>
+    <span class="hljs-keyword">uint32_t</span> alarm0_enable_reg; <span class="hljs-comment">// 0x28, alarm0 enable register</span>
+    <span class="hljs-keyword">uint32_t</span> alarm0_irq_en; <span class="hljs-comment">// 0x2c, alarm0 interrupt enable register</span>
+    <span class="hljs-keyword">uint32_t</span> alarm0_irq_sta_reg; <span class="hljs-comment">// 0x30, alarm0 interrupt status register, Write 1 to clear</span>
+    <span class="hljs-keyword">uint32_t</span> padding3[<span class="hljs-number">7</span>]; <span class="hljs-comment">// 0x34, padding</span>
+    <span class="hljs-keyword">uint32_t</span> alarm_config_reg; <span class="hljs-comment">// 0x50, alarm configuration register</span>
+};
+</code></pre>
+<h2 id="&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"><a name="&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;" class="anchor-navigation-ex-anchor" href="#&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;</h2>
+<p>&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;&#x53C2;&#x8003; D1 &#x6587;&#x6863;&#x7B2C; 3.14.4 &#x8282;&#x7684;&#x6307;&#x5357;</p>
+<h3 id="&#x65F6;&#x95F4;&#x8F6C;&#x6362;"><a name="&#x65F6;&#x95F4;&#x8F6C;&#x6362;" class="anchor-navigation-ex-anchor" href="#&#x65F6;&#x95F4;&#x8F6C;&#x6362;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x65F6;&#x95F4;&#x8F6C;&#x6362;</h3>
+<p>&#x7531;&#x4E8E; sunxi_rtc &#x4F7F;&#x7528;&#x4E86;&#x65E5;&#x5386;&#x578B;&#x65F6;&#x949F;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5199;&#x4E24;&#x4E2A; UNIX &#x65F6;&#x95F4;&#x6233;&#x4E0E;&#x65E5;&#x5386;&#x578B;&#x65F6;&#x949F;&#x76F8;&#x4E92;&#x8F6C;&#x6362;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;&#x539F;&#x7406;&#x5C31;&#x7565;&#x53BB;&#xFF0C;&#x76F4;&#x63A5;&#x7ED9;&#x51FA;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SEC_PER_DAY 86400</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SEC_PER_HOUR 3600</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SEC_PER_MIN 60</span>
+
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">timestamp_to_day_hh_mm_ss</span><span class="hljs-params">(uint64_t timestamp, uint32_t *day,
+                                      uint32_t *hh, uint32_t *mm, uint32_t *ss)</span>
+</span>{
+    timestamp /= <span class="hljs-number">1000000000</span>; <span class="hljs-comment">// ns -&gt; s</span>
+    *day = timestamp / SEC_PER_DAY;
+    *hh = timestamp % SEC_PER_DAY / SEC_PER_HOUR;
+    *mm = timestamp % SEC_PER_HOUR / SEC_PER_MIN;
+    *ss = timestamp % SEC_PER_MIN;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">static</span> uint64_t <span class="hljs-title">day_hh_mm_ss_to_timestamp</span><span class="hljs-params">(uint32_t day, uint32_t hh,
+                                          uint32_t mm, uint32_t ss)</span>
+</span>{
+    <span class="hljs-keyword">uint64_t</span> timestamp =
+            day * SEC_PER_DAY + hh * SEC_PER_HOUR + mm * SEC_PER_MIN + ss;
+    <span class="hljs-keyword">return</span> timestamp * <span class="hljs-number">1000000000</span>; <span class="hljs-comment">// s -&gt; ns</span>
+}
+</code></pre>
+<h3 id="&#x65F6;&#x949F;&#x6E90;&#x63A7;&#x5236;"><a name="&#x65F6;&#x949F;&#x6E90;&#x63A7;&#x5236;" class="anchor-navigation-ex-anchor" href="#&#x65F6;&#x949F;&#x6E90;&#x63A7;&#x5236;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x65F6;&#x949F;&#x6E90;&#x63A7;&#x5236;</h3>
+<ol>
+<li><p>&#x9009;&#x62E9;&#x65F6;&#x949F;&#x6E90;&#xFF1A;&#x901A;&#x8FC7; <code>LOSC_CTRL_REG</code> &#x7684;&#x4F4D; [0] &#x9009;&#x62E9;&#x65F6;&#x949F;&#x6E90;&#xFF0C;&#x9ED8;&#x8BA4;&#x65F6;&#x949F;&#x6E90;&#x662F;&#x5185;&#x90E8; RC &#x632F;&#x8361;&#x5668;&#x3002;&#x5F53;&#x7CFB;&#x7EDF;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8F6F;&#x4EF6;&#x5207;&#x6362;&#x5230;&#x5916;&#x90E8; 32K &#x632F;&#x8361;&#x5668;&#x3002;</p>
+</li>
+<li><p>&#x81EA;&#x52A8;&#x5207;&#x6362;&#xFF1A;&#x542F;&#x7528; <code>LOSC_CTRL_REG</code> &#x7684;&#x4F4D; [15:14] &#x540E;&#xFF0C;RTC &#x5728;&#x5916;&#x90E8;&#x6676;&#x4F53;&#x65E0;&#x6CD5;&#x8F93;&#x51FA;&#x6CE2;&#x5F62;&#x65F6;&#x81EA;&#x52A8;&#x5C06;&#x65F6;&#x949F;&#x6E90;&#x5207;&#x6362;&#x5230;&#x5185;&#x90E8;&#x632F;&#x8361;&#x5668;&#xFF0C;&#x5207;&#x6362;&#x72B6;&#x6001;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>LOSC_AUTO_SWT_STA_REG</code> &#x7684;&#x4F4D; [1] &#x67E5;&#x8BE2;&#x3002;</p>
+</li>
+</ol>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x5982;&#x679C;&#x4EC5;&#x914D;&#x7F6E; <code>LOSC_CTRL_REG</code> &#x7684;&#x4F4D; [15]&#xFF0C;&#x5219;&#x5728;&#x81EA;&#x52A8;&#x5207;&#x6362;&#x751F;&#x6548;&#x540E;&#x65E0;&#x6CD5;&#x66F4;&#x6539;&#x65F6;&#x949F;&#x6E90;&#x72B6;&#x6001;&#x4F4D;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E24;&#x4E2A;&#x529F;&#x80FD;&#x662F;&#x72EC;&#x7ACB;&#x7684;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x65F6;&#x949F;&#x6E90;&#x63A7;&#x5236;&#x529F;&#x80FD;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x4E00;&#x90E8;&#x5206;&#x4EC5;&#x505A;&#x4E86;&#x89E3;&#x3002;</p>
+<h3 id="&#x65F6;&#x949F;&#x63A7;&#x5236;"><a name="&#x65F6;&#x949F;&#x63A7;&#x5236;" class="anchor-navigation-ex-anchor" href="#&#x65F6;&#x949F;&#x63A7;&#x5236;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x65F6;&#x949F;&#x63A7;&#x5236;</h3>
+<ol>
+<li><p>&#x5199;&#x5165;&#x65F6;&#x95F4;&#x521D;&#x59CB;&#x503C;&#xFF1A;&#x5C06;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x5199;&#x5165; <code>RTC_DAY_REG</code> &#x548C; <code>RTC_HH_MM_SS_REG</code>&#x3002;</p>
+</li>
+<li><p>&#x66F4;&#x65B0;&#x65F6;&#x95F4;&#x540E;&#xFF0C;RTC &#x91CD;&#x65B0;&#x542F;&#x52A8;&#x8BA1;&#x6570;&#x3002;&#x8F6F;&#x4EF6;&#x53EF;&#x4EE5;&#x968F;&#x65F6;&#x8BFB;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x3002;</p>
+</li>
+</ol>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x5728;&#x6267;&#x884C;&#x8BBE;&#x7F6E;&#x4E4B;&#x524D;&#xFF0C;&#x786E;&#x4FDD; <code>LOSC_CTRL_REG</code> &#x7684;&#x4F4D; [8:7] &#x4E3A; 0&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-comment">// D1 &#x6587;&#x6863;&#x7ED9;&#x51FA;&#x7684;&#x793A;&#x4F8B;&#x4F2A;&#x4EE3;&#x7801;</span>
+<span class="hljs-comment">// For example: set time to 21st, 07:08:09 and read it.</span>
+RTC_DAY_REG = <span class="hljs-number">0x00000015</span>;
+RTC_HH_MM_SS_REG = <span class="hljs-number">0x00070809</span>; <span class="hljs-comment">//0000 0000 000|0 0000(Hour) 00|00 0000(Minute) 00|00 0000(Second) </span>
+Read (RTC_DAY_REG);
+Read (RTC_HH_MM_SS_REG);
+</code></pre>
+<p>&#x5176;&#x4E2D;<code>RTC_DAY_REG</code> &#x548C; <code>RTC_HH_MM_SS_REG</code> &#x7684;&#x5E03;&#x5C40;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="sunxi_RTC/RTC_DAY_REG.png" alt="RTC_DAY_REG">  </p>
+<p><img src="sunxi_RTC/RTC_HH_MM_SS_REG.png" alt="RTC_HH_MM_SS_REG">  </p>
+<p>&#x6839;&#x636E;&#x6587;&#x6863;&#xFF0C;&#x5199;&#x51FA;&#x8BFB;&#x5199;&#x65F6;&#x949F;&#x7684;&#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">uint64_t</span> sunxi_rtc_read_time()
+{
+    <span class="hljs-keyword">struct</span> sunxi_rtc_regs *regs = (<span class="hljs-keyword">struct</span> sunxi_rtc_regs *)SUNXI_RTC_START_ADDR;
+    <span class="hljs-keyword">uint32_t</span> day = regs-&gt;rtc_day_reg;
+    <span class="hljs-keyword">uint32_t</span> hh_mm_ss = regs-&gt;rtc_hh_mm_ss_reg;
+    <span class="hljs-comment">// &#x6839;&#x636E; 3.14.6.4&#x3001;3.14.6.5 &#x8282;&#x5E03;&#x5C40;&#x8F6C;&#x6362;&#x5929;&#x3001;&#x65F6;&#x3001;&#x5206;&#x3001;&#x79D2;&#x5230;&#x65F6;&#x95F4;&#x6233;</span>
+    <span class="hljs-keyword">return</span> day_hh_mm_ss_to_timestamp(day, hh_mm_ss &gt;&gt; <span class="hljs-number">16</span>,
+                                     (hh_mm_ss &gt;&gt; <span class="hljs-number">8</span>) &amp; <span class="hljs-number">0x3f</span>, hh_mm_ss &amp; <span class="hljs-number">0x3f</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sunxi_rtc_set_time</span><span class="hljs-params">(uint64_t now)</span>
+</span>{
+    <span class="hljs-keyword">uint32_t</span> day;
+    <span class="hljs-keyword">uint32_t</span> hh;
+    <span class="hljs-keyword">uint32_t</span> mm;
+    <span class="hljs-keyword">uint32_t</span> ss;
+
+    <span class="hljs-keyword">struct</span> sunxi_rtc_regs *regs = (<span class="hljs-keyword">struct</span> sunxi_rtc_regs *)SUNXI_RTC_START_ADDR;
+
+    <span class="hljs-comment">// &#x8F6C;&#x6362;&#x65F6;&#x95F4;&#x6233;&#x5230;&#x5929;&#x3001;&#x65F6;&#x3001;&#x5206;&#x3001;&#x79D2;</span>
+    timestamp_to_day_hh_mm_ss(now, &amp;day, &amp;hh, &amp;mm, &amp;ss);
+    <span class="hljs-comment">// &#x9996;&#x5148;&#x68C0;&#x6D4B; LOSC_CTRL_REG &#x7684;&#x4F4D; [8:7] &#x662F;&#x5426;&#x4E3A; 0</span>
+    <span class="hljs-keyword">if</span> (regs-&gt;losc_ctrl_reg &amp; <span class="hljs-number">0x180</span>) {
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x4E0D;&#x4E3A; 0&#xFF0C;&#x62A5;&#x9519;</span>
+        kprintf(<span class="hljs-string">&quot;LOSC_CTRL_REG[8:7] is not 0, cannot set time\n&quot;</span>);
+        <span class="hljs-keyword">return</span>;
+    } <span class="hljs-keyword">else</span> {
+        now &gt;&gt;= <span class="hljs-number">9</span>; <span class="hljs-comment">// ns -&gt; s</span>
+        <span class="hljs-comment">// &#x6839;&#x636E; 3.14.6.4 &#x8282;&#x5E03;&#x5C40;&#x4FEE;&#x6539; RTC_DAY_REG</span>
+        regs-&gt;rtc_day_reg = (<span class="hljs-keyword">uint64_t</span>)day;
+        <span class="hljs-comment">// &#x6839;&#x636E; 3.14.6.5 &#x8282;&#x5E03;&#x5C40;&#x4FEE;&#x6539; RTC_HH_MM_SS_REG</span>
+        regs-&gt;rtc_hh_mm_ss_reg = hh &lt;&lt; <span class="hljs-number">16</span> | mm &lt;&lt; <span class="hljs-number">8</span> | ss;
+    }
+}
+</code></pre>
+<h3 id="alarm0-&#x95F9;&#x949F;&#x63A7;&#x5236;"><a name="alarm0-&#x95F9;&#x949F;&#x63A7;&#x5236;" class="anchor-navigation-ex-anchor" href="#alarm0-&#x95F9;&#x949F;&#x63A7;&#x5236;"><i class="fa fa-link" aria-hidden="true"></i></a>ALARM0 &#x95F9;&#x949F;&#x63A7;&#x5236;</h3>
+<ol>
+<li><p>&#x901A;&#x8FC7;&#x5199; <code>ALARM0_IRQ_EN</code> &#x542F;&#x7528; alram0 &#x4E2D;&#x65AD;&#x3002;</p>
+</li>
+<li><p>&#x8BBE;&#x7F6E;&#x65F6;&#x949F;&#x6BD4;&#x8F83;&#x5668;&#xFF1A;&#x5411; <code>ALARM0_DAY_SET_REG</code> &#x4E0E; <code>ALARM0_HH-MM-SS_SET_REG</code> &#xFF08;&#x4E0B;&#x56FE;&#x4E2D;&#x4E3A; <code>ALARM_CUR_VLE_REG</code>) &#x5199;&#x5165;&#x95F9;&#x949F;&#x7684;&#x65E5;&#x3001;&#x5C0F;&#x65F6;&#x3001;&#x5206;&#x949F;&#x3001;&#x79D2;&#x3002;</p>
+</li>
+<li><p>&#x5199;&#x5165; <code>ALARM0_ENABLE_REG</code> &#x4EE5;&#x542F;&#x7528; alarm 0 &#x529F;&#x80FD;&#xFF0C;&#x7136;&#x540E;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>ALARM0_DAY_SET_REG</code> &#x548C; <code>ALARM0_HH-MM-SS_SET_REG</code> &#xFF08;&#x4E0B;&#x56FE;&#x4E2D;&#x4E3A; <code>ALARM_CUR_VLE_REG</code>) &#x5B9E;&#x65F6;&#x67E5;&#x8BE2;&#x95F9;&#x949F;&#x65F6;&#x95F4;&#x3002;&#x5F53;&#x8BBE;&#x7F6E;&#x65F6;&#x95F4;&#x8FBE;&#x5230;&#x65F6;&#xFF0C;<code>ALARM0_IRQ_STA_REG</code> &#x5C06;&#x88AB;&#x7F6E; 1 &#x4EE5;&#x751F;&#x6210;&#x4E2D;&#x65AD;&#x3002;</p>
+</li>
+<li><p>&#x5728;&#x8FDB;&#x5165;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x540E;&#xFF0C;&#x5199;&#x5165; <code>ALARM0_IRQ_STA_REG</code> &#x4EE5;&#x6E05;&#x9664;&#x4E2D;&#x65AD;&#xFF0C;&#x5E76;&#x6267;&#x884C;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x3002;</p>
+</li>
+<li><p>&#x6062;&#x590D;&#x4E2D;&#x65AD;&#x5E76;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x88AB;&#x4E2D;&#x65AD;&#x7684;&#x8FDB;&#x7A0B;&#x3002;</p>
+</li>
+<li><p>&#x65AD;&#x7535;&#x5524;&#x9192;&#x7531; SoC &#x786C;&#x4EF6;&#x548C; PMIC &#x751F;&#x6210;&#xFF0C;&#x7A0B;&#x5E8F;&#x4EC5;&#x9700;&#x8981;&#x8BBE;&#x7F6E; alarm 0 &#x7684;&#x89E6;&#x53D1;&#x6761;&#x4EF6;&#xFF0C;&#x5E76;&#x5C06; <code>ALARM_CONFIG_REG</code> &#x8BBE;&#x7F6E;&#x4E3A; 1 &#x5373;&#x53EF;&#x3002;</p>
+</li>
+</ol>
+<p>&#x76F8;&#x5173;&#x5BC4;&#x5B58;&#x5668;&#x5E03;&#x5C40;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="sunxi_RTC/ALARM0_VALUE.png" alt="ALARM0_VALUE"></p>
+<p><img src="sunxi_RTC/ALARM0_ENABLE_REG.png" alt="ALARM0_ENABLE_REG"></p>
+<p><img src="sunxi_RTC/ALARM0_IRQ.png" alt="ALARM0_IRQ">  </p>
+<p><img src="sunxi_RTC/ALARM0_CONF_REG.png" alt="ALARM0_CONF_REG">  </p>
+<pre><code class="lang-c"><span class="hljs-comment">// D1 &#x6587;&#x6863;&#x7ED9;&#x51FA;&#x7684;&#x793A;&#x4F8B;&#x4F2A;&#x4EE3;&#x7801;</span>
+irq_request(GIC_SRC_R_Alarm0, Alm0_handler); irq_enable(GIC_SRC_R_Alarm0);
+writel(<span class="hljs-number">1</span>, ALARM0_DAY_SET_REG);
+writel(<span class="hljs-number">1</span>, RTC_HH_MM_SS_REG); <span class="hljs-comment">//set 1 second corresponding to normal mode; writel(1, ALM0_EN);</span>
+writel(<span class="hljs-number">1</span>, ALM_CONFIG); <span class="hljs-comment">//NMI output</span>
+<span class="hljs-keyword">while</span>(!readl(ALM0_IRQ_STA));
+writel(<span class="hljs-number">1</span>, ALM0_IRQ_EN);
+<span class="hljs-keyword">while</span>(readl(ALM0_IRQ_STA));
+</code></pre>
+<p>&#x6839;&#x636E;&#x6587;&#x6863;&#xFF0C;&#x5199;&#x51FA;&#x8BFB;&#x5199;&#x95F9;&#x949F;&#x3001;&#x5904;&#x7406;&#x4E2D;&#x65AD;&#x4EE5;&#x53CA;&#x5173;&#x95F9;&#x949F;&#xFF08;&#x4E2D;&#x65AD;&#xFF09;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x6CE8;&#x610F;&#xFF0C;<code>alarm0_irq_sta_reg</code> &#x5BC4;&#x5B58;&#x5668;&#x662F; W1C&#xFF08;Write 1 to clear, &#x5199; 1 &#x6765;&#x6E05;&#x96F6;&#xFF09;&#x7684;&#xFF0C;&#x53E6;&#x5916; sunxi_rtc &#x662F;&#x5728;&#x4ECE; x &#x79D2;&#x8DF3;&#x5230; x+1 &#x79D2;&#x7684;&#x90A3;&#x4E00;&#x5239;&#x90A3;&#x624D;&#x4F1A;&#x89E6;&#x53D1;&#x8BBE;&#x7F6E;&#x5728; x &#x79D2;&#x7684;&#x95F9;&#x949F;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x95F9;&#x949F;&#x8BBE;&#x7F6E;&#x91CC;&#x9762;&#x63D0;&#x524D;&#x4E00;&#x79D2;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sunxi_rtc_set_alarm</span><span class="hljs-params">(uint64_t alarm)</span>
+</span>{
+    <span class="hljs-keyword">uint32_t</span> day;
+    <span class="hljs-keyword">uint32_t</span> hh;
+    <span class="hljs-keyword">uint32_t</span> mm;
+    <span class="hljs-keyword">uint32_t</span> ss;
+
+    <span class="hljs-keyword">struct</span> sunxi_rtc_regs *regs = (<span class="hljs-keyword">struct</span> sunxi_rtc_regs *)SUNXI_RTC_START_ADDR;
+    <span class="hljs-comment">// &#x901A;&#x8FC7;&#x5199; ALARM0_IRQ_EN &#x542F;&#x7528; alram0 &#x4E2D;&#x65AD;&#x3002;</span>
+    regs-&gt;alarm0_irq_en = <span class="hljs-number">1</span>;
+    <span class="hljs-comment">// &#x8BBE;&#x7F6E;&#x65F6;&#x949F;&#x6BD4;&#x8F83;&#x5668;&#xFF1A;&#x5411; ALARM0_DAY_SET_REG &#x4E0E; ALARM0_HH-MM-SS_SET_REG &#x5199;&#x5165;&#x95F9;&#x949F;&#x7684;&#x65E5;&#x3001;&#x5C0F;&#x65F6;&#x3001;&#x5206;&#x949F;&#x3001;&#x79D2;&#x3002;</span>
+    <span class="hljs-comment">// &#x8F6C;&#x6362;&#x65F6;&#x95F4;&#x6233;&#x5230;&#x5929;&#x3001;&#x65F6;&#x3001;&#x5206;&#x3001;&#x79D2;</span>
+    timestamp_to_day_hh_mm_ss(alarm, &amp;day, &amp;hh, &amp;mm, &amp;ss);
+    alarm &gt;&gt;= <span class="hljs-number">9</span>; <span class="hljs-comment">// ns -&gt; s</span>
+    <span class="hljs-comment">// &#x6839;&#x636E;&#x5E03;&#x5C40;&#x4FEE;&#x6539; ALARM0_DAY_SET_REG</span>
+    regs-&gt;alarm0_day_set_reg = (<span class="hljs-keyword">uint64_t</span>)day;
+    <span class="hljs-comment">// &#x6839;&#x636E;&#x5E03;&#x5C40;&#x4FEE;&#x6539; ALARM0_HH-MM-SS_SET_REG</span>
+    regs-&gt;alarm0_cur_vlu_reg = hh &lt;&lt; <span class="hljs-number">16</span> | mm &lt;&lt; <span class="hljs-number">8</span> | (ss - <span class="hljs-number">1</span>);
+    <span class="hljs-comment">// &#x5199;&#x5165; ALARM0_ENABLE_REG &#x4EE5;&#x542F;&#x7528; alarm 0 &#x529F;&#x80FD;</span>
+    regs-&gt;alarm0_enable_reg = <span class="hljs-number">1</span>;
+}
+
+<span class="hljs-keyword">uint64_t</span> sunxi_rtc_read_alarm()
+{
+    <span class="hljs-keyword">struct</span> sunxi_rtc_regs *regs = (<span class="hljs-keyword">struct</span> sunxi_rtc_regs *)SUNXI_RTC_START_ADDR;
+
+    <span class="hljs-comment">// &#x53EF;&#x4EE5;&#x901A;&#x8FC7; ALARM0_DAY_SET_REG &#x548C; ALARM0_HH-MM-SS_SET_REG &#xFF08;&#x4E0B;&#x56FE;&#x4E2D;&#x4E3A; ALARM_CUR_VLE_REG) &#x5B9E;&#x65F6;&#x67E5;&#x8BE2;&#x95F9;&#x949F;&#x65F6;&#x95F4;&#x3002;</span>
+    <span class="hljs-keyword">uint32_t</span> day = regs-&gt;alarm0_day_set_reg;
+    <span class="hljs-keyword">uint32_t</span> hh_mm_ss = regs-&gt;alarm0_cur_vlu_reg;
+    <span class="hljs-keyword">return</span> day_hh_mm_ss_to_timestamp(day, (hh_mm_ss &gt;&gt; <span class="hljs-number">16</span>) &amp; <span class="hljs-number">0x1f</span>,
+                                     (hh_mm_ss &gt;&gt; <span class="hljs-number">8</span>) &amp; <span class="hljs-number">0x3f</span>, hh_mm_ss &amp; <span class="hljs-number">0x3f</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sunxi_rtc_interrupt_handler</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">struct</span> sunxi_rtc_regs *regs = (<span class="hljs-keyword">struct</span> sunxi_rtc_regs *)SUNXI_RTC_START_ADDR;
+    <span class="hljs-comment">// &#x5728;&#x8FDB;&#x5165;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x540E;&#xFF0C;&#x5199;&#x5165; ALARM0_IRQ_STA_REG &#x4EE5;&#x6E05;&#x9664;&#x4E2D;&#x65AD;&#xFF0C;&#x5E76;&#x6267;&#x884C;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x3002;</span>
+    regs-&gt;alarm0_irq_sta_reg = <span class="hljs-number">1</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sunxi_rtc_clear_alarm</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">struct</span> sunxi_rtc_regs *regs = (<span class="hljs-keyword">struct</span> sunxi_rtc_regs *)SUNXI_RTC_START_ADDR;
+    regs-&gt;alarm0_irq_en = <span class="hljs-number">0</span>;
+    regs-&gt;alarm0_irq_sta_reg = <span class="hljs-number">1</span>;
+    regs-&gt;alarm0_enable_reg = <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 id="&#x6CE8;&#x518C;&#x8BBE;&#x5907;"><a name="&#x6CE8;&#x518C;&#x8BBE;&#x5907;" class="anchor-navigation-ex-anchor" href="#&#x6CE8;&#x518C;&#x8BBE;&#x5907;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6CE8;&#x518C;&#x8BBE;&#x5907;</h3>
+<p>&#x6700;&#x540E;&#x548C; goldfish_rtc &#x4E00;&#x6837;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x8981;&#x5C06; sunxi_rtc &#x6CE8;&#x518C;&#x5230;&#x63A5;&#x53E3;&#x4E0A;&#x4EE5;&#x4FBF;&#x8C03;&#x7528;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">struct</span> rtc_class_ops sunxi_rtc_ops = {
+    .read_time = sunxi_rtc_read_time,
+    .set_time = sunxi_rtc_set_time,
+    .read_alarm = sunxi_rtc_read_alarm,
+    .set_alarm = sunxi_rtc_set_alarm,
+    .rtc_interrupt_handler = sunxi_rtc_interrupt_handler,
+    .clear_alarm = sunxi_rtc_clear_alarm,
+};
+
+<span class="hljs-keyword">extern</span> <span class="hljs-keyword">struct</span> rtc_class_device rtc_device;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sunxi_rtc_init</span><span class="hljs-params">()</span>
+</span>{
+    rtc_device.ops = sunxi_rtc_ops;
+}
+</code></pre>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/ytf4425" target="_blank">Hanabi</a>&#xFF0C;&#x4F7F;&#x7528;<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">&#x7F72;&#x540D;-&#x975E;&#x5546;&#x4E1A;&#x6027;&#x4F7F;&#x7528;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0 &#x56FD;&#x9645;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2023-03-14 01:12:40 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="sunxi_plic.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 驱动全志哪吒 D1 开发板的 PLIC">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"驱动全志哪吒 D1 开发板的 RTC","level":"1.4.5","depth":2,"next":{"title":"[物理内存管理]","level":"1.5","depth":1,"ref":"","articles":[]},"previous":{"title":"驱动全志哪吒 D1 开发板的 PLIC","level":"1.4.4","depth":2,"path":"interrupt/sunxi_plic.md","ref":"interrupt/sunxi_plic.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","sharing-plus","github-buttons","anchor-navigation-ex","page-footer-ex","splitter","copy-code-button","expandable-chapters-small","katex"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-footer-ex":{"copyright":"By [Hanabi](https://github.com/ytf4425)，使用[署名-非商业性使用-相同方式共享 4.0 国际](http://creativecommons.org/licenses/by-nc-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"github-buttons":{"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{"all":["douban","facebook","google","instapaper","linkedin","twitter","weibo","qq","qzone","viber","whatsapp"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Hanabi","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Code an OS Handbook","language":"zh-hans","gitbook":"*"},"file":{"path":"interrupt/sunxi_RTC.md","mtime":"2023-03-14T01:12:40.446Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-14T01:13:16.286Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

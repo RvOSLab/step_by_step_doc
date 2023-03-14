@@ -1,0 +1,696 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>总体介绍 · Code an OS Handbook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Hanabi">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="env.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Code an OS Project
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    准备
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="intro.html">
+            
+                <a href="intro.html">
+            
+                    
+                    总体介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="env.html">
+            
+                <a href="env.html">
+            
+                    
+                    环境部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../helloworld/">
+            
+                <a href="../helloworld/">
+            
+                    
+                    你好，世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../helloworld/main.html">
+            
+                <a href="../helloworld/main.html">
+            
+                    
+                    “主”函数的编写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../helloworld/packaging.html">
+            
+                <a href="../helloworld/packaging.html">
+            
+                    
+                    ecall 指令的封装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../helloworld/boot.html">
+            
+                <a href="../helloworld/boot.html">
+            
+                    
+                    操作系统的启动
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../helloworld/make.html">
+            
+                <a href="../helloworld/make.html">
+            
+                    
+                    拼搭我们的系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../helloworld/linker_script.html">
+            
+                <a href="../helloworld/linker_script.html">
+            
+                    
+                    附录：链接脚本 Linker Script
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../interrupt/">
+            
+                <a href="../interrupt/">
+            
+                    
+                    中断
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../interrupt/plic.html">
+            
+                <a href="../interrupt/plic.html">
+            
+                    
+                    PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../interrupt/uart.html">
+            
+                <a href="../interrupt/uart.html">
+            
+                    
+                    UART
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../interrupt/goldfish_RTC.html">
+            
+                <a href="../interrupt/goldfish_RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../interrupt/sunxi_plic.html">
+            
+                <a href="../interrupt/sunxi_plic.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../interrupt/sunxi_RTC.html">
+            
+                <a href="../interrupt/sunxi_RTC.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    [物理内存管理]
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../virtualmm/">
+            
+                <a href="../virtualmm/">
+            
+                    
+                    虚拟内存管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../virtualmm/intro.html">
+            
+                <a href="../virtualmm/intro.html">
+            
+                    
+                    基础介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../virtualmm/header.html">
+            
+                <a href="../virtualmm/header.html">
+            
+                    
+                    基础头文件准备
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../virtualmm/init.html">
+            
+                <a href="../virtualmm/init.html">
+            
+                    
+                    初始化过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../virtualmm/manage.html">
+            
+                <a href="../virtualmm/manage.html">
+            
+                    
+                    其他管理过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../process/">
+            
+                <a href="../process/">
+            
+                    
+                    进程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../process/task0_init.html">
+            
+                <a href="../process/task0_init.html">
+            
+                    
+                    初始化 0 号进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >总体介绍</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x603B;&#x4F53;&#x4ECB;&#x7ECD;"><b></b>&#x603B;&#x4F53;&#x4ECB;&#x7ECD;</a></li><ul><li><span class="title-icon "></span><a href="#risc-v"><b></b>RISC-V</a></li><li><span class="title-icon "></span><a href="#supervisor-&#x4E8C;&#x8FDB;&#x5236;&#x63A5;&#x53E3;&#xFF08;sbi&#xFF09;"><b></b>Supervisor &#x4E8C;&#x8FDB;&#x5236;&#x63A5;&#x53E3;&#xFF08;SBI&#xFF09;</a></li><li><span class="title-icon "></span><a href="#gcc"><b></b>GCC</a></li><li><span class="title-icon "></span><a href="#gdb"><b></b>GDB</a></li><li><span class="title-icon "></span><a href="#qemu"><b></b>QEMU</a></li><li><span class="title-icon "></span><a href="#&#x53C2;&#x8003;&#x8D44;&#x6599;"><b></b>&#x53C2;&#x8003;&#x8D44;&#x6599;</a></li></ul></ul></div><a href="#&#x603B;&#x4F53;&#x4ECB;&#x7ECD;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x603B;&#x4F53;&#x4ECB;&#x7ECD;"><a name="&#x603B;&#x4F53;&#x4ECB;&#x7ECD;" class="anchor-navigation-ex-anchor" href="#&#x603B;&#x4F53;&#x4ECB;&#x7ECD;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x603B;&#x4F53;&#x4ECB;&#x7ECD;</h1>
+<h2 id="risc-v"><a name="risc-v" class="anchor-navigation-ex-anchor" href="#risc-v"><i class="fa fa-link" aria-hidden="true"></i></a>RISC-V</h2>
+<p>&#x786C;&#x4EF6;&#x6307;&#x4EE4;&#x96C6;&#x67B6;&#x6784;&#x5343;&#x5343;&#x4E07;&#xFF0C;&#x6211;&#x4EEC;&#x9009;&#x62E9; 64 &#x4F4D; RISC-V&#xFF0C;&#x65E0;&#x4ED6;&#xFF0C;&#x53EA;&#x662F;&#x56E0;&#x4E3A;&#x8FD9;&#x4E2A;&#x9879;&#x76EE;&#x5F00;&#x59CB;&#x65F6;&#x8001;&#x5E08;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x7F62;&#x4E86;&#xFF08;&#x7B11;</p>
+<p>&#x4E0D;&#x8FC7;&#x6700;&#x540E;&#x4F53;&#x9A8C;&#x4E0B;&#x6765; RISC-V &#x786E;&#x5B9E;&#x662F;&#x975E;&#x5E38;&#x4F18;&#x79C0;&#x7684;&#x4E00;&#x5957;&#x6307;&#x4EE4;&#x96C6;&#x67B6;&#x6784;&#xFF0C;&#x76F8;&#x4FE1;&#x6211;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x548C;&#x6211;&#x4E00;&#x6837;&#x4E00;&#x6B65;&#x6B65;&#x6765;&#x5B8C;&#x6210;&#x4E86;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x4F60;&#x4E5F;&#x4F1A;&#x7231;&#x4E0A; RISC-V &#x7684;&#x7B80;&#x6D01;&#x9AD8;&#x6548;&#x3002;</p>
+<p>&#x5148;&#x6765;&#x7B80;&#x5355;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B; RISC-V&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x4E0E; x86 &#x6709;&#x76F8;&#x5F53;&#x5927;&#x7684;&#x533A;&#x522B;&#x7684;&#x5F00;&#x6E90; RISC &#x6307;&#x4EE4;&#x96C6;&#xFF0C;&#x7531;&#x52A0;&#x5DDE;&#x4F2F;&#x514B;&#x5229;&#x548C;&#x6821;&#x5916;&#x7684;&#x51E0;&#x4F4D;&#x5927;&#x4F6C;&#x5171;&#x540C;&#x5F00;&#x53D1;&#xFF0C;&#x9879;&#x76EE;&#x59CB;&#x4E8E; 2010 &#x5E74;&#xFF0C;&#x56E0;&#x6B64;&#x662F;&#x4E2A;&#x975E;&#x5E38;&#x5E74;&#x8F7B;&#x7684;&#x6307;&#x4EE4;&#x96C6;&#x67B6;&#x6784;&#xFF0C;&#x6CA1;&#x6709;&#x5F88;&#x591A;&#x7684;&#x5386;&#x53F2;&#x5305;&#x88B1;&#xFF0C;&#x4E00;&#x5207;&#x4ECE;&#x7B80;&#xFF0C;&#x5E76;&#x4E14;&#x6839;&#x636E;&#x5DF2;&#x6709;&#x7684;&#x6307;&#x4EE4;&#x96C6;&#x67B6;&#x6784;&#x7684;&#x4F18;&#x70B9;&#x548C;&#x4E0D;&#x8DB3;&#x505A;&#x4E86;&#x5F88;&#x591A;&#x7684;&#x6539;&#x8FDB;&#xFF0C;&#x56E0;&#x6B64;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x201C;&#x6469;&#x767B;&#x201D;&#x7684;&#x6307;&#x4EE4;&#x96C6;&#x67B6;&#x6784;&#x3002;&#x5B83;&#x91C7;&#x7528;&#x6A21;&#x5757;&#x5316;&#x8BBE;&#x8BA1;&#xFF0C;64 &#x4F4D;&#x7684; RISC-V &#x57FA;&#x672C;&#x6307;&#x4EE4;&#x96C6;&#x79F0;&#x4E3A; <strong>RV64I</strong>&#xFF08;&#x8FD9;&#x91CC;&#x7684; I &#x4EE3;&#x8868;&#x6574;&#x6570;&#x7684;&#x610F;&#x601D;&#xFF0C;&#x5373;&#x8FD9;&#x662F;&#x4E00;&#x4E2A; 64 &#x4F4D;&#x7684;&#x57FA;&#x672C;&#x6574;&#x6570;&#x6307;&#x4EE4;&#x96C6;&#xFF09;&#xFF0C;&#x5728;&#x6B64;&#x57FA;&#x7840;&#x4E0A;&#x53EF;&#x4EE5;&#x6269;&#x5C55;&#x4E0D;&#x540C;&#x7684;&#x6307;&#x4EE4;&#x96C6;&#xFF08;&#x5982;&#x4E58;&#x6CD5;&#x3001;&#x5355;&#x53CC;&#x7CBE;&#x5EA6;&#x6D6E;&#x70B9;&#x7684;&#x652F;&#x6301;&#x7B49;&#xFF09;&#xFF0C;&#x8BE6;&#x7EC6;&#x53EF;&#x89C1; <a href="https://zh.wikipedia.org/wiki/RISC-V#%E6%8C%87%E4%BB%A4%E5%AD%90%E9%9B%86" target="_blank">RISC-V &#x7EF4;&#x57FA;&#x767E;&#x79D1;</a>&#x3002;</p>
+<p>RISC-V &#x4F5C;&#x4E3A;&#x7CBE;&#x7B80;&#x6307;&#x4EE4;&#x96C6; (reduced instruction set computer&#xFF0C;RISC)&#xFF0C;&#x6709;&#x5927;&#x591A;&#x6570;&#x7CBE;&#x7B80;&#x6307;&#x4EE4;&#x96C6;&#x67B6;&#x6784;&#x90FD;&#x6709;&#x7684;&#x4E00;&#x5927;&#x7279;&#x6027;&#xFF1A;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#xFF08;&#x6CA1;&#x6709;&#x7279;&#x6B8A;&#x7528;&#x9014;&#x53EF;&#x88AB;&#x4EFB;&#x610F;&#x4F7F;&#x7528;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#xFF09;&#x975E;&#x5E38;&#x591A;&#x3002;&#x5728;&#x6C47;&#x7F16;&#x4EE3;&#x7801;&#x5C42;&#x9762;&#x4E0E;&#x4F20;&#x7EDF; x86 &#x8FD9;&#x7C7B;&#x590D;&#x6742;&#x6307;&#x4EE4;&#x96C6; (Complex Instruction Set Computer&#xFF0C;CISC) &#x7684;&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#x4E5F;&#x6709;&#x5F88;&#x5927;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x6BD4;&#x5982;&#x6CA1;&#x6709;&#x5165;&#x6808;&#x51FA;&#x6808;&#x7684;&#x6C47;&#x7F16;&#x8BED;&#x53E5;&#xFF0C;&#x5F53;&#x7136;&#x5165;&#x6808;&#x548C;&#x51FA;&#x6808;&#x7684;&#x64CD;&#x4F5C;&#x8FD8;&#x662F;&#x6709;&#x7684;&#xFF0C;&#x4F46;&#x8FD9;&#x5C31;&#x9700;&#x8981;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x8BBF;&#x5B58;&#x6307;&#x4EE4;&#x548C;&#x6808;&#x6307;&#x9488;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x52A0;&#x51CF;&#x6765;&#x5B9E;&#x73B0;&#x6B64;&#x7C7B;&#x64CD;&#x4F5C;&#x3002;&#x5177;&#x4F53;&#x6307;&#x4EE4;&#x5F53;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7528;&#x5230;&#x65F6;&#x4F1A;&#x518D;&#x4ECB;&#x7ECD;&#x3002;</p>
+<blockquote>
+<p><strong>&#x5C0F;&#x77E5;&#x8BC6;&#xFF1A;&#x7CBE;&#x7B80;&#x6307;&#x4EE4;&#x96C6;&#x8BA1;&#x7B97;&#x673A; (reduced instruction set computer&#xFF0C;RISC)</strong>  </p>
+<p>&#x7CBE;&#x7B80;&#x6307;&#x4EE4;&#x96C6;&#x8BA1;&#x7B97;&#x673A;&#xFF08;&#x82F1;&#x8BED;&#xFF1A;reduced instruction set computer&#xFF0C;&#x7F29;&#x5199;&#xFF1A;RISC&#xFF09;&#x6216;&#x7B80;&#x8BD1;&#x4E3A;&#x7CBE;&#x7B80;&#x6307;&#x4EE4;&#x96C6;&#xFF0C;&#x662F;&#x8BA1;&#x7B97;&#x673A;&#x4E2D;&#x592E;&#x5904;&#x7406;&#x5668;&#x7684;&#x4E00;&#x79CD;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3002;&#x8FD9;&#x79CD;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#x53EF;&#x4EE5;&#x60F3;&#x50CF;&#x6210;&#x662F;&#x4E00;&#x5BB6;&#x6A21;&#x5757;&#x5316;&#x7684;&#x7EC4;&#x88C5;&#x5DE5;&#x5382;&#xFF0C;&#x5BF9;&#x6307;&#x4EE4;&#x6570;&#x76EE;&#x548C;&#x5BFB;&#x5740;&#x65B9;&#x5F0F;&#x90FD;&#x505A;&#x4E86;&#x7CBE;&#x7B80;&#xFF0C;&#x4F7F;&#x5176;&#x5B9E;&#x73B0;&#x66F4;&#x5BB9;&#x6613;&#xFF0C;&#x6307;&#x4EE4;&#x5E76;&#x884C;&#x6267;&#x884C;&#x7A0B;&#x5EA6;&#x66F4;&#x597D;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x6548;&#x7387;&#x66F4;&#x9AD8;&#x3002;&#x76EE;&#x524D;&#x5E38;&#x89C1;&#x7684;&#x7CBE;&#x7B80;&#x6307;&#x4EE4;&#x96C6;&#x5FAE;&#x5904;&#x7406;&#x5668;&#x5305;&#x62EC; ARM&#x3001;MIPS&#x3001;RISC-V &#x548C; SPARC &#x7B49;&#x3002;<br><em>&#x2014;&#x2014; <a href="https://zh.wikipedia.org/wiki/%E7%B2%BE%E7%AE%80%E6%8C%87%E4%BB%A4%E9%9B%86%E8%AE%A1%E7%AE%97%E6%9C%BA" target="_blank">&#x7CBE;&#x7B80;&#x6307;&#x4EE4;&#x96C6;&#x8BA1;&#x7B97;&#x673A; - &#x7EF4;&#x57FA;&#x767E;&#x79D1;&#xFF0C;&#x81EA;&#x7531;&#x7684;&#x767E;&#x79D1;&#x5168;&#x4E66;</a></em></p>
+<p>&#x6307;&#x4EE4;&#x96C6;&#x7684;&#x6BCF;&#x4E00;&#x6761;&#x6307;&#x4EE4;&#x7684;&#x5B9E;&#x73B0;&#x90FD;&#x9700;&#x8981;&#x82B1;&#x8D39;&#x82AF;&#x7247;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x9762;&#x79EF;&#xFF0C;&#x7CBE;&#x7B80;&#x6307;&#x4EE4;&#x96C6;&#x7684;&#x4E00;&#x5927;&#x601D;&#x60F3;&#x5C31;&#x662F;&#x53EA;&#x4FDD;&#x7559;&#x6700;&#x5E38;&#x7528;&#x7684;&#x548C;&#x4E0D;&#x53EF;&#x7F3A;&#x5C11;&#x7684;&#x6307;&#x4EE4;&#xFF0C;&#x5176;&#x4F59;&#x529F;&#x80FD;&#x901A;&#x8FC7;&#x6307;&#x4EE4;&#x7EC4;&#x5408;&#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x8FD9;&#x6837;&#x6307;&#x4EE4;&#x7684;&#x8BD1;&#x7801;&#x3001;&#x6267;&#x884C;&#x7B49;&#x6240;&#x5360;&#x7528;&#x7684;&#x82AF;&#x7247;&#x9762;&#x79EF;&#x8F83;&#x5C11;&#xFF0C;&#x5728;&#x540C;&#x6837;&#x7684;&#x9762;&#x79EF;&#x4E0B;&#x53EF;&#x4EE5;&#x6BD4;&#x590D;&#x6742;&#x6307;&#x4EE4;&#x96C6;&#x653E;&#x4E0B;&#x66F4;&#x591A;&#x7684;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#xFF08;&#x5982; RISC-V &#x6709; 32 &#x4E2A;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#xFF09;&#x4EE5;&#x51CF;&#x5C11;&#x5185;&#x5B58;&#x8BBF;&#x95EE;&#xFF0C;&#x52A0;&#x5FEB;&#x901F;&#x5EA6;&#xFF08;&#x8BBF;&#x95EE;&#x901F;&#x5EA6;&#xFF1A;&#x5BC4;&#x5B58;&#x5668; &gt; Cache &gt;&gt; &#x5185;&#x5B58;&#xFF09;&#x3002;</p>
+</blockquote>
+<p>&#xA0;</p>
+<blockquote>
+<p><strong>&#x5B58;&#x50A8;&#x5668;&#x5C42;&#x6B21;&#x7ED3;&#x6784;</strong>  </p>
+<p><img src="intro/memory_hierarchy.jpg" alt="&#x5B58;&#x50A8;&#x5668;&#x5C42;&#x6B21;&#x7ED3;&#x6784;"></p>
+<p>&#x5B58;&#x50A8;&#x5668;&#x4ECE;&#x4E0A;&#x5230;&#x4E0B;&#x901F;&#x5EA6;&#x964D;&#x4F4E;&#xFF0C;&#x4EF7;&#x683C;&#x964D;&#x4F4E;&#xFF0C;&#x5BB9;&#x91CF;&#x63D0;&#x5347;&#x3002;<br>&#x5BC4;&#x5B58;&#x5668;&#x662F;&#x5C01;&#x88C5;&#x5728; CPU &#x6838;&#x5FC3;&#x5185;&#x90E8;&#x7684;&#x4E34;&#x65F6;&#x5B58;&#x50A8;&#x5668;&#xFF0C;&#x4E0E; CPU &#x8DDD;&#x79BB;&#x6700;&#x8FD1;&#xFF0C;&#x901F;&#x5EA6;&#x6700;&#x5FEB;&#xFF0C;&#x5BB9;&#x91CF;&#x6700;&#x5C0F;&#xFF0C;&#x4EF7;&#x683C;&#x6700;&#x8D35;&#x3002;</p>
+</blockquote>
+<p>RISC-V &#x5904;&#x7406;&#x5668;&#x901A;&#x5E38;&#x6709; 3 &#x4E2A;&#x7279;&#x6743;&#x7EA7;&#xFF0C;&#x7531;&#x9AD8;&#x5230;&#x5E95;&#x5206;&#x522B;&#x4E3A; M &#x6A21;&#x5F0F;&#xFF08;machine mode&#xFF09;&#x3001;S &#x6A21;&#x5F0F;&#xFF08;supervisor mode&#xFF09;&#x548C; U &#x6A21;&#x5F0F;&#xFF08;user mode&#xFF09;&#x3002;M &#x6A21;&#x5F0F;&#x4E0B;&#x8FD0;&#x884C;&#x6700;&#x53D7;&#x4FE1;&#x4EFB;&#x7684;&#x4EE3;&#x7801;&#xFF0C;S &#x6A21;&#x5F0F;&#x4E0B;&#x8FD0;&#x884C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;U &#x6A21;&#x5F0F;&#x4E0B;&#x8FD0;&#x884C;&#x7528;&#x6237;&#x7A0B;&#x5E8F;&#x3002;M &#x6A21;&#x5F0F;&#x4E0B;&#x7684;&#x4EE3;&#x7801;&#x5BF9;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x62E5;&#x6709;&#x7EDD;&#x5BF9;&#x63A7;&#x5236;&#x6743;&#xFF0C;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x4E00;&#x5207;&#x786C;&#x4EF6;&#x8D44;&#x6E90;&#x3002;</p>
+<h2 id="supervisor-&#x4E8C;&#x8FDB;&#x5236;&#x63A5;&#x53E3;&#xFF08;sbi&#xFF09;"><a name="supervisor-&#x4E8C;&#x8FDB;&#x5236;&#x63A5;&#x53E3;&#xFF08;sbi&#xFF09;" class="anchor-navigation-ex-anchor" href="#supervisor-&#x4E8C;&#x8FDB;&#x5236;&#x63A5;&#x53E3;&#xFF08;sbi&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>Supervisor &#x4E8C;&#x8FDB;&#x5236;&#x63A5;&#x53E3;&#xFF08;SBI&#xFF09;</h2>
+<p>RISC-V &#x6807;&#x51C6;&#x8FD8;&#x89C4;&#x5B9A;&#x4E86;&#x4E00;&#x5957; <strong>Supervisor &#x4E8C;&#x8FDB;&#x5236;&#x63A5;&#x53E3;&#xFF08;SBI&#xFF09;</strong>&#xFF0C;&#x5B83;&#x8FD0;&#x884C;&#x4E8E; M &#x6A21;&#x5F0F;&#xFF0C;&#x638C;&#x63A7;&#x7740;&#x6574;&#x53F0;&#x8BA1;&#x7B97;&#x673A;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x5B83;&#x662F; RISC-V &#x4E0A;&#x7684; BIOS&#xFF08;BIOS &#x53C8;&#x53EF;&#x4EE5;&#x770B;&#x4F5C;&#x662F;&#x6700;&#x5E95;&#x5C42;&#x7684;&#x76F4;&#x63A5;&#x63A5;&#x89E6;&#x786C;&#x4EF6;&#x7684;&#x4E00;&#x4E2A;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF09;&#xFF0C;&#x5B83;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E9B;&#x73AF;&#x5883;&#x8C03;&#x7528;&#x7684;&#x652F;&#x6301;&#xFF0C;&#x5BF9;&#x66F4;&#x5E95;&#x5C42;&#x7684;&#x786C;&#x4EF6;&#x505A;&#x4E86;&#x4E00;&#x90E8;&#x5206;&#x7684;&#x62BD;&#x8C61;&#x548C;&#x5C01;&#x88C5;&#x3002;&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x90FD;&#x4E0D;&#x4F1A;&#x76F4;&#x63A5;&#x7BA1;&#x7406;&#x786C;&#x4EF6;&#x8D44;&#x6E90;&#xFF0C;&#x800C;&#x662F;&#x4F1A;&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x8C03;&#x7528;&#x6765;&#x8BA9; SBI &#x534F;&#x52A9;&#x7BA1;&#x7406;&#x3002;</p>
+<blockquote>
+<p>SBI&#xFF0C;&#x6216;&#x8005; Supervisor Binary Interface&#xFF0C;&#x662F;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5411;&#x5E95;&#x5C42;&#xFF08;&#x865A;&#x62DF;&#x5C42;&#x3001;&#x4E2D;&#x95F4;&#x4EF6;&#x3001;&#x56FA;&#x4EF6;&#x7B49;&#x7B49;&#xFF09;&#x63D0;&#x51FA;&#x670D;&#x52A1;&#x8BF7;&#x6C42;&#x7684;&#x63A5;&#x53E3;&#x3002; &#x4ECE;&#x4F18;&#x5148;&#x7EA7;&#x6765;&#x8BF4;&#xFF0C;&#x4E5F;&#x5C31;&#x662F; S &#x6A21;&#x5F0F;&#x4E0B;&#x7684;&#x7A0B;&#x5E8F;&#x5411; M(H) &#x6A21;&#x5F0F;&#x7684;&#x670D;&#x52A1;&#x7A0B;&#x5E8F;&#x63D0;&#x51FA;&#x8BF7;&#x6C42;&#x7684; API &#x63A5;&#x53E3;&#x3002;&#x4ECE;&#x8F6F;&#x4EF6;&#x4F53;&#x7CFB;&#x6765;&#x8BF4;&#xFF0C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x901A;&#x8FC7; SBI &#x5411;&#x5E95;&#x5C42;&#x786C;&#x4EF6;&#x63D0;&#x51FA;&#x670D;&#x52A1;&#x8BF7;&#x6C42;&#xFF0C;&#x67D0;&#x79CD;&#x7A0B;&#x5EA6;&#x4E0A; SBI &#x4E3A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x63D0;&#x4F9B;&#x4E86;&#x9488;&#x5BF9;&#x5E95;&#x5C42;&#x786C;&#x4EF6;&#x7684;&#x9694;&#x79BB;&#x3002;</p>
+<p><em>&#x2014;&#x2014; <a href="https://cnrv.io/bi-week-rpts/2018-12-11" target="_blank">CNRV &#x53CC;&#x5468;&#x7B80;&#x62A5;&#xFF08;2018-12-11&#xFF09;- &#x6280;&#x672F;&#x8BA8;&#x8BBA; - &#x8BA9;&#x6211;&#x4EEC;&#x91CD;&#x65B0;&#x601D;&#x8003; SBI &#x7684;&#x5B9A;&#x4E49;</a> ( <a href="https://archive.is/yUxt7" target="_blank">archive.is &#x4E92;&#x8054;&#x7F51;&#x5B58;&#x6863;</a> )</em>&#xFF08;&#x5199;&#x7684;&#x4E0D;&#x9519;&#xFF0C;&#x5EFA;&#x8BAE;&#x9605;&#x8BFB;&#xFF0C;&#x4E86;&#x89E3;&#x4E00;&#x4E0B;&#x5F53;&#x521D;&#x8BA8;&#x8BBA;&#x7684;&#x51E0;&#x79CD;&#x601D;&#x60F3;&#xFF09;  </p>
+</blockquote>
+<p>SBI &#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x89C4;&#x8303;&#xFF0C;&#x6839;&#x636E;&#x8FD9;&#x4E2A;&#x89C4;&#x8303;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x5382;&#x5BB6;&#xFF08;&#x6216;&#x7A0B;&#x5E8F;&#x5458;&#xFF09;&#x53EF;&#x4EE5;&#x7F16;&#x5199;&#x4E0D;&#x540C;&#x7684; SBI &#x7A0B;&#x5E8F;&#xFF0C;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x7B26;&#x5408; SBI &#x89C4;&#x8303;&#x7684;&#x7A0B;&#x5E8F;&#x79F0;&#x4E3A; SBI &#x5B9E;&#x73B0;&#xFF08;&#x4E0B;&#x9762;&#x7B80;&#x79F0; SBI &#xFF09;&#xFF0C;RISC-V &#x5B98;&#x65B9;&#x505A;&#x4E86;&#x4E00;&#x4E2A; SBI &#x5B9E;&#x73B0;&#xFF0C;&#x53EB; OpenSBI&#xFF0C;&#x6B64;&#x5916;&#x8FD8;&#x6709;&#x5176;&#x4ED6;&#x7684; SBI &#x5B9E;&#x73B0;&#xFF0C;&#x5982; BBL&#x3001;RustSBI &#x7B49;&#x3002;SBI &#x662F;&#x4E00;&#x4E2A;&#x5237;&#x5199;&#x5728;&#x4E3B;&#x677F;&#x4E0A;&#x7684;&#x7A0B;&#x5E8F;&#x3002;</p>
+<blockquote>
+<p>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#xFF0C;&#x5FC5;&#x987B;&#x52A0;&#x8F7D;&#x5230;&#x5185;&#x5B58;&#x91CC;&#x624D;&#x80FD;&#x6267;&#x884C;&#x3002;&#x800C;&#x201C;&#x628A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x52A0;&#x8F7D;&#x5230;&#x5185;&#x5B58;&#x91CC;&#x201D;&#x8FD9;&#x4EF6;&#x4E8B;&#x60C5;&#xFF0C;&#x4E0D;&#x662F;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x81EA;&#x5DF1;&#x80FD;&#x505A;&#x5230;&#x7684;&#xFF0C;&#x5C31;&#x597D;&#x50CF;&#x4F60;&#x4E0D;&#x80FD;&#x62FD;&#x7740;&#x5934;&#x53D1;&#x628A;&#x81EA;&#x5DF1;&#x62FD;&#x79BB;&#x5730;&#x9762;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x60F3;&#x8C61;&#xFF0C;&#x5728;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6267;&#x884C;&#x4E4B;&#x524D;&#xFF0C;&#x5FC5;&#x7136;&#x6709;&#x4E00;&#x4E2A;&#x5176;&#x4ED6;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#xFF0C;&#x4ED6;&#x4F5C;&#x4E3A;&#x201C;&#x5148;&#x950B;&#x961F;&#x201D;&#xFF0C;&#x5B8C;&#x6210;&#x201C;&#x628A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x52A0;&#x8F7D;&#x5230;&#x5185;&#x5B58;&#x201C;&#x8FD9;&#x4E2A;&#x5DE5;&#x4F5C;&#xFF0C;&#x7136;&#x540E;&#x4ED6;&#x529F;&#x6210;&#x8EAB;&#x9000;&#xFF0C;&#x628A; CPU &#x7684;&#x63A7;&#x5236;&#x6743;&#x4EA4;&#x7ED9;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x201C;&#x5176;&#x4ED6;&#x7A0B;&#x5E8F;&#x201D;&#xFF0C;&#x6211;&#x4EEC;&#x4E00;&#x822C;&#x79F0;&#x4E4B;&#x4E3A; bootloader&#x3002;&#x5F88;&#x597D;&#x7406;&#x89E3;&#xFF1A;&#x4ED6;&#x8D1F;&#x8D23; boot&#xFF08;&#x5F00;&#x673A;&#xFF09;&#xFF0C;&#x8FD8;&#x8D1F;&#x8D23; load&#xFF08;&#x52A0;&#x8F7D; OS &#x5230;&#x5185;&#x5B58;&#x91CC;&#xFF09;&#xFF0C;&#x6240;&#x4EE5;&#x53EB; bootloader&#x3002;</p>
+<p><em>&#x2014;&#x2014; <a href="https://1790865014.gitbook.io/ucore-step-by-step/intro-1/1_layout" target="_blank">&#x5185;&#x5B58;&#x5E03;&#x5C40;&#xFF0C;OpenSBI&#xFF0C;elf &#x548C; bin - ucore step by step</a></em></p>
+</blockquote>
+<p>&#x5728; RISC-V &#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A; bootloader &#x5C31;&#x662F; SBI&#xFF0C;&#x6216;&#x8005;&#x66F4;&#x786E;&#x5207;&#x5730;&#x8BF4;&#xFF0C;&#x5145;&#x5F53; bootloader &#x5C31;&#x662F; SBI &#x7684;&#x4E00;&#x90E8;&#x5206;&#x529F;&#x80FD;&#x3002;</p>
+<p>&#x8BA1;&#x7B97;&#x673A;&#x7684;&#x542F;&#x52A8;&#x987A;&#x5E8F;&#xFF1A;&#x4E0A;&#x7535; -&gt; &#x8FD0;&#x884C; SBI -&gt; SBI &#x52A0;&#x8F7D;&#x8FD0;&#x884C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF; -&gt; &#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x52A0;&#x8F7D;&#x666E;&#x901A;&#x7528;&#x6237;&#x7A0B;&#x5E8F;</p>
+<p><strong>&#x5982;&#x679C;&#x8FD8;&#x662F;&#x4E0D;&#x660E;&#x767D; SBI &#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x6CA1;&#x6709;&#x5173;&#x7CFB;&#xFF0C;&#x5177;&#x4F53;&#x662F;&#x4EC0;&#x4E48;&#x53EF;&#x80FD;&#x4E0D;&#x91CD;&#x8981;&#xFF0C;&#x5B83;&#x80FD;&#x5E72;&#x4EC0;&#x4E48;&#x540E;&#x9762;&#x4E5F;&#x4F1A;&#x8BB2;&#x5230;&#xFF0C;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#xFF0C;&#x8FD9;&#x5E76;&#x4E0D;&#x5F71;&#x54CD;&#x540E;&#x7EED;&#x7684;&#x5B66;&#x4E60;&#x3002;</strong></p>
+<h2 id="gcc"><a name="gcc" class="anchor-navigation-ex-anchor" href="#gcc"><i class="fa fa-link" aria-hidden="true"></i></a>GCC</h2>
+<p>&#x6CA1;&#x9519;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; GCC&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; C &#x8BED;&#x8A00;&#xFF08;&#x867D;&#x7136; GCC &#x5DF2;&#x7ECF;&#x80FD;&#x7F16;&#x8BD1;&#x5F88;&#x591A;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#x4E86;&#xFF09;&#xFF0C;&#x56E0;&#x4E3A;&#x5927;&#x5B66;&#x671F;&#x95F4;&#x6211;&#x4EEC;&#x5B66;&#x5F97;&#x6700;&#x65E9;&#x4E5F;&#x7528;&#x5F97;&#x6BD4;&#x8F83;&#x719F;&#x7EC3;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x5C31;&#x662F; C &#x8BED;&#x8A00;&#x4E86;&#xFF0C;&#x5176;&#x4F59;&#x7684;&#x5E95;&#x5C42;&#xFF08;&#x53EF;&#x76F4;&#x63A5;&#x63A7;&#x5236;&#x5185;&#x5B58;&#xFF09;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x5982; Rust &#x8BED;&#x8A00;&#x5728;&#x5927;&#x5B66;&#x8BFE;&#x7A0B;&#x91CC;&#x51FA;&#x73B0;&#x6BD4;&#x8F83;&#x7F55;&#x89C1;&#xFF0C;&#x81EA;&#x5B66;&#x7684;&#x5B66;&#x4E60;&#x66F2;&#x7EBF;&#x4E5F;&#x6BD4;&#x8F83;&#x9661;&#x5CED;&#xFF08;&#x5C31;&#x662F;&#x8BF4;&#x5F88;&#x96BE;&#x5165;&#x95E8;&#xFF09;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x9009;&#x62E9;&#x6BD4;&#x8F83;&#x4F20;&#x7EDF;&#x4E14;&#x201C;&#x843D;&#x540E;&#x201D;&#x7684; C &#x8BED;&#x8A00;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684; GCC &#x4E0D;&#x662F;&#x4E00;&#x822C;&#x7684; GCC&#xFF0C;&#x800C;&#x662F;&#x53EF;&#x4EE5;&#x5728; x86 &#x67B6;&#x6784;&#x4E0B;&#x7F16;&#x8BD1;&#x51FA; RISC-V &#x4EE3;&#x7801;&#x7684;&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x5668;&#x3002;</p>
+<blockquote>
+<p><strong>&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;</strong>  </p>
+<p>&#x5728;&#x89E3;&#x91CA;&#x4EC0;&#x4E48;&#x662F;&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x4E4B;&#x524D;&#xFF0C;&#x5148;&#x8981;&#x660E;&#x767D;&#x4EC0;&#x4E48;&#x662F;&#x672C;&#x5730;&#x7F16;&#x8BD1;&#x3002;</p>
+<p>&#x672C;&#x5730;&#x7F16;&#x8BD1;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#xFF0C;&#x5728;&#x5F53;&#x524D;&#x7F16;&#x8BD1;&#x5E73;&#x53F0;&#x4E0B;&#xFF0C;&#x7F16;&#x8BD1;&#x51FA;&#x6765;&#x7684;&#x7A0B;&#x5E8F;&#x53EA;&#x80FD;&#x653E;&#x5230;&#x5F53;&#x524D;&#x5E73;&#x53F0;&#x4E0B;&#x8FD0;&#x884C;&#x3002;&#x5E73;&#x65F6;&#x6211;&#x4EEC;&#x5E38;&#x89C1;&#x7684;&#x8F6F;&#x4EF6;&#x5F00;&#x53D1;&#xFF0C;&#x90FD;&#x662F;&#x5C5E;&#x4E8E;&#x672C;&#x5730;&#x7F16;&#x8BD1;&#xFF1A;<br>&#x6BD4;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x5728; x86 &#x5E73;&#x53F0;&#x4E0A;&#xFF0C;&#x7F16;&#x5199;&#x7A0B;&#x5E8F;&#x5E76;&#x7F16;&#x8BD1;&#x6210;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528; x86 &#x5E73;&#x53F0;&#x4E0A;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x5F00;&#x53D1;&#x9488;&#x5BF9; x86 &#x5E73;&#x53F0;&#x672C;&#x8EAB;&#x7684;&#x53EF;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x8FD9;&#x4E2A;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x79F0;&#x4E3A;&#x672C;&#x5730;&#x7F16;&#x8BD1;&#x3002;</p>
+<p>&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#xFF0C;&#x5728;&#x5F53;&#x524D;&#x7F16;&#x8BD1;&#x5E73;&#x53F0;&#x4E0B;&#xFF0C;&#x7F16;&#x8BD1;&#x51FA;&#x6765;&#x7684;&#x7A0B;&#x5E8F;&#x80FD;&#x8FD0;&#x884C;&#x5728;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x4E0D;&#x540C;&#x7684;&#x53E6;&#x4E00;&#x79CD;&#x76EE;&#x6807;&#x5E73;&#x53F0;&#x4E0A;&#xFF0C;&#x4F46;&#x662F;&#x7F16;&#x8BD1;&#x5E73;&#x53F0;&#x672C;&#x8EAB;&#x5374;&#x4E0D;&#x80FD;&#x8FD0;&#x884C;&#x8BE5;&#x7A0B;&#x5E8F;&#xFF1A;<br>&#x6BD4;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x5728; x86 &#x5E73;&#x53F0;&#x4E0A;&#xFF0C;&#x7F16;&#x5199;&#x7A0B;&#x5E8F;&#x5E76;&#x7F16;&#x8BD1;&#x6210;&#x80FD;&#x8FD0;&#x884C;&#x5728; ARM &#x5E73;&#x53F0;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x7F16;&#x8BD1;&#x5F97;&#x5230;&#x7684;&#x7A0B;&#x5E8F;&#x5728; x86 &#x5E73;&#x53F0;&#x4E0A;&#x662F;&#x4E0D;&#x80FD;&#x8FD0;&#x884C;&#x7684;&#xFF0C;&#x5FC5;&#x987B;&#x653E;&#x5230; ARM &#x5E73;&#x53F0;&#x4E0A;&#x624D;&#x80FD;&#x8FD0;&#x884C;&#x3002;</p>
+<p>&#x4E4B;&#x6240;&#x4EE5;&#x8981;&#x6709;&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#xFF0C;&#x4E3B;&#x8981;<strong>&#x539F;&#x56E0;</strong>&#x662F;&#xFF1A;</p>
+<p>Speed&#xFF1A; &#x76EE;&#x6807;&#x5E73;&#x53F0;&#x7684;&#x8FD0;&#x884C;&#x901F;&#x5EA6;&#x5F80;&#x5F80;&#x6BD4;&#x4E3B;&#x673A;&#x6162;&#x5F97;&#x591A;&#xFF0C;&#x8BB8;&#x591A;&#x4E13;&#x7528;&#x7684;&#x5D4C;&#x5165;&#x5F0F;&#x786C;&#x4EF6;&#x88AB;&#x8BBE;&#x8BA1;&#x4E3A;&#x4F4E;&#x6210;&#x672C;&#x548C;&#x4F4E;&#x529F;&#x8017;&#xFF0C;&#x6CA1;&#x6709;&#x592A;&#x9AD8;&#x7684;&#x6027;&#x80FD;<br>Capability&#xFF1A; &#x6574;&#x4E2A;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x662F;&#x975E;&#x5E38;&#x6D88;&#x8017;&#x8D44;&#x6E90;&#x7684;&#xFF0C;&#x5D4C;&#x5165;&#x5F0F;&#x7CFB;&#x7EDF;&#x5F80;&#x5F80;&#x6CA1;&#x6709;&#x8DB3;&#x591F;&#x7684;&#x5185;&#x5B58;&#x6216;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;<br>Availability&#xFF1A; &#x5373;&#x4F7F;&#x76EE;&#x6807;&#x5E73;&#x53F0;&#x8D44;&#x6E90;&#x5F88;&#x5145;&#x8DB3;&#xFF0C;&#x53EF;&#x4EE5;&#x672C;&#x5730;&#x7F16;&#x8BD1;&#xFF0C;&#x4F46;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x5728;&#x76EE;&#x6807;&#x5E73;&#x53F0;&#x4E0A;&#x8FD0;&#x884C;&#x7684;&#x672C;&#x5730;&#x7F16;&#x8BD1;&#x5668;&#x603B;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x83B7;&#x5F97;<br>Flexibility&#xFF1A; &#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684; Linux &#x7F16;&#x8BD1;&#x73AF;&#x5883;&#x9700;&#x8981;&#x5F88;&#x591A;&#x652F;&#x6301;&#x5305;&#xFF0C;&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;&#x4F7F;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x82B1;&#x65F6;&#x95F4;&#x5C06;&#x5404;&#x79CD;&#x652F;&#x6301;&#x5305;&#x79FB;&#x690D;&#x5230;&#x76EE;&#x6807;&#x677F;&#x4E0A;<br><em>&#x2014;&#x2014; <a href="https://blog.csdn.net/whatday/article/details/73930604" target="_blank">&#x4EC0;&#x4E48;&#x662F;&#x4EA4;&#x53C9;&#x7F16;&#x8BD1;_whatday &#x7684;&#x4E13;&#x680F;</a></em></p>
+</blockquote>
+<p>&#xA0;</p>
+<blockquote>
+<p><strong>&#x5C0F;&#x77E5;&#x8BC6;&#xFF1A;GCC</strong></p>
+<p>GNU &#x7F16;&#x8BD1;&#x5668;&#x5957;&#x88C5;&#xFF08;&#x82F1;&#x8BED;&#xFF1A;GNU Compiler Collection&#xFF0C;&#x7F29;&#x5199;&#x4E3A; GCC&#xFF09;&#xFF0C;&#x6307;&#x4E00;&#x5957;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7F16;&#x8BD1;&#x5668;&#xFF0C;&#x662F; GNU &#x5DE5;&#x5177;&#x94FE;&#x7684;&#x4E3B;&#x8981;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#x4E4B;&#x4E00;&#x3002;GCC&#xFF08;&#x7279;&#x522B;&#x662F;&#x5176;&#x4E2D;&#x7684; C &#x8BED;&#x8A00;&#x7F16;&#x8BD1;&#x5668;&#xFF09;&#x4E5F;&#x5E38;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x8DE8;&#x5E73;&#x53F0;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x4E8B;&#x5B9E;&#x6807;&#x51C6;&#x3002;</p>
+<p>&#x539F;&#x540D;&#x4E3A; GNU C &#x8BED;&#x8A00;&#x7F16;&#x8BD1;&#x5668;&#xFF08;GNU C Compiler&#xFF09;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x539F;&#x672C;&#x53EA;&#x80FD;&#x5904;&#x7406; C &#x8BED;&#x8A00;&#x3002;GCC &#x5728;&#x53D1;&#x5E03;&#x540E;&#x5F88;&#x5FEB;&#x5730;&#x5F97;&#x5230;&#x6269;&#x5C55;&#xFF0C;&#x53D8;&#x5F97;&#x53EF;&#x5904;&#x7406; C++&#x3002;&#x4E4B;&#x540E;&#x4E5F;&#x53D8;&#x5F97;&#x53EF;&#x5904;&#x7406; Fortran&#x3001;Pascal&#x3001;Objective-C&#x3001;Java&#x3001;Ada&#xFF0C;Go &#x4E0E;&#x5176;&#x4ED6;&#x8BED;&#x8A00;&#x3002;</p>
+<p>&#x8BB8;&#x591A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x5305;&#x62EC;&#x8BB8;&#x591A;&#x7C7B; Unix &#x7CFB;&#x7EDF;&#xFF0C;&#x5982; Linux &#x53CA; BSD &#x5BB6;&#x65CF;&#x90FD;&#x91C7;&#x7528; GCC &#x4F5C;&#x4E3A;&#x6807;&#x51C6;&#x7F16;&#x8BD1;&#x5668;&#x3002;</p>
+<p><em>&#x2014;&#x2014; <a href="https://zh.wikipedia.org/wiki/GCC" target="_blank">GCC - &#x7EF4;&#x57FA;&#x767E;&#x79D1;&#xFF0C;&#x81EA;&#x7531;&#x7684;&#x767E;&#x79D1;&#x5168;&#x4E66;</a></em></p>
+</blockquote>
+<h2 id="gdb"><a name="gdb" class="anchor-navigation-ex-anchor" href="#gdb"><i class="fa fa-link" aria-hidden="true"></i></a>GDB</h2>
+<p>&#x65E2;&#x7136;&#x7528;&#x4E86; GCC&#xFF0C;&#x90A3;&#x5C31;&#x7528;&#x914D;&#x5957;&#x7684;&#x8C03;&#x8BD5;&#x5E73;&#x53F0; GDB &#x5427;&#xFF0C;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x5176;&#x4ED6;&#x7684;&#x539F;&#x56E0;&#x3002;</p>
+<blockquote>
+<p><strong>&#x5C0F;&#x77E5;&#x8BC6;&#xFF1A;GDB</strong>  </p>
+<p>GNU &#x8C03;&#x8BD5;&#x5668;&#xFF08;&#x82F1;&#x8BED;&#xFF1A;GNU Debugger&#xFF0C;&#x7F29;&#x5199;&#xFF1A;GDB&#xFF09;&#xFF0C;&#x662F; GNU &#x8F6F;&#x4EF6;&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;&#x6807;&#x51C6;&#x8C03;&#x8BD5;&#x5668;&#xFF0C;&#x6B64;&#x5916; GDB &#x4E5F;&#x662F;&#x4E2A;&#x5177;&#x6709;&#x79FB;&#x643A;&#x6027;&#x7684;&#x8C03;&#x8BD5;&#x5668;&#xFF0C;&#x7ECF;&#x8FC7;&#x79FB;&#x643A;&#x9700;&#x6C42;&#x7684;&#x8C03;&#x4FEE;&#x4E0E;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#xFF0C;&#x5982;&#x4ECA;&#x8BB8;&#x591A;&#x7684;&#x7C7B; UNIX &#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E0A;&#x90FD;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; GDB&#xFF0C;&#x800C;&#x73B0;&#x6709; GDB &#x6240;&#x80FD;&#x652F;&#x6301;&#x8C03;&#x8BD5;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x6709; C&#x3001;C++&#x3001;Pascal &#x4EE5;&#x53CA; FORTRAN&#x3002;</p>
+<p><em>&#x2014;&#x2014; <a href="https://zh.wikipedia.org/wiki/GNU%E4%BE%A6%E9%94%99%E5%99%A8" target="_blank">GNU &#x8C03;&#x8BD5;&#x5668; - &#x7EF4;&#x57FA;&#x767E;&#x79D1;&#xFF0C;&#x81EA;&#x7531;&#x7684;&#x767E;&#x79D1;&#x5168;&#x4E66;</a></em></p>
+</blockquote>
+<p>&#xA0;</p>
+<blockquote>
+<p><strong>&#x5C0F;&#x77E5;&#x8BC6;&#xFF1A;GNU &#x5DE5;&#x5177;&#x94FE;</strong></p>
+<p>GNU &#x5DE5;&#x5177;&#x94FE;&#xFF08;&#x82F1;&#x8BED;&#xFF1A;GNU toolchain&#xFF09;&#x662F;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x4E86;&#x7531; GNU &#x8BA1;&#x5212;&#x6240;&#x4EA7;&#x751F;&#x7684;&#x5404;&#x79CD;&#x7F16;&#x7A0B;&#x5DE5;&#x5177;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x7531;&#x81EA;&#x7531;&#x8F6F;&#x4EF6;&#x57FA;&#x91D1;&#x4F1A;&#x8D1F;&#x8D23;&#x7EF4;&#x62A4;&#x5DE5;&#x4F5C;&#x3002;&#x8FD9;&#x4E9B;&#x5DE5;&#x5177;&#x5F62;&#x6210;&#x4E86;&#x4E00;&#x6761;&#x5DE5;&#x5177;&#x94FE;&#xFF0C;&#x7528;&#x4E8E;&#x5F00;&#x53D1;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x548C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;</p>
+<p>&#x7EC4;&#x6210;&#xFF08;&#x52A0;&#x7C97;&#x90E8;&#x5206;&#x662F;&#x6211;&#x4EEC;&#x4F1A;&#x4F7F;&#x7528;&#x5230;&#x7684;&#xFF09;&#xFF1A;<br><strong>GNU make</strong>&#xFF1A;&#x7528;&#x4E8E;&#x7F16;&#x8BD1;&#x548C;&#x6784;&#x5EFA;&#x7684;&#x81EA;&#x52A8;&#x5DE5;&#x5177;<br><strong>GNU &#x7F16;&#x8BD1;&#x5668;&#x96C6;&#x5408;&#xFF08;GCC&#xFF09;</strong>&#xFF1A;&#x4E00;&#x7EC4;&#x591A;&#x79CD;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#x7F16;&#x8BD1;&#x5668;<br><strong>GNU Binutils</strong>&#xFF1A;&#x5305;&#x542B;&#x94FE;&#x63A5;&#x5668;&#x3001;&#x6C47;&#x7F16;&#x5668;&#x548C;&#x5176;&#x5B83;&#x5DE5;&#x5177;&#x7684;&#x5DE5;&#x5177;&#x96C6;<br>GNU Bison: &#x7F16;&#x8BD1;&#x5668;&#x7F16;&#x8BD1;&#x7A0B;&#x5E8F;&#xFF0C;&#x7ECF;&#x5E38;&#x548C; Flex &#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x5668; &#x914D;&#x5408;&#x4F7F;&#x7528;<br>GNU m4&#xFF1A; m4 &#x5B8F;&#x9884;&#x5904;&#x7406;&#x5668;<br><strong>GNU Debugger&#xFF08;GDB&#xFF09;</strong>&#xFF1A;&#x4EE3;&#x7801;&#x8C03;&#x8BD5;&#x5DE5;&#x5177;<br>GNU &#x6784;&#x5EFA;&#x7CFB;&#x7EDF;&#xFF08;autotools&#xFF09;</p>
+<p><em>&#x2014;&#x2014; <a href="https://zh.wikipedia.org/wiki/GNU%E5%B7%A5%E5%85%B7%E9%93%BE" target="_blank">GNU &#x5DE5;&#x5177;&#x94FE; - &#x7EF4;&#x57FA;&#x767E;&#x79D1;&#xFF0C;&#x81EA;&#x7531;&#x7684;&#x767E;&#x79D1;&#x5168;&#x4E66;</a></em></p>
+</blockquote>
+<h2 id="qemu"><a name="qemu" class="anchor-navigation-ex-anchor" href="#qemu"><i class="fa fa-link" aria-hidden="true"></i></a>QEMU</h2>
+<p>QEMU &#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x68D2;&#x7684;&#x6A21;&#x62DF;&#x5668;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x52A8;&#x6001;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x8F6C;&#x6362;&#xFF0C;&#x6A21;&#x62DF; CPU&#xFF0C;&#x56E0;&#x6B64;&#x80FD;&#x591F;&#x8BA9;&#x6211;&#x4EEC;&#x5728; x86 &#x7684;&#x7535;&#x8111;&#x4E0A;&#x6A21;&#x62DF;&#x51FA; RISC-V &#x7684;&#x8FD0;&#x884C;&#x73AF;&#x5883;&#xFF0C;&#x4FBF;&#x4E8E;&#x6211;&#x4EEC;&#x7684;&#x5F00;&#x53D1;&#x6D4B;&#x8BD5;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x548C; GDB &#x8054;&#x52A8;&#x8C03;&#x8BD5;&#xFF0C;&#x975E;&#x5E38;&#x65B9;&#x4FBF;&#x3002;&#x6211;&#x4EEC;&#x7684;&#x7CFB;&#x7EDF;&#x5F88;&#x5C0F;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x56E0;&#x6B64;&#x4E5F;&#x5B8C;&#x5168;&#x4E0D;&#x9700;&#x8981;&#x8003;&#x8651;&#x6027;&#x80FD;&#x4E4B;&#x7C7B;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x53EA;&#x8981;&#x80FD;&#x8DD1;&#x8D77;&#x6765;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
+<p>QEMU &#x6240;&#x6A21;&#x62DF;&#x7684; 64 &#x4F4D; RISC-V &#x6307;&#x4EE4;&#x96C6;&#x652F;&#x6301;&#x5230;&#x4E86; RV64ACDFIMSU&#x3002;</p>
+<p>RV64ACDFIMSU&#xFF1A;</p>
+<ul>
+<li>&#x539F;&#x5B50;&#x6307;&#x4EE4; (A)</li>
+<li>&#x538B;&#x7F29;&#x6307;&#x4EE4; (C)</li>
+<li>&#x53CC;&#x7CBE;&#x5EA6;&#x6D6E;&#x70B9;&#x8FD0;&#x7B97; (D)</li>
+<li>&#x5355;&#x7CBE;&#x5EA6;&#x6D6E;&#x70B9;&#x8FD0;&#x7B97; (F)</li>
+<li>&#x6574;&#x6570;&#x8FD0;&#x7B97; (RV64I)</li>
+<li>&#x6574;&#x6570;&#x4E58;&#x9664;&#x6CD5; (M)</li>
+<li>&#x7279;&#x6743;&#x7EA7;<ul>
+<li>M &#x6A21;&#x5F0F;&#xFF08;machine mode&#xFF09;</li>
+<li>S &#x6A21;&#x5F0F;&#xFF08;supervisor mode&#xFF09;</li>
+<li>U &#x6A21;&#x5F0F;&#xFF08;user mode&#xFF09;</li>
+</ul>
+</li>
+</ul>
+<p>QEMU &#x81EA;&#x5E26; OpenSBI&#xFF0C;&#x4F46;&#x56E0;&#x4E3A;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x542F;&#x52A8;&#x540E;&#x5BFB;&#x5740;&#x4E0D;&#x6B63;&#x786E;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x4F7F;&#x7528; <a href="https://github.com/riscv/opensbi/releases/tag/v0.9" target="_blank">OpenSBI &#x7684;&#x5B98;&#x65B9; v0.9 &#x7248;&#x672C;</a>&#xFF0C;&#x914D;&#x5408; OpenSBI &#x5B98;&#x65B9;&#x4ED3;&#x5E93;&#x6253;&#x5305;&#x597D;&#x7684;&#x56FA;&#x4EF6;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x82E5;&#x4E0D;&#x6307;&#x5B9A;&#x53C2;&#x6570;&#xFF0C;&#x6A21;&#x62DF; RISC-V &#x73AF;&#x5883;&#x7684; QEMU virt &#x865A;&#x62DF;&#x673A;&#x7684;&#x9ED8;&#x8BA4;&#x7269;&#x7406;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x4E3A; 128 MiB&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x91C7;&#x7528;&#x8FD9;&#x4E2A;&#x5927;&#x5C0F;&#xFF0C;&#x4E0D;&#x505A;&#x4FEE;&#x6539;&#x3002;</p>
+<h2 id="&#x53C2;&#x8003;&#x8D44;&#x6599;"><a name="&#x53C2;&#x8003;&#x8D44;&#x6599;" class="anchor-navigation-ex-anchor" href="#&#x53C2;&#x8003;&#x8D44;&#x6599;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x53C2;&#x8003;&#x8D44;&#x6599;</h2>
+<p>&#x7406;&#x89E3; SBI&#xFF1A;</p>
+<ul>
+<li><a href="https://github.com/riscv/riscv-sbi-doc/blob/master/riscv-sbi.adoc" target="_blank">riscv-sbi-doc</a>: SBI &#x89C4;&#x8303;&#x3002;&#x540E;&#x7EED;&#x6211;&#x4EEC;&#x4F1A;&#x5C01;&#x88C5;&#x5176;&#x4E2D;&#x4E00;&#x90E8;&#x5206; ecall &#x8C03;&#x7528;&#xFF08;&#x73AF;&#x5883;&#x8C03;&#x7528;&#xFF09;&#x3002;</li>
+</ul>
+<p>&#x7406;&#x89E3; RISC-V &#x6307;&#x4EE4;&#x96C6;&#x548C;&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#xFF1A;</p>
+<ul>
+<li><a href="https://github.com/riscv/riscv-asm-manual/blob/master/riscv-asm.md" target="_blank">RISC-V Assembly Language</a>&#xFF1A;RISC-V &#x5B98;&#x65B9;&#x7684;&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#x6559;&#x7A0B;&#x3002;&#x7BC7;&#x5E45;&#x5F88;&#x77ED;&#xFF0C;&#x90FD;&#x662F;&#x4F8B;&#x5B50;&#xFF0C;&#x9700;&#x8981;&#x6709; RISC-V &#x6307;&#x4EE4;&#x7684;&#x57FA;&#x7840;&#x3002;</li>
+<li><a href="http://crva.ict.ac.cn/documents/RISC-V-Reader-Chinese-v2p1.pdf" target="_blank">RISC-V Reader&#xFF08;&#x4E2D;&#x8BD1;&#x7248;&#xFF09;</a>&#xFF1A;&#x5B8C;&#x6574;&#x7684; RISC-V &#x6559;&#x7A0B;&#xFF0C;&#x5305;&#x62EC;&#x4E3B;&#x8981;&#x7684;&#x6307;&#x4EE4;&#x96C6;&#x62D3;&#x5C55;&#x548C;&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#x3002;&#x8BE5;&#x4E66;&#x5047;&#x8BBE;&#x8BFB;&#x8005;&#x6709;&#x8BA1;&#x7B97;&#x673A;&#x7EC4;&#x6210;&#x539F;&#x7406;&#x3001;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x7684;&#x77E5;&#x8BC6;&#xFF0C;&#x4E86;&#x89E3;&#x81F3;&#x5C11;&#x4E00;&#x79CD;&#x6307;&#x4EE4;&#x96C6;&#xFF0C;&#x6709;&#x4F7F;&#x7528;&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#x7F16;&#x7A0B;&#x7684;&#x7ECF;&#x9A8C;&#x3002;</li>
+<li>&#x300A;&#x8BA1;&#x7B97;&#x673A;&#x7EC4;&#x6210;&#x4E0E;&#x8BBE;&#x8BA1;-&#x786C;&#x4EF6;/&#x8F6F;&#x4EF6;&#x63A5;&#x53E3;&#xFF08;&#x539F;&#x4E66;&#x7B2C; 5 &#x7248;&#xFF09;&#x300B;&#xFF1A;RISC-V &#x7684;&#x4E24;&#x4F4D;&#x4E3B;&#x8981;&#x8BBE;&#x8BA1;&#x8005;&#x64B0;&#x5199;&#x7684;&#x6559;&#x6750;&#x3002;&#x7B2C;&#x4E8C;&#x7AE0;&#x4ECB;&#x7ECD; RISC-V &#x6307;&#x4EE4;&#xFF0C;&#x5E76;&#x4F7F;&#x7528; RISC-V &#x6307;&#x4EE4;&#x7F16;&#x7A0B;&#x3002;&#x8BE5;&#x4E66;&#x5047;&#x8BBE;&#x8BFB;&#x8005;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x5173;&#x4E8E;&#x8BA1;&#x7B97;&#x673A;&#x7EC4;&#x6210;&#x539F;&#x7406;&#x548C;&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#x7684;&#x77E5;&#x8BC6;&#x3002;</li>
+</ul>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/ytf4425" target="_blank">Hanabi</a>&#xFF0C;&#x4F7F;&#x7528;<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">&#x7F72;&#x540D;-&#x975E;&#x5546;&#x4E1A;&#x6027;&#x4F7F;&#x7528;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0 &#x56FD;&#x9645;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2023-03-14 01:12:40 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 准备">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="env.html" class="navigation navigation-next " aria-label="Next page: 环境部署">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"总体介绍","level":"1.2.1","depth":2,"next":{"title":"环境部署","level":"1.2.2","depth":2,"path":"ready/env.md","ref":"ready/env.md","articles":[]},"previous":{"title":"准备","level":"1.2","depth":1,"path":"ready/README.md","ref":"ready/README.md","articles":[{"title":"总体介绍","level":"1.2.1","depth":2,"path":"ready/intro.md","ref":"ready/intro.md","articles":[]},{"title":"环境部署","level":"1.2.2","depth":2,"path":"ready/env.md","ref":"ready/env.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","sharing-plus","github-buttons","anchor-navigation-ex","page-footer-ex","splitter","copy-code-button","expandable-chapters-small","katex"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-footer-ex":{"copyright":"By [Hanabi](https://github.com/ytf4425)，使用[署名-非商业性使用-相同方式共享 4.0 国际](http://creativecommons.org/licenses/by-nc-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"github-buttons":{"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{"all":["douban","facebook","google","instapaper","linkedin","twitter","weibo","qq","qzone","viber","whatsapp"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Hanabi","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Code an OS Handbook","language":"zh-hans","gitbook":"*"},"file":{"path":"ready/intro.md","mtime":"2023-03-14T01:12:40.462Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-14T01:13:16.286Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

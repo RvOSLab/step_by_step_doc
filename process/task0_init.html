@@ -1,0 +1,1057 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>初始化 0 号进程 · Code an OS Handbook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Hanabi">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Code an OS Project
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ready/">
+            
+                <a href="../ready/">
+            
+                    
+                    准备
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ready/intro.html">
+            
+                <a href="../ready/intro.html">
+            
+                    
+                    总体介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ready/env.html">
+            
+                <a href="../ready/env.html">
+            
+                    
+                    环境部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../helloworld/">
+            
+                <a href="../helloworld/">
+            
+                    
+                    你好，世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../helloworld/main.html">
+            
+                <a href="../helloworld/main.html">
+            
+                    
+                    “主”函数的编写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../helloworld/packaging.html">
+            
+                <a href="../helloworld/packaging.html">
+            
+                    
+                    ecall 指令的封装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../helloworld/boot.html">
+            
+                <a href="../helloworld/boot.html">
+            
+                    
+                    操作系统的启动
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../helloworld/make.html">
+            
+                <a href="../helloworld/make.html">
+            
+                    
+                    拼搭我们的系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../helloworld/linker_script.html">
+            
+                <a href="../helloworld/linker_script.html">
+            
+                    
+                    附录：链接脚本 Linker Script
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../interrupt/">
+            
+                <a href="../interrupt/">
+            
+                    
+                    中断
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../interrupt/plic.html">
+            
+                <a href="../interrupt/plic.html">
+            
+                    
+                    PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../interrupt/uart.html">
+            
+                <a href="../interrupt/uart.html">
+            
+                    
+                    UART
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../interrupt/goldfish_RTC.html">
+            
+                <a href="../interrupt/goldfish_RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../interrupt/sunxi_plic.html">
+            
+                <a href="../interrupt/sunxi_plic.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../interrupt/sunxi_RTC.html">
+            
+                <a href="../interrupt/sunxi_RTC.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    [物理内存管理]
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../virtualmm/">
+            
+                <a href="../virtualmm/">
+            
+                    
+                    虚拟内存管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../virtualmm/intro.html">
+            
+                <a href="../virtualmm/intro.html">
+            
+                    
+                    基础介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../virtualmm/header.html">
+            
+                <a href="../virtualmm/header.html">
+            
+                    
+                    基础头文件准备
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../virtualmm/init.html">
+            
+                <a href="../virtualmm/init.html">
+            
+                    
+                    初始化过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../virtualmm/manage.html">
+            
+                <a href="../virtualmm/manage.html">
+            
+                    
+                    其他管理过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    进程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.7.1" data-path="task0_init.html">
+            
+                <a href="task0_init.html">
+            
+                    
+                    初始化 0 号进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >初始化 0 号进程</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x7528;&#x6237;&#x6808;&#x4E0E;&#x5185;&#x6838;&#x6808;"><b></b>&#x7528;&#x6237;&#x6808;&#x4E0E;&#x5185;&#x6838;&#x6808;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4E2D;&#x65AD;&#x53D1;&#x751F;"><b></b>&#x4E2D;&#x65AD;&#x53D1;&#x751F;</a></li><li><span class="title-icon "></span><a href="#&#x4E2D;&#x65AD;&#x6062;&#x590D;"><b></b>&#x4E2D;&#x65AD;&#x6062;&#x590D;</a></li></ul><li><span class="title-icon "></span><a href="#&#x7CFB;&#x7EDF;&#x8C03;&#x7528;"><b></b>&#x7CFB;&#x7EDF;&#x8C03;&#x7528;</a></li><li><span class="title-icon "></span><a href="#&#x521D;&#x59CB;&#x5316;-0-&#x53F7;&#x8FDB;&#x7A0B;"><b></b>&#x521D;&#x59CB;&#x5316; 0 &#x53F7;&#x8FDB;&#x7A0B;</a></li><ul><li><span class="title-icon "></span><a href="#&#x521D;&#x59CB;&#x5316;-0-&#x53F7;&#x8FDB;&#x7A0B;-pcb"><b></b>&#x521D;&#x59CB;&#x5316; 0 &#x53F7;&#x8FDB;&#x7A0B; PCB</a></li><li><span class="title-icon "></span><a href="#&#x5207;&#x6362;&#x81F3;&#x7528;&#x6237;&#x6001;"><b></b>&#x5207;&#x6362;&#x81F3;&#x7528;&#x6237;&#x6001;</a></li><ul><li><span class="title-icon "></span><a href="#&#x5185;&#x6838;&#x6808;&#x7684;&#x8BBE;&#x5B9A;"><b></b>&#x5185;&#x6838;&#x6808;&#x7684;&#x8BBE;&#x5B9A;</a></li><li><span class="title-icon "></span><a href="#&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x7684;&#x8BBE;&#x7F6E;"><b></b>&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x7684;&#x8BBE;&#x7F6E;</a></li></ul><li><span class="title-icon "></span><a href="#0-&#x53F7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;"><b></b>0 &#x53F7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;</a></li><ul><li><span class="title-icon "></span><a href="#&#x901A;&#x8FC7;&#x9875;&#x8868;&#x6620;&#x5C04;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x5404;&#x6BB5;"><b></b>&#x901A;&#x8FC7;&#x9875;&#x8868;&#x6620;&#x5C04;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x5404;&#x6BB5;</a></li><li><span class="title-icon "></span><a href="#&#x5206;&#x914D;&#x7528;&#x6237;&#x6808;"><b></b>&#x5206;&#x914D;&#x7528;&#x6237;&#x6808;</a></li></ul></ul><li><span class="title-icon "></span><a href="#&#x9644;&#x5F55;"><b></b>&#x9644;&#x5F55;</a></li><ul><li><span class="title-icon "></span><a href="#locally-declared-labels-&#x6269;&#x5C55;"><b></b>Locally Declared Labels &#x6269;&#x5C55;</a></li><li><span class="title-icon "></span><a href="#labels-as-values-&#x6269;&#x5C55;"><b></b>Labels as Values &#x6269;&#x5C55;</a></li><li><span class="title-icon "></span><a href="#statements-and-declarations-in-expressions-&#x6269;&#x5C55;"><b></b>Statements and Declarations in Expressions &#x6269;&#x5C55;</a></li></ul></ul></div><a href="#&#x7528;&#x6237;&#x6808;&#x4E0E;&#x5185;&#x6838;&#x6808;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x7528;&#x6237;&#x6808;&#x4E0E;&#x5185;&#x6838;&#x6808;"><a name="&#x7528;&#x6237;&#x6808;&#x4E0E;&#x5185;&#x6838;&#x6808;" class="anchor-navigation-ex-anchor" href="#&#x7528;&#x6237;&#x6808;&#x4E0E;&#x5185;&#x6838;&#x6808;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7528;&#x6237;&#x6808;&#x4E0E;&#x5185;&#x6838;&#x6808;</h1>
+<p>&#x5728;&#x8FDB;&#x7A0B;&#x8FD0;&#x884C;&#x5728;&#x7528;&#x6237;&#x6001;&#x65F6;&#xFF0C;&#x53D1;&#x751F;&#x7684;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x90FD;&#x662F;&#x7531;&#x8FDB;&#x7A0B;&#x5185;&#x90E8;&#x81EA;&#x5DF1;&#x4EA7;&#x751F;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x51FD;&#x6570;&#x7684;&#x8C03;&#x7528;&#x6808;&#x4E5F;&#x662F;&#x7531;&#x8FDB;&#x7A0B;&#x81EA;&#x5DF1;&#x7BA1;&#x7406;&#xFF0C;&#x6B64;&#x65F6;&#x7684;&#x6808;&#x4E0A;&#x5B58;&#x50A8;&#x7684;&#x5185;&#x5BB9;&#x4E0E;&#x8FDB;&#x7A0B;&#x7684;&#x6D3B;&#x52A8;&#x6709;&#x5173;&#x3002;</p>
+<p>&#x5F53;&#x53D1;&#x751F;&#x4E2D;&#x65AD;&#x65F6;&#xFF0C;&#x8FDB;&#x7A0B;&#x7684;&#x6D3B;&#x52A8;&#x5C06;&#x4F1A;&#x88AB;&#x6682;&#x505C;&#xFF0C;&#x7531;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5185;&#x6838;&#x63A5;&#x7BA1;&#x5B8C;&#x6210;&#x64CD;&#x4F5C;&#xFF0C;&#x6B64;&#x65F6;&#x6808;&#x4E0A;&#x5B58;&#x50A8;&#x7684;&#x5185;&#x5BB9;&#x4E0E;&#x5185;&#x6838;&#x7684;&#x6D3B;&#x52A8;&#x6709;&#x5173;&#x3002;&#x56E0;&#x6B64;&#x5728;&#x8FD9;&#x4E24;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x7279;&#x6743;&#x7EA7;&#x4E0B;&#xFF0C;&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x90FD;&#x9700;&#x8981;&#x6709;&#x4E24;&#x4E2A;&#x4E92;&#x4E0D;&#x5E72;&#x6270;&#x7684;&#x6808;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x8FDB;&#x7A0B;/&#x5185;&#x6838;&#x5BF9;&#x6808;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x65F6;&#x5F71;&#x54CD;&#x5185;&#x6838;/&#x8FDB;&#x7A0B;&#x7684;&#x72B6;&#x6001;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x540C;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x5728;&#x5185;&#x6838;&#x6001;&#x4E0E;&#x7528;&#x6237;&#x6001;&#x4F7F;&#x7528;&#x540C;&#x4E00;&#x4E2A;&#x9875;&#x8868;&#xFF0C;&#x4F7F;&#x7528;&#x4E24;&#x6BB5;&#x72EC;&#x7ACB;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x4E5F;&#x907F;&#x514D;&#x4E86;&#x67D0;&#x4E00;&#x7279;&#x6743;&#x7EA7;&#x5BF9;&#x6808;&#x5185;&#x5B58;&#x7F3A;&#x5C11;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#x3002;</p>
+<p>&#x5207;&#x6362;&#x6808;&#x7684;&#x64CD;&#x4F5C;&#x5E76;&#x4E0D;&#x4F1A;&#x7531; CPU &#x81EA;&#x52A8;&#x5B8C;&#x6210;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5728;&#x7279;&#x6743;&#x7EA7;&#x5207;&#x6362;&#x7684;&#x65F6;&#x5019;&#x4E00;&#x5E76;&#x5B8C;&#x6210;&#x6808;&#x7684;&#x5207;&#x6362;&#x3002;&#x5728;&#x7528;&#x6237;&#x6001;&#x53D1;&#x751F;&#x7279;&#x6743;&#x7EA7;&#x5207;&#x6362;&#x4E00;&#x5B9A;&#x662F;&#x56E0;&#x4E3A;&#x53D1;&#x751F;&#x4E86;&#x4E2D;&#x65AD;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x5728;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x4E2D;&#x5BF9;&#x6808;&#x5B8C;&#x6210;&#x5207;&#x6362;&#x3002;&#x5728;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6709;&#x4E00;&#x4E2A; <code>sscratch</code> &#x5BC4;&#x5B58;&#x5668;&#x662F; CPU &#x63D0;&#x4F9B;&#x7528;&#x4E8E;&#x6682;&#x5B58;&#x4E00;&#x4E2A;&#x5B57;&#x5927;&#x5C0F;&#x7684;&#x6570;&#x636E;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x5B83;&#x62FF;&#x6765;&#x5B58;&#x653E;&#x6808;&#x5730;&#x5740;&#x5E76;&#x6307;&#x793A;&#x5F53;&#x524D;&#x5904;&#x4E8E;&#x4F55;&#x79CD;&#x7279;&#x6743;&#x7EA7;&#xFF0C;&#x6211;&#x4EEC;&#x89C4;&#x5B9A;&#xFF1A;</p>
+<ul>
+<li>&#x5904;&#x4E8E; U &#x6001;&#x65F6;&#xFF0C;<code>sscratch</code> &#x4FDD;&#x5B58;&#x5185;&#x6838;&#x6808;&#x5730;&#x5740;&#xFF08;<code>sp</code> &#x4FDD;&#x5B58;&#x7528;&#x6237;&#x6808;&#x5730;&#x5740;&#xFF09;</li>
+<li>&#x5904;&#x4E8E; S &#x6001;&#x65F6;&#xFF0C;<code>sscratch</code> &#x4E3A; 0&#xFF08;<code>sp</code> &#x4FDD;&#x5B58;&#x5185;&#x6838;&#x6808;&#x5730;&#x5740;&#xFF0C;&#x7528;&#x6237;&#x6808;&#x5730;&#x5740;&#x5B58;&#x653E;&#x4E8E;&#x5185;&#x6838;&#x6808;&#x4E0A;&#xFF09;&#x3002;</li>
+</ul>
+<h2 id="&#x4E2D;&#x65AD;&#x53D1;&#x751F;"><a name="&#x4E2D;&#x65AD;&#x53D1;&#x751F;" class="anchor-navigation-ex-anchor" href="#&#x4E2D;&#x65AD;&#x53D1;&#x751F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E2D;&#x65AD;&#x53D1;&#x751F;</h2>
+<p>&#x6211;&#x4EEC;&#x5728;&#x4FDD;&#x5B58;&#x4E0A;&#x4E0B;&#x6587;&#x4E4B;&#x524D;&#x4E0D;&#x53EF;&#x968F;&#x610F;&#x4FEE;&#x6539;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x4EE5;&#x514D;&#x6570;&#x636E;&#x4E22;&#x5931;&#x3002;&#x56E0;&#x4E3A; CSR &#x5BC4;&#x5B58;&#x5668;&#x4E0D;&#x53EF;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x6761;&#x4EF6;&#x5224;&#x65AD;&#x6307;&#x4EE4;&#xFF0C;&#x9700;&#x8981;&#x8BFB;&#x51FA;&#x81F3;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x5224;&#x65AD;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x9996;&#x5148;&#x5C06; <code>sscratch</code> &#x4E0E; <code>sp</code> &#x4EA4;&#x6362;&#xFF0C;&#x968F;&#x540E;&#x901A;&#x8FC7; <code>sp</code> &#x7684;&#x503C;&#x5224;&#x65AD;&#x4E2D;&#x65AD;&#x53D1;&#x751F;&#x524D;&#x5904;&#x4E8E;&#x4F55;&#x79CD;&#x72B6;&#x6001;&#x3002;</p>
+<ul>
+<li>&#x82E5;&#x4E2D;&#x65AD;&#x524D;&#x662F;&#x5185;&#x6838;&#x6001;&#xFF0C;&#x5219;&#x5C06; <code>sscratch</code> &#x503C;&#xFF08;&#x4EA4;&#x6362;&#x540E;&#x4E3A; <code>sp</code> &#x7684;&#x503C;&#xFF0C;&#x5373;&#x4E2D;&#x65AD;&#x53D1;&#x751F;&#x524D;&#x7684;&#x5185;&#x6838;&#x6808;&#x5730;&#x5740;&#xFF09;&#x91CD;&#x65B0;&#x8BFB;&#x56DE; <code>sp</code><ul>
+<li>&#x6B64;&#x65F6; <code>sp</code> &#x4E3A;&#x5185;&#x6838;&#x6808;&#x5730;&#x5740;&#xFF0C;<code>sscratch</code> &#x4E5F;&#x4E3A;&#x5185;&#x6838;&#x6808;&#x5730;&#x5740;</li>
+</ul>
+</li>
+<li>&#x82E5;&#x4E2D;&#x65AD;&#x524D;&#x662F;&#x7528;&#x6237;&#x6001;&#xFF0C;&#x4E0D;&#x4F5C;&#x5904;&#x7406;<ul>
+<li>&#x6B64;&#x65F6; <code>sp</code> &#x4E3A;&#x5185;&#x6838;&#x6808;&#x5730;&#x5740;&#xFF0C;<code>sscratch</code> &#x4E3A;&#x7528;&#x6237;&#x6808;&#x5730;&#x5740;</li>
+</ul>
+</li>
+</ul>
+<p>&#x968F;&#x540E;&#x548C;&#x524D;&#x9762;&#x7684;&#x5B9E;&#x9A8C;&#x4E00;&#x6837;&#xFF0C;&#x6269;&#x5F20;&#x5185;&#x6838;&#x6808;&#x7A7A;&#x95F4;&#xFF08;&#x6A21;&#x62DF;&#x538B;&#x5165;&#x6808;&#xFF09;&#xFF0C;&#x4FDD;&#x5B58;&#x6240;&#x6709;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x503C;&#x81F3;&#x5185;&#x6838;&#x6808;&#x4E0A;&#xFF0C;&#x9664;&#x4E86; x2&#xFF08;&#x5373;sp&#xFF09;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;sp &#x672C;&#x5E94;&#x4FDD;&#x5B58;&#x7684;&#x662F;&#x53D1;&#x751F;&#x4E2D;&#x65AD;&#x524D;&#x7684;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x76EE;&#x524D;&#x88AB;&#x4EA4;&#x6362;&#x5230;&#x4E86; <code>sscratch</code> &#x4E2D;&#xFF0C;&#x56E0;&#x6B64;&#x7559;&#x5230;&#x540E;&#x9762;&#x5904;&#x7406;&#x3002;</p>
+<p>&#x5728;&#x4FDD;&#x5B58;&#x5B8C;&#x6240;&#x6709;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x540E;&#xFF0C;&#x8FD9;&#x4E9B;&#x5BC4;&#x5B58;&#x5668;&#x5DF2;&#x53EF;&#x88AB;&#x968F;&#x610F;&#x4F7F;&#x7528;&#xFF0C;&#x6B64;&#x65F6;&#x8BFB;&#x53D6; <code>sscratch</code> &#x5230; <code>s0</code>&#xFF0C;&#x518D;&#x8D4B; <code>sscratch = 0</code>&#xFF08;&#x5728;&#x5185;&#x6838;&#x6001;&#x4E2D;&#xFF0C;&#x9700;&#x8981;&#x786E;&#x4FDD; <code>sscratch</code> &#x4E3A; 0&#xFF0C;&#x501F; <code>s0</code> &#x4E2D;&#x8F6C; <code>sscratch</code> &#x5185;&#x7684;&#x4E2D;&#x65AD;&#x524D;&#x6808;&#x5730;&#x5740;&#x5B58;&#x81F3;&#x5185;&#x6838;&#x6808;&#x4E0A;&#xFF09;&#x3002;&#x540C;&#x6837;&#x7684;&#xFF0C;&#x501F; <code>s1</code> &#x81F3; <code>s4</code> &#x5BC4;&#x5B58;&#x5668;&#x4E2D;&#x8F6C;&#x5176;&#x4ED6;&#x9700;&#x8981;&#x7684; CSR &#x5BC4;&#x5B58;&#x5668;&#x81F3;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x65B9;&#x4FBF;&#x540E;&#x7EED;&#x8BFB;&#x53D6;&#x3002;</p>
+<p><code>SAVE_ALL</code> &#x5B8F;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-assembly"># &#x5B9A;&#x4E49;&#x5B8F;&#xFF1A;&#x4FDD;&#x5B58;&#x4E0A;&#x4E0B;&#x6587;&#xFF08;&#x6240;&#x6709;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x53CA;&#x989D;&#x5916;&#x7684;CSR&#x5BC4;&#x5B58;&#x5668;&#xFF09;
+# &#x6211;&#x4EEC;&#x89C4;&#x5B9A;&#xFF1A;&#x5F53; CPU &#x5904;&#x4E8E; U-Mode &#x65F6;&#xFF0C;sscratch &#x4FDD;&#x5B58;&#x5185;&#x6838;&#x6808;&#x5730;&#x5740;&#xFF1B;&#x5904;&#x4E8E; S-Mode &#x65F6;&#xFF0C;sscratch &#x4E3A; 0 &#x3002;
+.macro SAVE_ALL
+
+    # &#x4EA4;&#x6362; sp &#x548C; sscratch &#x5BC4;&#x5B58;&#x5668;
+    csrrw sp, sscratch, sp
+
+    # &#x53EF;&#x4EE5;&#x901A;&#x8FC7;sp&#x662F;&#x5426;&#x4E3A;0&#x5224;&#x65AD;&#x539F;&#x5148;&#x662F;&#x5426;&#x4E3A;&#x5185;&#x6838;&#x6001;
+    # &#x5982;&#x679C;&#x4E2D;&#x65AD;&#x6765;&#x81EA;&#x7528;&#x6237;&#x6001;&#xFF0C;&#x6B64;&#x65F6; sp &#x5DF2;&#x7ECF;&#x6307;&#x5411;&#x5185;&#x6838;&#x6808;&#xFF0C;&#x76F4;&#x63A5;&#x8DF3;&#x8F6C;&#x5230; trap_from_user &#x4FDD;&#x5B58;&#x5BC4;&#x5B58;&#x5668;
+    bnez sp, trap_from_user
+
+# &#x5426;&#x5219;&#x4E3A;0&#xFF0C;&#x539F;&#x672C;&#x5C31;&#x662F;&#x5185;&#x6838;&#x6001;&#xFF0C;&#x518D;&#x6B21;&#x4EA4;&#x6362;&#xFF0C;&#x7EE7;&#x7EED;&#x5F80;&#x4E0B;&#x6267;&#x884C;&#xFF0C;&#x4FDD;&#x5B58;&#x4E0A;&#x4E0B;&#x6587;
+trap_from_kernel:
+
+    # &#x5C06;sscratch&#x4E2D;&#x7684;&#x503C;&#x8BFB;&#x5230;sp&#x4E2D;&#xFF0C;&#x6B64;&#x65F6; sscratch = &#x53D1;&#x751F;&#x4E2D;&#x65AD;&#x524D;&#x7684; sp&#xFF08;&#x5185;&#x6838;&#x6808;&#xFF09;
+    csrr sp, sscratch
+
+# &#x4E0D;&#x4E3A;0&#xFF0C;&#x539F;&#x672C;&#x662F;&#x7528;&#x6237;&#x6001;&#xFF0C;&#x4E0D;&#x505A;&#x4EA4;&#x6362;&#xFF0C;&#x76F4;&#x63A5;&#x4FDD;&#x5B58;&#x4E0A;&#x4E0B;&#x6587;
+trap_from_user:
+    # &#x5C06;&#x6808;&#x6307;&#x9488;&#x4E0B;&#x79FB;&#x4E3A;TrapFrame&#x9884;&#x7559;&#x8DB3;&#x591F;&#x7684;&#x7A7A;&#x95F4;&#x7528;&#x4E8E;&#x5C06;&#x6240;&#x6709;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x503C;&#x5B58;&#x5165;&#x6808;&#x4E2D;&#xFF08;36&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x7A7A;&#x95F4;&#xFF09;
+    addi sp, sp, -36*XLENB
+    # &#x4FDD;&#x5B58;&#x6240;&#x6709;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x9664;&#x4E86; x2 (x2&#x5C31;&#x662F;sp&#xFF0C;sp &#x672C;&#x5E94;&#x4FDD;&#x5B58;&#x7684;&#x662F;&#x53D1;&#x751F;&#x4E2D;&#x65AD;&#x524D;&#x7684;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x76EE;&#x524D;&#x88AB;&#x4EA4;&#x6362;&#x5230;&#x4E86; sscratch &#x4E2D;&#xFF0C;&#x56E0;&#x6B64;&#x7559;&#x5230;&#x540E;&#x9762;&#x5904;&#x7406;&#x3002;)
+    STORE x1, 1
+    STORE x3, 3
+    STORE x4, 4
+    STORE x5, 5
+    STORE x6, 6
+    STORE x7, 7
+    STORE x8, 8
+    STORE x9, 9
+    STORE x10, 10
+    STORE x11, 11
+    STORE x12, 12
+    STORE x13, 13
+    STORE x14, 14
+    STORE x15, 15
+    STORE x16, 16
+    STORE x17, 17
+    STORE x18, 18
+    STORE x19, 19
+    STORE x20, 20
+    STORE x21, 21
+    STORE x22, 22
+    STORE x23, 23
+    STORE x24, 24
+    STORE x25, 25
+    STORE x26, 26
+    STORE x27, 27
+    STORE x28, 28
+    STORE x29, 29
+    STORE x30, 30
+    STORE x31, 31
+
+    # &#x4FDD;&#x5B58;&#x5B8C;x0-x31&#x4E4B;&#x540E;&#x8FD9;&#x4E9B;&#x5BC4;&#x5B58;&#x5668;&#x5C31;&#x53EF;&#x4EE5;&#x968F;&#x610F;&#x4F7F;&#x7528;&#x4E86;&#xFF0C;&#x4E0B;&#x9762;&#x9A6C;&#x4E0A;&#x7528;&#x5230;&#xFF1A;
+    # &#x8BFB;&#x53D6;sscratch&#x5230;s0&#xFF0C;&#x8D4B; sscratch = 0&#xFF08;&#x5728;&#x5185;&#x6838;&#x6001;&#x4E2D;&#xFF0C;&#x65F6;&#x523B;&#x4FDD;&#x6301;sscratch&#x4E3A;0&#xFF0C;&#x8BA9;s0&#x5B58;&#x539F;&#x6709;&#x7684;sp&#xFF09;
+    csrrw s0, sscratch, x0
+
+    # &#x8BFB;&#x53D6; sstatus, sepc, stval, scause&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x503C;&#x5230;s0-s4&#xFF08;x1-x31&#x4E2D;&#x7684;&#x7279;&#x5B9A;&#x51E0;&#x4E2A;&#xFF09;&#x5BC4;&#x5B58;&#x5668;
+    csrr s1, sstatus
+    csrr s2, sepc
+    csrr s3, stval
+    csrr s4, scause
+
+    # &#x5B58;&#x50A8; sp, sstatus, sepc, sbadvaddr, scause &#x5230;&#x6808;&#x4E2D;
+    # &#x5176;&#x4E2D;&#x628A;s0&#x5B58;&#x5230;x2&#xFF08;sp&#xFF09;&#x7684;&#x4F4D;&#x7F6E;&#x4EE5;&#x4FBF;&#x4E8E;&#x8FD4;&#x56DE;&#x65F6;&#x76F4;&#x63A5;&#x6062;&#x590D;&#x6808;
+    STORE s0, 2
+    STORE s1, 32
+    STORE s2, 33
+    STORE s3, 34
+    STORE s4, 35
+.endm
+</code></pre>
+<h2 id="&#x4E2D;&#x65AD;&#x6062;&#x590D;"><a name="&#x4E2D;&#x65AD;&#x6062;&#x590D;" class="anchor-navigation-ex-anchor" href="#&#x4E2D;&#x65AD;&#x6062;&#x590D;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E2D;&#x65AD;&#x6062;&#x590D;</h2>
+<p>&#x5728;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x7ED3;&#x675F;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x6062;&#x590D;&#x4E0A;&#x4E0B;&#x6587;&#x4E0E;&#x7279;&#x6743;&#x7EA7;&#x3002;&#x9996;&#x5148;&#x4ECE;&#x5185;&#x5B58;&#x4E2D;&#x8BFB;&#x5165;&#x4E2D;&#x65AD;&#x53D1;&#x751F;&#x65F6; <code>sstatus</code> &#x4E0E; <code>sepc</code> &#x7684;&#x503C;&#x81F3;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x501F;&#x52A9; <code>sstatus.SPP</code> &#x662F;&#x5426;&#x4E3A; 1 &#x6765;&#x5224;&#x65AD;&#x4E2D;&#x65AD;&#x524D;&#x7684;&#x7279;&#x6743;&#x7EA7;&#xFF0C;1&#x4E3A;&#x5185;&#x6838;&#x6001;&#xFF0C;0&#x4E3A;&#x7528;&#x6237;&#x6001;&#x3002;</p>
+<ul>
+<li>&#x82E5;&#x56DE;&#x5230;&#x7528;&#x6237;&#x6001;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x5C06;&#x53D1;&#x751F;&#x4E2D;&#x65AD;&#x524D;&#x7684;&#x5185;&#x6838;&#x6808;&#x5730;&#x5740;&#xFF08;<code>sp</code> &#x6269;&#x5F20;&#x524D;&#x7684;&#x503C;&#xFF0C;&#x6A21;&#x62DF;&#x5F39;&#x51FA;&#x6808;&#xFF09;&#x91CD;&#x65B0;&#x5B58;&#x5165; <code>sscratch</code> &#x4EE5;&#x7B26;&#x5408;&#x6211;&#x4EEC;&#x7684;&#x89C4;&#x5B9A;&#x3002;</li>
+<li>&#x82E5;&#x56DE;&#x5230;&#x5185;&#x6838;&#x6001;&#xFF0C;&#x5219;&#x8DF3;&#x8FC7;&#x8FD9;&#x4E00;&#x6B65;&#xFF0C;&#x4FDD;&#x6301;&#x503C;&#x4E3A; 0&#x3002;</li>
+</ul>
+<p>&#x968F;&#x540E;&#x4ECE;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x4E2D;&#x5C06;&#x4E2D;&#x65AD;&#x53D1;&#x751F;&#x65F6; <code>sstatus</code> &#x4E0E; <code>sepc</code> &#x7684;&#x503C;&#x8BFB;&#x81F3; <code>sstatus</code> &#x4E0E; <code>sepc</code> &#x5BC4;&#x5B58;&#x5668;&#x3002;</p>
+<p>&#x6062;&#x590D;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x65F6;&#x56E0;&#x4E3A; <code>LOAD</code> &#x5B8F;&#x4F7F;&#x7528;&#x4E86;&#x6269;&#x5F20;&#x540E;&#x7684;&#x6808;&#x5730;&#x5740; <code>sp</code>&#xFF0C;&#x56E0;&#x6B64;&#x540C;&#x6837;&#x5C06; <code>sp</code> &#x7559;&#x5230;&#x6700;&#x540E;&#x6062;&#x590D;&#xFF0C;&#x6700;&#x540E;&#x6267;&#x884C; <code>sret</code> &#x4ECE;&#x5185;&#x6838;&#x6001;&#x4E2D;&#x65AD;&#x8FD4;&#x56DE;&#x3002;</p>
+<p><code>RESTORE_ALL</code> &#x5B8F;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-assembly"># &#x5B9A;&#x4E49;&#x5B8F;&#xFF1A;&#x6062;&#x590D;&#x5BC4;&#x5B58;&#x5668;
+.macro RESTORE_ALL
+    LOAD s1, 32             # s1 = sstatus
+    LOAD s2, 33             # s2 = sepc
+    andi s0, s1, 1 &lt;&lt; 8     # &#x6839;&#x636E; sstatus.SPP &#x662F;&#x5426;&#x4E3A; 1 &#x6765;&#x5224;&#x65AD;&#x4E2D;&#x65AD;&#x524D;&#x7684;&#x7279;&#x6743;&#x7EA7;&#xFF0C;1&#x4E3A;&#x5185;&#x6838;&#x6001;&#xFF0C;0&#x4E3A;&#x7528;&#x6237;&#x6001;
+    bnez s0, _to_kernel     # s0 = &#x662F;&#x5426;&#x4F1A;&#x5230;&#x5185;&#x6838;&#x6001;
+# &#x82E5;&#x56DE;&#x5230;&#x7528;&#x6237;&#x6001;
+_to_user:
+    addi s0, sp, 36*XLENB      # &#x8BA1;&#x7B97;&#x51FA;&#x4E2D;&#x65AD;&#x524D;&#x7684;&#x5185;&#x6838;&#x6001;sp&#xFF0C;&#x5148;&#x5B58;&#x653E;&#x5728;s0&#x4E2D;
+    csrw sscratch, s0         # &#x5C06;s0&#x4E2D;&#x7684;&#x5185;&#x6838;&#x6001;sp&#x5B58;&#x5165;sscratch&#x3002;&#x6839;&#x636E;&#x89C4;&#x5B9A;&#xFF0C;&#x56DE;&#x5230;&#x7528;&#x6237;&#x6001;&#x540E;sscratch = &#x5185;&#x6838;&#x6001;sp
+# &#x82E5;&#x56DE;&#x5230;&#x5185;&#x6838;&#x6001;&#xFF0C;&#x8DF3;&#x8FC7;&#x56DE;&#x5230;&#x7528;&#x6237;&#x6001;&#x7684;sscratch&#x4FEE;&#x6539;
+_to_kernel:
+    # &#x6062;&#x590D; sstatus, sepc
+    csrw sstatus, s1
+    csrw sepc, s2
+
+    # &#x6062;&#x590D;&#x9664;&#x4E86; x2 (sp) &#x4EE5;&#x5916;&#x7684;&#x5176;&#x4F59;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;
+    LOAD x1, 1
+    LOAD x3, 3
+    LOAD x4, 4
+    LOAD x5, 5
+    LOAD x6, 6
+    LOAD x7, 7
+    LOAD x8, 8
+    LOAD x9, 9
+    LOAD x10, 10
+    LOAD x11, 11
+    LOAD x12, 12
+    LOAD x13, 13
+    LOAD x14, 14
+    LOAD x15, 15
+    LOAD x16, 16
+    LOAD x17, 17
+    LOAD x18, 18
+    LOAD x19, 19
+    LOAD x20, 20
+    LOAD x21, 21
+    LOAD x22, 22
+    LOAD x23, 23
+    LOAD x24, 24
+    LOAD x25, 25
+    LOAD x26, 26
+    LOAD x27, 27
+    LOAD x28, 28
+    LOAD x29, 29
+    LOAD x30, 30
+    LOAD x31, 31
+    # &#x6700;&#x540E;&#x6062;&#x590D;&#x6808;&#x6307;&#x9488;(x2, sp)&#x4E3A;&#x539F;&#x6307;&#x9488;&#xFF08;&#x65E0;&#x8BBA;&#x662F;&#x7528;&#x6237;&#x6001;&#x8FD8;&#x662F;&#x5185;&#x6838;&#x6001;&#xFF09;
+    LOAD x2, 2
+.endm
+</code></pre>
+<h1 id="&#x7CFB;&#x7EDF;&#x8C03;&#x7528;"><a name="&#x7CFB;&#x7EDF;&#x8C03;&#x7528;" class="anchor-navigation-ex-anchor" href="#&#x7CFB;&#x7EDF;&#x8C03;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7CFB;&#x7EDF;&#x8C03;&#x7528;</h1>
+<p>&#x4ECE;&#x7528;&#x6237;&#x6001;&#x4E3B;&#x52A8;&#x8FDB;&#x5165;&#x5185;&#x6838;&#x6001;&#x7684;&#x65B9;&#x5F0F;&#x5C31;&#x662F;&#x901A;&#x8FC7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x8FDB;&#x884C;&#x3002;&#x5B83;&#x5728;&#x6307;&#x4EE4;&#x96C6;&#x5C42;&#x9762;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x662F;&#x5728; U &#x6001;&#x53D1;&#x51FA; <code>ecall</code> &#x6307;&#x4EE4;&#xFF0C;&#x8FD9;&#x65F6; CPU &#x4F1A;&#x6536;&#x5230;&#x4E00;&#x4E2A; <code>CAUSE_USER_ECALL</code> &#x5F02;&#x5E38;&#xFF0C;&#x8FDB;&#x5165;&#x5185;&#x6838;&#x6001;&#x5904;&#x7406;&#x5F02;&#x5E38;&#x3002;</p>
+<p>&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x53EF;&#x4EE5;&#x6709;&#x4E0D;&#x5B9A;&#x957F;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x4F20;&#x9012;&#xFF0C;&#x8FD4;&#x56DE;&#x503C;&#x4E5F;&#x662F;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x4F20;&#x9012;&#xFF0C;&#x5177;&#x4F53;&#x53EF;&#x67E5;&#x770B; <a href="https://github.com/riscv-non-isa/riscv-elf-psabi-doc" target="_blank">RISC-V ABI &#x89C4;&#x8303;</a>&#xFF0C;&#x56E0;&#x6B64;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x5165;&#x53E3;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x5199;&#x6210;&#x8FD9;&#x6837;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/**
+ * @brief &#x901A;&#x8FC7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x53F7;&#x8C03;&#x7528;&#x5BF9;&#x5E94;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;
+ *
+ * @param number &#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x53F7;
+ * @param ... &#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x53C2;&#x6570;
+ * @note &#x672C;&#x5B9E;&#x73B0;&#x4E2D;&#x6240;&#x6709;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x90FD;&#x4EC5;&#x5728;&#x5931;&#x8D25;&#x65F6;&#x8FD4;&#x56DE;&#x8D1F;&#x6570;&#xFF0C;&#x4F46;&#x5B9E;&#x9645;&#x4E0A;&#x6781;&#x5C0F;&#x4E00;&#x90E8;&#x5206; UNIX &#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#xFF08;&#x5982;
+ *       `getpriority()`&#x7684;&#x6B63;&#x5E38;&#x8FD4;&#x56DE;&#x503C;&#x53EF;&#x80FD;&#x662F;&#x8D1F;&#x6570;&#x7684;&#xFF09;&#x3002;
+ */</span>
+<span class="hljs-keyword">int64_t</span> syscall(<span class="hljs-keyword">int64_t</span> number, ...)
+{
+    va_list ap;
+    va_start(ap, number);
+    <span class="hljs-keyword">int64_t</span> arg1 = va_arg(ap, <span class="hljs-keyword">int64_t</span>);
+    <span class="hljs-keyword">int64_t</span> arg2 = va_arg(ap, <span class="hljs-keyword">int64_t</span>);
+    <span class="hljs-keyword">int64_t</span> arg3 = va_arg(ap, <span class="hljs-keyword">int64_t</span>);
+    <span class="hljs-keyword">int64_t</span> arg4 = va_arg(ap, <span class="hljs-keyword">int64_t</span>);
+    <span class="hljs-keyword">int64_t</span> arg5 = va_arg(ap, <span class="hljs-keyword">int64_t</span>);
+    <span class="hljs-keyword">int64_t</span> arg6 = va_arg(ap, <span class="hljs-keyword">int64_t</span>);
+    <span class="hljs-keyword">int64_t</span> ret = <span class="hljs-number">0</span>;
+    va_end(ap);
+    <span class="hljs-keyword">if</span> (number &gt; <span class="hljs-number">0</span> &amp;&amp; number &lt; NR_TASKS) {
+        <span class="hljs-comment">/* &#x5C0F;&#x5FC3;&#x5BC4;&#x5B58;&#x5668;&#x53D8;&#x91CF;&#x88AB;&#x8986;&#x76D6; */</span>
+        <span class="hljs-function"><span class="hljs-keyword">register</span> int64_t a0 <span class="hljs-title">asm</span><span class="hljs-params">(<span class="hljs-string">&quot;a0&quot;</span>)</span> </span>= arg1;
+        <span class="hljs-function"><span class="hljs-keyword">register</span> int64_t a1 <span class="hljs-title">asm</span><span class="hljs-params">(<span class="hljs-string">&quot;a1&quot;</span>)</span> </span>= arg2;
+        <span class="hljs-function"><span class="hljs-keyword">register</span> int64_t a2 <span class="hljs-title">asm</span><span class="hljs-params">(<span class="hljs-string">&quot;a2&quot;</span>)</span> </span>= arg3;
+        <span class="hljs-function"><span class="hljs-keyword">register</span> int64_t a3 <span class="hljs-title">asm</span><span class="hljs-params">(<span class="hljs-string">&quot;a3&quot;</span>)</span> </span>= arg4;
+        <span class="hljs-function"><span class="hljs-keyword">register</span> int64_t a4 <span class="hljs-title">asm</span><span class="hljs-params">(<span class="hljs-string">&quot;a4&quot;</span>)</span> </span>= arg5;
+        <span class="hljs-function"><span class="hljs-keyword">register</span> int64_t a5 <span class="hljs-title">asm</span><span class="hljs-params">(<span class="hljs-string">&quot;a5&quot;</span>)</span> </span>= arg6;
+        <span class="hljs-function"><span class="hljs-keyword">register</span> int64_t a7 <span class="hljs-title">asm</span><span class="hljs-params">(<span class="hljs-string">&quot;a7&quot;</span>)</span> </span>= number;
+        __asm__ __volatile__ (<span class="hljs-string">&quot;ecall\n\t&quot;</span>
+                :<span class="hljs-string">&quot;=r&quot;</span>(a0)
+                :<span class="hljs-string">&quot;r&quot;</span> (a1), <span class="hljs-string">&quot;r&quot;</span> (a2), <span class="hljs-string">&quot;r&quot;</span> (a3), <span class="hljs-string">&quot;r&quot;</span> (a4), <span class="hljs-string">&quot;r&quot;</span> (a5), <span class="hljs-string">&quot;r&quot;</span> (a7)
+                :<span class="hljs-string">&quot;memory&quot;</span>);
+        ret = a0;
+    } <span class="hljs-keyword">else</span> {
+        panic(<span class="hljs-string">&quot;Try to call unknown system call&quot;</span>);
+    }
+    <span class="hljs-keyword">if</span> (ret &lt; <span class="hljs-number">0</span>) {
+        errno = -ret;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+    <span class="hljs-keyword">return</span> ret;
+}
+</code></pre>
+<p>&#x540C;&#x6837;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x9700;&#x5728;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x4E2D;&#x6DFB;&#x52A0;&#x5BF9; <code>CAUSE_USER_ECALL</code> &#x5F02;&#x5E38;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x53EA;&#x9700;&#x5728;&#x539F;&#x6709;&#x7684; <code>exception_handler</code> &#x51FD;&#x6570;&#x5185;&#x4FEE;&#x6539;&#x3002;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8C03;&#x7528;&#x4E00;&#x4E2A;&#x65B0;&#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">case</span> CAUSE_USER_ECALL:
+    <span class="hljs-keyword">return</span> syscall_handler(tf);
+    <span class="hljs-keyword">break</span>;
+</code></pre>
+<p>&#x968F;&#x540E;&#x5728; <code>syscall_handler</code> &#x51FD;&#x6570;&#x4E2D;&#x5206;&#x6D3E;&#x81F3;&#x4E0D;&#x540C;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x5904;&#x7406;&#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/**
+ * @brief &#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x5904;&#x7406;&#x51FD;&#x6570;
+ *
+ * &#x68C0;&#x6D4B;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x53F7;&#xFF0C;&#x8C03;&#x7528;&#x54CD;&#x5E94;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x3002;
+ * &#x5F53;&#x63A5;&#x6536;&#x5230;&#x9519;&#x8BEF;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x53F7;&#x65F6;&#xFF0C;&#x8BBE;&#x7F6E; errno &#x4E3A; ENOSY &#x5E76;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;&#x7801; -1
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">struct</span> trapframe* <span class="hljs-title">syscall_handler</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> trapframe* tf)</span>
+</span>{
+    <span class="hljs-keyword">uint64_t</span> syscall_nr = tf-&gt;gpr.a7;
+    <span class="hljs-keyword">if</span> (syscall_nr &gt;= NR_syscalls) {
+        tf-&gt;gpr.a0 = <span class="hljs-number">-1</span>;
+        errno = ENOSYS;
+    } <span class="hljs-keyword">else</span> {
+        tf-&gt;gpr.a0 = syscall_table[syscall_nr](tf);
+    }
+    tf-&gt;epc += INST_LEN(tf-&gt;epc); <span class="hljs-comment">/* &#x6267;&#x884C;&#x4E0B;&#x4E00;&#x6761;&#x6307;&#x4EE4; */</span>
+    <span class="hljs-keyword">return</span> tf;
+}
+</code></pre>
+<h1 id="&#x521D;&#x59CB;&#x5316;-0-&#x53F7;&#x8FDB;&#x7A0B;"><a name="&#x521D;&#x59CB;&#x5316;-0-&#x53F7;&#x8FDB;&#x7A0B;" class="anchor-navigation-ex-anchor" href="#&#x521D;&#x59CB;&#x5316;-0-&#x53F7;&#x8FDB;&#x7A0B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x521D;&#x59CB;&#x5316; 0 &#x53F7;&#x8FDB;&#x7A0B;</h1>
+<h2 id="&#x521D;&#x59CB;&#x5316;-0-&#x53F7;&#x8FDB;&#x7A0B;-pcb"><a name="&#x521D;&#x59CB;&#x5316;-0-&#x53F7;&#x8FDB;&#x7A0B;-pcb" class="anchor-navigation-ex-anchor" href="#&#x521D;&#x59CB;&#x5316;-0-&#x53F7;&#x8FDB;&#x7A0B;-pcb"><i class="fa fa-link" aria-hidden="true"></i></a>&#x521D;&#x59CB;&#x5316; 0 &#x53F7;&#x8FDB;&#x7A0B; PCB</h2>
+<p>&#x6240;&#x6709;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x90FD;&#x662F;&#x4ECE; 0 &#x53F7;&#x8FDB;&#x7A0B; fork &#x51FA;&#x6765;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x624B;&#x52A8;&#x6784;&#x5EFA; 0 &#x53F7;&#x8FDB;&#x7A0B;&#x6240;&#x9700;&#x7684;&#x76F8;&#x5173;&#x6570;&#x636E;&#xFF0C;&#x6700;&#x4E3B;&#x8981;&#x7684;&#x5C31;&#x662F;&#x8FDB;&#x7A0B;&#x7684; PCB&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x6784;&#x5EFA;&#x4E00;&#x4E2A; PCB &#x7684;&#x7ED3;&#x6784;&#x4F53;&#x53D8;&#x91CF;&#xFF0C;&#x5C06;&#x8FDB;&#x7A0B; 0 &#x7684;&#x4E00;&#x90E8;&#x5206;&#x5FC5;&#x8981;&#x4FE1;&#x606F;&#x586B;&#x5165;&#xFF0C;&#x5E76;&#x5C06;&#x8BE5; PCB &#x7684;&#x5730;&#x5740;&#x5B58;&#x5165;&#x8FDB;&#x7A0B;&#x6570;&#x7EC4;&#x4E2D;&#xFF0C;&#x987A;&#x4FBF;&#x628A;&#x8FDB;&#x7A0B;&#x6570;&#x7EC4;&#x7684;&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x6E05;&#x7A7A;&#xFF08;&#x7406;&#x8BBA;&#x4E0A;&#x6765;&#x8BF4;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; 0&#xFF0C;&#x4E0D;&#x6E05;&#x7A7A;&#x4E5F;&#x6CA1;&#x5173;&#x7CFB;&#xFF09;&#xFF0C;&#x6700;&#x540E;&#x628A;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x8BBE;&#x4E3A;&#x8FDB;&#x7A0B; 0&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/**
+ * @brief &#x521D;&#x59CB;&#x5316;&#x8FDB;&#x7A0B;&#x6A21;&#x5757;
+ *
+ * &#x4E3B;&#x8981;&#x8D1F;&#x8D23;&#x521D;&#x59CB;&#x5316;&#x8FDB;&#x7A0B; 0
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sched_init</span><span class="hljs-params">()</span>
+</span>{
+    tasks[<span class="hljs-number">0</span>] = (<span class="hljs-keyword">struct</span> task_struct*)&amp;init_task;
+    init_task.task = (<span class="hljs-keyword">struct</span> task_struct) {
+        .state = TASK_RUNNING,
+        .counter = <span class="hljs-number">15</span>,
+        .priority = <span class="hljs-number">15</span>,
+        .start_time = ticks <span class="hljs-comment">/* 0 */</span>,
+        <span class="hljs-comment">// .start_code = START_CODE,</span>
+        <span class="hljs-comment">// .start_stack = START_STACK,</span>
+        <span class="hljs-comment">// .start_kernel = START_KERNEL,</span>
+        <span class="hljs-comment">// .start_rodata = (uint64_t)&amp;rodata_start - (0xC0200000 - 0x00010000),</span>
+        .start_data = (<span class="hljs-keyword">uint64_t</span>)data_start - ((<span class="hljs-keyword">uint64_t</span>)kernel_start - START_CODE),
+        .end_data = (<span class="hljs-keyword">uint64_t</span>)kernel_end - ((<span class="hljs-keyword">uint64_t</span>)kernel_start - START_CODE),
+        .brk = (<span class="hljs-keyword">uint64_t</span>)kernel_end - ((<span class="hljs-keyword">uint64_t</span>)kernel_start - START_CODE),
+        .pg_dir = pg_dir,
+    };
+
+    current = &amp;init_task.task;
+}
+</code></pre>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x6709;&#x4E09;&#x4E2A;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#xFF1A;</p>
+<ol>
+<li>&#x7269;&#x7406;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#xFF1A;<ul>
+<li>&#x7269;&#x7406;&#x5185;&#x5B58;&#x5728; <code>0x80000000</code> &#x5F80;&#x540E;&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x5176;&#x4E2D; <code>0x80000000</code> - <code>0x80200000</code> &#x5C5E;&#x4E8E; SBI&#xFF0C;<code>0x80200000</code> &#x8D77;&#x5C5E;&#x4E8E;&#x7CFB;&#x7EDF;&#x90E8;&#x5206;</li>
+</ul>
+</li>
+<li>&#x8FDB;&#x5165;&#x7528;&#x6237;&#x6001;&#xFF08;&#x6267;&#x884C; <code>init_task0</code>&#xFF09;&#x4E4B;&#x524D;&#x7684;&#x865A;&#x62DF;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#xFF1A;<ul>
+<li>&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x4ECE; <code>0xC0000000</code> &#x5F00;&#x59CB;&#xFF0C;&#x5176;&#x4E2D; <code>0xC0000000</code> - <code>0xC0200000</code> &#x5C5E;&#x4E8E; SBI&#xFF0C;<code>0xC0200000</code> &#x8D77;&#x5C5E;&#x4E8E;&#x7CFB;&#x7EDF;&#x90E8;&#x5206;</li>
+</ul>
+</li>
+<li>&#x8FDB;&#x5165;&#x7528;&#x6237;&#x6001;&#xFF08;&#x6267;&#x884C; <code>init_task0</code>&#xFF09;&#x4E4B;&#x540E;&#x7684;&#x865A;&#x62DF;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#xFF1A;<ul>
+<li>&#x4ECE; <code>0x10000</code> &#x8D77;&#x5C5E;&#x4E8E;&#x7528;&#x6237;&#x4EE3;&#x7801;&#x6BB5;&#x90E8;&#x5206;&#xFF0C;&#x968F;&#x540E;&#x4F9D;&#x6B21;&#x662F;&#x9759;&#x6001;&#x6570;&#x636E;&#x533A;&#x3001;&#x52A8;&#x6001;&#x6570;&#x636E;&#x533A;&#x4EE5;&#x53CA;&#x7528;&#x6237;&#x6808;</li>
+<li>&#x5185;&#x6838;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x4ECE; <code>0xC0000000</code> &#x5F00;&#x59CB;&#xFF0C;&#x5176;&#x4E2D; <code>0xC0000000</code> - <code>0xC0200000</code> &#x5C5E;&#x4E8E; SBI&#xFF0C;<code>0xC0200000</code> &#x8D77;&#x5C5E;&#x4E8E;&#x7CFB;&#x7EDF;&#x90E8;&#x5206;</li>
+</ul>
+</li>
+</ol>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5728; PCB &#x4E2D;&#xFF0C;&#x8FDB;&#x7A0B; 0 &#x7684;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#xFF08;&#x6570;&#x636E;&#x6BB5;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x4E0E;&#x6570;&#x636E;&#x6BB5;&#x3001;&#x5806;&#x7684;&#x7ED3;&#x675F;&#x5730;&#x5740;&#xFF09;&#x548C;&#x9875;&#x8868;&#xFF08;&#x6682;&#x65F6;&#x6CBF;&#x7528;&#x5185;&#x6838;&#x7684;&#x9875;&#x8868;&#xFF0C;&#x5C06;&#x5728; 0 &#x53F7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x4E2D;&#x88AB;&#x91CD;&#x65B0;&#x6620;&#x5C04;&#xFF09;&#x5DF2;&#x7ECF;&#x88AB;&#x6307;&#x5B9A;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x7684; <code>init_task</code> &#x7ED3;&#x6784;&#x4F53;&#x662F;&#x4E2A;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x56E0;&#x51FD;&#x6570;&#x7ED3;&#x675F;&#x5BFC;&#x81F4;&#x53D8;&#x91CF;&#x751F;&#x547D;&#x5468;&#x671F;&#x7ED3;&#x675F;&#x3002;</p>
+<h2 id="&#x5207;&#x6362;&#x81F3;&#x7528;&#x6237;&#x6001;"><a name="&#x5207;&#x6362;&#x81F3;&#x7528;&#x6237;&#x6001;" class="anchor-navigation-ex-anchor" href="#&#x5207;&#x6362;&#x81F3;&#x7528;&#x6237;&#x6001;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5207;&#x6362;&#x81F3;&#x7528;&#x6237;&#x6001;</h2>
+<p>&#x521B;&#x5EFA;&#x5B8C;&#x8FDB;&#x7A0B; 0 &#x7684;&#x76F8;&#x5173;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5E76;&#x5207;&#x6362;&#x5230;&#x8FDB;&#x7A0B; 0 &#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5C06;&#x7279;&#x6743;&#x7EA7;&#x5207;&#x6362;&#x81F3; U &#x6001;&#xFF08;&#x4EE5;&#x4E0B;&#x4E5F;&#x6210;&#x7528;&#x6237;&#x6001;&#xFF0C;&#x4E0D;&#x505A;&#x533A;&#x5206;&#xFF09;&#xFF0C;&#x8FD9;&#x91CC;&#x91C7;&#x7528;&#x4F2A;&#x9020;&#x4E2D;&#x65AD;&#x53D1;&#x751F;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5047;&#x8BBE;&#xFF0C;&#x6211;&#x4EEC;&#x6B63;&#x8FD0;&#x884C;&#x5728;&#x7528;&#x6237;&#x6001;&#xFF0C;<code>sscratch</code> &#x6309;&#x7167;&#x89C4;&#x5B9A;&#x8BBE;&#x7F6E;&#x4E3A;&#x5185;&#x6838;&#x6808;&#x5730;&#x5740;&#x3002;&#x6B64;&#x65F6;&#x901A;&#x8FC7; <code>ecall</code> &#x6307;&#x4EE4;<strong>&#x9677;&#x5165;&#x5185;&#x6838;&#x6001;</strong>&#x8BF7;&#x6C42;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#xFF0C;&#x8FD9;&#x65F6;&#x5019; CPU &#x4F1A;&#x81EA;&#x52A8;&#x5C06;&#x90E8;&#x5206;&#x5BC4;&#x5B58;&#x5668;&#x6539;&#x5199;&#xFF1A;</p>
+<ul>
+<li>scause: &#x88AB;&#x8BBE;&#x7F6E;&#x6210; CAUSE_USER_ECALL</li>
+<li>sstatus: <ul>
+<li>SPP &#x4F4D;&#x8BBE;&#x4E3A;&#x53D1;&#x751F;&#x5F02;&#x5E38;&#x4E4B;&#x524D;&#x7684;&#x6743;&#x9650;&#x6A21;&#x5F0F;&#xFF08;0&#xFF0C;&#x8868;&#x793A; U &#x6001;&#xFF09;</li>
+<li>SIE &#x4F4D;&#x7F6E; 0 &#x4EE5;&#x7981;&#x7528;&#x4E2D;&#x65AD;</li>
+<li>SPIE &#x4F4D;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;&#x539F; SIE &#x4F4D;&#x7684;&#x503C;&#xFF08;1&#xFF0C;&#x5F00;&#xFF09;</li>
+</ul>
+</li>
+<li>sepc: &#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;&#x5F02;&#x5E38;&#x53D1;&#x751F;&#x65F6;&#x7684; pc &#x503C;</li>
+<li>pc: &#x88AB;&#x8BBE;&#x7F6E;&#x4E3A; stvec(<code>__alltraps</code>)</li>
+</ul>
+<p>&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x8981;&#x60F3;<strong>&#x4F2A;&#x9020;</strong>&#x4E00;&#x4E2A;&#x4ECE;&#x7528;&#x6237;&#x6001;&#x53D1;&#x51FA;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x9700;&#x8981;&#x4F2A;&#x9020;&#x4E0A;&#x8FF0; CSR &#x7684;&#x53D8;&#x5316;&#x3002;&#x6B64;&#x5916;&#xFF0C;&#x7531;&#x4E8E;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x81F3;&#x5C11;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x63D0;&#x4F9B;&#x8C03;&#x7528;&#x53F7;&#xFF0C;&#x800C;&#x6211;&#x4EEC;&#x4E0D;&#x662F;&#x901A;&#x8FC7;&#x771F;&#x6B63;&#x6267;&#x884C; <code>syscall</code> &#x51FD;&#x6570;&#x8FDB;&#x5165;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x4E5F;&#x9700;&#x8981;&#x4F2A;&#x9020;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x63D0;&#x524D;&#x5199;&#x597D;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x5904;&#x7406;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x7ED1;&#x5B9A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x53F7;&#xFF08;0&#x53F7;&#xFF09;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5C06;&#x503C;&#x5199;&#x5165;&#x5404;&#x5BC4;&#x5B58;&#x5668;&#x540E;&#x7528; call &#x6307;&#x4EE4;&#x8DF3;&#x8F6C;&#x81F3; <code>__alltraps</code> &#x5904;&#xFF0C;&#x907F;&#x514D;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x5F71;&#x54CD;&#x6808;&#x3002;</p>
+<p>&#x6574;&#x4E2A; <code>init_task0</code> &#x51FD;&#x6570;&#x90FD;&#x662F;&#x5728;&#x4F2A;&#x9020;&#x8FD9;&#x4E00;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/**
+ * @brief &#x521D;&#x59CB;&#x5316;&#x8FDB;&#x7A0B; 0
+ * &#x624B;&#x52A8;&#x8FDB;&#x5165;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#xFF0C;&#x8C03;&#x7528; sys_init() &#x521D;&#x59CB;&#x5316;&#x8FDB;&#x7A0B;0
+ * @see sys_init()
+ * @note &#x8FD9;&#x4E2A;&#x5B8F;&#x4F7F;&#x7528;&#x4E86;&#x4EE5;&#x4E0B;&#x4E09;&#x4E2A; GNU C &#x62D3;&#x5C55;&#xFF1A;
+ *       - [Locally Declared Labels](https://gcc.gnu.org/onlinedocs/gcc/Local-Labels.html)
+ *       - [Labels as Values](https://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html)
+ *       - [Statements and Declarations in Expressions](https://gcc.gnu.org/onlinedocs/gcc/Statement-Exprs.html#Statement-Exprs)
+ */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> init_task0()                                                        \
+({                                                                          \
+    __label__ ret;                                                          \
+    write_csr(scause, CAUSE_USER_ECALL);                                    \
+    clear_csr(sstatus, SSTATUS_SPP);                                        \
+    set_csr(sstatus, SSTATUS_SPIE);                                         \
+    clear_csr(sstatus, SSTATUS_SIE);                                        \
+    write_csr(sepc, &amp;&amp;ret - 4 - (SBI_END + LINEAR_OFFSET - START_CODE));    \
+    write_csr(sscratch, (char*)&amp;init_task + PAGE_SIZE);                     \
+    register uint64_t a7 asm(<span class="hljs-string">&quot;a7&quot;</span>) = 0;                                     \
+    __asm__ __volatile__(<span class="hljs-string">&quot;call __alltraps \n\t&quot;</span> ::<span class="hljs-string">&quot;r&quot;</span>(a7):<span class="hljs-string">&quot;memory&quot;</span>);        \
+    ret: ;                                                                  \
+})</span>
+</code></pre>
+<p>&#x5176;&#x4E2D;&#x8F83;&#x4E3A;&#x590D;&#x6742;&#x7684;&#x90E8;&#x5206;&#x662F; <code>sepc</code> &#x548C; <code>sscratch</code> &#x503C;&#x7684;&#x786E;&#x5B9A;&#x3002;</p>
+<h3 id="&#x5185;&#x6838;&#x6808;&#x7684;&#x8BBE;&#x5B9A;"><a name="&#x5185;&#x6838;&#x6808;&#x7684;&#x8BBE;&#x5B9A;" class="anchor-navigation-ex-anchor" href="#&#x5185;&#x6838;&#x6808;&#x7684;&#x8BBE;&#x5B9A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5185;&#x6838;&#x6808;&#x7684;&#x8BBE;&#x5B9A;</h3>
+<p>&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x7528;&#x7684;&#x5185;&#x6838;&#x6808;&#x662F;&#x5728;&#x7CFB;&#x7EDF;&#x542F;&#x52A8;&#x65F6;&#x4E34;&#x65F6;&#x8BBE;&#x7F6E;&#x7684;&#x521D;&#x59CB;&#x6808;&#xFF0C;&#x4F4D;&#x4E8E; <code>boot_stack</code> &#x81F3; <code>boot_stack_top</code> &#x4E4B;&#x95F4;&#xFF0C;&#x5F53;&#x5F15;&#x5165;&#x8FDB;&#x7A0B;&#x540E;&#xFF0C;&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x7684;&#x5185;&#x6838;&#x6808;&#x4E0D;&#x540C;&#xFF0C;&#x9700;&#x8981;&#x4E3A;&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x90FD;&#x5F00;&#x8F9F;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5185;&#x6838;&#x6808;&#x3002;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x8BBE;&#x5B9A; PCB &#x6240;&#x5728;&#x7684;&#x9875;&#x540C;&#x65F6;&#x7528;&#x4F5C;&#x5185;&#x6838;&#x6808;&#x4F7F;&#x7528;&#xFF0C;PCB &#x5B58;&#x4E8E;&#x8BE5;&#x9875;&#x4F4E;&#x5730;&#x5740;&#x5904;&#xFF0C;&#x800C;&#x5185;&#x6838;&#x6808;&#x4ECE;&#x8BE5;&#x9875;&#x9AD8;&#x5730;&#x5740;&#x5904;&#x5F80;&#x4F4E;&#x5730;&#x5740;&#x589E;&#x957F;&#x3002;<code>sscratch</code> &#x503C;&#x5728;&#x4E2D;&#x65AD;&#x53D1;&#x751F;&#x524D;&#x5B58;&#x7684;&#x662F;&#x5185;&#x6838;&#x6808;&#x5730;&#x5740;&#xFF0C;&#x540C;&#x6837;&#x9700;&#x8981;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x201C;&#x4F2A;&#x9020;&#x201D;&#x3002;</p>
+<h3 id="&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x7684;&#x8BBE;&#x7F6E;"><a name="&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x7684;&#x8BBE;&#x7F6E;" class="anchor-navigation-ex-anchor" href="#&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x7684;&#x8BBE;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x7684;&#x8BBE;&#x7F6E;</h3>
+<p>&#x6A21;&#x62DF;&#x4E2D;&#x65AD;&#x8FD4;&#x56DE;&#x65F6;&#x5E94;&#x8BE5;&#x662F;&#x8FD4;&#x56DE;&#x5230;&#x4E2D;&#x65AD;&#x53D1;&#x751F;&#x524D;&#x7684;&#x4E0B;&#x4E00;&#x6761;&#x8BED;&#x53E5;&#xFF0C;&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x4E0D;&#x77E5;&#x9053;&#x7F16;&#x8BD1;&#x5B8C;&#x6210;&#x540E; <code>call __alltraps</code> &#x7684;&#x4E0B;&#x4E00;&#x6761;&#x6307;&#x4EE4;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x8FD9;&#x91CC;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#xFF0C;&#x968F;&#x540E;&#x4FBF;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>&amp;&amp;</code> &#x8FD0;&#x7B97;&#x7B26;&#x83B7;&#x53D6;&#x5176;&#x5730;&#x5740;&#x3002;&#x8FD9;&#x91CC;&#x7684;&#x83B7;&#x53D6;&#x5230;&#x5730;&#x5740;&#x6839;&#x636E;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x6765;&#x786E;&#x5B9A;&#xFF0C;&#x5728; <code>0xc02000**</code> &#x6BB5;&#xFF0C;&#x4F46;&#x662F;&#x4E4B;&#x540E;&#x7684;&#x4EE3;&#x7801;&#x5728;&#x7528;&#x6237;&#x6001;&#x7684;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5730;&#x5740;&#x6620;&#x5C04;&#x4E2D;&#x5E76;&#x4E0D;&#x662F;&#x5904;&#x4E8E; <code>0xc02000**</code> &#x6BB5;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x8FD8;&#x9700;&#x8981;&#x5BF9;&#x5B83;&#x7A0D;&#x52A0;&#x8FD0;&#x7B97;&#xFF0C;&#x83B7;&#x5F97;&#x771F;&#x6B63;&#x7684;&#x5728;&#x7528;&#x6237;&#x6001;&#x7684;&#x865A;&#x62DF;&#x5730;&#x5740;&#x503C;&#x3002;</p>
+<h2 id="0-&#x53F7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;"><a name="0-&#x53F7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;" class="anchor-navigation-ex-anchor" href="#0-&#x53F7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>0 &#x53F7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;</h2>
+<p>&#x5728; 0 &#x53F7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4E3B;&#x8981;&#x5B8C;&#x6210;&#x4E0E;&#x8FDB;&#x7A0B; 0 &#x5185;&#x5B58;&#x76F8;&#x5173;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x5982;&#x65B0;&#x9875;&#x8868;&#x7684;&#x6620;&#x5C04;&#x4E0E;&#x542F;&#x7528;&#x3001;&#x7528;&#x6237;&#x6808;&#x7684;&#x5206;&#x914D;&#x3002;</p>
+<h3 id="&#x901A;&#x8FC7;&#x9875;&#x8868;&#x6620;&#x5C04;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x5404;&#x6BB5;"><a name="&#x901A;&#x8FC7;&#x9875;&#x8868;&#x6620;&#x5C04;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x5404;&#x6BB5;" class="anchor-navigation-ex-anchor" href="#&#x901A;&#x8FC7;&#x9875;&#x8868;&#x6620;&#x5C04;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x5404;&#x6BB5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x901A;&#x8FC7;&#x9875;&#x8868;&#x6620;&#x5C04;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x5404;&#x6BB5;</h3>
+<p>&#x5BF9;&#x4E8E;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#xFF0C;&#x7531;&#x4E8E;&#x6BCF;&#x4E00;&#x4E2A;&#x6BB5;&#x7684;&#x6743;&#x9650;&#x90FD;&#x4E0D;&#x540C;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x88AB;&#x5355;&#x72EC;&#x6620;&#x5C04;&#x3002;</p>
+<p>&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x5E76;&#x6CA1;&#x6709;&#x5B9E;&#x9645;&#x4E0A;&#x7684; 0 &#x53F7;&#x8FDB;&#x7A0B;&#x7684;&#x4EE3;&#x7801;&#x548C;&#x6570;&#x636E;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5185;&#x6838;&#x7684;&#x4EE3;&#x7801;&#x548C;&#x6570;&#x636E;&#x6620;&#x5C04;&#x81F3;&#x7528;&#x6237;&#x7A0B;&#x5E8F;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#xFF0C;&#x5F53;&#x505A; 0 &#x53F7;&#x8FDB;&#x7A0B;&#x7684;&#x4EE3;&#x7801;&#x548C;&#x6570;&#x636E;&#x4F7F;&#x7528;&#x3002;&#x4ECE; <code>linker.ld</code> &#x6587;&#x4EF6;&#x53EF;&#x77E5;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x4EE3;&#x7801;&#x4E0E;&#x6570;&#x636E;&#x4E3B;&#x8981;&#x5206;&#x4E3A;&#x56DB;&#x6BB5;&#xFF0C;&#x4F9D;&#x6B21;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li>&#x4EE3;&#x7801;&#x6BB5;(text)&#xFF1A;<ul>
+<li>&#x4ECE; <code>text_start</code> &#x5230; <code>rodata_start</code></li>
+<li>&#x7528;&#x6237;&#x6001;&#x53EA;&#x8BFB;&#x548C;&#x6267;&#x884C;</li>
+</ul>
+</li>
+<li>&#x53EA;&#x8BFB;&#x6570;&#x636E;&#x6BB5;(rodata)&#xFF1A;<ul>
+<li>&#x4ECE; <code>rodata_start</code> &#x5230; <code>data_start</code></li>
+<li>&#x7528;&#x6237;&#x6001;&#x53EA;&#x8BFB;</li>
+</ul>
+</li>
+<li>&#x6570;&#x636E;&#x6BB5;(&#x542B; data &#x4E0E; bss &#x6BB5;)&#xFF1A;<ul>
+<li>&#x4ECE; <code>data_start</code> &#x5230; <code>kernel_end</code></li>
+<li>&#x7528;&#x6237;&#x6001;&#x53EF;&#x8BFB;&#x53EF;&#x5199;</li>
+</ul>
+</li>
+</ul>
+<p>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x91CC;&#x4EC5;&#x4EC5;&#x662F;&#x628A;&#x5185;&#x6838;&#x7684;&#x4EE3;&#x7801;&#x548C;&#x6570;&#x636E;&#x5145;&#x5F53;&#x8FDB;&#x7A0B; 0 &#x7684;&#x4EE3;&#x7801;&#x548C;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E0D;&#x53D6;&#x6D88;&#x539F;&#x5185;&#x6838;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x7684;&#x6620;&#x5C04;&#x3002;&#x76F8;&#x5F53;&#x4E8E;&#x4E24;&#x4E2A;&#x865A;&#x62DF;&#x5730;&#x5740;&#x6620;&#x5C04;&#x5230;&#x540C;&#x4E00;&#x6BB5;&#x7269;&#x7406;&#x5730;&#x5740;&#x4E0A;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x65B0;&#x6620;&#x5C04;&#x5EFA;&#x7ACB;&#x540E;&#x7269;&#x7406;&#x9875;&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x9700;&#x8981;&#x52A0; 1.</p>
+<p>&#x53EF;&#x4EE5;&#x5199;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5FAA;&#x73AF;&#x8C03;&#x7528; <code>put_page</code> &#x51FD;&#x6570;&#x4EE5;&#x65B9;&#x4FBF;&#x6620;&#x5C04;&#x6BB5;&#x3002;&#x6CE8;&#x610F;&#x4E24;&#x7AEF;&#x865A;&#x62DF;&#x5730;&#x5740;&#x7684;&#x5DEE;&#x503C;&#xFF0C;&#x540C;&#x65F6;&#x505A;&#x597D;&#x7269;&#x7406;&#x5185;&#x5B58;&#x9875;&#x9762;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x7684;&#x7BA1;&#x7406;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/**
+ * @brief &#x521B;&#x5EFA;&#x8FDB;&#x7A0B; 0 &#x5404;&#x6BB5;&#x7684;&#x6620;&#x5C04;
+ *
+ * @param start &#x865A;&#x62DF;&#x5730;&#x5740;&#x8D77;&#x59CB;
+ * @param end &#x865A;&#x62DF;&#x5730;&#x5740;&#x7ED3;&#x675F;
+ * @param flag &#x6743;&#x9650;&#x4F4D;
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">map_segment</span><span class="hljs-params">(uint64_t start, uint64_t end, uint16_t flag)</span>
+</span>{
+    <span class="hljs-keyword">uint64_t</span> physical = PHYSICAL(start);
+    start -= VIRTUAL(SBI_END) - START_CODE;
+    end -= VIRTUAL(SBI_END) - START_CODE;
+    <span class="hljs-keyword">while</span> (start != end) {
+        put_page(physical, start, flag);
+        start += PAGE_SIZE;
+        ++mem_map[MAP_NR(physical)];
+        physical += PAGE_SIZE;
+    }
+}
+</code></pre>
+<h3 id="&#x5206;&#x914D;&#x7528;&#x6237;&#x6808;"><a name="&#x5206;&#x914D;&#x7528;&#x6237;&#x6808;" class="anchor-navigation-ex-anchor" href="#&#x5206;&#x914D;&#x7528;&#x6237;&#x6808;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5206;&#x914D;&#x7528;&#x6237;&#x6808;</h3>
+<p>&#x968F;&#x540E;&#x6211;&#x4EEC;&#x5148;&#x5206;&#x914D;&#x4E00;&#x9875;&#x7A7A;&#x95F4;&#x4F5C;&#x4E3A;&#x8FDB;&#x7A0B;&#x7684;&#x7528;&#x6237;&#x6001;&#x6808;&#xFF08;&#x82E5;&#x4EE5;&#x540E;&#x4E0D;&#x591F;&#x7528;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x9875;&#x9519;&#x8BEF;&#x5F02;&#x5E38;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x81EA;&#x52A8;&#x6269;&#x5F20;&#xFF09;&#xFF0C;&#x5237;&#x65B0; TLB&#xFF0C;&#x5E76;&#x5C06;&#x73B0;&#x5185;&#x6838;&#x6001;&#x6808;&#xFF08;&#x5730;&#x5740;&#x5B58;&#x4E8E; <code>sp</code> &#x5BC4;&#x5B58;&#x5668;&#xFF09;&#x7684;&#x6570;&#x636E;&#x590D;&#x5236;&#x8FC7;&#x53BB;&#xFF0C;&#x6700;&#x540E;&#x5C06;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x7684;&#x6808;&#x6307;&#x9488;&#xFF08;<code>sp</code> &#x4E0E; <code>s0</code>&#xFF09;&#x8BBE;&#x7F6E;&#x4E3A;&#x7528;&#x6237;&#x6808;&#x5730;&#x5740;&#xFF0C;&#x8FD9;&#x6837;&#x8FD4;&#x56DE;&#x7528;&#x6237;&#x6001;&#x65F6;&#x6062;&#x590D;&#x4E0A;&#x4E0B;&#x6587;&#x540E;&#x5C31;&#x80FD;&#x4F7F;&#x7528;&#x65B0;&#x7684;&#x7528;&#x6237;&#x6808;&#x4E86;&#x3002;</p>
+<p>&#x5B8C;&#x6210;&#x8FD9;&#x4E9B;&#x4EFB;&#x52A1;&#x540E;&#xFF0C;&#x5C06;&#x201C;&#x4F2A;&#x201D;&#x4E2D;&#x65AD;&#x4E2D;&#x4FDD;&#x5B58;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x6570;&#x636E;&#x5730;&#x5740;&#x5B58;&#x5165; PCB &#x4E2D;&#xFF0C;&#x4EE5;&#x5907;&#x540E;&#x7EED; <code>switch_to</code> &#x51FD;&#x6570;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x89C4;&#x5B9A;&#x6808;&#x9876;&#x4ECE; <code>0xBFFFFFF0</code> &#x5F00;&#x59CB;&#x5411;&#x4F4E;&#x5730;&#x5740;&#x6269;&#x5C55;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5728;&#x865A;&#x62DF;&#x5730;&#x5740; <code>START_STACK - PAGE_SIZE</code> &#x5904;&#x7533;&#x8BF7;&#x65B0;&#x9875;&#xFF0C;&#x5E76;&#x4E14;&#x662F;&#x7528;&#x6237;&#x6001;&#x53EF;&#x8BFB;&#x53EF;&#x5199;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>get_empty_page</code> &#x51FD;&#x6570;&#x5B8C;&#x6210;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;<code>sp</code> &#x7406;&#x8BBA;&#x4E0A;&#x4E0D;&#x80FD;&#x4EC5;&#x7B80;&#x5355;&#x8BBE;&#x7F6E;&#x4E3A; <code>START_STACK</code>&#xFF0C;&#x56E0;&#x4E3A;&#x4ECE;&#x5185;&#x6838;&#x6808;&#x590D;&#x5236;&#x8FC7;&#x6765;&#x7684;&#x7528;&#x6237;&#x6808;&#x5DF2;&#x7ECF;&#x6709;&#x6709;&#x7528;&#x7684;&#x6570;&#x636E;&#xFF08;&#x5982;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#xFF09;&#x4E86;&#xFF0C;&#x65B0;&#x7684;&#x5185;&#x5BB9;&#x4E0D;&#x80FD;&#x5C06;&#x539F;&#x6709;&#x6570;&#x636E;&#x8986;&#x76D6;&#xFF0C;&#x800C;&#x662F;&#x9700;&#x8981;&#x5728;&#x539F;&#x6709;&#x6570;&#x636E;&#x57FA;&#x7840;&#x4E0A;&#x6536;&#x7F29;/&#x6269;&#x5F20;&#x6808;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x539F; <code>sp</code> &#x52A0;&#x4E0A;&#x7528;&#x6237;&#x6808;&#x5230;&#x521D;&#x59CB;&#x6808;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x3002;</p>
+<p>&#x540C;&#x6837;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x8FD9;&#x91CC;&#x53C2;&#x4E0E;&#x8BA1;&#x7B97;&#x7684; <code>sp</code> &#x503C;&#x4E0D;&#x80FD;&#x662F;&#x5F53;&#x524D; <code>sp</code> &#x5BC4;&#x5B58;&#x5668;&#x7684;&#x503C;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x8FDB;&#x5165;&#x201C;&#x4F2A;&#x201D;&#x4E2D;&#x65AD;&#x540E; <code>sp</code> &#x7531;&#x4E8E;&#x9700;&#x8981;&#x5B58;&#x653E;&#x4E0A;&#x4E0B;&#x6587;&#x88AB;&#x4FEE;&#x6539;&#x8FC7;&#xFF0C;&#x5185;&#x6838;&#x6808;&#x5728;&#x4E2D;&#x65AD;&#x8FD4;&#x56DE;&#x65F6;&#x4F1A;&#x88AB;&#x6062;&#x590D;&#xFF0C;&#x4F46; <code>tf</code> &#x4E2D;&#x7684;&#x6211;&#x4EEC;&#x624B;&#x52A8;&#x4FEE;&#x6539;&#x7684;&#x7528;&#x6237;&#x6808;&#x5E76;&#x4E0D;&#x4F1A;&#xFF0C;&#x8FD9;&#x6837;&#x56DE;&#x5230;&#x7528;&#x6237;&#x6001;&#x540E;&#x6808;&#x4E0A;&#x4F1A;&#x6709;&#x591A;&#x4F59;&#x7684;&#x201C;&#x4F2A;&#x201D;&#x4E2D;&#x65AD;&#x65F6;&#x7684;&#x4FDD;&#x5B58;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x3002;</p>
+<p>GCC &#x4F7F;&#x7528; <code>s0</code> &#x5BC4;&#x5B58;&#x5668;&#x6765;&#x67E5;&#x627E;&#x6808;&#x4E0A;&#x7684;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#xFF0C;&#x5B83;&#x6307;&#x5411;&#x5F53;&#x524D;&#x6808;&#x5E27;&#x8D77;&#x59CB;&#x5730;&#x5740;&#xFF08;&#x9AD8;&#x5730;&#x5740;&#xFF09;&#xFF0C;&#x548C; <code>sp</code> &#x4E00;&#x6837;&#x9700;&#x8981;&#x52A0;&#x4E0A;&#x7528;&#x6237;&#x6808;&#x5230;&#x521D;&#x59CB;&#x6808;&#x7684;&#x504F;&#x79FB;&#x91CF;&#x6765;&#x4F7F;&#x7528;&#x6237;&#x6001;&#x7A0B;&#x5E8F;&#x80FD;&#x5728;&#x7528;&#x6237;&#x6808;&#x4E2D;&#x67E5;&#x627E;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#x8FD8;&#x9700;&#x6CE8;&#x610F;&#xFF0C;&#x590D;&#x5236;&#x8FC7;&#x6765;&#x7684;&#x7528;&#x6237;&#x6808;&#x4E2D;&#x6709;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x4FE1;&#x606F;&#xFF0C;&#x4F46;&#x662F;&#x91CC;&#x9762;&#x7684;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#xFF08;&#x7EDD;&#x5BF9;&#x5730;&#x5740;&#xFF09;&#x5728;&#x5185;&#x6838;&#x533A;&#xFF0C;&#x7528;&#x6237;&#x6001;&#x65E0;&#x6CD5;&#x8BBF;&#x95EE;&#xFF0C;&#x56E0;&#x6B64;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x4FE1;&#x606F;&#x4E0D;&#x53EF;&#x88AB;&#x4F7F;&#x7528;&#xFF0C;&#x4E5F;&#x6B63;&#x56E0;&#x5982;&#x6B64;&#xFF0C;<code>init_task0</code> &#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x7684;&#x65B9;&#x5F0F;&#x8BBF;&#x95EE;&#xFF0C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x5B8F;&#xFF0C;&#x5E76;&#x4E14;&#x76F4;&#x63A5;&#x653E;&#x5728; main &#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x4E0D;&#x53EF;&#x7531;&#x5176;&#x4ED6;&#x51FD;&#x6570;&#x8C03;&#x7528;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x51FA;&#x73B0;&#x8FD4;&#x56DE;&#x81F3;&#x5185;&#x6838;&#x533A;&#x7684;&#x9519;&#x8BEF;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x5728; <code>mm.h</code> &#x4E2D;&#x5F15;&#x5165;&#x7684;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x7684;&#x7B26;&#x53F7;&#x6765;&#x786E;&#x5B9A;&#x5404;&#x4E2A;&#x6BB5;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/**
+ * @brief &#x521D;&#x59CB;&#x5316;&#x8FDB;&#x7A0B; 0
+ *
+ * &#x521B;&#x5EFA;&#x7528;&#x6237;&#x6001;&#x8FDB;&#x7A0B;&#x96F6;&#xFF0C;&#x5C06;&#x5185;&#x6838;&#x79FB;&#x5165;&#x8FDB;&#x7A0B;&#x4E2D;&#x3002;
+ * @see init_task0()
+ * @note &#x53EA;&#x6709;&#x5728;&#x53D1;&#x751F;&#x4E2D;&#x65AD;&#x65F6;&#x624D;&#x80FD;&#x4FDD;&#x5B58;&#x5904;&#x7406;&#x5668;&#x72B6;&#x6001;&#xFF0C;
+ *       &#x56E0;&#x6B64;&#x8BA9; sys_init() &#x5360;&#x636E;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x53F7; 0,
+ *       &#x4F46;&#x662F;&#x5B9E;&#x9645;&#x4E0A; sys_init() &#x88AB;&#x5185;&#x6838;&#x8C03;&#x7528;&#xFF0C;&#x5E76;
+ *       &#x4E0D;&#x662F;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x3002;
+ */</span>
+<span class="hljs-keyword">int64_t</span> sys_init(<span class="hljs-keyword">struct</span> trapframe* tf)
+{
+    <span class="hljs-comment">/* &#x521B;&#x5EFA;&#x6307;&#x5411;&#x5185;&#x6838;&#x4EE3;&#x7801;/&#x6570;&#x636E;&#x7684;&#x7528;&#x6237;&#x6001;&#x6620;&#x5C04; */</span>
+    map_segment((<span class="hljs-keyword">uint64_t</span>)text_start, (<span class="hljs-keyword">uint64_t</span>)rodata_start, USER_RX | PAGE_VALID);
+    map_segment((<span class="hljs-keyword">uint64_t</span>)rodata_start, (<span class="hljs-keyword">uint64_t</span>)data_start, USER_R | PAGE_VALID);
+    map_segment((<span class="hljs-keyword">uint64_t</span>)data_start, (<span class="hljs-keyword">uint64_t</span>)kernel_end, USER_RW | PAGE_VALID);
+
+    <span class="hljs-comment">/*
+     * &#x521B;&#x5EFA;&#x8FDB;&#x7A0B; 0 &#x5806;&#x6808;&#xFF08;&#x4ECE; 0xBFFFFFF0 &#x5F00;&#x59CB;&#xFF09;
+     *
+     * &#x5185;&#x6838;&#x5806;&#x6808;&#x5DF2;&#x4F7F;&#x7528;&#x7684;&#x7A7A;&#x95F4;&#x8FDC;&#x5C0F;&#x4E8E;&#x4E00;&#x9875;&#xFF0C;&#x56E0;&#x6B64;&#x4EC5;&#x4E3A;&#x7528;&#x6237;&#x6001;&#x5806;&#x6808;&#x5206;&#x914D;&#x4E00;&#x9875;&#x865A;&#x62DF;&#x9875;&#x3002;
+     * &#x4E3A;&#x4E86;&#x786E;&#x4FDD;&#x5207;&#x6362;&#x5230;&#x5E94;&#x7528;&#x6001;&#x540E;&#x6B63;&#x786E;&#x6267;&#x884C;&#xFF0C;&#x5C06;&#x5185;&#x6838;&#x6001;&#x5806;&#x6808;&#x7684;&#x6570;&#x636E;&#x5168;&#x90E8;&#x62F7;&#x8D1D;&#x5230;&#x7528;&#x7528;&#x6237;&#x6001;&#x5806;&#x6808;&#x4E2D;&#x3002;
+     */</span>
+    get_empty_page(START_STACK - PAGE_SIZE, USER_RW);
+    get_empty_page(START_STACK, USER_RW);
+    invalidate();
+    <span class="hljs-built_in">memcpy</span>((<span class="hljs-keyword">void</span>*)((<span class="hljs-keyword">uint64_t</span>)START_STACK - PAGE_SIZE), (<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span>*)FLOOR(tf-&gt;gpr.sp), PAGE_SIZE);
+    tf-&gt;gpr.sp += START_STACK - (<span class="hljs-keyword">uint64_t</span>)boot_stack_top;
+    <span class="hljs-comment">/* GCC &#x4F7F;&#x7528; s0 &#x6307;&#x5411;&#x51FD;&#x6570;&#x6808;&#x5E27;&#x8D77;&#x59CB;&#x5730;&#x5740;&#xFF08;&#x9AD8;&#x5730;&#x5740;&#xFF09;&#xFF0C;&#x56E0;&#x6B64;&#x8FD9;&#x91CC;&#x4E5F;&#x8981;&#x4FEE;&#x6539;&#xFF0C;&#x5426;&#x5219;&#x5207;&#x6362;&#x5230;&#x8FDB;&#x7A0B;0&#x4F1A;&#x8BBF;&#x95EE;&#x5230;&#x5185;&#x6838;&#x533A; */</span>
+    tf-&gt;gpr.s0 += START_STACK - (<span class="hljs-keyword">uint64_t</span>)boot_stack_top;
+    save_context(tf);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>&#x5728;&#x5B8C;&#x6210; 0 &#x53F7;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x540E;&#xFF0C;CPU &#x5C31;&#x901A;&#x8FC7; <code>sret</code> &#x6307;&#x4EE4;&#x6839;&#x636E;&#x7B2C;&#x4E8C;&#x90E8;&#x4F2A;&#x9020;&#x7684;&#x4E2D;&#x65AD;&#x8FDB;&#x5165;&#x4E86;&#x7528;&#x6237;&#x6001;&#xFF0C;&#x7EE7;&#x7EED;&#x6267;&#x884C; <code>main</code> &#x51FD;&#x6570;&#x4E2D;&#x7684;&#x8BED;&#x53E5;&#x3002;</p>
+<h1 id="&#x9644;&#x5F55;"><a name="&#x9644;&#x5F55;" class="anchor-navigation-ex-anchor" href="#&#x9644;&#x5F55;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9644;&#x5F55;</h1>
+<p>GCC&#x63D0;&#x4F9B;&#x4E00;&#x4E9B;&#x6807;&#x51C6; C &#x4E0D;&#x652F;&#x6301;&#x7684;&#x989D;&#x5916;&#x8BED;&#x6CD5;&#x4E0E;&#x529F;&#x80FD;&#xFF0C;&#x672C;&#x8282;&#x9644;&#x5F55;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;&#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528;&#x5230;&#x7684;&#x4E09;&#x4E2A; GNU C &#x7684;&#x62D3;&#x5C55;&#x3002;</p>
+<h2 id="locally-declared-labels-&#x6269;&#x5C55;"><a name="locally-declared-labels-&#x6269;&#x5C55;" class="anchor-navigation-ex-anchor" href="#locally-declared-labels-&#x6269;&#x5C55;"><i class="fa fa-link" aria-hidden="true"></i></a>Locally Declared Labels &#x6269;&#x5C55;</h2>
+<p><strong>&#x5C40;&#x90E8;&#x58F0;&#x660E;&#x7684;&#x6807;&#x7B7E;</strong>&#x662F;&#x4F5C;&#x7528;&#x57DF;&#x4EC5;&#x5728;<em>&#x5F53;&#x524D;&#x5757;&#x53CA;&#x5D4C;&#x5957;&#x7684;&#x5757;&#x3001;&#x5D4C;&#x5957;&#x7684;&#x51FD;&#x6570;</em>&#x5185;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x58F0;&#x660E;&#x65B9;&#x5F0F;&#x4E3A;<code>__label__ label1, label2, /* &#x2026; */;</code>&#x3002;&#x5C40;&#x90E8;&#x6807;&#x7B7E;&#x7684;&#x58F0;&#x660E;&#x5FC5;&#x987B;&#x5728;&#x4EE3;&#x7801;&#x5757;&#x7684;&#x5F00;&#x5934;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x666E;&#x901A;&#x58F0;&#x660E;&#x4E0E;&#x8BED;&#x53E5;&#x4E4B;&#x524D;&#x3002;&#x5C40;&#x90E8;&#x6807;&#x7B7E;&#x7684;&#x58F0;&#x660E;&#x53EA;&#x58F0;&#x660E;&#x5176;&#x540D;&#x79F0;&#xFF0C;&#x5177;&#x4F53;&#x7684;&#x5B9A;&#x4E49;&#x4F9D;&#x7136;&#x9700;&#x8981;&#x9760;<code>label:</code>&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x5728;&#x8F83;&#x4E3A;&#x590D;&#x6742;&#x7684;&#x5B8F;&#x4E2D;&#x5C40;&#x90E8;&#x6807;&#x7B7E;&#x4F7F;&#x7528; <code>goto</code> &#x8DF3;&#x51FA;&#x5FAA;&#x73AF;&#x6216;&#x83B7;&#x53D6;&#x67D0;&#x4E00;&#x5730;&#x5740;&#xFF0C;&#x7528;&#x5C40;&#x90E8;&#x6807;&#x7B7E;&#x4F1A;&#x66F4;&#x65B9;&#x4FBF;&#xFF0C;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x591A;&#x6B21;&#x5F15;&#x7528;&#x8FD9;&#x4E00;&#x5B8F;&#x5F15;&#x53D1;&#x7684;&#x6807;&#x7B7E;&#x91CD;&#x590D;&#x5B9A;&#x4E49;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x4F7F;&#x7528;&#x793A;&#x4F8B;&#x89C1; <code>sched.h</code> &#x4E2D; <code>init_task0</code> &#x5B8F;&#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x5176;&#x4E2D;&#x4F7F;&#x7528; <code>__label__ ret;</code> &#x58F0;&#x660E;&#x4E86;&#x5C40;&#x90E8;&#x6807;&#x7B7E;<code>ret</code>&#xFF0C;&#x5E76;&#x5728; <code>write_csr(sepc, &amp;&amp;ret - 4 - (SBI_END + LINEAR_OFFSET - START_CODE));</code> &#x4E2D;&#x4F7F;&#x7528;&#x4E86;&#x5B83;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x800C; <code>ret</code> &#x7684;&#x5177;&#x4F53;&#x5B9A;&#x4E49;&#x5728; <code>ret: ;</code> &#x5904;&#x3002;</p>
+<h2 id="labels-as-values-&#x6269;&#x5C55;"><a name="labels-as-values-&#x6269;&#x5C55;" class="anchor-navigation-ex-anchor" href="#labels-as-values-&#x6269;&#x5C55;"><i class="fa fa-link" aria-hidden="true"></i></a>Labels as Values &#x6269;&#x5C55;</h2>
+<p>&#x5BF9;&#x4E8E;&#x5F53;&#x524D;&#x51FD;&#x6570;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>&amp;&amp;</code> &#x8FD0;&#x7B97;&#x7B26;&#x83B7;&#x53D6;&#x5176;&#x5730;&#x5740;&#xFF0C;&#x83B7;&#x53D6;&#x5230;&#x7684;&#x503C;&#x7684;&#x7C7B;&#x578B;&#x4E3A; <code>void *</code>&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">void</span> *ptr;
+<span class="hljs-comment">/* &#x2026; */</span>
+ptr = &amp;&amp;foo;
+</code></pre>
+<p>&#x540C;&#x65F6;&#x4F60;&#x53EF;&#x4EE5;&#x7528; <code>goto *ptr;</code> &#x6765;&#x8DF3;&#x8F6C;&#x81F3;&#x8BE5;&#x6807;&#x7B7E;&#x6240;&#x4EE3;&#x8868;&#x7684;&#x5730;&#x5740;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x8DE8;&#x51FD;&#x6570;&#x4F7F;&#x7528;&#x8FD9;&#x4E00;&#x65B9;&#x6CD5;&#x8DF3;&#x8F6C;&#x4F1A;&#x5BFC;&#x81F4;&#x4E0D;&#x53EF;&#x9884;&#x77E5;&#x7684;&#x540E;&#x679C;&#x3002;</p>
+<p>&#x5728; <code>inline</code> &#x51FD;&#x6570;&#x6216; <code>clone</code> &#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x5BF9;&#x540C;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#x83B7;&#x53D6;&#x5230;&#x7684;&#x503C;&#x53EF;&#x80FD;&#x4E0D;&#x540C;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x4FDD;&#x8BC1;&#x5B83;&#x4EEC;&#x76F8;&#x540C;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528; <code>__attribute__((__noinline__,__noclone__))</code> &#x4EE5;&#x907F;&#x514D;&#x51FD;&#x6570;&#x88AB;&#x4F5C;&#x4E3A; <code>inline</code> &#x51FD;&#x6570;&#x6216; <code>clone</code> &#x51FD;&#x6570;&#x3002;&#x5982;&#x679C;&#x5728;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x521D;&#x59CB;&#x503C;&#x8BBE;&#x5B9A;&#x4E2D;&#x4F7F;&#x7528; <code>&amp;&amp;foo</code>&#xFF0C;&#x5219;&#x7981;&#x6B62; <code>inline</code> &#x6216; <code>clone</code>&#x3002;</p>
+<h2 id="statements-and-declarations-in-expressions-&#x6269;&#x5C55;"><a name="statements-and-declarations-in-expressions-&#x6269;&#x5C55;" class="anchor-navigation-ex-anchor" href="#statements-and-declarations-in-expressions-&#x6269;&#x5C55;"><i class="fa fa-link" aria-hidden="true"></i></a>Statements and Declarations in Expressions &#x6269;&#x5C55;</h2>
+<p>&#x8BED;&#x53E5;&#x8868;&#x8FBE;&#x5F0F;&#xFF1A;&#x7528;&#x62EC;&#x53F7;&#x62EC;&#x8D77;&#x6765;&#x7684;&#x590D;&#x5408;&#x8BED;&#x53E5;&#x53EF;&#x80FD;&#x5728; GNU C &#x4E2D;&#x88AB;&#x5F53;&#x505A;&#x8868;&#x8FBE;&#x5F0F;&#x3002;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x5728;&#x8868;&#x8FBE;&#x5F0F;&#x4E2D;&#x4F7F;&#x7528;&#x5FAA;&#x73AF;&#x3001;switch&#x548C;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x3002;</p>
+<p>&#x590D;&#x5408;&#x8BED;&#x53E5;&#x662F;&#x6307;&#x7531;&#x5927;&#x62EC;&#x53F7;&#x5305;&#x56F4;&#x7684;&#x4E00;&#x7CFB;&#x5217;&#x8BED;&#x53E5;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x4E0A;&#x8FF0;&#x7ED3;&#x6784;&#x4E2D;&#xFF0C;&#x5706;&#x62EC;&#x53F7;&#x53EF;&#x4EE5;&#x5305;&#x542B;&#x5927;&#x62EC;&#x53F7;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-c">({ <span class="hljs-keyword">int</span> y = foo();
+   <span class="hljs-keyword">int</span> z;
+   <span class="hljs-keyword">if</span> (y &gt; <span class="hljs-number">0</span>) z = y;
+   <span class="hljs-keyword">else</span> z = - y;
+   z; })
+</code></pre>
+<p>&#x5176;&#x4E2D;&#x590D;&#x5408;&#x8BED;&#x53E5;&#x7684;&#x6700;&#x540E;&#x4E00;&#x53E5;&#x5E94;&#x8BE5;&#x662F;&#x4E00;&#x4E2A;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x5176;&#x8FD4;&#x56DE;&#x503C;&#x4F5C;&#x4E3A;&#x6574;&#x4E2A;&#x7ED3;&#x6784;&#x7684;&#x503C;&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x4E3A; <code>void</code>&#xFF0C;&#x5E76;&#x4E14;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#x3002;</p>
+<p>&#x8FD9;&#x4E00;&#x7279;&#x6027;&#x4F7F;&#x5176;&#x5728;&#x786E;&#x4FDD;&#x5B8F;&#x5B9A;&#x4E49;&#x7684;&#x201C;&#x5B89;&#x5168;&#x201D;&#x4E2D;&#x8F83;&#x4E3A;&#x6709;&#x7528;&#xFF0C;&#x53EF;&#x7528;&#x4E8E;&#x786E;&#x4FDD;&#x64CD;&#x4F5C;&#x6570;&#x53EA;&#x8FD0;&#x7B97;&#x4E00;&#x6B21;&#x3002;&#x4F8B;&#x5982;&#x5728;<code>#define max(a,b) ((a) &gt; (b) ? (a) : (b))</code>&#x7684;&#x5B9A;&#x4E49;&#x4E2D;&#xFF0C;a &#x548C; b &#x4F1A;&#x88AB;&#x8BA1;&#x7B97;&#x4E24;&#x6B21;&#xFF0C;&#x5982;&#x679C;&#x8C03;&#x7528;&#x5B83;&#x7684;&#x8FD0;&#x7B97;&#x7B26;&#x6709;&#x526F;&#x4F5C;&#x7528;&#xFF08;&#x5982;++&#x8FD0;&#x7B97;&#x7B26;&#xFF09;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x9519;&#x8BEF;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x5728; GNU C &#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x77E5;&#x9053;&#x64CD;&#x4F5C;&#x6570;&#x7684;&#x7C7B;&#x578B;&#xFF08;&#x8FD9;&#x91CC;&#x53D6;<code>int</code>&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5982;&#x4E0B;&#x5B9A;&#x4E49;&#x5B8F;&#x6765;&#x907F;&#x514D;&#x6B64;&#x95EE;&#x9898;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> maxint(a,b) \
+  ({int _a = (a), _b = (b); _a &gt; _b ? _a : _b; })</span>
+</code></pre>
+<p>&#x6BD4;&#x5982;&#x5728;&#x5982;&#x4E0B;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;<code>max</code> &#x5B8F;&#x4F1A;&#x5BFC;&#x81F4;a&#x3001;b&#x81EA;&#x589E;&#x4E24;&#x6B21;&#xFF0C;&#x800C; <code>maxint</code> &#x5B8F;&#x5219;&#x4E0D;&#x4F1A;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">int</span> b = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">int</span> c = max(a++, b++);
+<span class="hljs-comment">// int c = ((a++) &gt; (b++) ? (a++) : (b++));</span>
+<span class="hljs-keyword">int</span> d = maxint(a++, b++);
+<span class="hljs-comment">// int d = ({</span>
+<span class="hljs-comment">//          int _a = (a++), _b = (b++);</span>
+<span class="hljs-comment">//          _a &gt; _b ? _a : _b;</span>
+<span class="hljs-comment">//          });</span>
+</code></pre>
+<hr>
+<p>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x5F15;&#x5165;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#xFF08;&#x4F8B;&#x5982;&#x5728; <code>maxint</code> &#x4E2D;&#xFF09;&#x53EF;&#x80FD;&#x4F1A;&#x548C;&#x201C;&#x4E3B;&#x8C03;&#x201D;&#x51FD;&#x6570;&#x4E2D;&#x539F;&#x6709;&#x7684;&#x53D8;&#x91CF;&#x76F8;&#x4E92;&#x5F71;&#x54CD;&#x4EA7;&#x751F;&#x9519;&#x8BEF;&#xFF0C;&#x4F8B;&#x5982;&#x5728;&#x4EE5;&#x4E0B;&#x793A;&#x4F8B;&#x4E2D;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">int</span> _a = <span class="hljs-number">1</span>, _b = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">int</span> c = max(_a, _b);
+<span class="hljs-comment">// int c = ((_a) &gt; (_b) ? (_a) : (_b));</span>
+<span class="hljs-keyword">int</span> d = maxint(_a, _b);
+<span class="hljs-comment">// int d = ({int _a = (_a), _b = (_b); _a &gt; _b ? _a : _b; });</span>
+<span class="hljs-comment">// &#x5C55;&#x5F00;&#x540E;&#x53D8;&#x91CF;&#x5B9A;&#x4E49;&#x4F1A;&#x5BFC;&#x81F4;&#x9519;&#x8BEF;</span>
+</code></pre>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x50CF;&#x4E0B;&#x4F8B;&#x4E2D;&#x9012;&#x5F52;&#x5730;&#x4F7F;&#x7528;&#x6B64;&#x6A21;&#x5F0F;&#x65F6;&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x4F1A;&#x53D1;&#x751F;&#x6B64;&#x95EE;&#x9898;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> maxint3(a, b, c) \
+  ({int _a = (a), _b = (b), _c = (c); maxint (maxint (_a, _b), _c); })</span>
+</code></pre>
+<hr>
+<p>&#x5E38;&#x91CF;&#x8868;&#x8FBE;&#x5F0F;&#xFF08;&#x5982;&#x679A;&#x4E3E;&#x5E38;&#x91CF;&#x7684;&#x503C;&#x3001;&#x4F4D;&#x57DF;&#x7684;&#x5BBD;&#x5EA6;&#x6216;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x7684;&#x521D;&#x59CB;&#x503C;&#xFF09;&#x4E2D;&#x4E0D;&#x5141;&#x8BB8;&#x5D4C;&#x5165;&#x8BED;&#x53E5;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4E0D;&#x77E5;&#x9053;&#x64CD;&#x4F5C;&#x6570;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x4F7F;&#x7528; <code>typeof</code> &#x6216; <code>__auto_type</code>&#x3002;</p>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/ytf4425" target="_blank">Hanabi</a>&#xFF0C;&#x4F7F;&#x7528;<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">&#x7F72;&#x540D;-&#x975E;&#x5546;&#x4E1A;&#x6027;&#x4F7F;&#x7528;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0 &#x56FD;&#x9645;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2023-03-14 01:12:40 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 进程管理">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"初始化 0 号进程","level":"1.7.1","depth":2,"previous":{"title":"进程管理","level":"1.7","depth":1,"path":"process/README.md","ref":"process/README.md","articles":[{"title":"初始化 0 号进程","level":"1.7.1","depth":2,"path":"process/task0_init.md","ref":"process/task0_init.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","sharing-plus","github-buttons","anchor-navigation-ex","page-footer-ex","splitter","copy-code-button","expandable-chapters-small","katex"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-footer-ex":{"copyright":"By [Hanabi](https://github.com/ytf4425)，使用[署名-非商业性使用-相同方式共享 4.0 国际](http://creativecommons.org/licenses/by-nc-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"github-buttons":{"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{"all":["douban","facebook","google","instapaper","linkedin","twitter","weibo","qq","qzone","viber","whatsapp"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Hanabi","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Code an OS Handbook","language":"zh-hans","gitbook":"*"},"file":{"path":"process/task0_init.md","mtime":"2023-03-14T01:12:40.462Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-14T01:13:16.286Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

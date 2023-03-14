@@ -1,0 +1,1054 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>附录：链接脚本 Linker Script · Code an OS Handbook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Hanabi">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../interrupt/" />
+    
+    
+    <link rel="prev" href="make.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Code an OS Project
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ready/">
+            
+                <a href="../ready/">
+            
+                    
+                    准备
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ready/intro.html">
+            
+                <a href="../ready/intro.html">
+            
+                    
+                    总体介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ready/env.html">
+            
+                <a href="../ready/env.html">
+            
+                    
+                    环境部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    你好，世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="main.html">
+            
+                <a href="main.html">
+            
+                    
+                    “主”函数的编写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="packaging.html">
+            
+                <a href="packaging.html">
+            
+                    
+                    ecall 指令的封装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="boot.html">
+            
+                <a href="boot.html">
+            
+                    
+                    操作系统的启动
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="make.html">
+            
+                <a href="make.html">
+            
+                    
+                    拼搭我们的系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.5" data-path="linker_script.html">
+            
+                <a href="linker_script.html">
+            
+                    
+                    附录：链接脚本 Linker Script
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../interrupt/">
+            
+                <a href="../interrupt/">
+            
+                    
+                    中断
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../interrupt/plic.html">
+            
+                <a href="../interrupt/plic.html">
+            
+                    
+                    PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../interrupt/uart.html">
+            
+                <a href="../interrupt/uart.html">
+            
+                    
+                    UART
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../interrupt/goldfish_RTC.html">
+            
+                <a href="../interrupt/goldfish_RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../interrupt/sunxi_plic.html">
+            
+                <a href="../interrupt/sunxi_plic.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../interrupt/sunxi_RTC.html">
+            
+                <a href="../interrupt/sunxi_RTC.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    [物理内存管理]
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../virtualmm/">
+            
+                <a href="../virtualmm/">
+            
+                    
+                    虚拟内存管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../virtualmm/intro.html">
+            
+                <a href="../virtualmm/intro.html">
+            
+                    
+                    基础介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../virtualmm/header.html">
+            
+                <a href="../virtualmm/header.html">
+            
+                    
+                    基础头文件准备
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../virtualmm/init.html">
+            
+                <a href="../virtualmm/init.html">
+            
+                    
+                    初始化过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../virtualmm/manage.html">
+            
+                <a href="../virtualmm/manage.html">
+            
+                    
+                    其他管理过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../process/">
+            
+                <a href="../process/">
+            
+                    
+                    进程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../process/task0_init.html">
+            
+                <a href="../process/task0_init.html">
+            
+                    
+                    初始化 0 号进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >附录：链接脚本 Linker Script</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x9644;&#x5F55;&#xFF1A;&#x94FE;&#x63A5;&#x811A;&#x672C;-linker-script"><b></b>&#x9644;&#x5F55;&#xFF1A;&#x94FE;&#x63A5;&#x811A;&#x672C; Linker Script</a></li><ul><li><span class="title-icon "></span><a href="#&#x57FA;&#x672C;&#x6982;&#x5FF5;"><b></b>&#x57FA;&#x672C;&#x6982;&#x5FF5;</a></li><li><span class="title-icon "></span><a href="#&#x94FE;&#x63A5;&#x811A;&#x672C;&#x683C;&#x5F0F;"><b></b>&#x94FE;&#x63A5;&#x811A;&#x672C;&#x683C;&#x5F0F;</a></li><li><span class="title-icon "></span><a href="#&#x7B80;&#x5355;&#x793A;&#x4F8B;"><b></b>&#x7B80;&#x5355;&#x793A;&#x4F8B;</a></li><li><span class="title-icon "></span><a href="#&#x7B80;&#x5355;&#x547D;&#x4EE4;"><b></b>&#x7B80;&#x5355;&#x547D;&#x4EE4;</a></li><ul><li><span class="title-icon "></span><a href="#&#x5165;&#x53E3;&#x70B9;"><b></b>&#x5165;&#x53E3;&#x70B9;</a></li><li><span class="title-icon "></span><a href="#&#x6587;&#x4EF6;&#x547D;&#x4EE4;"><b></b>&#x6587;&#x4EF6;&#x547D;&#x4EE4;</a></li><li><span class="title-icon "></span><a href="#&#x683C;&#x5F0F;&#x547D;&#x4EE4;"><b></b>&#x683C;&#x5F0F;&#x547D;&#x4EE4;</a></li><li><span class="title-icon "></span><a href="#regionalias"><b></b>REGION_ALIAS</a></li><li><span class="title-icon "></span><a href="#&#x5176;&#x4ED6;&#x547D;&#x4EE4;"><b></b>&#x5176;&#x4ED6;&#x547D;&#x4EE4;</a></li></ul><li><span class="title-icon "></span><a href="#&#x4E3A;&#x7B26;&#x53F7;&#x8D4B;&#x503C;"><b></b>&#x4E3A;&#x7B26;&#x53F7;&#x8D4B;&#x503C;</a></li><ul><li><span class="title-icon "></span><a href="#&#x7B80;&#x5355;&#x8D4B;&#x503C;"><b></b>&#x7B80;&#x5355;&#x8D4B;&#x503C;</a></li><li><span class="title-icon "></span><a href="#&#x5728;&#x7A0B;&#x5E8F;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x5F15;&#x7528;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7B26;&#x53F7;"><b></b>&#x5728;&#x7A0B;&#x5E8F;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x5F15;&#x7528;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7B26;&#x53F7;</a></li></ul><li><span class="title-icon "></span><a href="#sections-&#x547D;&#x4EE4;"><b></b>SECTIONS &#x547D;&#x4EE4;</a></li><ul><li><span class="title-icon "></span><a href="#&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;"><b></b>&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;</a></li><li><span class="title-icon "></span><a href="#&#x8F93;&#x51FA;&#x8282;&#x5730;&#x5740;"><b></b>&#x8F93;&#x51FA;&#x8282;&#x5730;&#x5740;</a></li><li><span class="title-icon "></span><a href="#&#x8F93;&#x5165;&#x8282;"><b></b>&#x8F93;&#x5165;&#x8282;</a></li><li><span class="title-icon "></span><a href="#&#x8F93;&#x51FA;&#x8282;&#x6570;&#x636E;"><b></b>&#x8F93;&#x51FA;&#x8282;&#x6570;&#x636E;</a></li><li><span class="title-icon "></span><a href="#&#x8F93;&#x51FA;&#x8282;&#x5173;&#x952E;&#x8BCD;"><b></b>&#x8F93;&#x51FA;&#x8282;&#x5173;&#x952E;&#x8BCD;</a></li><li><span class="title-icon "></span><a href="#&#x8F93;&#x51FA;&#x8282;&#x4E22;&#x5F03;"><b></b>&#x8F93;&#x51FA;&#x8282;&#x4E22;&#x5F03;</a></li><li><span class="title-icon "></span><a href="#&#x8F93;&#x51FA;&#x8282;&#x5C5E;&#x6027;"><b></b>&#x8F93;&#x51FA;&#x8282;&#x5C5E;&#x6027;</a></li><li><span class="title-icon "></span><a href="#&#x8986;&#x76D6;&#x63CF;&#x8FF0;"><b></b>&#x8986;&#x76D6;&#x63CF;&#x8FF0;</a></li></ul><li><span class="title-icon "></span><a href="#&#x5176;&#x4F59;&#x547D;&#x4EE4;"><b></b>&#x5176;&#x4F59;&#x547D;&#x4EE4;</a></li><li><span class="title-icon "></span><a href="#&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x7684;&#x8868;&#x8FBE;&#x5F0F;"><b></b>&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x7684;&#x8868;&#x8FBE;&#x5F0F;</a></li><li><span class="title-icon "></span><a href="#&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;"><b></b>&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;</a></li></ul></ul></div><a href="#&#x9644;&#x5F55;&#xFF1A;&#x94FE;&#x63A5;&#x811A;&#x672C;-linker-script" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x9644;&#x5F55;&#xFF1A;&#x94FE;&#x63A5;&#x811A;&#x672C;-linker-script"><a name="&#x9644;&#x5F55;&#xFF1A;&#x94FE;&#x63A5;&#x811A;&#x672C;-linker-script" class="anchor-navigation-ex-anchor" href="#&#x9644;&#x5F55;&#xFF1A;&#x94FE;&#x63A5;&#x811A;&#x672C;-linker-script"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9644;&#x5F55;&#xFF1A;&#x94FE;&#x63A5;&#x811A;&#x672C; Linker Script</h1>
+<p>&#x672C;&#x6587;&#x6839;&#x636E;<a href="https://sourceware.org/binutils/docs/ld/Scripts.html" target="_blank">&#x6587;&#x6863; Linker Script</a> &#x7FFB;&#x8BD1;&#x800C;&#x6210;&#x3002;</p>
+<p>&#x94FE;&#x63A5;&#x811A;&#x672C;&#xFF08;Linker Script&#xFF09;&#x662F;&#x7528;&#x4E8E;&#x63A7;&#x5236;&#x94FE;&#x63A5;&#x5668; <code>ld</code> &#x6267;&#x884C;&#x7684;&#x547D;&#x4EE4;&#x811A;&#x672C;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x63CF;&#x8FF0;&#x591A;&#x4E2A;&#x8F93;&#x5165;&#x7684;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x5982;&#x4F55;&#x88AB;&#x6620;&#x5C04;&#x5230;&#x4E00;&#x4E2A;&#x8F93;&#x51FA;&#x7684;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x5E76;&#x63A7;&#x5236;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#xFF0C;&#x5219;&#x4F1A;&#x4F7F;&#x7528;&#x81EA;&#x5E26;&#x7684;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x6765;&#x751F;&#x6210;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x3002;&#x7531;&#x4E8E;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x624B;&#x52A8;&#x6307;&#x5B9A;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x3002;</p>
+<p>&#x5728;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x7ED9; <code>ld</code> &#x52A0;&#x4E0A; <code>-T</code> &#x53C2;&#x6570;&#x4EE5;&#x6307;&#x5B9A;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x3002;</p>
+<h2 id="&#x57FA;&#x672C;&#x6982;&#x5FF5;"><a name="&#x57FA;&#x672C;&#x6982;&#x5FF5;" class="anchor-navigation-ex-anchor" href="#&#x57FA;&#x672C;&#x6982;&#x5FF5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x57FA;&#x672C;&#x6982;&#x5FF5;</h2>
+<p>&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x5408;&#x5E76;&#x4E3A;&#x5355;&#x4E2A;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x3002;</p>
+<ul>
+<li>&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x683C;&#x5F0F;<em>(object file format)</em>&#xFF1A;&#x6BCF;&#x4E2A;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x548C;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x7684;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x3002;</li>
+<li><strong>&#x76EE;&#x6807;&#x6587;&#x4EF6;<em>(object file)</em></strong>&#xFF1A;&#x6BCF;&#x4E2A;&#x6587;&#x4EF6;&#x90FD;&#x79F0;&#x4E3A;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x3002;&#x5176;&#x4E2D;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x901A;&#x5E38;&#x4E5F;&#x88AB;&#x79F0;&#x4E3A;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x3002;</li>
+</ul>
+<p>&#x6BCF;&#x4E2A;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x8BB0;&#x5F55;&#x4E86;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x7684;&#x5404;&#x4E2A;<strong>&#x8282;<em>(sections)</em></strong>&#x3002;</p>
+<ul>
+<li>&#x8F93;&#x5165;&#x8282;<em>(input section)</em>&#xFF1A;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x8282;&#x3002;</li>
+<li>&#x8F93;&#x51FA;&#x8282;<em>(output section)</em>&#xFF1A;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x8282;&#x3002;</li>
+</ul>
+<p>&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x8282;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x540D;&#x79F0;&#x548C;&#x5927;&#x5C0F;&#x3002;&#x5927;&#x591A;&#x6570;&#x8282;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x76F8;&#x5173;&#x8054;&#x7684;&#x6570;&#x636E;&#x5757;&#xFF0C;&#x79F0;&#x4E3A;&#x8282;&#x5185;&#x5BB9;<em>(section contents)</em>&#x3002;&#x8282;&#x53EF;&#x4EE5;&#x6807;&#x8BB0;&#x4E3A;&#x53EF;&#x52A0;&#x8F7D;&#x7684;<em>(loadable)</em>&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5728;&#x8FD0;&#x884C;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x8282;&#x5185;&#x5BB9;&#x5E94;&#x8BE5;&#x52A0;&#x8F7D;&#x5230;&#x5185;&#x5B58;&#x4E2D;&#x3002;&#x6CA1;&#x6709;&#x5185;&#x5BB9;&#x7684;&#x8282;&#x53EF;&#x80FD;&#x662F;&#x53EF;&#x5206;&#x914D;&#x7684;<em>(allocatable)</em>&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5E94;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x9884;&#x7559;&#x4E00;&#x4E2A;&#x533A;&#x57DF;&#xFF0C;&#x4F46;&#x662F;&#x65E0;&#x9700;&#x586B;&#x5199;&#x5185;&#x5BB9;(&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#x987B;&#x586B;&#x96F6;)&#x3002;&#x65E2;&#x4E0D;&#x53EF;&#x52A0;&#x8F7D;&#x4E5F;&#x4E0D;&#x53EF;&#x5206;&#x914D;&#x7684;&#x8282;&#x901A;&#x5E38;&#x5305;&#x542B;&#x67D0;&#x79CD;&#x8C03;&#x8BD5;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x6BCF;&#x4E2A;&#x53EF;&#x52A0;&#x8F7D;&#x6216;&#x53EF;&#x5206;&#x914D;&#x7684;&#x8F93;&#x51FA;&#x8282;&#x6709;&#x4E24;&#x4E2A;&#x5730;&#x5740;&#x3002;&#x7B2C;&#x4E00;&#x4E2A;&#x662F; VMA&#xFF0C;&#x5373;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5730;&#x5740;(virtual memory address)&#x3002;&#x8FD9;&#x662F;&#x8BE5;&#x8282;&#x5728;&#x8FD0;&#x884C;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x65F6;&#x5C06;&#x62E5;&#x6709;&#x7684;&#x5730;&#x5740;&#x3002;&#x7B2C;&#x4E8C;&#x4E2A;&#x662F; LMA&#xFF0C;&#x5373;&#x52A0;&#x8F7D;&#x5185;&#x5B58;&#x5730;&#x5740;(load memory address)&#x3002;&#x8FD9;&#x662F;&#x5C06;&#x8981;&#x52A0;&#x8F7D;&#x8282;&#x7684;&#x5730;&#x5740;&#x3002;&#x5728;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E24;&#x4E2A;&#x5730;&#x5740;&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;</p>
+<p>&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x5E26;&#x6709;<code>-h</code>&#x9009;&#x9879;&#x7684;<code>objdump</code>&#x7A0B;&#x5E8F;&#xFF0C;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x8282;&#x3002;</p>
+<p>&#x6BCF;&#x4E2A;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x90FD;&#x6709;&#x4E00;&#x4E2A;<strong>&#x7B26;&#x53F7;<em>(symbol)</em></strong>&#x5217;&#x8868;&#xFF0C;&#x79F0;&#x4E3A;<strong>&#x7B26;&#x53F7;&#x8868;<em>(symbol table)</em></strong>&#x3002;&#x7B26;&#x53F7;&#x53EF;&#x4EE5;&#x662F;&#x5DF2;&#x5B9A;&#x4E49;&#x7684;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x3002;&#x6BCF;&#x4E2A;&#x7B26;&#x53F7;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x540D;&#x79F0;&#xFF0C;&#x6BCF;&#x4E2A;<strong>&#x5DF2;&#x5B9A;&#x4E49;</strong>&#x7684;&#x7B26;&#x53F7;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x5730;&#x5740;&#x3002;&#x5982;&#x679C;&#x5C06;C&#x6216;C++&#x7A0B;&#x5E8F;&#x7F16;&#x8BD1;&#x6210;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#xFF0C;&#x5219;&#x6BCF;&#x4E2A;&#x5DF2;&#x5B9A;&#x4E49;&#x7684;&#x51FD;&#x6570;&#x548C;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x6216;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x5DF2;&#x5B9A;&#x4E49;&#x7684;&#x7B26;&#x53F7;&#x3002;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x5F15;&#x7528;&#x7684;&#x6BCF;&#x4E2A;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x51FD;&#x6570;&#x6216;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x90FD;&#x5C06;&#x6210;&#x4E3A;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x7B26;&#x53F7;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F7F;&#x7528; <code>nm</code> &#x7A0B;&#x5E8F;&#x6216;&#x4F7F;&#x7528;&#x5E26;&#x6709; <code>-t</code> &#x9009;&#x9879;&#x7684; <code>objdump</code> &#x7A0B;&#x5E8F;&#x6765;&#x67E5;&#x770B;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x7B26;&#x53F7;&#x3002;</p>
+<h2 id="&#x94FE;&#x63A5;&#x811A;&#x672C;&#x683C;&#x5F0F;"><a name="&#x94FE;&#x63A5;&#x811A;&#x672C;&#x683C;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#&#x94FE;&#x63A5;&#x811A;&#x672C;&#x683C;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x94FE;&#x63A5;&#x811A;&#x672C;&#x683C;&#x5F0F;</h2>
+<p>&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x542B;&#x6709;&#x4E00;&#x7CFB;&#x5217;&#x547D;&#x4EE4;&#x7684;&#x6587;&#x672C;&#x6587;&#x4EF6;&#xFF0C;&#x6BCF;&#x4E2A;&#x547D;&#x4EE4;&#x662F;&#x4E00;&#x4E2A;&#x53EF;&#x6709;&#x53C2;&#x6570;&#x7684;&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x6216;&#x5BF9;&#x4E00;&#x4E2A;&#x7B26;&#x53F7;&#x8D4B;&#x503C;&#x3002;&#x547D;&#x4EE4;&#x53EF;&#x7528;&#x5206;&#x53F7;&#x5206;&#x9694;&#xFF0C;&#x7A7A;&#x683C;&#x5C06;&#x88AB;&#x5FFD;&#x7565;&#x3002;</p>
+<p>&#x901A;&#x5E38;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x540D;&#x6216;&#x683C;&#x5F0F;&#x540D;&#x7B49;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x5982;&#x679C;&#x6587;&#x4EF6;&#x540D;&#x5305;&#x542B;&#x5206;&#x9694;&#x7B26;&#xFF08;&#x5982;&#x9017;&#x53F7;&#xFF09;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x5C06;&#x6587;&#x4EF6;&#x540D;&#x653E;&#x5728;&#x53CC;&#x5F15;&#x53F7;&#x4E2D;&#x3002;&#x6587;&#x4EF6;&#x540D;&#x4E2D;&#x4E0D;&#x5F97;&#x6709;&#x53CC;&#x5F15;&#x53F7;&#x3002;</p>
+<p>&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7684;&#x6CE8;&#x91CA;&#x7531;<code>/*</code>&#x548C;<code>*/</code>&#x5305;&#x56F4;&#x3002;</p>
+<h2 id="&#x7B80;&#x5355;&#x793A;&#x4F8B;"><a name="&#x7B80;&#x5355;&#x793A;&#x4F8B;" class="anchor-navigation-ex-anchor" href="#&#x7B80;&#x5355;&#x793A;&#x4F8B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7B80;&#x5355;&#x793A;&#x4F8B;</h2>
+<p>&#x6700;&#x7B80;&#x5355;&#x7684;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x547D;&#x4EE4;&#xFF1A;<code>SECTIONS</code>&#x3002;&#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>SECTIONS</code>&#x547D;&#x4EE4;&#x6765;&#x63CF;&#x8FF0;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x3002;</p>
+<p><code>SECTIONS</code>&#x547D;&#x4EE4;&#x662F;&#x4E00;&#x4E2A;&#x5F3A;&#x5927;&#x7684;&#x547D;&#x4EE4;&#x3002;&#x5047;&#x8BBE;&#x7A0B;&#x5E8F;&#x53EA;&#x5305;&#x542B;&#x4EE3;&#x7801;&#x3001;&#x5DF2;&#x521D;&#x59CB;&#x5316;&#x7684;&#x6570;&#x636E;&#x548C;&#x672A;&#x521D;&#x59CB;&#x5316;&#x7684;&#x6570;&#x636E;&#x3002;&#x8FD9;&#x4E9B;&#x5206;&#x522B;&#x5728; <code>.text</code>, <code>.data</code> &#x4E0E; <code>.bss</code> &#x8282;&#x4E2D;&#xFF0C;&#x5E76;&#x8FDB;&#x4E00;&#x6B65;&#x5047;&#x8BBE;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x4EC5;&#x6709;&#x8FD9;&#x4E9B;&#x8282;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x672C;&#x4F8B;&#xFF0C;&#x5047;&#x8BBE;&#x4EE3;&#x7801;&#x5E94;&#x8BE5;&#x52A0;&#x8F7D;&#x5230;&#x5730;&#x5740;<code>0x10000</code>&#xFF0C;&#x5DF2;&#x521D;&#x59CB;&#x5316;&#x7684;&#x6570;&#x636E;&#x548C;&#x672A;&#x521D;&#x59CB;&#x5316;&#x7684;&#x6570;&#x636E;&#x5E94;&#x8BE5;&#x4ECE;&#x5730;&#x5740;<code>0x8000000</code>&#x5F00;&#x59CB;&#x5E76;&#x76F8;&#x8FDE;&#x3002;&#x76F8;&#x5E94;&#x7684;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-linker-script">SECTIONS
+{
+  . = 0x10000;
+  .text : { *(.text) }
+  . = 0x8000000;
+  .data : { *(.data) }
+  .bss : { *(.bss) }
+}
+</code></pre>
+<p><code>SECTIONS</code>&#x547D;&#x4EE4;&#x4EE5;&#x5173;&#x952E;&#x5B57;<code>SECTIONS</code>&#x5F00;&#x59CB;&#xFF0C;&#x7136;&#x540E;&#x662F;&#x4E00;&#x7CFB;&#x5217;&#x7B26;&#x53F7;&#x8D4B;&#x503C;&#x548C;&#x7528;&#x5927;&#x62EC;&#x53F7;&#x62EC;&#x8D77;&#x6765;&#x7684;&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;&#x3002;</p>
+<p>&#x4E0A;&#x4F8B;&#x4E2D;<code>SECTIONS</code>&#x547D;&#x4EE4;&#x7684;&#x7B2C;&#x4E00;&#x884C;&#x7528;&#x4E8E;&#x8BBE;&#x7F6E;&#x7279;&#x6B8A;&#x7B26;&#x53F7;<code>.</code>&#x7684;&#x503C;&#xFF0C;&#x8FD9;&#x662F;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x4EE5;&#x5176;&#x4ED6;&#x65B9;&#x5F0F;&#x6307;&#x5B9A;&#x8F93;&#x51FA;&#x8282;&#x7684;&#x5730;&#x5740;&#xFF08;&#x5176;&#x4ED6;&#x65B9;&#x5F0F;&#x5C06;&#x5728;&#x540E;&#x9762;&#x4ECB;&#x7ECD;&#xFF09;&#xFF0C;&#x5219;&#x5C06;&#x6839;&#x636E;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x5F53;&#x524D;&#x503C;&#x8BBE;&#x7F6E;&#x5730;&#x5740;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x6309;&#x8F93;&#x51FA;&#x8282;&#x7684;&#x5927;&#x5C0F;&#x9012;&#x589E;&#x3002;&#x82E5;&#x4E0D;&#x989D;&#x5916;&#x8BBE;&#x7F6E;&#xFF0C;&#x5728;<code>SECTIONS</code>&#x547D;&#x4EE4;&#x7684;&#x5F00;&#x5934;&#xFF0C;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x503C;&#x4E3A;<code>0</code>&#x3002;</p>
+<p>&#x7B2C;&#x4E8C;&#x884C;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x8F93;&#x51FA;&#x8282;<code>.text</code>&#xFF0C;&#x5176;&#x4E2D;&#x5192;&#x53F7;&#x662F;&#x5FC5;&#x9700;&#x7684;&#x8BED;&#x6CD5;&#xFF0C;&#x76EE;&#x524D;&#x53EF;&#x5FFD;&#x7565;&#x3002;&#x5728;&#x8F93;&#x51FA;&#x8282;&#x540D;&#x79F0;&#x540E;&#x7684;&#x5927;&#x62EC;&#x53F7;&#x5185;&#xFF0C;&#x5217;&#x51FA;&#x4E86;&#x5E94;&#x653E;&#x5165;&#x6B64;&#x8F93;&#x51FA;&#x8282;&#x7684;&#x8F93;&#x5165;&#x8282;&#x7684;&#x540D;&#x79F0;&#x3002;<code>*</code> &#x662F;&#x4E00;&#x4E2A;&#x4E0E;&#x4EFB;&#x4F55;&#x6587;&#x4EF6;&#x540D;&#x5339;&#x914D;&#x7684;&#x901A;&#x914D;&#x7B26;&#x3002;<code>*(.text)</code>&#x8868;&#x793A;&#x6240;&#x6709;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x7684;<code>.text</code>&#x8F93;&#x5165;&#x8282;&#x3002;</p>
+<p>&#x7531;&#x4E8E;&#x5B9A;&#x4E49;&#x8F93;&#x51FA;&#x8282;<code>.text</code>&#x65F6;&#xFF0C;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x4E3A;<code>0x10000</code>&#xFF0C;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x4E2D;&#x7684;<code>.text</code>&#x8282;&#x7684;&#x5730;&#x5740;&#x4E3A;<code>0x10000</code>&#x3002;</p>
+<p>&#x5269;&#x4F59;&#x7684;&#x884C;&#x5B9A;&#x4E49;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x4E2D;&#x7684;<code>.data</code>&#x548C;<code>.bss</code>&#x8282;&#x3002;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x5728;<code>0x8000000</code>&#x5730;&#x5740;&#x5904;&#x653E;&#x7F6E;<code>.data</code>&#x8F93;&#x51FA;&#x8282;&#x3002;&#x94FE;&#x63A5;&#x5668;&#x653E;&#x7F6E;<code>.data</code>&#x8F93;&#x51FA;&#x8282;&#x540E;&#xFF0C;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x503C;&#x5C06;&#x4E3A; $  <code>0x8000000</code>+<code>.data</code>&#x8F93;&#x51FA;&#x8282;&#x7684;&#x5927;&#x5C0F; $ &#xFF0C;&#x56E0;&#x6B64;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x5728;<code>.data</code>&#x540E;&#x7ACB;&#x5373;&#x653E;&#x7F6E;<code>.bss</code>&#x8F93;&#x51FA;&#x8282;&#x3002;</p>
+<p>&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x786E;&#x4FDD;&#x6BCF;&#x4E2A;&#x8F93;&#x51FA;&#x8282;&#x90FD;&#x5177;&#x6709;&#x6240;&#x9700;&#x7684;&#x5BF9;&#x9F50;&#x65B9;&#x5F0F;&#xFF0C;&#x5FC5;&#x8981;&#x65F6;&#x589E;&#x52A0;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x3002;&#x5728;&#x672C;&#x4F8B;&#x4E2D;&#xFF0C;<code>.text</code>&#x548C;<code>.data</code>&#x8282;&#x7684;&#x6307;&#x5B9A;&#x5730;&#x5740;&#x6EE1;&#x8DB3;&#x4EFB;&#x4F55;&#x5BF9;&#x9F50;&#x7EA6;&#x675F;&#xFF0C;&#x4F46;&#x94FE;&#x63A5;&#x5668;&#x53EF;&#x80FD;&#x5FC5;&#x987B;&#x5728;<code>.data</code>&#x548C;<code>.bss</code>&#x8282;&#x4E4B;&#x95F4;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5C0F;&#x7684;&#x95F4;&#x9699;&#x4EE5;&#x6EE1;&#x8DB3;&#x90E8;&#x5206;&#x5BF9;&#x9F50;&#x8981;&#x6C42;&#x3002;</p>
+<h2 id="&#x7B80;&#x5355;&#x547D;&#x4EE4;"><a name="&#x7B80;&#x5355;&#x547D;&#x4EE4;" class="anchor-navigation-ex-anchor" href="#&#x7B80;&#x5355;&#x547D;&#x4EE4;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7B80;&#x5355;&#x547D;&#x4EE4;</h2>
+<h3 id="&#x5165;&#x53E3;&#x70B9;"><a name="&#x5165;&#x53E3;&#x70B9;" class="anchor-navigation-ex-anchor" href="#&#x5165;&#x53E3;&#x70B9;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5165;&#x53E3;&#x70B9;</h3>
+<p>&#x5728;&#x7A0B;&#x5E8F;&#x4E2D;&#x6267;&#x884C;&#x7684;&#x7B2C;&#x4E00;&#x6761;&#x6307;&#x4EE4;&#x79F0;&#x4E3A;<strong>&#x5165;&#x53E3;&#x70B9;<em>(Entry Point)</em></strong>&#x3002;&#x60A8;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>ENTRY</code>&#x547D;&#x4EE4;&#x8BBE;&#x7F6E;&#x5165;&#x53E3;&#x70B9;&#xFF0C;&#x53C2;&#x6570;&#x662F;&#x4E00;&#x4E2A;&#x7B26;&#x53F7;&#x540D;&#x79F0;&#xFF1A;</p>
+<p><code>ENTRY(symbol)</code></p>
+<p>&#x6709;&#x51E0;&#x79CD;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x5165;&#x53E3;&#x70B9;&#x3002;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x901A;&#x8FC7;&#x6309;&#x987A;&#x5E8F;&#xFF08;&#x5373;&#x4F18;&#x5148;&#x7EA7;&#x4ECE;&#x9AD8;&#x5230;&#x4F4E;&#xFF09;&#x5C1D;&#x8BD5;&#x4EE5;&#x4E0B;&#x6BCF;&#x4E2A;&#x65B9;&#x6CD5;&#x6765;&#x8BBE;&#x7F6E;&#x5165;&#x53E3;&#x70B9;&#x76F4;&#x81F3;&#x6210;&#x529F;&#xFF1A;</p>
+<ul>
+<li>&#x547D;&#x4EE4;&#x884C;&#x901A;&#x8FC7; <code>-e</code> &#x4F20;&#x53C2;;</li>
+<li>&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x7684;<code>ENTRY(symbol)</code>&#x547D;&#x4EE4;;</li>
+<li>&#x5E73;&#x53F0;&#x76F8;&#x5173;&#x7684;&#x7B26;&#x53F7;&#x7684;&#x503C;&#xFF08;&#x82E5;&#x6709;&#xFF09;&#x3002;&#x5BF9;&#x4E8E;&#x591A;&#x6570;&#x5E73;&#x53F0;&#x6765;&#x8BF4;&#x662F; <code>start</code>&#xFF0C;&#x4F46;&#x57FA;&#x4E8E;PE&#x548C;BeOS&#x7684;&#x7CFB;&#x7EDF;&#x4F1A;&#x68C0;&#x67E5;&#x53EF;&#x80FD;&#x7684;&#x5165;&#x53E3;&#x7B26;&#x53F7;&#x5217;&#x8868;&#xFF0C;&#x5339;&#x914D;&#x627E;&#x5230;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x3002;</li>
+<li>&#x4EE3;&#x7801;&#x8282;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x5982;&#x679C;&#x5B58;&#x5728;&#x5E76;&#x4E14;&#x6B63;&#x5728;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x3002;&#x4EE3;&#x7801;&#x8282;&#x901A;&#x5E38;&#x662F;<code>.text</code>&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x5176;&#x4ED6;&#x540D;&#x79F0;;</li>
+<li>&#x5730;&#x5740; <code>0</code>&#x3002;</li>
+</ul>
+<h3 id="&#x6587;&#x4EF6;&#x547D;&#x4EE4;"><a name="&#x6587;&#x4EF6;&#x547D;&#x4EE4;" class="anchor-navigation-ex-anchor" href="#&#x6587;&#x4EF6;&#x547D;&#x4EE4;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6587;&#x4EF6;&#x547D;&#x4EE4;</h3>
+<pre><code class="lang-linker-script">INCLUDE filename
+</code></pre>
+<p>&#x5728;&#x8BE5;&#x547D;&#x4EE4;&#x5904;&#x8C03;&#x7528;&#x53E6;&#x4E00;&#x4E2A;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x3002;</p>
+<p>&#x5C06;&#x5728;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4EE5;&#x53CA;&#x4F7F;&#x7528;<code>-L</code>&#x9009;&#x9879;&#x6307;&#x5B9A;&#x7684;&#x76EE;&#x5F55;&#x4E2D;&#x641C;&#x7D22;&#x8BE5;&#x6587;&#x4EF6;&#x3002;&#x5D4C;&#x5957;&#x8C03;&#x7528;&#x6700;&#x591A;10&#x7EA7;&#x3002;</p>
+<p><code>INCLUDE</code>&#x6307;&#x4EE4;&#x53EF;&#x653E;&#x5728;&#x9876;&#x5C42;&#x3001;<code>MEMORY</code>&#x6216;<code>SECTIONS</code>&#x547D;&#x4EE4;&#x4E2D;&#xFF0C;&#x6216;&#x653E;&#x5728;&#x8F93;&#x51FA;&#x8282;&#x7684;&#x63CF;&#x8FF0;&#x4E2D;&#x3002;</p>
+<pre><code class="lang-linker-script">INPUT(file, file, &#x2026;)
+INPUT(file file &#x2026;)
+</code></pre>
+<p><code>INPUT</code> &#x547D;&#x4EE4;&#x8868;&#x793A;&#x5728;&#x94FE;&#x63A5;&#x4E2D;&#x5305;&#x542B;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#xFF0C;&#x5C31;&#x50CF;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x4E2D;&#x88AB;&#x6307;&#x5B9A;&#x4E00;&#x6837;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#x603B;&#x5E0C;&#x671B;&#x5728;&#x94FE;&#x63A5;&#x65F6;&#x5305;&#x542B; <code>subr.o</code>&#xFF0C;&#x4F46;&#x662F;&#x65E0;&#x6CD5;&#x5C06;&#x5176;&#x653E;&#x5728;&#x6BCF;&#x4E2A;&#x94FE;&#x63A5;&#x547D;&#x4EE4;&#x7684;&#x53C2;&#x6570;&#x4E2D;&#xFF0C;&#x6B64;&#x65F6;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x52A0;&#x5165;<code>INPUT (subr.o)</code>&#x3002;</p>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x751A;&#x81F3;&#x53EF;&#x4EE5;&#x5728;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x5217;&#x51FA;&#x6240;&#x6709;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;<code>-t</code>&#x9009;&#x9879;&#x6307;&#x5B9A;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x800C;&#x4E0D;&#x5728;&#x53C2;&#x6570;&#x4E2D;&#x5F15;&#x7528;&#x4EFB;&#x4F55;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x914D;&#x7F6E;&#x4E86; <code>sysroot prefix</code> &#x76EE;&#x5F55;&#xFF0C;&#x5E76;&#x4E14;&#x6587;&#x4EF6;&#x540D;&#x4EE5; <code>/</code> &#x5B57;&#x7B26;&#x5F00;&#x5934;&#xFF0C;&#x5E76;&#x4E14;&#x6B63;&#x5728;&#x5904;&#x7406;&#x7684;&#x811A;&#x672C;&#x4F4D;&#x4E8E; <code>sysroot prefix</code> &#x76EE;&#x5F55;&#xFF0C;&#x5219;&#x5C06;&#x5728; <code>sysroot prefix</code> &#x76EE;&#x5F55;&#x4E2D;&#x67E5;&#x627E;&#x6587;&#x4EF6;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x8BA9;&#x6587;&#x4EF6;&#x540D;&#x8DEF;&#x5F84;&#x4EE5;<code>=</code>&#x5F00;&#x5934;&#xFF0C;&#x6216;&#x8005;&#x4F7F;&#x7528;<code>$SYSROOT</code>&#x4F5C;&#x4E3A;&#x6587;&#x4EF6;&#x540D;&#x8DEF;&#x5F84;&#x7684;&#x524D;&#x7F00;&#x6765;&#x5F3A;&#x5236;&#x4F7F;&#x7528; <code>sysroot prefix</code>&#x3002;&#x53E6;&#x8BF7;&#x53C2;&#x9605;<a href="https://sourceware.org/binutils/docs/ld/Options.html" target="_blank">&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;</a>&#x4E2D;<code>-L</code>&#x53C2;&#x6570;&#x7684;&#x63CF;&#x8FF0;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x672A;&#x4F7F;&#x7528; <code>sysroot prefix</code>&#xFF0C;&#x5219;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x5C1D;&#x8BD5;&#x5728;&#x5305;&#x542B;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7684;&#x76EE;&#x5F55;&#x4E2D;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x3002;&#x82E5;&#x672A;&#x627E;&#x5230;&#xFF0C;&#x5C06;&#x641C;&#x7D22;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x3002;&#x5982;&#x679C;&#x4ECD;&#x672A;&#x627E;&#x5230;&#xFF0C;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x5728;&#x5E93;&#x7684;&#x641C;&#x7D22;&#x8DEF;&#x5F84;&#x4E2D;&#x67E5;&#x627E;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F7F;&#x7528; <code>INPUT (-lfile)</code>&#xFF0C;<code>ld</code> &#x4F1A;&#x5C06;&#x540D;&#x79F0;&#x8F6C;&#x6362;&#x4E3A; <code>libfile.a</code>&#xFF0C;&#x4E0E;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;<code>-l</code>&#x4E00;&#x6837;&#x3002;</p>
+<p>&#x5F53;&#x60A8;&#x5728;&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x4F7F;&#x7528;<code>INPUT</code>&#x547D;&#x4EE4;&#x65F6;&#xFF0C;&#x6587;&#x4EF6;&#x5C06;&#x5728;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x88AB;&#x5F15;&#x7528;&#x65F6;&#x624D;&#x88AB;&#x52A0;&#x5165;&#x3002;&#x8FD9;&#x53EF;&#x80FD;&#x4F1A;&#x5F71;&#x54CD;&#x5E93;&#x7684;&#x641C;&#x7D22;&#x3002;</p>
+<pre><code class="lang-linker-script">GROUP(file, file, &#x2026;)
+GROUP(file file &#x2026;)
+</code></pre>
+<p><code>GROUP</code> &#x547D;&#x4EE4;&#x4E0E; <code>INPUT</code> &#x7C7B;&#x4F3C;&#xFF0C;&#x53EA;&#x662F;&#x88AB;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x90FD;&#x5E94;&#x8BE5;&#x662F;&#x5E93;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x4E14;&#x8981;&#x53CD;&#x590D;&#x641C;&#x7D22;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#xFF0C;&#x76F4;&#x5230;&#x6CA1;&#x6709;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x5F15;&#x7528;&#x3002;&#x8BF7;&#x53C2;&#x89C1;<a href="https://sourceware.org/binutils/docs/ld/Options.html" target="_blank">&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;</a>&#x4E2D; <code>-(</code> &#x7684;&#x8BF4;&#x660E;&#x3002;</p>
+<pre><code class="lang-linker-script">AS_NEEDED(file, file, &#x2026;)
+AS_NEEDED(file file &#x2026;)
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x53EA;&#x80FD;&#x51FA;&#x73B0;&#x5728; <code>INPUT</code> &#x6216; <code>GROUP</code> &#x547D;&#x4EE4;&#x4EE5;&#x53CA;&#x5176;&#x4ED6;&#x6587;&#x4EF6;&#x540D;&#x4E2D;&#x3002;&#x5217;&#x51FA;&#x7684;&#x6587;&#x4EF6;&#x5C06;&#x50CF;&#x76F4;&#x63A5;&#x51FA;&#x73B0;&#x5728; <code>INPUT</code> &#x6216; <code>GROUP</code> &#x547D;&#x4EE4;&#x4E2D;&#x4E00;&#x6837;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x4F46; ELF &#x5171;&#x4EAB;&#x5E93;&#x9664;&#x5916;&#xFF0C;&#x5B83;&#x4EEC;&#x53EA;&#x6709;&#x5728;&#x5B9E;&#x9645;&#x9700;&#x8981;&#x65F6;&#x624D;&#x6DFB;&#x52A0;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#x3002;&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x5B9E;&#x8D28;&#x4E0A;&#x4E3A;&#x5176;&#x4E2D;&#x5217;&#x51FA;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x542F;&#x7528;&#x4E86; <code>-as-needed</code> &#x9009;&#x9879;&#xFF0C;&#x4E3A;&#x4E86;&#x6062;&#x590D;&#x4EE5;&#x524D;&#x7F16;&#x8BD1;&#x73AF;&#x5883;&#xFF0C;&#x4E4B;&#x540E;&#x9700;&#x8BBE;&#x7F6E; <code>--no-as-needed</code>&#x3002;</p>
+<pre><code class="lang-linker-script">OUTPUT(filename)
+</code></pre>
+<p><code>OUTPUT</code> &#x547D;&#x4EE4;&#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x3002;&#x5728;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x4F7F;&#x7528;<code>OUTPUT(filename)</code>&#x4E0E;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x4F7F;&#x7528;<code>-o filename</code>&#x5B8C;&#x5168;&#x76F8;&#x540C;&#xFF08;&#x8BF7;&#x53C2;&#x89C1;<a href="https://sourceware.org/binutils/docs/ld/Options.html" target="_blank">&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;</a>&#xFF09;&#xFF0C;&#x4E14;&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;&#x4F18;&#x5148;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>OUTPUT</code>&#x547D;&#x4EE4;&#x8BBE;&#x7F6E;&#x9ED8;&#x8BA4;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x901A;&#x5E38;&#x7684;&#x9ED8;&#x8BA4;&#x540D;&#x79F0;<code>a.out</code>&#x3002;</p>
+<pre><code class="lang-linker-script">SEARCH_DIR(path)
+</code></pre>
+<p><code>SEARCH_DIR</code>&#x547D;&#x4EE4;&#x5C06;<code>path</code>&#x6DFB;&#x52A0;&#x5230;<code>ld</code>&#x67E5;&#x627E;&#x5E93;&#x7684;&#x8DEF;&#x5F84;&#x5217;&#x8868;&#x4E2D;&#x3002;&#x4F7F;&#x7528;<code>SEARCH_DIR(path)</code>&#x4E0E;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4E0A;&#x4F7F;&#x7528;<code>-L path</code>&#x5B8C;&#x5168;&#x76F8;&#x540C;&#xFF08;&#x8BF7;&#x53C2;&#x89C1;<a href="https://sourceware.org/binutils/docs/ld/Options.html" target="_blank">&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;</a>&#xFF09;&#x3002;&#x5982;&#x679C;&#x4E24;&#x8005;&#x90FD;&#x4F7F;&#x7528;&#xFF0C;&#x90A3;&#x4E48;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x641C;&#x7D22;&#x4E24;&#x8005;&#x7684;&#x8DEF;&#x5F84;&#x3002;&#x9996;&#x5148;&#x641C;&#x7D22;&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;&#x6307;&#x5B9A;&#x7684;&#x8DEF;&#x5F84;&#x3002;</p>
+<pre><code class="lang-linker-script">STARTUP(filename)
+</code></pre>
+<p><code>STARTUP</code> &#x547D;&#x4EE4;&#x4E0E; <code>INPUT</code> &#x547D;&#x4EE4;&#x7C7B;&#x4F3C;&#xFF0C;&#x53EA;&#x662F; <code>filename</code> &#x5C06;&#x6210;&#x4E3A;&#x7B2C;&#x4E00;&#x4E2A;&#x8981;&#x94FE;&#x63A5;&#x7684;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#xFF0C;&#x5C31;&#x597D;&#x50CF;&#x5B83;&#x662F;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x9996;&#x5148;&#x6307;&#x5B9A;&#x7684;&#x4E00;&#x6837;&#x3002;&#x5728;&#x4F7F;&#x7528;&#x90A3;&#x4E9B;&#x5165;&#x53E3;&#x70B9;&#x59CB;&#x7EC8;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x8D77;&#x59CB;&#x5904;&#x7684;&#x7CFB;&#x7EDF;&#x65F6;&#x5C06;&#x4F1A;&#x5F88;&#x6709;&#x7528;&#x3002;</p>
+<h3 id="&#x683C;&#x5F0F;&#x547D;&#x4EE4;"><a name="&#x683C;&#x5F0F;&#x547D;&#x4EE4;" class="anchor-navigation-ex-anchor" href="#&#x683C;&#x5F0F;&#x547D;&#x4EE4;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x683C;&#x5F0F;&#x547D;&#x4EE4;</h3>
+<pre><code class="lang-linker-script">OUTPUT_FORMAT(bfdname)
+OUTPUT_FORMAT(default, big, little)
+</code></pre>
+<p><code>OUTPUT_FORMAT</code> &#x547D;&#x4EE4;&#x6307;&#x5B9A;&#x7528;&#x4E8E;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x7684; BFD &#x683C;&#x5F0F;&#xFF08;&#x8BF7;&#x53C2;&#x89C1; <a href="https://sourceware.org/binutils/docs/ld/BFD.html" target="_blank">BFD</a>&#xFF09;&#x3002;&#x4F7F;&#x7528; <code>OUTPUT_FORMAT(bfdname)</code> &#x4E0E;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4E0A;&#x4F7F;&#x7528; <code>--oformat bfdname</code> &#x5B8C;&#x5168;&#x76F8;&#x540C;&#xFF08;&#x8BF7;&#x53C2;&#x89C1;<a href="https://sourceware.org/binutils/docs/ld/Options.html" target="_blank">&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;</a>&#xFF09;&#xFF0C;&#x4E14;&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;&#x4F18;&#x5148;&#x3002;</p>
+<p>&#x6839;&#x636E;<code>-EB</code>&#x548C;<code>-EL</code>&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5E26;&#x6709;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#x7684; <code>OUTPUT_FORMAT</code> &#x6765;&#x4F7F;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x683C;&#x5F0F;&#x3002;&#x8FD9;&#x5141;&#x8BB8;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x6839;&#x636E;&#x6240;&#x9700;&#x7684;&#x5927;&#x5C0F;&#x7AEF;&#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x683C;&#x5F0F;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x65E2;&#x4E0D;&#x4F7F;&#x7528;<code>-EB</code>&#x4E5F;&#x4E0D;&#x4F7F;&#x7528;<code>-EL</code>&#xFF0C;&#x5219;&#x8F93;&#x51FA;&#x683C;&#x5F0F;&#x5C06;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF08;<code>default</code>&#xFF09;&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528;<code>-EB</code>&#xFF0C;&#x8F93;&#x51FA;&#x683C;&#x5F0F;&#x5C06;&#x662F;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;(<code>big</code>)&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528;<code>-EL</code>&#xFF0C;&#x5219;&#x8F93;&#x51FA;&#x683C;&#x5F0F;&#x5C06;&#x662F;&#x7B2C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;(<code>little</code>)&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF0C;MIPS ELF &#x76EE;&#x6807;&#x5E73;&#x53F0;&#x7684;&#x9ED8;&#x8BA4;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4F7F;&#x7528;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#xFF1A;</p>
+<p><code>OUTPUT_FORMAT(elf32-bigmips, elf32-bigmips, elf32-littlemips)</code></p>
+<p>&#x8FD9;&#x8868;&#x793A;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x7684;&#x9ED8;&#x8BA4;&#x683C;&#x5F0F;&#x4E3A;<code>elf32-bigmips</code>&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x7528;&#x6237;&#x4F7F;&#x7528;<code>-EL</code>&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;&#xFF0C;&#x5219;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x5C06;&#x4EE5; <code>elf32-littlemips</code> &#x683C;&#x5F0F;&#x521B;&#x5EFA;&#x3002;</p>
+<pre><code class="lang-linker-script">TARGET(bfdname)
+</code></pre>
+<p><code>TARGET</code> &#x547D;&#x4EE4;&#x6307;&#x5B9A;&#x8BFB;&#x53D6;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x65F6;&#x4F7F;&#x7528;&#x7684; BFD &#x683C;&#x5F0F;&#x3002;&#x5B83;&#x5F71;&#x54CD;&#x540E;&#x7EED;&#x7684; <code>INPUT</code> &#x548C; <code>GROUP</code> &#x547D;&#x4EE4;&#x3002;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x7C7B;&#x4F3C;&#x4E8E;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4E0A;&#x4F7F;&#x7528;<code>-b bfdname</code>&#xFF08;&#x8BF7;&#x53C2;&#x89C1;<a href="https://sourceware.org/binutils/docs/ld/Options.html" target="_blank">&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;</a>&#xFF09;&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528; <code>TARGET</code> &#x547D;&#x4EE4;&#x800C;&#x4E0D;&#x4F7F;&#x7528; <code>OUTPUT_FORMAT</code>&#xFF0C;&#x90A3;&#x4E48;&#x6700;&#x540E;&#x4E00;&#x4E2A; <code>TARGET</code> &#x547D;&#x4EE4;&#x4E5F;&#x7528;&#x4E8E;&#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x7684;&#x683C;&#x5F0F;&#x3002;&#x53C2;&#x89C1; <a href="https://sourceware.org/binutils/docs/ld/BFD.html" target="_blank">BFD</a>&#x3002;</p>
+<h3 id="regionalias"><a name="regionalias" class="anchor-navigation-ex-anchor" href="#regionalias"><i class="fa fa-link" aria-hidden="true"></i></a>REGION_ALIAS</h3>
+<p>&#x4E3A;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x6307;&#x5B9A;&#x522B;&#x540D;&#x3002;</p>
+<p>&#x522B;&#x540D;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x5230;&#x4F7F;&#x7528; MEMORY &#x547D;&#x4EE4;&#x521B;&#x5EFA;&#x7684;&#x73B0;&#x6709;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x4E2D;&#x3002;&#x6BCF;&#x4E2A;&#x540D;&#x79F0;&#x6700;&#x591A;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x3002;</p>
+<p><code>REGION_ALIAS(alias, region)</code></p>
+<p><code>REGION_ALIAS</code> &#x51FD;&#x6570;&#x4E3A;&#x5185;&#x5B58;&#x533A;&#x57DF; <code>region</code> &#x521B;&#x5EFA;&#x522B;&#x540D; <code>alias</code>&#x3002;&#x53EF;&#x5C06;&#x8F93;&#x51FA;&#x8282;&#x7075;&#x6D3B;&#x5730;&#x6620;&#x5C04;&#x5230;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<p>&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x6709;&#x4E00;&#x4E2A;&#x5D4C;&#x5165;&#x5F0F;&#x7CFB;&#x7EDF;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x5B83;&#x5E26;&#x6709;&#x5404;&#x79CD;&#x5185;&#x5B58;&#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x3002;&#x5B83;&#x4EEC;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x901A;&#x7528;&#x7684;&#x6613;&#x5931;&#x6027;&#x5185;&#x5B58; RAM&#xFF0C;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x4EE3;&#x7801;&#x6216;&#x5B58;&#x50A8;&#x6570;&#x636E;&#x3002;&#x6709;&#x4E9B;&#x53EF;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x53EA;&#x8BFB;&#x7684;&#xFF0C;&#x975E;&#x6613;&#x5931;&#x7684; ROM&#xFF0C;&#x5141;&#x8BB8;&#x4EE3;&#x7801;&#x6267;&#x884C;&#x548C;&#x53EA;&#x8BFB;&#x6570;&#x636E;&#x8BBF;&#x95EE;&#x3002;&#x6700;&#x540E;&#x4E00;&#x79CD;&#x662F;&#x53EA;&#x8BFB;&#x7684;&#x3001;&#x975E;&#x6325;&#x53D1;&#x6027;&#x8BB0;&#x5FC6;&#x4F53;&#x7684; ROM2&#xFF0C;&#x5177;&#x6709;&#x53EA;&#x8BFB;&#x6570;&#x636E;&#x8BBF;&#x95EE;&#xFF0C;&#x4F46;&#x65E0;&#x4EE3;&#x7801;&#x6267;&#x884C;&#x80FD;&#x529B;&#x3002;&#x6211;&#x4EEC;&#x6709;&#x56DB;&#x4E2A;&#x8F93;&#x51FA;&#x8282;:</p>
+<pre><code>.text &#x7A0B;&#x5E8F;&#x4EE3;&#x7801;;
+.rodata &#x53EA;&#x8BFB;&#x6570;&#x636E;;
+.data &#x53EF;&#x5199;&#x7684;&#x5DF2;&#x521D;&#x59CB;&#x5316;&#x7684;&#x6570;&#x636E;;
+.bss &#x53EF;&#x5199;&#x7684;&#x586B;&#x96F6;&#x7684;&#x6570;&#x636E;.
+</code></pre><p>&#x6211;&#x4EEC;&#x7684;&#x76EE;&#x6807;&#x662F;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x94FE;&#x63A5;&#x5668;&#x547D;&#x4EE4;&#x6587;&#x4EF6;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x5B9A;&#x4E49;&#x8F93;&#x51FA;&#x8282;&#x7684;&#x7CFB;&#x7EDF;&#x65E0;&#x5173;&#x90E8;&#x5206;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x5C06;&#x8F93;&#x51FA;&#x8282;&#x6620;&#x5C04;&#x5230;&#x7CFB;&#x7EDF;&#x4E0A;&#x53EF;&#x7528;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x7684;&#x7CFB;&#x7EDF;&#x76F8;&#x5173;&#x90E8;&#x5206;&#x3002;&#x6211;&#x4EEC;&#x7684;&#x5D4C;&#x5165;&#x5F0F;&#x7CFB;&#x7EDF;&#x6709;&#x4E09;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x5185;&#x5B58;&#x8BBE;&#x7F6E;A&#x3001;B&#x548C;C&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Variant A</th>
+<th>Variant B</th>
+<th>Variant C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.text</td>
+<td>RAM</td>
+<td>ROM</td>
+<td>ROM</td>
+</tr>
+<tr>
+<td>.rodata</td>
+<td>RAM</td>
+<td>ROM</td>
+<td>ROM2</td>
+</tr>
+<tr>
+<td>.data</td>
+<td>RAM</td>
+<td>RAM/ROM</td>
+<td>RAM/ROM2</td>
+</tr>
+<tr>
+<td>.bss</td>
+<td>RAM</td>
+<td>RAM</td>
+<td>RAM</td>
+</tr>
+</tbody>
+</table>
+<p>&#x7B26;&#x53F7; RAM/ROM &#x6216; RAM/ROM2 &#x8868;&#x793A;&#x8BE5;&#x8282;&#x5206;&#x522B;&#x52A0;&#x8F7D;&#x5230;&#x533A;&#x57DF; ROM &#x6216; ROM2 &#x4E2D;&#x3002;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;<code>.data</code> &#x7684;&#x52A0;&#x8F7D;&#x5730;&#x5740;&#x5728;&#x4E09;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x65B9;&#x6848;&#x4E2D;&#x90FD;&#x5728; <code>.rodata</code> &#x7684;&#x7ED3;&#x5C3E;&#x5904;&#x5F00;&#x59CB;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x662F;&#x5904;&#x7406;&#x8F93;&#x51FA;&#x8282;&#x7684;&#x57FA;&#x672C;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x3002;&#x5B83;&#x5305;&#x62EC;&#x4F9D;&#x8D56;&#x4E8E;&#x7CFB;&#x7EDF;&#x7684;&#x63CF;&#x8FF0;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x7684; <code>linkcmds.memory</code> &#x6587;&#x4EF6;&#xFF1A;</p>
+<pre><code class="lang-linker-script">INCLUDE linkcmds.memory
+
+SECTIONS
+  {
+    .text :
+      {
+        *(.text)
+      } &gt; REGION_TEXT
+    .rodata :
+      {
+        *(.rodata)
+        rodata_end = .;
+      } &gt; REGION_RODATA
+    .data : AT (rodata_end)
+      {
+        data_start = .;
+        *(.data)
+      } &gt; REGION_DATA
+    data_size = SIZEOF(.data);
+    data_load_start = LOADADDR(.data);
+    .bss :
+      {
+        *(.bss)
+      } &gt; REGION_BSS
+  }
+</code></pre>
+<p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4E09;&#x4E2A;&#x4E0D;&#x540C;&#x7684; <code>linkcmds.memory</code> &#x6587;&#x4EF6;&#x6765;&#x5B9A;&#x4E49;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x548C;&#x522B;&#x540D;&#x540D;&#x79F0;&#x3002;&#x5BF9;&#x4E8E;&#x8FD9;&#x4E09;&#x79CD;&#x65B9;&#x6848;&#xFF0C;<code>linkcmds.memory</code> &#x7684;&#x5185;&#x5BB9;&#x5206;&#x522B;&#x662F;&#xFF1A;</p>
+<p>A&#xFF1A;&#x5168;&#x90FD;&#x653E;&#x5165; RAM</p>
+<pre><code class="lang-linker-script">MEMORY
+  {
+    RAM : ORIGIN = 0, LENGTH = 4M
+  }
+
+REGION_ALIAS(&quot;REGION_TEXT&quot;, RAM);
+REGION_ALIAS(&quot;REGION_RODATA&quot;, RAM);
+REGION_ALIAS(&quot;REGION_DATA&quot;, RAM);
+REGION_ALIAS(&quot;REGION_BSS&quot;, RAM);
+</code></pre>
+<p>B&#xFF1A;&#x4EE3;&#x7801;&#x548C;&#x53EA;&#x8BFB;&#x6570;&#x636E;&#x653E;&#x5165; ROM&#xFF0C;&#x53EF;&#x5199;&#x6570;&#x636E;&#x653E;&#x5165; RAM&#x3002;&#x5DF2;&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x7684;&#x6620;&#x50CF;&#x88AB;&#x52A0;&#x8F7D;&#x5230; ROM &#x4E2D;&#xFF0C;&#x5E76;&#x5728;&#x7CFB;&#x7EDF;&#x542F;&#x52A8;&#x671F;&#x95F4;&#x88AB;&#x590D;&#x5236;&#x5230; RAM &#x4E2D;&#x3002;</p>
+<pre><code class="lang-linker-script">
+MEMORY
+  {
+    ROM : ORIGIN = 0, LENGTH = 3M
+    RAM : ORIGIN = 0x10000000, LENGTH = 1M
+  }
+
+REGION_ALIAS(&quot;REGION_TEXT&quot;, ROM);
+REGION_ALIAS(&quot;REGION_RODATA&quot;, ROM);
+REGION_ALIAS(&quot;REGION_DATA&quot;, RAM);
+REGION_ALIAS(&quot;REGION_BSS&quot;, RAM);
+</code></pre>
+<p>C&#xFF1A;&#x4EE3;&#x7801;&#x653E;&#x5165; ROM&#xFF0C;&#x53EA;&#x8BFB;&#x6570;&#x636E;&#x653E;&#x5165; ROM2&#xFF0C;&#x53EF;&#x5199;&#x6570;&#x636E;&#x653E;&#x5165; RAM&#x3002;&#x5DF2;&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x7684;&#x6620;&#x50CF;&#x88AB;&#x52A0;&#x8F7D;&#x5230; ROM2 &#x4E2D;&#xFF0C;&#x5E76;&#x5728;&#x7CFB;&#x7EDF;&#x542F;&#x52A8;&#x671F;&#x95F4;&#x88AB;&#x590D;&#x5236;&#x5230; RAM &#x4E2D;&#x3002;</p>
+<pre><code class="lang-linker-script">
+MEMORY
+  {
+    ROM : ORIGIN = 0, LENGTH = 2M
+    ROM2 : ORIGIN = 0x10000000, LENGTH = 1M
+    RAM : ORIGIN = 0x20000000, LENGTH = 1M
+  }
+
+REGION_ALIAS(&quot;REGION_TEXT&quot;, ROM);
+REGION_ALIAS(&quot;REGION_RODATA&quot;, ROM2);
+REGION_ALIAS(&quot;REGION_DATA&quot;, RAM);
+REGION_ALIAS(&quot;REGION_BSS&quot;, RAM);
+</code></pre>
+<p>&#x5982;&#x679C;&#x9700;&#x8981;&#xFF0C;&#x53EF;&#x4EE5;&#x7F16;&#x5199;&#x901A;&#x7528;&#x7684;&#x7CFB;&#x7EDF;&#x521D;&#x59CB;&#x5316;&#x4F8B;&#x7A0B;&#x4EE5;&#x5C06;&#x6765;&#x81EA; ROM &#x6216; ROM2 &#x7684; <code>.data</code> &#x8282;&#x590D;&#x5236;&#x5230;RAM&#x4E2D;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-keyword">extern</span> <span class="hljs-keyword">char</span> data_start [];
+<span class="hljs-keyword">extern</span> <span class="hljs-keyword">char</span> data_size [];
+<span class="hljs-keyword">extern</span> <span class="hljs-keyword">char</span> data_load_start [];
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">copy_data</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span>
+</span>{
+  <span class="hljs-keyword">if</span> (data_start != data_load_start)
+    {
+      <span class="hljs-built_in">memcpy</span>(data_start, data_load_start, (<span class="hljs-keyword">size_t</span>) data_size);
+    }
+}
+</code></pre>
+<h3 id="&#x5176;&#x4ED6;&#x547D;&#x4EE4;"><a name="&#x5176;&#x4ED6;&#x547D;&#x4EE4;" class="anchor-navigation-ex-anchor" href="#&#x5176;&#x4ED6;&#x547D;&#x4EE4;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5176;&#x4ED6;&#x547D;&#x4EE4;</h3>
+<p>&#x5176;&#x4ED6;&#x547D;&#x4EE4;&#x6709;&#xFF1A;</p>
+<pre><code class="lang-linker-script">ASSERT(exp, message)
+EXTERN(symbol symbol &#x2026;)
+FORCE_COMMON_ALLOCATION
+INHIBIT_COMMON_ALLOCATION
+FORCE_GROUP_ALLOCATION
+INSERT [ AFTER | BEFORE ] output_section
+NOCROSSREFS(section section &#x2026;)
+NOCROSSREFS_TO(tosection fromsection &#x2026;)
+OUTPUT_ARCH(bfdarch)
+LD_FEATURE(string)
+</code></pre>
+<p>&#x5176;&#x4E2D;&#x6211;&#x4EEC;&#x9879;&#x76EE;&#x4E2D;&#x53EA;&#x7528;&#x5230;&#x4E86;<code>OUTPUT_ARCH(bfdarch)</code>&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x5BF9;&#x5176;&#x4F59;&#x547D;&#x4EE4;&#x505A;&#x4ECB;&#x7ECD;&#xFF0C;&#x6709;&#x5174;&#x8DA3;&#x53EF;&#x81EA;&#x884C;&#x9605;&#x8BFB;&#x6587;&#x6863;&#x3002;</p>
+<p><code>OUTPUT_ARCH(bfdarch)</code> &#x7528;&#x4E8E;&#x6307;&#x5B9A;&#x7279;&#x5B9A;&#x7684;&#x8F93;&#x51FA;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x3002;&#x53C2;&#x6570;&#x662F; BFD &#x5E93;&#x4F7F;&#x7528;&#x7684;&#x540D;&#x79F0;&#x4E4B;&#x4E00;&#xFF08;&#x8BF7;&#x53C2;&#x89C1; <a href="https://sourceware.org/binutils/docs/ld/BFD.html" target="_blank">BFD</a>&#xFF09;&#x3002;&#x4F7F;&#x7528; <code>objdump</code> &#x7A0B;&#x5E8F;&#x52A0; <code>-f</code> &#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x7684;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x3002;</p>
+<h2 id="&#x4E3A;&#x7B26;&#x53F7;&#x8D4B;&#x503C;"><a name="&#x4E3A;&#x7B26;&#x53F7;&#x8D4B;&#x503C;" class="anchor-navigation-ex-anchor" href="#&#x4E3A;&#x7B26;&#x53F7;&#x8D4B;&#x503C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E3A;&#x7B26;&#x53F7;&#x8D4B;&#x503C;</h2>
+<p>&#x53EF;&#x4EE5;&#x5728;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x4E3A;&#x7B26;&#x53F7;&#x8D4B;&#x503C;&#x3002;&#x8FD9;&#x5C06;&#x5B9A;&#x4E49;&#x7B26;&#x53F7;&#x5E76;&#x5C06;&#x5176;&#x653E;&#x7F6E;&#x5230;&#x5177;&#x6709;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x7B26;&#x53F7;&#x8868;&#x4E2D;&#x3002;</p>
+<h3 id="&#x7B80;&#x5355;&#x8D4B;&#x503C;"><a name="&#x7B80;&#x5355;&#x8D4B;&#x503C;" class="anchor-navigation-ex-anchor" href="#&#x7B80;&#x5355;&#x8D4B;&#x503C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7B80;&#x5355;&#x8D4B;&#x503C;</h3>
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;C&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x7ED9;&#x7B26;&#x53F7;&#x8D4B;&#x503C;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;&#x672B;&#x4F4D;&#x5FC5;&#x987B;&#x6709;&#x5206;&#x53F7;&#xFF1A;</p>
+<pre><code class="lang-linker-script">symbol = expression ;
+symbol += expression ;
+symbol -= expression ;
+symbol *= expression ;
+symbol /= expression ;
+symbol &lt;&lt;= expression ;
+symbol &gt;&gt;= expression ;
+symbol &amp;= expression ;
+symbol |= expression ;
+</code></pre>
+<p>&#x7279;&#x6B8A;&#x7684;&#x7B26;&#x53F7;&#x540D;&#x79F0; <code>.</code> &#x8868;&#x793A;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x3002;&#x60A8;&#x53EA;&#x80FD;&#x5728; <code>SECTIONS</code> &#x547D;&#x4EE4;&#x4E2D;&#x4F7F;&#x7528;&#x6B64;&#x7B26;&#x53F7;&#x3002;&#x89C1;<a href="https://sourceware.org/binutils/docs/ld/Location-Counter.html" target="_blank">&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;</a>&#x3002;</p>
+<p>&#x8868;&#x8FBE;&#x5F0F;&#x5728;&#x4E0B;&#x9762;&#x5B9A;&#x4E49;&#xFF08;&#x8BF7;<a href="https://sourceware.org/binutils/docs/ld/Expressions.html" target="_blank">&#x53C2;&#x9605;&#x8868;&#x8FBE;&#x5F0F;</a>&#xFF09;&#x3002;</p>
+<p>&#x7B26;&#x53F7;&#x8D4B;&#x503C;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x547D;&#x4EE4;&#x672C;&#x8EAB;&#x7F16;&#x5199;&#xFF0C;&#x6216;&#x8005;&#x4F5C;&#x4E3A; <code>SECTIONS</code> &#x547D;&#x4EE4;&#x4E2D;&#x7684;&#x8BED;&#x53E5;&#x7F16;&#x5199;&#xFF0C;&#x6216;&#x8005;&#x4F5C;&#x4E3A; <code>SECTIONS</code> &#x547D;&#x4EE4;&#x4E2D;&#x7684;&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x5C55;&#x793A;&#x4E86;&#x4E09;&#x4E2A;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7B26;&#x53F7;&#x8D4B;&#x503C;&#x7684;&#x4E0D;&#x540C;&#x5730;&#x65B9;:</p>
+<pre><code class="lang-linker-script">floating_point = 0;
+SECTIONS
+{
+  .text :
+    {
+      *(.text)
+      _etext = .;
+    }
+  _bdata = (. + 3) &amp; ~ 3;
+  .data : { *(.data) }
+}
+</code></pre>
+<p>&#x5728;&#x6B64;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;&#x7B26;&#x53F7;<code>floating_point</code>&#x5C06;&#x88AB;&#x5B9A;&#x4E49;&#x4E3A; 0&#x3002;&#x7B26;&#x53F7;<code>_etext</code>&#x5C06;&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;&#x6700;&#x540E;&#x4E00;&#x4E2A;<code>.text</code>&#x8F93;&#x5165;&#x8282;&#x7ED3;&#x675F;&#x4E4B;&#x540E;&#x7684;&#x5730;&#x5740;&#x3002;&#x7B26;&#x53F7;<code>_bdata</code>&#x5C06;&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;<code>.text</code>&#x8F93;&#x51FA;&#x8282;&#x7ED3;&#x675F;&#x4E4B;&#x540E;&#x7684;&#x5730;&#x5740;&#x5411;&#x4E0A;&#x5BF9;&#x9F50;&#x81F3;4&#x5B57;&#x8282;&#x8FB9;&#x754C;&#x3002;</p>
+<p>&#x9664;&#x6B64;&#x4E4B;&#x5916;&#xFF0C;&#x8FD8;&#x6709; <code>HIDDEN</code>&#x3001;<code>PROVIDE</code>&#x3001;<code>PROVIDE_HIDDEN</code> &#x547D;&#x4EE4;&#x53EF;&#x4F9B;&#x9009;&#x7528;&#xFF0C;&#x9879;&#x76EE;&#x4E2D;&#x6682;&#x65F6;&#x7528;&#x4E0D;&#x5230;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Assignments.html" target="_blank">&#x6587;&#x6863;</a>&#x81EA;&#x884C;&#x7406;&#x89E3;&#x3002;</p>
+<h3 id="&#x5728;&#x7A0B;&#x5E8F;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x5F15;&#x7528;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7B26;&#x53F7;"><a name="&#x5728;&#x7A0B;&#x5E8F;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x5F15;&#x7528;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7B26;&#x53F7;" class="anchor-navigation-ex-anchor" href="#&#x5728;&#x7A0B;&#x5E8F;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x5F15;&#x7528;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7B26;&#x53F7;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5728;&#x7A0B;&#x5E8F;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x5F15;&#x7528;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7B26;&#x53F7;</h3>
+<p>&#x4ECE;&#x7A0B;&#x5E8F;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x8BBF;&#x95EE;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#x5E76;&#x4E0D;&#x76F4;&#x89C2;&#x3002;&#x5C24;&#x5176;&#x662F;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7B26;&#x53F7;&#x5E76;&#x4E0D;&#x7B49;&#x540C;&#x4E8E;&#x9AD8;&#x7EA7;&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#xFF0C;&#x800C;&#x662F;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;&#x503C;&#x7684;&#x7B26;&#x53F7;&#x3002;</p>
+<p>&#x8BF7;&#x6CE8;&#x610F;&#x5F53;&#x7F16;&#x8BD1;&#x5668;&#x5C06;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x540D;&#x79F0;&#x5B58;&#x50A8;&#x5728;&#x7B26;&#x53F7;&#x8868;&#x4E2D;&#x65F6;&#xFF0C;&#x5B83;&#x4EEC;&#x901A;&#x5E38;&#x4F1A;&#x5C06;&#x53D8;&#x91CF;&#x8F6C;&#x6362;&#x4E3A;&#x4E0D;&#x540C;&#x7684;&#x540D;&#x79F0;&#x3002;&#x4F8B;&#x5982;&#xFF0C;Fortran &#x7F16;&#x8BD1;&#x5668;&#x901A;&#x5E38;&#x4F1A;&#x6DFB;&#x52A0;&#x4E0B;&#x5212;&#x7EBF;&#xFF0C;&#x800C; C++ &#x4F1A;&#x6267;&#x884C;&#x5E7F;&#x6CDB;&#x7684;&#x91CD;&#x6574;(name mangling)&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5728;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x53D8;&#x91CF;&#x7684;&#x540D;&#x79F0;&#x548C;&#x4E0E;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x5B9A;&#x4E49;&#x76F8;&#x540C;&#x7684;&#x53D8;&#x91CF;&#x7684;&#x540D;&#x79F0;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x5DEE;&#x5F02;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5728; C &#x4E2D;&#xFF0C;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x53D8;&#x91CF;&#x53EF;&#x80FD;&#x88AB;&#x5F15;&#x7528;&#x4E3A;&#xFF1A;</p>
+<p><code>extern int foo;</code></p>
+<p>&#x4F46;&#x5728;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x5B83;&#x53EF;&#x80FD;&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;:</p>
+<p><code>_foo = 1000;</code></p>
+<p>&#x5047;&#x8BBE;&#x6CA1;&#x6709;&#x53D1;&#x751F;&#x540D;&#x79F0;&#x8F6C;&#x6362;&#xFF0C;&#x5F53;&#x7528;&#x9AD8;&#x7EA7;&#x8BED;&#x8A00;&#xFF08;&#x5982;C&#xFF09;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x7B26;&#x53F7;&#x65F6;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x9996;&#x5148;&#x4F1A;&#x5728;&#x7A0B;&#x5E8F;&#x5185;&#x5B58;&#x4E2D;&#x9884;&#x7559;&#x7A7A;&#x95F4;&#x6765;&#x4FDD;&#x5B58;&#x7B26;&#x53F7;&#x7684;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x7B26;&#x53F7;&#x8868;&#x4E2D;&#x521B;&#x5EFA;&#x6761;&#x76EE;&#x6765;&#x4FDD;&#x5B58;&#x7B26;&#x53F7;&#x7684;&#x5730;&#x5740;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+<p><code>int foo = 1000;</code></p>
+<p>&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x5728;&#x7B26;&#x53F7;&#x8868;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;<code>foo</code>&#x7684;&#x6761;&#x76EE;&#xFF0C;&#x4FDD;&#x5B58;&#x4E86;&#x5B58;&#x50A8;&#x6570;&#x5B57; 1000 &#x7684;<code>int</code>&#x5927;&#x5C0F;&#x7684;&#x5185;&#x5B58;&#x5757;&#x7684;&#x5730;&#x5740;&#x3002;</p>
+<p>&#x5F53;&#x7A0B;&#x5E8F;&#x5F15;&#x7528;&#x7B26;&#x53F7;&#x65F6;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x751F;&#x6210;&#x7684;&#x4EE3;&#x7801;&#x4F1A;&#x9996;&#x5148;&#x8BBF;&#x95EE;&#x7B26;&#x53F7;&#x8868;&#x4EE5;&#x67E5;&#x627E;&#x7B26;&#x53F7;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x7136;&#x540E;&#x8BFB;&#x53D6;&#x8BE5;&#x5730;&#x5740;&#x6240;&#x5B58;&#x7684;&#x503C;&#x3002;&#x6240;&#x4EE5; <code>foo = 1;</code> &#x67E5;&#x627E;&#x7B26;&#x53F7;&#x8868;&#x4E2D;&#x7684;&#x7B26;&#x53F7;<code>foo</code>&#xFF0C;&#x83B7;&#x53D6;&#x5173;&#x8054;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x503C; 1 &#x5199;&#x5165;&#x8BE5;&#x5730;&#x5740;&#x3002;</p>
+<p>&#x800C; <code>int * a = &amp; foo;</code> &#x67E5;&#x627E;&#x7B26;&#x53F7;&#x8868;&#x4E2D;&#x7684;&#x7B26;&#x53F7;<code>foo</code>&#xFF0C;&#x83B7;&#x53D6;&#x5176;&#x5730;&#x5740;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x6B64;&#x5730;&#x5740;&#x590D;&#x5236;&#x5230;&#x4E0E;&#x53D8;&#x91CF;<code>a</code>&#x5173;&#x8054;&#x7684;&#x5185;&#x5B58;&#x5757;&#x4E2D;&#xFF08;&#x5373;&#x8D4B;&#x503C;&#x7ED9;<code>a</code>&#xFF09;&#x3002;</p>
+<p>&#x76F8;&#x6BD4;&#x4E4B;&#x4E0B;&#xFF0C;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7B26;&#x53F7;&#x58F0;&#x660E;&#x547D;&#x4EE4;&#x4F1A;&#x5728;&#x7B26;&#x53F7;&#x8868;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6761;&#x76EE;&#xFF0C;&#x4F46;&#x4E0D;&#x4E3A;&#x5B83;&#x4EEC;&#x5206;&#x914D;&#x4EFB;&#x4F55;&#x5185;&#x5B58;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5B83;&#x4EEC;&#x662F;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;&#x503C;&#x7684;&#x5730;&#x5740;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x5B9A;&#x4E49; <code>foo = 1000;</code> &#x5C06;&#x4F1A;&#x5728;&#x7B26;&#x53F7;&#x8868;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;<code>foo</code>&#x7684;&#x6761;&#x76EE;&#xFF0C;&#x8BE5;&#x6761;&#x76EE;&#x4FDD;&#x5B58;&#x5185;&#x5B58;&#x4F4D;&#x7F6E;1000&#x7684;&#x5730;&#x5740;&#xFF0C;&#x4F46;&#x5728;&#x5730;&#x5740;1000&#x5904;&#x672A;&#x5B58;&#x50A8;&#x4EFB;&#x4F55;&#x7279;&#x6B8A;&#x5185;&#x5BB9;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x65E0;&#x6CD5;&#x8BBF;&#x95EE;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x5B9A;&#x4E49;&#x7684;&#x7B26;&#x53F7;&#x7684;&#x503C;&#xFF08;&#x5B83;&#x6CA1;&#x6709;&#x503C;&#xFF09;&#xFF0C;&#x6240;&#x80FD;&#x505A;&#x7684;&#x5C31;&#x662F;&#x8BBF;&#x95EE;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x5B9A;&#x4E49;&#x7684;&#x7B26;&#x53F7;&#x7684;&#x5730;&#x5740;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x5F53;&#x5728;&#x6E90;&#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x5B9A;&#x4E49;&#x7684;&#x7B26;&#x53F7;&#x65F6;&#xFF0C;&#x5E94;&#x8BE5;&#x59CB;&#x7EC8;&#x83B7;&#x53D6;&#x7B26;&#x53F7;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x800C;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x5176;&#x503C;&#x3002;&#x4F8B;&#x5982;&#x8981;&#x5C06;<code>.ROM</code>&#x8282;&#x7684;&#x5185;&#x5BB9;&#x590D;&#x5236;&#x5230;<code>.FLASH</code>&#xFF0C;&#x4E14;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x5305;&#x542B;&#x8FD9;&#x4E9B;&#x58F0;&#x660E;&#xFF1A;</p>
+<pre><code class="lang-linker-script">start_of_ROM   = .ROM;
+end_of_ROM     = .ROM + sizeof (.ROM);
+start_of_FLASH = .FLASH;
+</code></pre>
+<p>&#x5219;&#x590D;&#x5236;&#x5185;&#x5BB9;&#x7684;C&#x8BED;&#x8A00;&#x4EE3;&#x7801;&#x5E94;&#x8FD9;&#x6837;&#x5199;&#xFF0C;&#x6CE8;&#x610F;&#x5176;&#x4E2D;&#x7684;<code>&amp;</code>&#x3002;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">char</span> start_of_ROM, end_of_ROM, start_of_FLASH;
+
+<span class="hljs-built_in">memcpy</span> (&amp; start_of_FLASH, &amp; start_of_ROM, &amp; end_of_ROM - &amp; start_of_ROM);
+</code></pre>
+<p>&#x6216;&#x8005;&#x4F7F;&#x7528;&#x6570;&#x7EC4;&#x8868;&#x793A;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">char</span> start_of_ROM[], end_of_ROM[], start_of_FLASH[];
+
+<span class="hljs-built_in">memcpy</span> (start_of_FLASH, start_of_ROM, end_of_ROM - start_of_ROM);
+</code></pre>
+<h2 id="sections-&#x547D;&#x4EE4;"><a name="sections-&#x547D;&#x4EE4;" class="anchor-navigation-ex-anchor" href="#sections-&#x547D;&#x4EE4;"><i class="fa fa-link" aria-hidden="true"></i></a>SECTIONS &#x547D;&#x4EE4;</h2>
+<p><code>SECTIONS</code> &#x547D;&#x4EE4;&#x544A;&#x8BC9;&#x94FE;&#x63A5;&#x5668;&#x5982;&#x4F55;&#x5C06;&#x8F93;&#x5165;&#x8282;&#x6620;&#x5C04;&#x5230;&#x8F93;&#x51FA;&#x8282;&#xFF0C;&#x4EE5;&#x53CA;&#x5982;&#x4F55;&#x5C06;&#x8F93;&#x51FA;&#x8282;&#x653E;&#x5165;&#x5185;&#x5B58;&#x3002;</p>
+<p><code>SECTIONS</code> &#x547D;&#x4EE4;&#x7684;&#x683C;&#x5F0F;&#x4E3A;&#xFF1A;</p>
+<pre><code class="lang-linker-script">SECTIONS
+{
+  sections-command
+  sections-command
+  &#x2026;
+}
+</code></pre>
+<p>&#x6BCF;&#x4E2A; <code>sections-command</code> &#x53EF;&#x4EE5;&#x662F;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#x4E4B;&#x4E00;&#xFF1A;</p>
+<ul>
+<li><code>ENTRY</code> &#x547D;&#x4EE4;&#xFF08;&#x53C2;&#x89C1;<a href="https://sourceware.org/binutils/docs/ld/Entry-Point.html" target="_blank">&#x8F93;&#x5165;&#x547D;&#x4EE4;</a>&#xFF09;</li>
+<li>&#x7B26;&#x53F7;&#x8D4B;&#x503C;&#xFF08;&#x8BF7;&#x53C2;&#x89C1;<a href="#&#x4E3A;&#x7B26;&#x53F7;&#x8D4B;&#x503C;">&#x8D4B;&#x503C;</a>&#xFF09;</li>
+<li>&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;</li>
+<li>&#x8986;&#x76D6;&#x63CF;&#x8FF0;</li>
+</ul>
+<p>&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x5728;&#x8FD9;&#x4E9B;&#x547D;&#x4EE4;&#x4E2D;&#x4F7F;&#x7528;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#xFF0C;&#x5141;&#x8BB8;&#x5728; <code>SECTIONS</code> &#x547D;&#x4EE4;&#x4E2D;&#x4F7F;&#x7528; <code>ENTRY</code> &#x547D;&#x4EE4;&#x548C;&#x7B26;&#x53F7;&#x8D4B;&#x503C;&#x3002;&#x8FD9;&#x8FD8;&#x53EF;&#x4EE5;&#x4F7F;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x66F4;&#x5BB9;&#x6613;&#x7406;&#x89E3;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x5E03;&#x5C40;&#x4E2D;&#x6709;&#x610F;&#x4E49;&#x7684;&#x5730;&#x65B9;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x547D;&#x4EE4;&#x3002;</p>
+<p>&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;&#x548C;&#x8986;&#x76D6;&#x63CF;&#x8FF0;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>&#x5982;&#x679C;&#x5728;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x4E0D;&#x4F7F;&#x7528; <code>SECTIONS</code> &#x547D;&#x4EE4;&#xFF0C;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x6309;&#x7167;&#x5728;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x9996;&#x5148;&#x9047;&#x5230;&#x7684;&#x987A;&#x5E8F;&#xFF0C;&#x5C06;&#x6BCF;&#x4E2A;&#x8F93;&#x5165;&#x8282;&#x653E;&#x5165;&#x4E00;&#x4E2A;&#x540C;&#x540D;&#x7684;&#x8F93;&#x51FA;&#x8282;&#x4E2D;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x7B2C;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x5B58;&#x5728;&#x6240;&#x6709;&#x8F93;&#x5165;&#x8282;&#xFF0C;&#x5219;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x4E2D;&#x8282;&#x7684;&#x987A;&#x5E8F;&#x5C06;&#x4E0E;&#x7B2C;&#x4E00;&#x4E2A;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x987A;&#x5E8F;&#x5339;&#x914D;&#x3002;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x5C06;&#x5728;&#x5730;&#x5740; 0 &#x5904;&#x3002;</p>
+<h3 id="&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;"><a name="&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;</h3>
+<p>&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x8F93;&#x51FA;&#x8282;&#x63CF;&#x8FF0;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-linker-script">section [address] [(type)] :
+  [AT(lma)]
+  [ALIGN(section_align) | ALIGN_WITH_INPUT]
+  [SUBALIGN(subsection_align)]
+  [constraint]
+  {
+    output-section-command
+    output-section-command
+    &#x2026;
+  } [&gt;region] [AT&gt;lma_region] [:phdr :phdr &#x2026;] [=fillexp] [,]
+</code></pre>
+<p>&#x5927;&#x591A;&#x6570;&#x8282;&#x5C5E;&#x6027;&#x5E76;&#x4E0D;&#x4F1A;&#x88AB;&#x5E7F;&#x6CDB;&#x4F7F;&#x7528;&#x3002;</p>
+<p><code>section</code> &#x662F;&#x8282;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;&#x8F93;&#x51FA;&#x7684;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x7684;&#x683C;&#x5F0F;&#x9650;&#x5236;&#x3002;&#x5728;&#x4EC5;&#x652F;&#x6301;&#x6709;&#x9650;&#x6570;&#x91CF;&#x8282;&#x7684;&#x683C;&#x5F0F;&#x4E2D;&#xFF0C;&#x540D;&#x79F0;&#x5FC5;&#x987B;&#x662F;&#x8BE5;&#x683C;&#x5F0F;&#x652F;&#x6301;&#x7684;&#x540D;&#x79F0;&#x4E4B;&#x4E00;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;<code>a.out</code> &#x683C;&#x5F0F;&#x7684;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x53EA;&#x5141;&#x8BB8;&#x4F7F;&#x7528;<code>.text</code>&#x3001;<code>.data</code>&#x6216;<code>.bss</code>&#xFF09;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8F93;&#x51FA;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x7684;&#x683C;&#x5F0F;&#x652F;&#x6301;&#x4EFB;&#x610F;&#x6570;&#x91CF;&#x7684;&#x8282;&#xFF0C;&#x4F46;&#x53EA;&#x6709;&#x6570;&#x5B57;&#xFF08;&#x5C31;&#x50CF; <code>Oasys</code> &#x7684;&#x60C5;&#x51B5;&#x4E00;&#x6837;&#xFF09;&#xFF0C;&#x5219;&#x540D;&#x79F0;&#x5E94;&#x4F5C;&#x4E3A;&#x5E26;&#x5F15;&#x53F7;&#x7684;&#x6570;&#x5B57;&#x5B57;&#x7B26;&#x4E32;&#x63D0;&#x4F9B;&#x3002;&#x8282;&#x540D;&#x53EF;&#x4EE5;&#x7531;&#x4EFB;&#x4F55;&#x5B57;&#x7B26;&#x5E8F;&#x5217;&#x7EC4;&#x6210;&#xFF0C;&#x4F46;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x4E0D;&#x5BFB;&#x5E38;&#x5B57;&#x7B26;&#xFF08;&#x5982;&#x9017;&#x53F7;&#xFF09;&#x7684;&#x540D;&#x79F0;&#x5FC5;&#x987B;&#x52A0;&#x5F15;&#x53F7;&#x3002;<code>/DISCARD/</code> &#x662F;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x53C2;&#x89C1;<a href="#&#x8F93;&#x51FA;&#x8282;&#x4E22;&#x5F03;">&#x8F93;&#x51FA;&#x8282;&#x4E22;&#x5F03;</a>&#x3002;</p>
+<p><code>section</code> &#x4E24;&#x8FB9;&#x7684;&#x7A7A;&#x767D;&#x7B26;&#x662F;&#x5FC5;&#x987B;&#x7684;&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x8282;&#x7684;&#x540D;&#x5B57;&#x4E0D;&#x4F1A;&#x6DF7;&#x6DC6;&#x3002;&#x5192;&#x53F7;&#x548C;&#x82B1;&#x62EC;&#x53F7;&#x4E5F;&#x662F;&#x5FC5;&#x987B;&#x7684;&#x3002;&#x5F53;&#x4F7F;&#x7528;&#x4E86; <code>fillexp</code> &#x4E14;&#x4E0B;&#x4E00;&#x4E2A; <code>sections-command</code> &#x770B;&#x8D77;&#x6765;&#x50CF;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x5EF6;&#x7EED;&#x65F6;&#x9700;&#x8981;&#x7ED3;&#x5C3E;&#x7684;&#x9017;&#x53F7;&#xFF0C;&#x6362;&#x884C;&#x548C;&#x5176;&#x4ED6;&#x7A7A;&#x767D;&#x7B26;&#x662F;&#x53EF;&#x9009;&#x7684;&#x3002;</p>
+<p>&#x6BCF;&#x4E2A; <code>output-section-command</code> &#x53EF;&#x4EE5;&#x662F;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#x4E4B;&#x4E00;&#xFF1A;</p>
+<ul>
+<li>&#x7B26;&#x53F7;&#x8D4B;&#x503C;&#xFF08;&#x8BF7;&#x53C2;&#x9605;<a href="#&#x4E3A;&#x7B26;&#x53F7;&#x8D4B;&#x503C;">&#x8D4B;&#x503C;</a>&#xFF09;</li>
+<li>&#x8F93;&#x5165;&#x8282;&#x63CF;&#x8FF0;&#xFF08;&#x53C2;&#x89C1;<a href="#&#x8F93;&#x5165;&#x8282;">&#x8F93;&#x5165;&#x8282;</a>&#xFF09;</li>
+<li>&#x76F4;&#x63A5;&#x5305;&#x542B;&#x7684;&#x6570;&#x636E;&#x503C;&#xFF08;&#x8BF7;&#x53C2;&#x9605;&#x8F93;&#x51FA;&#x8282;&#x6570;&#x636E;&#xFF09;</li>
+<li>&#x7279;&#x6B8A;&#x8F93;&#x51FA;&#x8282;&#x5173;&#x952E;&#x5B57;&#xFF08;&#x8BF7;&#x53C2;&#x9605;&#x8F93;&#x51FA;&#x8282;&#x5173;&#x952E;&#x8BCD;&#xFF09;</li>
+</ul>
+<h3 id="&#x8F93;&#x51FA;&#x8282;&#x5730;&#x5740;"><a name="&#x8F93;&#x51FA;&#x8282;&#x5730;&#x5740;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x51FA;&#x8282;&#x5730;&#x5740;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x51FA;&#x8282;&#x5730;&#x5740;</h3>
+<p>&#x4E0A;&#x4E00;&#x90E8;&#x5206;&#x4E2D;&#xFF0C;<code>address</code> &#x662F;&#x8F93;&#x51FA;&#x8282;&#x7684;VMA&#xFF08;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5730;&#x5740;&#xFF09;&#x7684;&#x8868;&#x8FBE;&#x5F0F;&#x3002;&#x6B64;&#x5730;&#x5740;&#x662F;&#x53EF;&#x9009;&#x7684;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x63D0;&#x4F9B;&#x4E86;&#x6B64;&#x5730;&#x5740;&#xFF0C;&#x5219;&#x8F93;&#x51FA;&#x5730;&#x5740;&#x5C06;&#x5B8C;&#x5168;&#x7167;&#x6B64;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x672A;&#x6307;&#x5B9A;&#x8F93;&#x51FA;&#x5730;&#x5740;&#xFF0C;&#x5219;&#x5C06;&#x6839;&#x636E;&#x4E0B;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#x4E2D;&#x5C1D;&#x8BD5;&#x3002;&#x6B64;&#x65F6;&#x5730;&#x5740;&#x4F1A;&#x88AB;&#x8C03;&#x6574;&#x4EE5;&#x7B26;&#x5408;&#x5BF9;&#x9F50;&#x8981;&#x6C42;&#x3002;&#x8F93;&#x51FA;&#x8282;&#x7684;&#x5BF9;&#x9F50;&#x8981;&#x6C42;&#x662F;&#x6240;&#x6709;&#x8F93;&#x5165;&#x8282;&#x4E2D;&#x542B;&#x6709;&#x7684;&#x5BF9;&#x9F50;&#x8981;&#x6C42;&#x4E2D;&#x6700;&#x4E25;&#x683C;&#x7684;&#x4E00;&#x4E2A;&#x3002;</p>
+<ul>
+<li>&#x5982;&#x679C;&#x4E3A;&#x8BE5;&#x533A;&#x57DF;&#x8BBE;&#x7F6E;&#x4E86;&#x8F93;&#x51FA;&#x5185;&#x5B58;&#x533A;&#x57DF;&#xFF08;&#x4E0A;&#x9762;&#x7684; <code>region</code> &#x5B57;&#x6BB5;&#xFF09;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5C06;&#x88AB;&#x6DFB;&#x52A0;&#x5230;&#x8BE5;&#x533A;&#x57DF;&#xFF0C;&#x5176;&#x5730;&#x5740;&#x5C06;&#x662F;&#x8BE5;&#x533A;&#x57DF;&#x4E2D;&#x7684;&#x4E0B;&#x4E00;&#x4E2A;&#x7A7A;&#x95F2;&#x5730;&#x5740;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x4F7F;&#x7528; <code>MEMORY</code> &#x547D;&#x4EE4;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x5217;&#x8868;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x9009;&#x62E9;&#x5177;&#x6709;&#x4E0E;&#x8BE5;&#x8282;&#x517C;&#x5BB9;&#x7684;&#x5C5E;&#x6027;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x533A;&#x57DF;&#x6765;&#x5305;&#x542B;&#x5B83;&#x3002;&#x8BE5;&#x8282;&#x7684;&#x8F93;&#x51FA;&#x5730;&#x5740;&#x5C06;&#x662F;&#x8BE5;&#x533A;&#x57DF;&#x7684;&#x4E0B;&#x4E00;&#x4E2A;&#x7A7A;&#x95F2;&#x5730;&#x5740;;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x5185;&#x5B58;&#x533A;&#x57DF;&#xFF0C;&#x6216;&#x8005;&#x6CA1;&#x6709;&#x5339;&#x914D;&#x8282;&#xFF0C;&#x5219;&#x8F93;&#x51FA;&#x5730;&#x5740;&#x5C06;&#x57FA;&#x4E8E;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x503C;&#x3002;</li>
+</ul>
+<p>&#x4F8B;&#x5982; <code>.text . : { *(.text) }</code> &#x548C; <code>.text : { *(.text) }</code> &#x6709;&#x4E9B;&#x8BB8;&#x4E0D;&#x540C;&#xFF0C;&#x524D;&#x4E00;&#x4E2A;&#x5C06;&#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x8282;&#x7684;&#x5730;&#x5740;&#x4E3A;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x503C;&#xFF0C;&#x800C;&#x540E;&#x4E00;&#x4E2A;&#x5C06;&#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x8282;&#x7684;&#x5730;&#x5740;&#x4E3A;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x503C;&#x7ECF;&#x8FC7;&#x5BF9;&#x9F50;&#x540E;&#x7684;&#x503C;&#x3002;</p>
+<p><code>address</code> &#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x4EFB;&#x610F;&#x8868;&#x8FBE;&#x5F0F;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x5728; 0x10 &#x5B57;&#x8282;&#x8FB9;&#x754C;&#x4E0A;&#x5BF9;&#x9F50;&#x8282;&#xFF0C;&#x4F7F;&#x8282;&#x5730;&#x5740;&#x7684;&#x6700;&#x4F4E;&#x56DB;&#x4F4D;&#x4E3A;&#x96F6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>.text ALIGN(0x10) : { *(.text) }</code>&#xFF0C;&#x5176;&#x4E2D; <code>ALIGN</code> &#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x5411;&#x4E0A;&#x5BF9;&#x9F50;&#x81F3;&#x6307;&#x5B9A;&#x503C;&#x3002;</p>
+<p>&#x6307;&#x5B9A;&#x8282;&#x7684; <code>address</code> &#x5C06;&#x66F4;&#x6539;&#x4F4D;&#x7F6E;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x503C;&#xFF0C;&#x524D;&#x63D0;&#x662F;&#x8FD9;&#x4E00;&#x8282;&#x662F;&#x975E;&#x7A7A;&#x7684;&#x3002;&#xFF08;&#x7A7A;&#x8282;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#xFF09;&#x3002;</p>
+<h3 id="&#x8F93;&#x5165;&#x8282;"><a name="&#x8F93;&#x5165;&#x8282;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x5165;&#x8282;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x5165;&#x8282;</h3>
+<p>&#x8F93;&#x5165;&#x8282;&#x63CF;&#x8FF0;&#x662F;&#x6700;&#x57FA;&#x672C;&#x7684;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x64CD;&#x4F5C;&#x3002;&#x8F93;&#x51FA;&#x8282;&#x544A;&#x8BC9;&#x94FE;&#x63A5;&#x5668;&#x5982;&#x4F55;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x653E;&#x7F6E;&#x7A0B;&#x5E8F;&#xFF0C;&#x800C;&#x8F93;&#x5165;&#x8282;&#x63CF;&#x8FF0;&#x544A;&#x8BC9;&#x94FE;&#x63A5;&#x5668;&#x5982;&#x4F55;&#x5C06;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x6620;&#x5C04;&#x5230;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x4E2D;&#x3002;</p>
+<h4 id="&#x8F93;&#x5165;&#x8282;&#x57FA;&#x7840;"><a name="&#x8F93;&#x5165;&#x8282;&#x57FA;&#x7840;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x5165;&#x8282;&#x57FA;&#x7840;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x5165;&#x8282;&#x57FA;&#x7840;</h4>
+<p>&#x8F93;&#x5165;&#x8282;&#x63CF;&#x8FF0;&#x7531;&#x6587;&#x4EF6;&#x540D;&#xFF08;&#x53EF;&#x9009;&#xFF09;&#x548C;&#x62EC;&#x53F7;&#x4E2D;&#x7684;&#x8282;&#x540D;&#x5217;&#x8868;&#x7EC4;&#x6210;&#x3002;</p>
+<p>&#x6587;&#x4EF6;&#x540D;&#x548C;&#x8282;&#x540D;&#x53EF;&#x4EE5;&#x662F;&#x901A;&#x914D;&#x7B26;&#x6A21;&#x5F0F;&#xFF08;&#x8BF7;&#x53C2;&#x9605;<a href="#&#x8F93;&#x5165;&#x8282;&#x901A;&#x914D;&#x7B26;">&#x8F93;&#x5165;&#x8282;&#x901A;&#x914D;&#x7B26;</a>&#xFF09;</p>
+<p>&#x6700;&#x5E38;&#x89C1;&#x7684;&#x8F93;&#x5165;&#x8282;&#x63CF;&#x8FF0;&#x662F;&#x5728;&#x8F93;&#x51FA;&#x8282;&#x4E2D;&#x5305;&#x542B;&#x5177;&#x6709;&#x7279;&#x5B9A;&#x540D;&#x79F0;&#x7684;&#x6240;&#x6709;&#x8F93;&#x5165;&#x8282;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5305;&#x542B;&#x6240;&#x6709;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x7684;<code>.text</code>&#x8282;&#xFF1A;<code>*(.text)</code>&#x3002;</p>
+<p>&#x8FD9;&#x91CC; <code>*</code> &#x662F;&#x4E00;&#x4E2A;&#x5339;&#x914D;&#x4EFB;&#x4F55;&#x6587;&#x4EF6;&#x540D;&#x7684;&#x901A;&#x914D;&#x7B26;&#x3002;&#x8981;&#x4ECE;&#x5339;&#x914D;&#x6587;&#x4EF6;&#x540D;&#x901A;&#x914D;&#x7B26;&#x4E2D;&#x6392;&#x9664;&#x4E00;&#x4E9B;&#x6587;&#x4EF6;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>EXCLUDE_FILE</code> &#x6392;&#x9664;&#x3002;&#x4F8B;&#x5982;&#xFF1A;<code>EXCLUDE_FILE (*crtend.o *otherfile.o) *(.ctors)</code> &#x5C06;&#x4F1A;&#x5305;&#x542B;&#x9664;&#x4E86; <code>crtend.o</code> &#x548C; <code>otherfile.o</code> &#x4E4B;&#x5916;&#x7684;&#x6240;&#x6709;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <code>.ctors</code> &#x8282;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x653E;&#x5165;&#x8282;&#x5217;&#x8868;&#xFF0C;&#x5982; <code>*(EXCLUDE_FILE (*crtend.o *otherfile.o) .ctors)</code> &#xFF0C;&#x7ED3;&#x679C;&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;&#x5982;&#x679C;&#x6709;&#x8282;&#x5217;&#x8868;&#x6709;&#x591A;&#x4E2A;&#x8282;&#xFF0C;<code>EXCLUDE_FILE</code> &#x7684;&#x4E24;&#x79CD;&#x8BED;&#x6CD5;&#x5C31;&#x5F88;&#x6709;&#x7528;&#x4E86;&#x3002;</p>
+<p>&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x5305;&#x542B;&#x591A;&#x4E2A;&#x8F93;&#x5165;&#x8282;&#xFF1A;</p>
+<ul>
+<li>&#x4F7F;&#x7528;&#x7A7A;&#x683C;&#x5206;&#x9694;&#x8282;&#x540D;&#x5217;&#x8868;&#xFF0C;&#x4F8B;&#x5982; <code>*(.text .rdata)</code>&#xFF1B;</li>
+<li>&#x4F7F;&#x7528;&#x62EC;&#x53F7;&#x5206;&#x9694;&#x8282;&#x540D;&#x5217;&#x8868;&#xFF0C;&#x4F8B;&#x5982; <code>*(.text) *(.rdata)</code>&#x3002;</li>
+</ul>
+<p>&#x8FD9;&#x4E24;&#x8005;&#x4E4B;&#x95F4;&#x7684;&#x533A;&#x522B;&#x5728;&#x4E8E; &#x2018;.text&#x2019; &#x548C; &#x2018;.rdata&#x2019; &#x8F93;&#x5165;&#x8282;&#x653E;&#x7F6E;&#x5728;&#x8F93;&#x51FA;&#x8282;&#x4E2D;&#x7684;&#x987A;&#x5E8F;&#x3002;&#x524D;&#x8005;&#x5C06;&#x6DF7;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x51FA;&#x73B0;&#x7684;&#x987A;&#x5E8F;&#x4E0E;&#x5B83;&#x4EEC;&#x5728;&#x94FE;&#x63A5;&#x5668;&#x8F93;&#x5165;&#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x987A;&#x5E8F;&#x76F8;&#x540C;&#x3002;&#x540E;&#x8005;&#x4F1A;&#x5148;&#x653E;&#x6240;&#x6709;&#x7684; <code>.text</code> &#x8282;&#xFF0C;&#x7136;&#x540E;&#x653E;&#x6240;&#x6709;&#x7684; <code>.rdata</code> &#x8282;&#x3002;</p>
+<p>&#x5F53;&#x5C06; <code>EXCLUDE_FILE</code> &#x4E0E;&#x591A;&#x4E2A;&#x8282;&#x4E00;&#x8D77;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x5728;&#x8282;&#x5217;&#x8868;&#x4E2D;&#xFF0C;&#x5219;&#x6392;&#x9664;&#x4EC5;&#x9002;&#x7528;&#x4E8E;&#x7D27;&#x63A5;&#x7740;&#x7684;&#x8282;&#xFF0C;&#x4F8B;&#x5982; <code>*(EXCLUDE_FILE (*somefile.o) .text .rdata)</code> &#x4F1A;&#x6392;&#x9664; <code>somefile.o</code> &#x4E2D;&#x7684; <code>.text</code> &#x8282;&#xFF0C;&#x4F46;&#x662F;&#x4F1A;&#x5305;&#x542B;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x7684; <code>.rdata</code> &#x8282;&#x3002;&#x5982;&#x60F3;&#x540C;&#x65F6;&#x6392;&#x9664; <code>somefile.o</code> &#x4E2D;&#x7684; <code>.rdata</code> &#x8282;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>*(EXCLUDE_FILE (*somefile.o) .text EXCLUDE_FILE (*somefile.o) .rdata)</code>&#xFF0C;&#x6216;&#x8005;&#x628A; <code>EXCLUDE_FILE</code> &#x653E;&#x5728;&#x8282;&#x5217;&#x8868;&#x5916;&#xFF0C;&#x4F8B;&#x5982; <code>EXCLUDE_FILE (*somefile.o) *(.text .rdata)</code>&#x3002;</p>
+<p>&#x5982;&#x679C;&#x67D0;&#x4E9B;&#x6587;&#x4EF6;&#x7279;&#x5B9A;&#x4F4D;&#x7F6E;&#x7684;&#x7279;&#x6B8A;&#x6570;&#x636E;&#x9700;&#x8981;&#x5305;&#x542B;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x6587;&#x4EF6;&#x540D;&#x4EE5;&#x5305;&#x542B;&#x6765;&#x81EA;&#x7279;&#x5B9A;&#x6587;&#x4EF6;&#x7684;&#x8282;&#x3002;&#x4F8B;&#x5982;&#xFF1A;<code>data.o(.data)</code> &#x5C06;&#x4F1A;&#x5305;&#x542B; <code>data.o</code> &#x4E2D;&#x7684; <code>.data</code> &#x8282;&#x3002;</p>
+<p>&#x4F7F;&#x7528; <code>INPUT_SECTION_FLAGS</code> &#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8F93;&#x5165;&#x8282;&#x7684;&#x8282;&#x6807;&#x5FD7;(section flags)&#x6765;&#x9009;&#x62E9;&#x8282;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; ELF &#x8282;&#x7684;&#x8282;&#x5934;&#x6807;&#x5FD7;(Section header flags)&#xFF1A;</p>
+<pre><code class="lang-linker-script">SECTIONS {
+  .text : { INPUT_SECTION_FLAGS (SHF_MERGE &amp; SHF_STRINGS) *(.text) }
+  .text2 :  { INPUT_SECTION_FLAGS (!SHF_WRITE) *(.text) }
+}
+</code></pre>
+<p>&#x5728;&#x6B64;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;&#x8F93;&#x51FA;&#x90E8;&#x5206; <code>.text</code> &#x5C06;&#x7531;&#x5339;&#x914D;&#x540D;&#x79F0; <code>*(.text)</code> &#x4E14;&#x8282;&#x5934;&#x6807;&#x5FD7;&#x8BBE;&#x7F6E;&#x4E86; <code>SHF_MERGE</code> &#x4E0E; <code>SHF_STRINGS</code> &#x6807;&#x5FD7;&#x7684;&#x6240;&#x6709;&#x8F93;&#x5165;&#x8282;&#x7EC4;&#x6210;&#x3002;&#x8F93;&#x51FA;&#x90E8;&#x5206; <code>.text2</code> &#x5C06;&#x7531;&#x5339;&#x914D;&#x540D;&#x79F0; <code>*(.text)</code> &#x4E14;&#x8282;&#x5934;&#x6807;&#x5FD7;&#x672A;&#x8BBE;&#x7F6E; <code>SHF_WRITE</code> &#x6807;&#x5FD7;&#x7684;&#x6240;&#x6709;&#x8F93;&#x5165;&#x8282;&#x7EC4;&#x6210;&#x3002;</p>
+<p>&#x8FD8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7F16;&#x5199;&#x4E0E;&#x5E93;&#x6587;&#x4EF6;&#x5339;&#x914D;&#x7684;&#x6A21;&#x5F0F;&#x6765;&#x6307;&#x5B9A;&#x6587;&#x4EF6;&#xFF0C;&#x9879;&#x76EE;&#x4E2D;&#x672A;&#x4F7F;&#x7528;&#xFF0C;&#x5982;&#x6709;&#x9700;&#x8981;&#x8BF7;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Input-Section-Basics.html" target="_blank">Input Section Basics</a></p>
+<p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x8282;&#x5217;&#x8868;&#x800C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x5219;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x8282;&#x90FD;&#x5C06;&#x5305;&#x542B;&#x5728;&#x8F93;&#x51FA;&#x8282;&#x4E2D;&#x3002;&#x8FD9;&#x4E0D;&#x5E38;&#x89C1;&#xFF0C;&#x4F46;&#x6709;&#x65F6;&#x53EF;&#x80FD;&#x6709;&#x7528;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+<p><code>data.o</code></p>
+<p>&#x5F53;&#x4F7F;&#x7528;&#x7684;&#x6587;&#x4EF6;&#x540D;&#x4E0D;&#x662F;<code>archive:file</code>&#x8BF4;&#x660E;&#x7B26;&#x4E14;&#x4E0D;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x901A;&#x914D;&#x7B26;&#x65F6;&#xFF0C;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x9996;&#x5148;&#x67E5;&#x770B;&#x662F;&#x5426;&#x8FD8;&#x5728;&#x94FE;&#x63A5;&#x5668;&#x547D;&#x4EE4;&#x884C;&#x6216;&#x8F93;&#x5165;&#x547D;&#x4EE4;&#x4E2D;&#x6307;&#x5B9A;&#x4E86;&#x6587;&#x4EF6;&#x540D;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#xFF0C;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x5C1D;&#x8BD5;&#x5C06;&#x8BE5;&#x6587;&#x4EF6;&#x4F5C;&#x4E3A;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#xFF0C;&#x5C31;&#x50CF;&#x5B83;&#x51FA;&#x73B0;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4E0A;&#x4E00;&#x6837;&#x3002;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x4E0E; <code>INPUT</code> &#x547D;&#x4EE4;&#x4E0D;&#x540C;&#xFF0C;&#x56E0;&#x4E3A;&#x94FE;&#x63A5;&#x5668;&#x4E0D;&#x4F1A;&#x5728;&#x5E93;&#x641C;&#x7D22;&#x8DEF;&#x5F84;&#x4E2D;&#x641C;&#x7D22;&#x6587;&#x4EF6;&#x3002;</p>
+<h4 id="&#x8F93;&#x5165;&#x8282;&#x901A;&#x914D;&#x7B26;"><a name="&#x8F93;&#x5165;&#x8282;&#x901A;&#x914D;&#x7B26;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x5165;&#x8282;&#x901A;&#x914D;&#x7B26;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x5165;&#x8282;&#x901A;&#x914D;&#x7B26;</h4>
+<p>&#x5728;&#x8F93;&#x5165;&#x8282;&#x63CF;&#x8FF0;&#x4E2D;&#xFF0C;&#x6587;&#x4EF6;&#x540D;&#x548C;&#x8282;&#x540D;&#x90FD;&#x53EF;&#x4EE5;&#x7528;&#x901A;&#x914D;&#x7B26;&#x3002;&#x5728;&#x8BB8;&#x591A;&#x793A;&#x4F8B;&#x4E2D;&#x770B;&#x5230;&#x7684; <code>*</code> &#x6587;&#x4EF6;&#x540D;&#x662F;&#x7B80;&#x5355;&#x7684;&#x901A;&#x914D;&#x7B26;&#x6A21;&#x5F0F;&#x3002;</p>
+<ul>
+<li><code>*</code> &#x5339;&#x914D;&#x4EFB;&#x4F55;&#x6587;&#x4EF6;&#x540D;&#x3002;</li>
+<li><code>?</code> &#x5339;&#x914D;&#x4EFB;&#x4F55;&#x5355;&#x5B57;&#x7B26;&#x3002;</li>
+<li><code>[chars]</code> &#x5339;&#x914D;&#x4EFB;&#x4F55;&#x5B57;&#x7B26;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5176;&#x4E2D; <code>-</code> &#x7B26;&#x53F7;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x8303;&#x56F4;&#xFF0C;&#x5982; <code>[a-z]</code> &#x5339;&#x914D;&#x6240;&#x6709;&#x7684;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x3002;</li>
+<li><code>\</code> &#x53EF;&#x4EE5;&#x7528;&#x6765;&#x8F6C;&#x4E49;&#x5B57;&#x7B26;&#xFF0C;&#x5982; <code>\*</code> &#x5339;&#x914D; <code>*</code>&#x3002;</li>
+</ul>
+<p>&#x6587;&#x4EF6;&#x540D;&#x901A;&#x914D;&#x7B26;&#x53EA;&#x5339;&#x914D;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x6216; <code>INPUT</code> &#x547D;&#x4EE4;&#x4E0A;&#x660E;&#x786E;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x3002;&#x94FE;&#x63A5;&#x5668;&#x4E0D;&#x641C;&#x7D22;&#x76EE;&#x5F55;&#x4EE5;&#x6269;&#x5C55;&#x901A;&#x914D;&#x7B26;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6587;&#x4EF6;&#x540D;&#x4E0E;&#x591A;&#x4E2A;&#x901A;&#x914D;&#x7B26;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#x6210;&#x529F;&#xFF0C;&#x6216;&#x8005;&#x5982;&#x679C;&#x6587;&#x4EF6;&#x540D;&#x88AB;&#x663E;&#x5F0F;&#x5730;&#x6307;&#x5B9A;&#x4E14;&#x540C;&#x65F6;&#x7531;&#x901A;&#x914D;&#x7B26;&#x6A21;&#x5F0F;&#x5339;&#x914D;&#x6210;&#x529F;&#xFF0C;&#x5219;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x4F7F;&#x7528;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5339;&#x914D;&#x9879;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#x53EF;&#x80FD;&#x51FA;&#x9519;&#xFF0C;&#x56E0;&#x4E3A; <code>data.o</code> &#x89C4;&#x5219;&#x4E0D;&#x4F1A;&#x88AB;&#x4F7F;&#x7528;&#xFF1A;</p>
+<pre><code class="lang-linker-script">.data : { *(.data) }
+.data1 : { data.o(.data) }
+</code></pre>
+<p>&#x901A;&#x5E38;&#xFF0C;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x4EE5;&#x5728;&#x94FE;&#x63A5;&#x671F;&#x95F4;&#x53D1;&#x73B0;&#x7684;&#x987A;&#x5E8F;&#x6392;&#x5217;&#x901A;&#x914D;&#x7B26;&#x5339;&#x914D;&#x7684;&#x6587;&#x4EF6;&#x548C;&#x8282;&#x3002; <code>SORT_BY_NAME</code>&#xFF08;&#x6216;<code>SORT</code>)&#x5173;&#x952E;&#x8BCD;&#x53EF;&#x4EE5;&#x66F4;&#x6539;&#x8FD9;&#x4E00;&#x987A;&#x5E8F;&#xFF0C;&#x8BE5;&#x5173;&#x952E;&#x5B57;&#x653E;&#x7F6E;&#x5728;&#x62EC;&#x53F7;&#x4E2D;&#x7684;&#x901A;&#x914D;&#x7B26;&#x6A21;&#x5F0F;&#x524D;&#xFF08;&#x4F8B;&#x5982; <code>SORT_BY_NAME(.text*)</code>&#xFF09;&#x3002;&#x4F7F;&#x7528; <code>SORT_BY_NAME</code> &#x5173;&#x952E;&#x5B57;&#x65F6;&#xFF0C;&#x94FE;&#x63A5;&#x5668;&#x4F1A;&#x6309;&#x6587;&#x4EF6;&#x6216;&#x8282;&#x540D;&#x5347;&#x5E8F;&#x6392;&#x5E8F;&#x653E;&#x5165;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x540C;&#x6837;&#x7684;&#xFF0C;<code>SORT_BY_ALIGNMENT</code> &#x4F1A;&#x5C06;&#x8282;&#x6309;&#x5BF9;&#x9F50;&#x65B9;&#x5F0F;&#x964D;&#x5E8F;&#x6392;&#x5217;&#xFF0C;&#x5927;&#x7684;&#x5BF9;&#x9F50;&#x88AB;&#x653E;&#x5728;&#x5C0F;&#x7684;&#x5BF9;&#x9F50;&#x524D;&#x9762;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x6240;&#x9700;&#x7684;&#x586B;&#x5145;&#x91CF;&#x3002;</p>
+<p><code>SORT_BY_INIT_PRIORITY</code> &#x6309;&#x7167;&#x7F16;&#x7801;&#x5728;&#x8282;&#x540D;&#x4E2D;&#x7684; <code>GCC init_priority</code> &#x5C5E;&#x6027;&#x5347;&#x5E8F;&#x6392;&#x5217;&#x8282;&#xFF0C;&#x5728; <code>.init_array.NNNNN</code> &#x548C; <code>.fini_array.NNNNN</code> &#x4E2D;&#xFF0C;<code>NNNNN</code> &#x5C31;&#x662F; <code>init_priority</code>&#x3002;&#x5728; <code>.ctors.NNNNN</code> &#x548C; <code>.dtors.NNNNN</code> &#x4E2D;&#xFF0C;<code>NNNNN</code> &#x662F; 65535 &#x51CF;&#x53BB; <code>init_priority</code>.</p>
+<p>&#x5F53;&#x94FE;&#x63A5;&#x5668;&#x811A;&#x672C;&#x4E2D;&#x6709;&#x5D4C;&#x5957;&#x8282;&#x6392;&#x5E8F;&#x547D;&#x4EE4;&#x65F6;&#xFF0C;&#x6700;&#x591A;&#x53EF;&#x4EE5;&#x5D4C;&#x5957;&#x4E00;&#x5C42;&#xFF1A;</p>
+<ul>
+<li><code>SORT_BY_NAME (SORT_BY_ALIGNMENT (wildcard section pattern))</code> &#x5148;&#x6309;&#x540D;&#xFF0C;&#x540C;&#x540D;&#x65F6;&#x518D;&#x6309;&#x5BF9;&#x9F50;&#x65B9;&#x5F0F;&#x6392;&#x5E8F;&#x3002;</li>
+<li><code>SORT_BY_ALIGNMENT (SORT_BY_NAME (wildcard section pattern))</code> &#x5148;&#x6309;&#x5BF9;&#x9F50;&#x65B9;&#x5F0F;&#xFF0C;&#x540C;&#x5BF9;&#x9F50;&#x65F6;&#x518D;&#x6309;&#x540D;&#x6392;&#x5E8F;&#x3002;</li>
+<li><code>SORT_BY_NAME (SORT_BY_NAME (wildcard section pattern))</code> &#x548C;&#x5355;&#x5C42; <code>SORT_BY_NAME</code> &#x76F8;&#x540C;&#x3002;</li>
+<li><code>SORT_BY_ALIGNMENT (SORT_BY_ALIGNMENT (wildcard section pattern))</code> &#x548C;&#x5355;&#x5C42; <code>SORT_BY_ALIGNMENT</code> &#x76F8;&#x540C;&#x3002;</li>
+<li>&#x5176;&#x4ED6;&#x5D4C;&#x5957;&#x65B9;&#x5F0F;&#x5747;&#x65E0;&#x6548;&#x3002;</li>
+</ul>
+<p>&#x5F53;&#x547D;&#x4EE4;&#x884C;&#x6392;&#x5E8F;&#x9009;&#x9879;&#x548C;&#x811A;&#x672C;&#x6392;&#x5E8F;&#x9009;&#x9879;&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;&#x811A;&#x672C;&#x6392;&#x5E8F;&#x9009;&#x9879;&#x4F18;&#x5148;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x6CA1;&#x6709;&#x6392;&#x5E8F;&#x5D4C;&#x5957;&#xFF0C;&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;&#x4E5F;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x6392;&#x5E8F;&#x7684;&#x5D4C;&#x5957;&#xFF1A;</p>
+<ul>
+<li><code>SORT_BY_NAME(wildcard section pattern)</code> &#x4E0E; <code>--sort-sections alignment</code> &#x5171;&#x7528;&#x7B49;&#x4EF7;&#x4E8E; <code>SORT_BY_NAME (SORT_BY_ALIGNMENT (wildcard section pattern))</code></li>
+<li><code>SORT_BY_ALIGNMENT(wildcard section pattern)</code> &#x4E0E; <code>--sort-section name</code> &#x5171;&#x7528;&#x7B49;&#x4EF7;&#x4E8E; <code>SORT_BY_ALIGNMENT (SORT_BY_NAME (wildcard section pattern))</code></li>
+</ul>
+<p>&#x5982;&#x679C;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x7684;&#x6392;&#x5E8F;&#x547D;&#x4EE4;&#x5DF2;&#x7ECF;&#x53D1;&#x751F;&#x5D4C;&#x5957;&#xFF0C;&#x5219;&#x5C06;&#x5FFD;&#x7565;&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;&#x3002;</p>
+<p>&#x4F7F;&#x7528; <code>SORT_NONE</code> &#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x547D;&#x4EE4;&#x884C;&#x8282;&#x6392;&#x5E8F;&#x9009;&#x9879;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x5BF9;&#x8F93;&#x5165;&#x8282;&#x5728;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x5E03;&#x5C40;&#x611F;&#x5230;&#x56F0;&#x60D1;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;<code>-M</code>&#x94FE;&#x63A5;&#x5668;&#x9009;&#x9879;&#x751F;&#x6210; map &#x6587;&#x4EF6;&#x3002;map &#x6587;&#x4EF6;&#x7CBE;&#x786E;&#x5730;&#x663E;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x5C06;&#x8F93;&#x5165;&#x8282;&#x6620;&#x5C04;&#x5230;&#x8F93;&#x51FA;&#x8282;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x94FE;&#x63A5;&#x5668;&#x4F1A;&#x5C06;&#x6240;&#x6709;&#x8F93;&#x5165;&#x7684; <code>.text</code> &#x8282;&#x653E;&#x5165;&#x8F93;&#x51FA; <code>.text</code> &#x8282;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x6240;&#x6709;&#x8F93;&#x5165;&#x7684; <code>.bss</code> &#x8282;&#x653E;&#x5165;&#x8F93;&#x51FA; <code>.bss</code> &#x8282;&#x3002;&#x6240;&#x6709;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#x5F00;&#x5934;&#x7684;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x4E2D;&#x7684; <code>.data</code> &#x8282;&#x90FD;&#x4F1A;&#x88AB;&#x653E;&#x5165;&#x8F93;&#x51FA; <code>.DATA</code> &#x8282;&#x3002;&#x5BF9;&#x4E8E;&#x5176;&#x4ED6;&#x6587;&#x4EF6;&#xFF0C;&#x94FE;&#x63A5;&#x5668;&#x4F1A;&#x5C06;&#x5B83;&#x4EEC;&#x7684; <code>.data</code> &#x8282;&#x653E;&#x5165;&#x8F93;&#x51FA; <code>.data</code> &#x8282;&#x3002;</p>
+<pre><code class="lang-linker-script">SECTIONS {
+  .text : { *(.text) }
+  .DATA : { [A-Z]*(.data) }
+  .data : { *(.data) }
+  .bss : { *(.bss) }
+}
+</code></pre>
+<h4 id="&#x8F93;&#x5165;&#x8282;&#x901A;&#x7528;&#x7B26;&#x53F7;"><a name="&#x8F93;&#x5165;&#x8282;&#x901A;&#x7528;&#x7B26;&#x53F7;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x5165;&#x8282;&#x901A;&#x7528;&#x7B26;&#x53F7;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x5165;&#x8282;&#x901A;&#x7528;&#x7B26;&#x53F7;</h4>
+<p>&#x8BF7;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Input-Section-Common.html" target="_blank">Input Section for Common Symbols</a></p>
+<h4 id="&#x8F93;&#x5165;&#x8282;&#x4E0E;&#x5783;&#x573E;&#x56DE;&#x6536;"><a name="&#x8F93;&#x5165;&#x8282;&#x4E0E;&#x5783;&#x573E;&#x56DE;&#x6536;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x5165;&#x8282;&#x4E0E;&#x5783;&#x573E;&#x56DE;&#x6536;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x5165;&#x8282;&#x4E0E;&#x5783;&#x573E;&#x56DE;&#x6536;</h4>
+<p>&#x5F53;&#x4F7F;&#x7528;&#x94FE;&#x63A5;&#x65F6;&#x5783;&#x573E;&#x56DE;&#x6536;&#x529F;&#x80FD; <code>--gc-sections</code> &#x65F6;&#xFF0C;&#x901A;&#x5E38;&#x5E94;&#x6807;&#x8BB0;&#x4E0D;&#x5E94;&#x5220;&#x9664;&#x7684;&#x8282;&#xFF0C;&#x6B64;&#x65F6;&#x8BF7;&#x4F7F;&#x7528; <code>KEEP()</code>&#xFF0C;&#x6BD4;&#x5982; <code>KEEP(*(.init))</code> &#x6216; <code>KEEP(SORT_BY_NAME(*)(.ctors)).</code></p>
+<h4 id="&#x8F93;&#x5165;&#x8282;&#x793A;&#x4F8B;"><a name="&#x8F93;&#x5165;&#x8282;&#x793A;&#x4F8B;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x5165;&#x8282;&#x793A;&#x4F8B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x5165;&#x8282;&#x793A;&#x4F8B;</h4>
+<p>&#x8BF7;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Input-Section-Example.html" target="_blank">Input Section Example</a></p>
+<h3 id="&#x8F93;&#x51FA;&#x8282;&#x6570;&#x636E;"><a name="&#x8F93;&#x51FA;&#x8282;&#x6570;&#x636E;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x51FA;&#x8282;&#x6570;&#x636E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x51FA;&#x8282;&#x6570;&#x636E;</h3>
+<p>&#x9879;&#x76EE;&#x4E2D;&#x6682;&#x65F6;&#x7528;&#x4E0D;&#x5230;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Output-Section-Data.html" target="_blank">&#x6587;&#x6863;</a>&#x81EA;&#x884C;&#x7406;&#x89E3;&#x3002;</p>
+<h3 id="&#x8F93;&#x51FA;&#x8282;&#x5173;&#x952E;&#x8BCD;"><a name="&#x8F93;&#x51FA;&#x8282;&#x5173;&#x952E;&#x8BCD;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x51FA;&#x8282;&#x5173;&#x952E;&#x8BCD;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x51FA;&#x8282;&#x5173;&#x952E;&#x8BCD;</h3>
+<p>&#x9879;&#x76EE;&#x4E2D;&#x6682;&#x65F6;&#x7528;&#x4E0D;&#x5230;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Output-Section-Keywords.html" target="_blank">&#x6587;&#x6863;</a>&#x81EA;&#x884C;&#x7406;&#x89E3;&#x3002;</p>
+<h3 id="&#x8F93;&#x51FA;&#x8282;&#x4E22;&#x5F03;"><a name="&#x8F93;&#x51FA;&#x8282;&#x4E22;&#x5F03;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x51FA;&#x8282;&#x4E22;&#x5F03;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x51FA;&#x8282;&#x4E22;&#x5F03;</h3>
+<p>&#x9879;&#x76EE;&#x4E2D;&#x6682;&#x65F6;&#x7528;&#x4E0D;&#x5230;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Output-Section-Discarding.html" target="_blank">&#x6587;&#x6863;</a>&#x81EA;&#x884C;&#x7406;&#x89E3;&#x3002;</p>
+<h3 id="&#x8F93;&#x51FA;&#x8282;&#x5C5E;&#x6027;"><a name="&#x8F93;&#x51FA;&#x8282;&#x5C5E;&#x6027;" class="anchor-navigation-ex-anchor" href="#&#x8F93;&#x51FA;&#x8282;&#x5C5E;&#x6027;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F93;&#x51FA;&#x8282;&#x5C5E;&#x6027;</h3>
+<p>&#x9879;&#x76EE;&#x4E2D;&#x6682;&#x65F6;&#x7528;&#x4E0D;&#x5230;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Output-Section-Attributes.html" target="_blank">&#x6587;&#x6863;</a>&#x81EA;&#x884C;&#x7406;&#x89E3;&#x3002;</p>
+<h3 id="&#x8986;&#x76D6;&#x63CF;&#x8FF0;"><a name="&#x8986;&#x76D6;&#x63CF;&#x8FF0;" class="anchor-navigation-ex-anchor" href="#&#x8986;&#x76D6;&#x63CF;&#x8FF0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8986;&#x76D6;&#x63CF;&#x8FF0;</h3>
+<p>&#x9879;&#x76EE;&#x4E2D;&#x6682;&#x65F6;&#x7528;&#x4E0D;&#x5230;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Overlay-Description.html" target="_blank">&#x6587;&#x6863;</a>&#x81EA;&#x884C;&#x7406;&#x89E3;&#x3002;</p>
+<h2 id="&#x5176;&#x4F59;&#x547D;&#x4EE4;"><a name="&#x5176;&#x4F59;&#x547D;&#x4EE4;" class="anchor-navigation-ex-anchor" href="#&#x5176;&#x4F59;&#x547D;&#x4EE4;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5176;&#x4F59;&#x547D;&#x4EE4;</h2>
+<p>&#x9664;&#x6B64;&#x4E4B;&#x5916;&#xFF0C;&#x8FD8;&#x6709; <code>MEMORY</code>&#x3001;<code>PHDRS</code>&#x3001;<code>VERSION</code> &#x547D;&#x4EE4;&#x53EF;&#x4F9B;&#x4F7F;&#x7528;&#xFF0C;&#x9879;&#x76EE;&#x4E2D;&#x6682;&#x65F6;&#x7528;&#x4E0D;&#x5230;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Scripts.html" target="_blank">&#x6587;&#x6863;</a>&#x81EA;&#x884C;&#x7406;&#x89E3;&#x3002;</p>
+<h2 id="&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x7684;&#x8868;&#x8FBE;&#x5F0F;"><a name="&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x7684;&#x8868;&#x8FBE;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x7684;&#x8868;&#x8FBE;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x7684;&#x8868;&#x8FBE;&#x5F0F;</h2>
+<p>&#x94FE;&#x63A5;&#x811A;&#x672C;&#x8BED;&#x8A00;&#x4E2D;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x8BED;&#x6CD5;&#x4E0E; C &#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x8BED;&#x6CD5;&#x76F8;&#x540C;&#xFF0C;&#x53EA;&#x662F;&#x5728;&#x67D0;&#x4E9B;&#x5730;&#x65B9;&#x9700;&#x8981;&#x7A7A;&#x683C;&#x6765;&#x89E3;&#x51B3;&#x8BED;&#x6CD5;&#x6B67;&#x4E49;&#x3002;&#x6240;&#x6709;&#x8868;&#x8FBE;&#x5F0F;&#x90FD;&#x4F5C;&#x4E3A;&#x6574;&#x6570;&#x8BA1;&#x7B97;&#x3002;&#x6240;&#x6709;&#x8868;&#x8FBE;&#x5F0F;&#x90FD;&#x4EE5;&#x76F8;&#x540C;&#x7684;&#x5927;&#x5C0F;&#x8BA1;&#x7B97;&#xFF0C;&#x5982;&#x679C;&#x4E3B;&#x673A;&#x548C;&#x76EE;&#x6807;&#x90FD;&#x662F; 32 &#x4F4D;&#xFF0C;&#x5219;&#x4E3A; 32 &#x4F4D;&#xFF0C;&#x5426;&#x5219;&#x4E3A; 64 &#x4F4D;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x5728;&#x8868;&#x8FBE;&#x5F0F;&#x4E2D;&#x4F7F;&#x7528;&#x548C;&#x8BBE;&#x7F6E;&#x7B26;&#x53F7;&#x503C;&#x3002;</p>
+<p>&#x94FE;&#x63A5;&#x5668;&#x5B9A;&#x4E49;&#x4E86;&#x51E0;&#x4E2A;&#x5728;&#x8868;&#x8FBE;&#x5F0F;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x4E13;&#x7528;&#x5185;&#x7F6E;&#x51FD;&#x6570;&#x3002;</p>
+<p>&#x9879;&#x76EE;&#x4E2D;&#x6682;&#x65F6;&#x7528;&#x4E0D;&#x5230;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="https://sourceware.org/binutils/docs/ld/Expressions.html" target="_blank">&#x6587;&#x6863;</a>&#x81EA;&#x884C;&#x7406;&#x89E3;&#x3002;</p>
+<h2 id="&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;"><a name="&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;" class="anchor-navigation-ex-anchor" href="#&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;</h2>
+<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;&#x94FE;&#x63A5;&#x5668;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#xFF0C;&#x4F46;&#x94FE;&#x63A5;&#x5668;&#x65E0;&#x6CD5;&#x5C06;&#x5176;&#x8BC6;&#x522B;&#x4E3A;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x6216;&#x5E93;&#x6587;&#x4EF6;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x5C1D;&#x8BD5;&#x5C06;&#x8BE5;&#x6587;&#x4EF6;&#x8BFB;&#x53D6;&#x4E3A;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x3002;&#x5982;&#x679C;&#x65E0;&#x6CD5;&#x5C06;&#x6587;&#x4EF6;&#x89E3;&#x6790;&#x4E3A;&#x94FE;&#x63A5;&#x811A;&#x672C;&#xFF0C;&#x5219;&#x94FE;&#x63A5;&#x5668;&#x5C06;&#x62A5;&#x544A;&#x9519;&#x8BEF;&#x3002;</p>
+<p>&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E0D;&#x4F1A;&#x66FF;&#x6362;&#x9ED8;&#x8BA4;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x3002;</p>
+<p>&#x901A;&#x5E38;&#xFF0C;&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x53EA;&#x5305;&#x542B;&#x7B26;&#x53F7;&#x8D4B;&#x503C;&#xFF0C;&#x6216; <code>INPUT</code>&#x3001;<code>GROUP</code>&#x3001;<code>VERSION</code> &#x547D;&#x4EE4;&#x3002;</p>
+<p>&#x7531;&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x800C;&#x8BFB;&#x53D6;&#x7684;&#x4EFB;&#x4F55;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x90FD;&#x5C06;&#x5728;&#x8BFB;&#x53D6;&#x9690;&#x5F0F;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x4F4D;&#x7F6E;&#x8BFB;&#x53D6;&#x3002;&#x8FD9;&#x53EF;&#x80FD;&#x4F1A;&#x5F71;&#x54CD;&#x5E93;&#x7684;&#x641C;&#x7D22;&#x3002;</p>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/ytf4425" target="_blank">Hanabi</a>&#xFF0C;&#x4F7F;&#x7528;<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">&#x7F72;&#x540D;-&#x975E;&#x5546;&#x4E1A;&#x6027;&#x4F7F;&#x7528;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0 &#x56FD;&#x9645;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2023-03-14 01:12:40 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="make.html" class="navigation navigation-prev " aria-label="Previous page: 拼搭我们的系统">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../interrupt/" class="navigation navigation-next " aria-label="Next page: 中断">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"附录：链接脚本 Linker Script","level":"1.3.5","depth":2,"next":{"title":"中断","level":"1.4","depth":1,"path":"interrupt/README.md","ref":"interrupt/README.md","articles":[{"title":"PLIC","level":"1.4.1","depth":2,"path":"interrupt/plic.md","ref":"interrupt/plic.md","articles":[]},{"title":"UART","level":"1.4.2","depth":2,"path":"interrupt/uart.md","ref":"interrupt/uart.md","articles":[]},{"title":"RTC","level":"1.4.3","depth":2,"path":"interrupt/goldfish_RTC.md","ref":"interrupt/goldfish_RTC.md","articles":[]},{"title":"驱动全志哪吒 D1 开发板的 PLIC","level":"1.4.4","depth":2,"path":"interrupt/sunxi_plic.md","ref":"interrupt/sunxi_plic.md","articles":[]},{"title":"驱动全志哪吒 D1 开发板的 RTC","level":"1.4.5","depth":2,"path":"interrupt/sunxi_RTC.md","ref":"interrupt/sunxi_RTC.md","articles":[]}]},"previous":{"title":"拼搭我们的系统","level":"1.3.4","depth":2,"path":"helloworld/make.md","ref":"helloworld/make.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","sharing-plus","github-buttons","anchor-navigation-ex","page-footer-ex","splitter","copy-code-button","expandable-chapters-small","katex"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-footer-ex":{"copyright":"By [Hanabi](https://github.com/ytf4425)，使用[署名-非商业性使用-相同方式共享 4.0 国际](http://creativecommons.org/licenses/by-nc-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"github-buttons":{"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{"all":["douban","facebook","google","instapaper","linkedin","twitter","weibo","qq","qzone","viber","whatsapp"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Hanabi","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Code an OS Handbook","language":"zh-hans","gitbook":"*"},"file":{"path":"helloworld/linker_script.md","mtime":"2023-03-14T01:12:40.446Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-14T01:13:16.286Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

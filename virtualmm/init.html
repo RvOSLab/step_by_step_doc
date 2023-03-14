@@ -1,0 +1,926 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>初始化过程 · Code an OS Handbook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Hanabi">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="manage.html" />
+    
+    
+    <link rel="prev" href="header.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Code an OS Project
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ready/">
+            
+                <a href="../ready/">
+            
+                    
+                    准备
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ready/intro.html">
+            
+                <a href="../ready/intro.html">
+            
+                    
+                    总体介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ready/env.html">
+            
+                <a href="../ready/env.html">
+            
+                    
+                    环境部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../helloworld/">
+            
+                <a href="../helloworld/">
+            
+                    
+                    你好，世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../helloworld/main.html">
+            
+                <a href="../helloworld/main.html">
+            
+                    
+                    “主”函数的编写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../helloworld/packaging.html">
+            
+                <a href="../helloworld/packaging.html">
+            
+                    
+                    ecall 指令的封装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../helloworld/boot.html">
+            
+                <a href="../helloworld/boot.html">
+            
+                    
+                    操作系统的启动
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../helloworld/make.html">
+            
+                <a href="../helloworld/make.html">
+            
+                    
+                    拼搭我们的系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../helloworld/linker_script.html">
+            
+                <a href="../helloworld/linker_script.html">
+            
+                    
+                    附录：链接脚本 Linker Script
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../interrupt/">
+            
+                <a href="../interrupt/">
+            
+                    
+                    中断
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../interrupt/plic.html">
+            
+                <a href="../interrupt/plic.html">
+            
+                    
+                    PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../interrupt/uart.html">
+            
+                <a href="../interrupt/uart.html">
+            
+                    
+                    UART
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../interrupt/goldfish_RTC.html">
+            
+                <a href="../interrupt/goldfish_RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../interrupt/sunxi_plic.html">
+            
+                <a href="../interrupt/sunxi_plic.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../interrupt/sunxi_RTC.html">
+            
+                <a href="../interrupt/sunxi_RTC.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    [物理内存管理]
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    虚拟内存管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="intro.html">
+            
+                <a href="intro.html">
+            
+                    
+                    基础介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="header.html">
+            
+                <a href="header.html">
+            
+                    
+                    基础头文件准备
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.3" data-path="init.html">
+            
+                <a href="init.html">
+            
+                    
+                    初始化过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="manage.html">
+            
+                <a href="manage.html">
+            
+                    
+                    其他管理过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../process/">
+            
+                <a href="../process/">
+            
+                    
+                    进程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../process/task0_init.html">
+            
+                <a href="../process/task0_init.html">
+            
+                    
+                    初始化 0 号进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >初始化过程</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x865A;&#x62DF;&#x5206;&#x9875;&#x7684;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;"><b></b>&#x865A;&#x62DF;&#x5206;&#x9875;&#x7684;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;</a></li><ul><li><span class="title-icon "></span><a href="#&#x6211;&#x4EEC;&#x7684;&#x4EFB;&#x52A1;"><b></b>&#x6211;&#x4EEC;&#x7684;&#x4EFB;&#x52A1;</a></li><li><span class="title-icon "></span><a href="#&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x89C4;&#x5212;"><b></b>&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x89C4;&#x5212;</a></li><li><span class="title-icon "></span><a href="#&#x5F00;&#x542F;&#x5927;&#x9875;&#x6A21;&#x5F0F;&#x865A;&#x62DF;&#x5185;&#x5B58;"><b></b>&#x5F00;&#x542F;&#x5927;&#x9875;&#x6A21;&#x5F0F;&#x865A;&#x62DF;&#x5185;&#x5B58;</a></li><ul><li><span class="title-icon "></span><a href="#&#x5199;&#x5165;&#x9875;&#x8868;"><b></b>&#x5199;&#x5165;&#x9875;&#x8868;</a></li><li><span class="title-icon "></span><a href="#&#x5F00;&#x542F;&#x5206;&#x9875;"><b></b>&#x5F00;&#x542F;&#x5206;&#x9875;</a></li><li><span class="title-icon "></span><a href="#&#x8BBE;&#x7F6E;&#x6808;&#x9876;&#x6307;&#x9488;&#x5E76;&#x8FDB;&#x5165;-main-&#x51FD;&#x6570;"><b></b>&#x8BBE;&#x7F6E;&#x6808;&#x9876;&#x6307;&#x9488;&#x5E76;&#x8FDB;&#x5165; main &#x51FD;&#x6570;</a></li></ul><li><span class="title-icon "></span><a href="#&#x4ECE;&#x5927;&#x9875;&#x5230;&#x5C0F;&#x9875;"><b></b>&#x4ECE;&#x5927;&#x9875;&#x5230;&#x5C0F;&#x9875;</a></li><ul><li><span class="title-icon "></span><a href="#&#x6211;&#x4EEC;&#x7684;&#x65B0;&#x4EFB;&#x52A1;"><b></b>&#x6211;&#x4EEC;&#x7684;&#x65B0;&#x4EFB;&#x52A1;</a></li><li><span class="title-icon "></span><a href="#&#x5EFA;&#x7ACB;&#x5185;&#x6838;&#x7684;&#x5185;&#x5B58;&#x6620;&#x5C04;"><b></b>&#x5EFA;&#x7ACB;&#x5185;&#x6838;&#x7684;&#x5185;&#x5B58;&#x6620;&#x5C04;</a></li><li><span class="title-icon "></span><a href="#&#x6FC0;&#x6D3B;&#x65B0;&#x9875;&#x8868;"><b></b>&#x6FC0;&#x6D3B;&#x65B0;&#x9875;&#x8868;</a></li></ul></ul></ul></div><a href="#&#x865A;&#x62DF;&#x5206;&#x9875;&#x7684;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x865A;&#x62DF;&#x5206;&#x9875;&#x7684;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;"><a name="&#x865A;&#x62DF;&#x5206;&#x9875;&#x7684;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;" class="anchor-navigation-ex-anchor" href="#&#x865A;&#x62DF;&#x5206;&#x9875;&#x7684;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x865A;&#x62DF;&#x5206;&#x9875;&#x7684;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;</h1>
+<h2 id="&#x6211;&#x4EEC;&#x7684;&#x4EFB;&#x52A1;"><a name="&#x6211;&#x4EEC;&#x7684;&#x4EFB;&#x52A1;" class="anchor-navigation-ex-anchor" href="#&#x6211;&#x4EEC;&#x7684;&#x4EFB;&#x52A1;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6211;&#x4EEC;&#x7684;&#x4EFB;&#x52A1;</h2>
+<p>&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x7684;&#x4E00;&#x5207;&#x5C11;&#x4E0D;&#x4E86;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;&#x53C2;&#x4E0E;&#xFF0C;&#x5176;&#x4E2D;&#x6700;&#x91CD;&#x8981;&#x7684;&#x4EFB;&#x52A1;&#x4E4B;&#x4E00;&#x4FBF;&#x662F;&#x7EF4;&#x62A4;&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x7684;&#x9875;&#x8868;&#x3002;&#x5728;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x8FDB;&#x7A0B;&#x4E4B;&#x524D;&#xFF0C;&#x53EA;&#x6709;&#x4ECE;&#x5F00;&#x673A;&#x4FBF;&#x4E00;&#x76F4;&#x6301;&#x7EED;&#x8FD0;&#x884C;&#x7684;&#x5185;&#x6838;&#x4EE3;&#x7801;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x7684;&#x603B;&#x4F53;&#x601D;&#x8DEF;&#x662F;&#x5148;&#x4E3A;&#x5185;&#x6838;&#x533A;&#x505A;&#x4E00;&#x4E2A;&#x9875;&#x8868;&#xFF0C;&#x968F;&#x540E;&#x5C06;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#x7684;&#x7269;&#x7406;&#x5730;&#x5740;&#x548C;&#x5206;&#x9875;&#x65B9;&#x6848;&#x5199;&#x5165; satp &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x6700;&#x540E;&#x5237;&#x65B0; TLB&#xFF0C;&#x865A;&#x62DF;&#x5206;&#x9875;&#x5C31;&#x53EF;&#x6210;&#x529F;&#x5F00;&#x542F;&#x3002;</p>
+<h2 id="&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x89C4;&#x5212;"><a name="&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x89C4;&#x5212;" class="anchor-navigation-ex-anchor" href="#&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x89C4;&#x5212;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#x89C4;&#x5212;</h2>
+<p>&#x5728;&#x5EFA;&#x7ACB;&#x9875;&#x8868;&#x4E4B;&#x524D;&#xFF0C;&#x9700;&#x8981;&#x9996;&#x5148;&#x89C4;&#x5212;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5E03;&#x5C40;&#xFF0C;&#x51B3;&#x5B9A;&#x5B58;&#x653E;&#x5185;&#x6838;&#x7684;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x3002;&#x8003;&#x8651;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x524D;&#x63D0;&#xFF1A;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x7684;&#x4F5C;&#x7528;&#x4E4B;&#x4E00;&#x5C31;&#x662F;&#x8BA9;&#x8FDB;&#x7A0B;&#x8BA4;&#x4E3A;&#x81EA;&#x5DF1;&#x72EC;&#x5360;&#x4E86;&#x6574;&#x4E86;&#x5185;&#x5B58;&#xFF0C;&#x9664;&#x6B64;&#x4E4B;&#x5916;&#x4E3A;&#x4E86;&#x4FBF;&#x4E8E;&#x8C03;&#x7528;&#x7CFB;&#x7EDF;&#x51FD;&#x6570;&#xFF0C;&#x5185;&#x6838;&#x90E8;&#x5206;&#x4E5F;&#x9700;&#x8981;&#x5728;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x4E2D;&#x6709;&#x6240;&#x4F53;&#x73B0;&#xFF0C;&#x56E0;&#x6B64;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x7684;&#x5E03;&#x5C40;&#x4E2D;&#x53EA;&#x6709;&#x7CFB;&#x7EDF;&#x5185;&#x6838;&#x548C;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x7684;&#x4EE3;&#x7801;&#x4E0E;&#x6570;&#x636E;&#x3002;<em><a href="reference/RISC-V-Reader-Chinese-v2p1.pdf">RISC-V Reader Chinese v2.1</a></em> &#x7B2C; 48 &#x9875;&#x7684;&#x56FE; 3.10 &#x5C55;&#x793A;&#x4E86;&#x4E00;&#x4E2A;&#x5178;&#x578B;&#x7684; RISC-V &#x7A0B;&#x5E8F;&#x5206;&#x914D;&#x7ED9;&#x4EE3;&#x7801;&#x548C;&#x6570;&#x636E;&#x7684;&#x5185;&#x5B58;&#x533A;&#x57DF;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53C2;&#x8003;&#x8FD9;&#x4E2A;&#x5E03;&#x5C40;&#xFF0C;&#x5728;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x540E;&#x90E8;&#x52A0;&#x4E0A;&#x4F9B;&#x5B58;&#x653E;&#x5185;&#x6838;&#x7684;&#x4F4D;&#x7F6E;&#x5373;&#x53EF;&#xFF0C;&#x6700;&#x540E;&#x6211;&#x4EEC;&#x91C7;&#x7528;&#x7684;&#x5E03;&#x5C40;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>0xFFFFFFFF-----&gt;+--------------+
+                |              |
+                |    Kernel    |
+                |              |
+0xC0000000-----&gt;---------------+
+                |    Hole      |
+0xBFFFFFF0-----&gt;---------------+
+                |    Stack     |
+                |      +       |
+                |      |       |
+                |      v       |
+                |              |
+                |      ^       |
+                |      |       |
+                |      +       |
+                | Dynamic data |
+       brk-----&gt;+--------------+
+                |              |
+                | Static data  |
+                |              |
+                +--------------+
+                |              |
+                |     Text     |
+                |              |
+0x00010000-----&gt;---------------+
+                |   Reserved   |
+0x00000000-----&gt;+--------------+
+</code></pre><p>&#x6808;&#x4ECE; <code>0xBFFFFFF0</code> &#x5411;&#x4F4E;&#x5730;&#x5740;&#x6269;&#x5F20;&#xFF0C;&#x56E0;&#x968F;&#x540E;&#x5373;&#x5C06;&#x91C7;&#x7528;&#x9875;&#x9762;&#x5927;&#x5C0F;&#x4E3A; 1 GiB &#x7684;&#x5927;&#x9875;&#x6A21;&#x5F0F;&#xFF0C;<code>0xC0000000</code> &#x6070;&#x597D;&#x662F;&#x6808;&#x7A7A;&#x95F4;&#x5F80;&#x4E0A;&#x6700;&#x8FD1;&#x7684;&#x4E0E; 1 GiB &#x5BF9;&#x9F50;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#xFF0C;&#x7559;&#x7ED9;&#x5185;&#x6838;&#x7684;&#x7A7A;&#x95F4;&#x8F83;&#x5927;&#x3002;</p>
+<p>&#x5185;&#x6838;&#x5360;&#x636E;&#x865A;&#x62DF;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x7684; <code>0xC0000000</code> &#x5230; <code>0xFFFFFFFF</code> &#xFF0C;&#x5BF9;&#x5E94;&#x7684;&#x7269;&#x7406;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x662F; <code>0x80000000</code> &#x5230; <code>0x88000000</code> &#xFF0C;&#x5185;&#x6838;&#x7684;&#x8D77;&#x59CB;&#x7269;&#x7406;&#x5730;&#x5740;&#x548C;&#x865A;&#x62DF;&#x7269;&#x7406;&#x5730;&#x5740;&#x6070;&#x597D;&#x76F8;&#x5DEE; <code>0x40000000</code> &#xFF0C;&#x5F97;&#x5230;&#x865A;&#x62DF;&#x5730;&#x5740;&#x548C;&#x7269;&#x7406;&#x5730;&#x5740;&#x4E4B;&#x95F4;&#x7684;&#x8F6C;&#x6362;&#x5173;&#x7CFB;&#xFF1A;</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>V</mi><mi>i</mi><mi>r</mi><mi>t</mi><mi>u</mi><mi>a</mi><mi>l</mi><mi>A</mi><mi>d</mi><mi>d</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>s</mi><mo>=</mo><mi>P</mi><mi>h</mi><mi>y</mi><mi>s</mi><mi>i</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>A</mi><mi>d</mi><mi>d</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>s</mi><mo>+</mo><mi>L</mi><mi>i</mi><mi>n</mi><mi>e</mi><mi>a</mi><mi>r</mi><mi>O</mi><mi>f</mi><mi>f</mi><mi>s</mi><mi>e</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">VirtualAddress = PhysicalAddress + LinearOffset</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.22222em;">V</span><span class="mord mathit">i</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">t</span><span class="mord mathit">u</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">A</span><span class="mord mathit">d</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">e</span><span class="mord mathit">s</span><span class="mord mathit">s</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mord mathit">h</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">s</span><span class="mord mathit">i</span><span class="mord mathit">c</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">A</span><span class="mord mathit">d</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">e</span><span class="mord mathit">s</span><span class="mord mathit">s</span><span class="mbin">+</span><span class="mord mathit">L</span><span class="mord mathit">i</span><span class="mord mathit">n</span><span class="mord mathit">e</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mord mathit">s</span><span class="mord mathit">e</span><span class="mord mathit">t</span></span></span></span></p>
+<p>&#x5185;&#x6838;&#x865A;&#x62DF;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x5C31;&#x662F;&#x53EF;&#x7528;&#x7269;&#x7406;&#x5185;&#x5B58;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x7684;&#x7EBF;&#x6027;&#x6620;&#x5C04;&#xFF1A;</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>V</mi><mi>i</mi><mi>r</mi><mi>t</mi><mi>u</mi><mi>a</mi><mi>l</mi><mi>A</mi><mi>d</mi><mi>d</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>s</mi><mi>S</mi><mi>p</mi><mi>a</mi><mi>c</mi><mi>e</mi><mo>[</mo><mn>0</mn><mi>x</mi><mi>C</mi><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mo separator="true">,</mo><mi>C</mi><mn>8</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mo>)</mo><mo>&#x27F6;</mo><mi>P</mi><mi>h</mi><mi>y</mi><mi>s</mi><mi>i</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>A</mi><mi>d</mi><mi>d</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>s</mi><mi>S</mi><mi>p</mi><mi>a</mi><mi>c</mi><mi>e</mi><mo>[</mo><mn>0</mn><mi>x</mi><mn>8</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mo separator="true">,</mo><mn>8</mn><mn>8</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">
+VirtualAddressSpace[0xC0000000,C8000000) \longrightarrow PhysicalAddressSpace[0x80000000, 88000000)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base displaystyle textstyle uncramped"><span class="mord mathit" style="margin-right:0.22222em;">V</span><span class="mord mathit">i</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">t</span><span class="mord mathit">u</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">A</span><span class="mord mathit">d</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">e</span><span class="mord mathit">s</span><span class="mord mathit">s</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit">p</span><span class="mord mathit">a</span><span class="mord mathit">c</span><span class="mord mathit">e</span><span class="mopen">[</span><span class="mord mathrm">0</span><span class="mord mathit">x</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathrm">8</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mclose">)</span><span class="mrel">&#x27F6;</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mord mathit">h</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">s</span><span class="mord mathit">i</span><span class="mord mathit">c</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">A</span><span class="mord mathit">d</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">e</span><span class="mord mathit">s</span><span class="mord mathit">s</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit">p</span><span class="mord mathit">a</span><span class="mord mathit">c</span><span class="mord mathit">e</span><span class="mopen">[</span><span class="mord mathrm">0</span><span class="mord mathit">x</span><span class="mord mathrm">8</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="mord mathrm">8</span><span class="mord mathrm">8</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mclose">)</span></span></span></span></span></p>
+<p>&#x4E3A;&#x4E86;&#x4FBF;&#x4E8E;&#x540E;&#x7EED;&#x7A0B;&#x5E8F;&#x7F16;&#x5199;&#xFF0C;&#x53EF;&#x4EE5;&#x7F16;&#x5199;&#x5185;&#x6838;&#x533A;&#x7269;&#x7406;&#x5730;&#x5740;&#x4E0E;&#x865A;&#x62DF;&#x5730;&#x5740;&#x76F8;&#x4E92;&#x8F6C;&#x6362;&#x7684;&#x5B8F;&#x6765;&#x8868;&#x793A;&#x8FD9;&#x4E00;&#x7EBF;&#x6027;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">// include/mm.h</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> LINEAR_OFFSET    0x40000000</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PHYSICAL(vaddr)  (vaddr - LINEAR_OFFSET)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> VIRTUAL(paddr)   (paddr + LINEAR_OFFSET)</span>
+</code></pre>
+<p>&#x5728;&#x542F;&#x7528;&#x5206;&#x9875;&#x673A;&#x5236;&#x4E4B;&#x524D;&#xFF0C;&#x5185;&#x6838;&#x7A0B;&#x5E8F;&#x5165;&#x53E3;&#x70B9;&#x5728; <code>0x80200000</code>&#xFF0C;&#x8F6C;&#x6362;&#x4E3A;&#x865A;&#x62DF;&#x5730;&#x5740;&#x540E;&#x53D8;&#x6210; <code>0xC0200000</code>&#x3002;&#x94FE;&#x63A5;&#x811A;&#x672C;&#x4E2D;&#x5404;&#x8282;&#x5B58;&#x653E;&#x7684;&#x5730;&#x5740;&#x4E5F;&#x5E94;&#x4EE5;&#x865A;&#x62DF;&#x5730;&#x5740;&#x4E3A;&#x51C6;&#xFF0C;&#x8FD9;&#x6837;&#x624D;&#x80FD;&#x4F7F;&#x7F16;&#x8BD1;&#x51FA;&#x6765;&#x540E;&#x5404;&#x7B26;&#x53F7;&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#x662F; <code>0xC020****</code>&#xFF0C;&#x4FDD;&#x8BC1;&#x5728;&#x5F00;&#x542F;&#x5206;&#x9875;&#x673A;&#x5236;&#x4E4B;&#x540E;&#x6240;&#x5F15;&#x7528;&#x7684;&#x53D8;&#x91CF;&#x4E0E;&#x51FD;&#x6570;&#x7684;&#x5730;&#x5740;&#x7684;&#x6B63;&#x786E;&#x6027;&#xFF1A;</p>
+<pre><code class="lang-linker.ld">/* &#x76EE;&#x6807;&#x67B6;&#x6784; */
+OUTPUT_ARCH(riscv)
+/* &#x6267;&#x884C;&#x5165;&#x53E3; */
+ENTRY(_start)
+/* &#x8D77;&#x59CB;&#x5730;&#x5740; */
+BASE_ADDRESS = 0xc0200000;
+</code></pre>
+<p>&#x8FD9;&#x6837;&#xFF0C;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x5730;&#x5740;&#x5168;&#x90E8;&#x5927;&#x4E8E; <code>0xC0200000</code>&#xFF0C;&#x6211;&#x4EEC;&#x786E;&#x4FDD;&#x4E86;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x5730;&#x5740;&#x4E0E;&#x89C4;&#x5B9A;&#x7684;&#x865A;&#x62DF;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x4E00;&#x81F4;&#x3002;</p>
+<p>&#x8FD9;&#x65F6;&#x5019;&#x53EF;&#x80FD;&#x4F1A;&#x6709;&#x7591;&#x60D1;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x5982;&#x6B64;&#x4E00;&#x6765; SBI &#x542F;&#x52A8;&#x5230; <code>0x80200000</code> &#x8FD8;&#x53EF;&#x4EE5;&#x6B63;&#x786E;&#x6267;&#x884C;&#x5462;&#xFF1F;</p>
+<p>&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5728;&#x542F;&#x52A8; QEMU &#x65F6;&#x53C2;&#x6570; <code>addr=0x80200000</code> &#x5C06;&#x5185;&#x6838;&#x7684;&#x4EE3;&#x7801;&#x786E;&#x786E;&#x5B9E;&#x5B9E;&#x5730;&#x52A0;&#x8F7D;&#x5230;&#x4E86;&#x7269;&#x7406;&#x5185;&#x5B58;&#x7684; <code>0x80200000</code>&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x5185;&#x6838;&#x542F;&#x52A8;&#x540E;&#x5230;&#x5206;&#x9875;&#x5F00;&#x542F;&#x524D;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x90FD;&#x662F;&#x76F8;&#x5BF9;&#x5BFB;&#x5740;&#xFF0C;&#x6CA1;&#x6709;&#x5F15;&#x7528;&#x7B26;&#x53F7;&#x7684;&#x7EDD;&#x5BF9;&#x5730;&#x5740;&#x5BFB;&#x5740;&#xFF0C;&#x53EA;&#x8981;&#x504F;&#x79FB;&#x6B63;&#x786E;&#xFF0C;&#x7A0B;&#x5E8F;&#x81EA;&#x7136;&#x5C31;&#x80FD;&#x5728;&#x5F53;&#x524D; pc &#x7684;&#x57FA;&#x7840;&#x4E0A;&#x5411;&#x524D;&#x6216;&#x5411;&#x540E;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x3002;&#x800C;&#x5F53;&#x524D; pc &#x662F;&#x5728; <code>0x8020****</code> &#x8FD9;&#x4E00;&#x6BB5;&#x4E0A;&#xFF0C;&#x672A;&#x5F00;&#x542F;&#x5206;&#x9875;&#x65F6;&#x6240;&#x6709;&#x7684;&#x5730;&#x5740;&#x90FD;&#x662F;&#x7269;&#x7406;&#x5730;&#x5740;&#xFF0C;&#x800C;&#x7269;&#x7406;&#x5730;&#x5740;&#x7684;&#x8FD9;&#x4E00;&#x90E8;&#x5206;&#x5B58;&#x653E;&#x7684;&#x4E5F;&#x786E;&#x5B9E;&#x662F;&#x5185;&#x6838;&#x521D;&#x59CB;&#x5316;&#x4EE3;&#x7801;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x4F1A;&#x6709;&#x95EE;&#x9898;&#x3002;</p>
+<h2 id="&#x5F00;&#x542F;&#x5927;&#x9875;&#x6A21;&#x5F0F;&#x865A;&#x62DF;&#x5185;&#x5B58;"><a name="&#x5F00;&#x542F;&#x5927;&#x9875;&#x6A21;&#x5F0F;&#x865A;&#x62DF;&#x5185;&#x5B58;" class="anchor-navigation-ex-anchor" href="#&#x5F00;&#x542F;&#x5927;&#x9875;&#x6A21;&#x5F0F;&#x865A;&#x62DF;&#x5185;&#x5B58;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5F00;&#x542F;&#x5927;&#x9875;&#x6A21;&#x5F0F;&#x865A;&#x62DF;&#x5185;&#x5B58;</h2>
+<h3 id="&#x5199;&#x5165;&#x9875;&#x8868;"><a name="&#x5199;&#x5165;&#x9875;&#x8868;" class="anchor-navigation-ex-anchor" href="#&#x5199;&#x5165;&#x9875;&#x8868;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5199;&#x5165;&#x9875;&#x8868;</h3>
+<p>&#x8BBE;&#x8BA1;&#x5206;&#x9875;&#x65B9;&#x6848;&#x65F6;&#x6709;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x4EEC;&#x5185;&#x6838;&#x7684;&#x4EE3;&#x7801;&#x7F16;&#x8BD1;&#x540E;&#x5DF2;&#x7ECF;&#x8FDC;&#x5927;&#x4E8E; 4KiB&#xFF08;&#x4E00;&#x9875;&#xFF09;&#x4E86;&#xFF0C;&#x5373;&#x4F7F;&#x73B0;&#x5728;&#x6CA1;&#x6709;&#xFF0C;&#x4EE5;&#x540E;&#x4E5F;&#x4F1A;&#x53D1;&#x751F;&#xFF0C;&#x5982;&#x679C;&#x8BA9;&#x6211;&#x4EEC;&#x624B;&#x52A8;&#x5F80;&#x5185;&#x5B58;&#x91CC;&#x4E00;&#x884C;&#x4E00;&#x884C;&#x5199;&#x4E00;&#x6574;&#x4E2A;&#x5185;&#x6838;&#x7684;&#x9875;&#x8868;&#x7684;&#x8BDD;&#xFF0C;&#x65E2;&#x8D39;&#x65F6;&#x4E14;&#x6CA1;&#x6709;&#x7075;&#x6D3B;&#x6027;&#xFF0C;&#x6BCF;&#x6B21;&#x5185;&#x6838;&#x5927;&#x5C0F;&#x7684;&#x589E;&#x957F;&#x90FD;&#x5C06;&#x5BFC;&#x81F4;&#x9875;&#x8868;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x7F16;&#x5199;&#x3002;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7075;&#x6D3B;&#x7B80;&#x4FBF;&#x7684;&#x9875;&#x8868;&#x751F;&#x6210;&#x65B9;&#x5F0F;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x91C7;&#x53D6;&#x4E00;&#x79CD;&#x7B56;&#x7565;&#xFF1A;&#x8FDB;&#x5165;&#x5185;&#x6838;&#x540E;&#x901A;&#x8FC7;&#x5185;&#x6838;&#x751F;&#x6210; Sv39 &#x7684;&#x4E09;&#x7EA7;&#x9875;&#x8868;&#x3002;</p>
+<p>&#x8FD9;&#x6709;&#x4E24;&#x79CD;&#x5B9E;&#x73B0;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<ul>
+<li>&#x5148;&#x4F7F;&#x7528; 1GiB &#x7684;&#x5927;&#x9875;&#x6A21;&#x5F0F;&#x6765;&#x6620;&#x5C04;&#x6574;&#x4E2A;&#x7269;&#x7406;&#x5185;&#x5B58;&#x5230;&#x865A;&#x62DF;&#x5185;&#x5B58;&#xFF0C;&#x968F;&#x540E;&#x5F00;&#x542F;&#x5206;&#x9875;&#xFF0C;&#x4F9D;&#x9760;&#x7CFB;&#x7EDF;&#x4EE3;&#x7801;&#x9010;&#x4E00;&#x751F;&#x6210;&#x5C0F;&#x9875;&#x8868;&#x540E;&#x518D;&#x91CD;&#x65B0;&#x8BBE;&#x7F6E; <code>satp</code> &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5237;&#x65B0; TLB&#x3002;</li>
+<li>&#x8FDB;&#x5165;&#x7CFB;&#x7EDF;&#x540E;&#x76F4;&#x63A5;&#x5728;&#x4F7F;&#x7528;&#x7269;&#x7406;&#x5730;&#x5740;&#x73AF;&#x5883;&#x4E0B;&#x751F;&#x6210;&#x5C0F;&#x9875;&#x8868;&#xFF0C;&#x5C06;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#x5199;&#x5165; <code>satp</code> &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5237;&#x65B0; TLB&#x3002;</li>
+</ul>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x91C7;&#x7528;&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x6848;&#xFF0C;&#x76F8;&#x5BF9;&#x7684;&#x6BD4;&#x8F83;&#x7075;&#x6D3B;&#x81EA;&#x7531;&#xFF0C;&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x6848;&#x7531;&#x540C;&#x5B66;&#x4EEC;&#x81EA;&#x5DF1;&#x8003;&#x8651;&#x53EF;&#x884C;&#x6027;&#x4E0E;&#x5B9E;&#x73B0;&#x65B9;&#x6CD5;&#x3002;</p>
+<h3 id="&#x5F00;&#x542F;&#x5206;&#x9875;"><a name="&#x5F00;&#x542F;&#x5206;&#x9875;" class="anchor-navigation-ex-anchor" href="#&#x5F00;&#x542F;&#x5206;&#x9875;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5F00;&#x542F;&#x5206;&#x9875;</h3>
+<p>&#x5F00;&#x542F;&#x5206;&#x9875;&#x5E76;&#x4E0D;&#x96BE;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5C06;&#x9875;&#x8868;&#x5730;&#x5740;&#x548C;&#x5206;&#x9875;&#x65B9;&#x6848;&#x5199;&#x5165; <code>satp</code> &#x5BC4;&#x5B58;&#x5668;&#x5373;&#x53EF;&#xFF0C;&#x5728;&#x90A3;&#x4E4B;&#x524D;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x5F97;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x9875;&#x8868;&#xFF0C;<a href="intro.html#sv39">&#x56DE;&#x987E;&#x4E00;&#x4E0B;&#x4E0A;&#x4E00;&#x8282; Sv39 &#x7684;&#x9875;&#x8868;&#x9879;&#x7ED3;&#x6784;</a>&#xFF0C;&#x6309;&#x7167;&#x4E0A;&#x9762;&#x6240;&#x8BB2;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x6211;&#x4EEC;&#x6784;&#x9020;&#x5982;&#x4E0B;&#x7EBF;&#x6027;&#x6620;&#x5C04;&#xFF1A;</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>V</mi><mi>i</mi><mi>r</mi><mi>t</mi><mi>u</mi><mi>a</mi><mi>l</mi><mi>A</mi><mi>d</mi><mi>d</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>s</mi><mi>S</mi><mi>p</mi><mi>a</mi><mi>c</mi><mi>e</mi><mo>[</mo><mn>0</mn><mi>x</mi><mi>C</mi><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mo separator="true">,</mo><mi>C</mi><mn>8</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mo>)</mo><mo>&#x27F6;</mo><mi>P</mi><mi>h</mi><mi>y</mi><mi>s</mi><mi>i</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>A</mi><mi>d</mi><mi>d</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>s</mi><mi>S</mi><mi>p</mi><mi>a</mi><mi>c</mi><mi>e</mi><mo>[</mo><mn>0</mn><mi>x</mi><mn>8</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mo separator="true">,</mo><mn>8</mn><mn>8</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mn>0</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">
+VirtualAddressSpace[0xC0000000,C8000000) \longrightarrow PhysicalAddressSpace[0x80000000, 88000000)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base displaystyle textstyle uncramped"><span class="mord mathit" style="margin-right:0.22222em;">V</span><span class="mord mathit">i</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">t</span><span class="mord mathit">u</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">A</span><span class="mord mathit">d</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">e</span><span class="mord mathit">s</span><span class="mord mathit">s</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit">p</span><span class="mord mathit">a</span><span class="mord mathit">c</span><span class="mord mathit">e</span><span class="mopen">[</span><span class="mord mathrm">0</span><span class="mord mathit">x</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.07153em;">C</span><span class="mord mathrm">8</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mclose">)</span><span class="mrel">&#x27F6;</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mord mathit">h</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">s</span><span class="mord mathit">i</span><span class="mord mathit">c</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.01968em;">l</span><span class="mord mathit">A</span><span class="mord mathit">d</span><span class="mord mathit">d</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mord mathit">e</span><span class="mord mathit">s</span><span class="mord mathit">s</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit">p</span><span class="mord mathit">a</span><span class="mord mathit">c</span><span class="mord mathit">e</span><span class="mopen">[</span><span class="mord mathrm">0</span><span class="mord mathit">x</span><span class="mord mathrm">8</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="mord mathrm">8</span><span class="mord mathrm">8</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span><span class="mclose">)</span></span></span></span></span></p>
+<p><img src="intro/sv39_PTE.png" alt="&#x4E00;&#x4E2A; RV64 Sv39 &#x9875;&#x8868;&#x9879;&#xFF08;PTE&#xFF09;"></p>
+<p>&#x90A3;&#x4E48; PTE &#x4E2D;&#x6BCF;&#x4E00;&#x9879;&#x9700;&#x8981;&#x586B;&#x5199;&#x7684;&#x5185;&#x5BB9;&#x5C31;&#x662F;</p>
+<ul>
+<li>Reserved: 0000 0000 00b</li>
+<li>PPN[2]: 0x8000 0000h &gt;&gt; (12 + 9 + 9)</li>
+<li>PPN[1]: 0 0000 0000b&#xFF08;&#x968F;&#x610F;&#x586B;&#xFF09;</li>
+<li>PPN[0]: 0 0000 0000b&#xFF08;&#x968F;&#x610F;&#x586B;&#xFF09;</li>
+<li>RSW: 00b&#xFF08;&#x968F;&#x610F;&#x586B;&#xFF09;</li>
+<li>D: 0b</li>
+<li>A: 0b</li>
+<li>G: 0b&#xFF08;&#x968F;&#x610F;&#x586B;&#xFF09;</li>
+<li>U: 0b</li>
+<li>X: 1b</li>
+<li>W: 1b</li>
+<li>R: 1b</li>
+<li>V: 1b</li>
+</ul>
+<p>&#x7EC4;&#x5408;&#x8D77;&#x6765;&#x7528;&#x7B97;&#x672F;&#x8868;&#x793A;&#x5C31;&#x662F; $((0x80000000 &gt;&gt; 30) &lt;&lt; 28) | 0x0F$&#xFF0C;&#x5373;$(0x80000000 &gt;&gt; 2) | 0x0F$</p>
+<p>&#x865A;&#x62DF;&#x5185;&#x5B58;&#x662F; <code>0xC0000000</code>&#xFF0C;&#x5411;&#x53F3;&#x79FB;&#x52A8; 12 + 9 <em> 2 = 30 &#x4F4D;&#x53EF;&#x5F97; 3&#xFF0C;&#x8868;&#x793A;&#x6B64;&#x6761;&#x9875;&#x8868;&#x9879;&#x5E94;&#x8BE5;&#x653E;&#x5728;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#x4E0B;&#x6807;&#x4E3A; 3 &#x7684;&#x4F4D;&#x7F6E;&#xFF08;&#x5373;&#x7B2C; 4 &#x6761;&#xFF09;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x8FD9;&#x6761;&#x6620;&#x5C04;&#x4E4B;&#x524D;&#x653E; 3 &#x6761;&#x65E0;&#x6548;&#xFF08;V = 0&#xFF09;&#x7684;&#x9875;&#x8868;&#x9879;&#x3002;&#x9875;&#x8868;&#x9879;&#x6BCF;&#x6761;&#x5360; 64 bits&#xFF0C;&#x5373; 8 Bytes&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x6C47;&#x7F16;&#x4F2A;&#x64CD;&#x4F5C; `.zero 3 </em> 8<code>&#x6765;&#x5B9E;&#x73B0;&#xFF0C;</code>.zero N` &#x8868;&#x793A;&#x586B;&#x5145; N &#x4E2A;&#x5B57;&#x8282;&#x7684; 0&#xFF0C;&#x5F53;&#x4E00;&#x6761;&#x9875;&#x8868;&#x9879;&#x5168;&#x4E3A; 0&#xFF0C;&#x90A3;&#x4E48; V &#x4F4D;&#x4E00;&#x5B9A;&#x662F; 0&#xFF0C;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x5B9E;&#x73B0;&#x65E0;&#x6548;&#x9875;&#x8868;&#x9879;&#x7684;&#x586B;&#x5145;&#x3002;</p>
+<p>&#x6BCF;&#x4E2A;&#x9875;&#x8868;&#x6709; 512 &#x9879;&#xFF0C;&#x56E0;&#x6B64;&#x540E;&#x9762;&#x8FD8;&#x6709; 508 &#x6761;&#x65E0;&#x6548;&#x9875;&#x8868;&#x9879;&#x9700;&#x8981;&#x586B;&#x5145;&#xFF0C;&#x540C;&#x6837;&#x4F7F;&#x7528; <code>.zero 508 * 8</code> &#x5B8C;&#x6210;&#x3002;</p>
+<p>&#x9875;&#x8868;&#x5C31;&#x8FD9;&#x4E48;&#x5EFA;&#x5B8C;&#x4E86;&#x3002;.. &#x5417;&#xFF1F;</p>
+<p>&#x663E;&#x7136;&#x6CA1;&#x6709;&#xFF0C;&#x8003;&#x8651;&#x4E00;&#x4E0B;&#x5F53;&#x6211;&#x4EEC;&#x5EFA;&#x5B8C;&#x9875;&#x8868;&#xFF0C;&#x586B;&#x5199;&#x5B8C; <code>satp</code> &#x5BC4;&#x5B58;&#x5668;&#x5F00;&#x542F;&#x865A;&#x5B58;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x7684; <code>pc</code> &#x5728;&#x54EA;&#xFF1F;&#x6CA1;&#x9519;&#xFF0C;<code>pc</code> &#x4ECD;&#x7136;&#x505C;&#x7559;&#x5728; <code>0x8020****</code> &#x8FD9;&#x4E00;&#x6BB5;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5F00;&#x59CB;&#x7528;&#x9875;&#x8868;&#x4E86;&#xFF0C;&#x8FD9;&#x4E00;&#x865A;&#x62DF;&#x5730;&#x5740;&#x7684;&#x5BF9;&#x5E94;&#x9879;&#x5728;&#x9875;&#x8868;&#x91CC;&#x662F;&#x65E0;&#x6548;&#x7684;&#xFF08;V = 0&#xFF09;&#xFF0C;&#x56E0;&#x6B64;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x7684;&#x8BDD;&#xFF0C;&#x4ECE; <code>pc</code> &#x6240;&#x6307;&#x865A;&#x62DF;&#x5730;&#x5740;&#x53D6;&#x6307;&#x4F1A;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x9700;&#x5EFA;&#x4E00;&#x6761;&#x9875;&#x8868;&#x9879;&#xFF0C;&#x8BA9;&#x865A;&#x62DF;&#x5730;&#x5740; <code>0x80000000</code> &#x6620;&#x5C04;&#x5230;&#x7269;&#x7406;&#x5730;&#x5740; <code>0x80000000</code> &#x5904;&#x3002;</p>
+<p>&#x6A21;&#x4EFF;&#x4E0A;&#x9762;&#x7684;&#x7B97;&#x6CD5;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x5728;&#x9875;&#x8868;&#x7B2C; 3 &#x6761;&#x540C;&#x6837;&#x5199;&#x5165; <code>.quad (0x80000000 &gt;&gt; 2) | 0x0F</code>&#xFF0C;&#x56E0;&#x6B64;&#x6700;&#x540E;&#x9875;&#x8868;&#x5728; <code>entry.S</code> &#x4E2D;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
+<pre><code class="lang-assembly">boot_pg_dir:
+    .zero 2 * 8
+    .quad (0x80000000 &gt;&gt; 2) | 0x0F
+    .quad (0x80000000 &gt;&gt; 2) | 0x0F
+    .zero 508 * 8
+</code></pre>
+<blockquote>
+<p>&#x4E3A;&#x4EC0;&#x4E48;&#x6211;&#x628A;&#x8FD9;&#x4E2A;&#x6620;&#x5C04;&#x5220;&#x4E86;&#xFF0C;&#x4EE3;&#x7801;&#x8FD8;&#x662F;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#xFF1F;&#x56E0;&#x4E3A; QEMU &#x6709;&#x6307;&#x4EE4;&#x7F13;&#x5B58;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x8FD9;&#x6837;&#x7684;&#x5220;&#x53BB;&#x7684;&#x5199;&#x6CD5;&#x662F;&#x9519;&#x8BEF;&#x7684;&#x3002;&#x5C1D;&#x8BD5;&#x5728; <code>sfence.vma</code> &#x540E;&#x52A0;&#x5165;&#x6307;&#x4EE4; <code>fence.i</code> &#x5373;&#x53EF;&#x53D1;&#x73B0;&#x8FD0;&#x884C;&#x5931;&#x8D25;&#x3002;</p>
+</blockquote>
+<p>&#x5728;&#x6784;&#x5EFA;&#x597D;&#x9875;&#x8868;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x628A;&#x9875;&#x8868;&#x52A0;&#x8F7D;&#x5230; <code>satp</code> &#x5BC4;&#x5B58;&#x5668;&#x4E2D;&#xFF0C;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x865A;&#x62DF;&#x5730;&#x5740; <code>0xC0000000</code> &#x5904;&#x6267;&#x884C; <code>pc</code> &#x6307;&#x5411;&#x7684;&#x6307;&#x4EE4;&#x4E86;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x518D;&#x6765;&#x56DE;&#x987E;&#x4E00;&#x4E0B; <code>satp</code> &#x5BC4;&#x5B58;&#x5668;&#x7684;&#x7ED3;&#x6784;&#xFF1A;</p>
+<p><img src="intro/satp.png" alt="satp"></p>
+<p>&#x4F4E; 44 &#x4F4D;&#x662F;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#x7684;&#x7269;&#x7406;&#x9875;&#x53F7;&#xFF08;&#x7269;&#x7406;&#x5730;&#x5740; &lt;&lt; 12&#xFF09;&#xFF0C;&#x4E2D;&#x95F4; 16 &#x4F4D;&#x662F;&#x6211;&#x4EEC;&#x6682;&#x65F6;&#x4E0D;&#x7528;&#x7684; ASID&#xFF0C;&#x9AD8; 4 &#x4F4D;&#x662F;&#x5206;&#x9875;&#x65B9;&#x6848;&#xFF08;Sv39 &#x5BF9;&#x5E94; 8&#xFF09;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x5B58;&#x653E; $boot_pg_dir &lt;&lt; 12 | 8 &lt;&lt; (44 + 16)$&#xFF0C;&#x968F;&#x540E;&#x8D4B;&#x503C;&#x7ED9; <code>satp</code>&#xFF0C;&#x6700;&#x540E;&#x5237;&#x65B0; TLB &#x5373;&#x53EF;&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-assembly">_start:
+    la t0, boot_pg_dir
+    srli t0, t0, 12
+    li t1, (8 &lt;&lt; 60)
+    or t0, t0, t1
+    csrw satp, t0
+    sfence.vma
+</code></pre>
+<h3 id="&#x8BBE;&#x7F6E;&#x6808;&#x9876;&#x6307;&#x9488;&#x5E76;&#x8FDB;&#x5165;-main-&#x51FD;&#x6570;"><a name="&#x8BBE;&#x7F6E;&#x6808;&#x9876;&#x6307;&#x9488;&#x5E76;&#x8FDB;&#x5165;-main-&#x51FD;&#x6570;" class="anchor-navigation-ex-anchor" href="#&#x8BBE;&#x7F6E;&#x6808;&#x9876;&#x6307;&#x9488;&#x5E76;&#x8FDB;&#x5165;-main-&#x51FD;&#x6570;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8BBE;&#x7F6E;&#x6808;&#x9876;&#x6307;&#x9488;&#x5E76;&#x8FDB;&#x5165; <code>main</code> &#x51FD;&#x6570;</h3>
+<p>&#x865A;&#x62DF;&#x5206;&#x9875;&#x5F00;&#x542F;&#x6210;&#x529F;&#x4E86;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x518D;&#x8BBE;&#x7F6E;&#x6808;&#x9876;&#x6307;&#x9488;&#xFF0C;&#x968F;&#x540E;&#x8DF3;&#x8F6C;&#x5230;&#x6211;&#x4EEC;&#x5199;&#x7684; <code>main</code> &#x51FD;&#x6570;&#x5373;&#x53EF;&#xFF0C;&#x4E5F;&#x8BB8;&#x4F1A;&#x89C9;&#x5F97;&#x6CBF;&#x7528;&#x524D;&#x9762;&#x5B9E;&#x9A8C;&#x7684;&#x4EE3;&#x7801;&#x65E0;&#x9700;&#x4FEE;&#x6539;&#xFF0C;&#x7136;&#x800C;&#x4E0D;&#x662F;&#x8FD9;&#x6837;&#x7684;&#x3002;</p>
+<p>&#x524D;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x4F7F;&#x7528;&#x77ED;&#x77ED;&#x4E24;&#x884C;</p>
+<pre><code class="lang-assembly">    la sp, boot_stack_top
+    call main
+</code></pre>
+<p>&#x5C31;&#x5B9E;&#x73B0;&#x4E86;&#x3002;&#x4F46;&#x662F;&#x5F53;&#x6211;&#x4EEC;&#x5982;&#x6B64;&#x5199;&#x4E0A;&#x4E4B;&#x540E;&#x4F1A;&#x53D1;&#x73B0;&#x6700;&#x540E;&#x65E0;&#x6CD5;&#x5B8C;&#x5168;&#x6B63;&#x786E;&#x6267;&#x884C;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x5462;&#xFF1F;&#x6211;&#x4EEC;&#x4F7F;&#x7528; <code>riscv64-unknown-elf-objdump -d kernel.bin &gt;&gt; disassembly.s</code> &#x628A;&#x751F;&#x6210;&#x7684; <code>kernel.bin</code> &#x6587;&#x4EF6;&#x53CD;&#x6C47;&#x7F16;&#x4E00;&#x4E0B;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6211;&#x4EEC;&#x7684; <code>_start</code> &#x662F;&#x7531;&#x5982;&#x4E0B;&#x6C47;&#x7F16;&#x4EE3;&#x7801;&#x6784;&#x6210;&#x7684;&#xFF1A;</p>
+<pre><code class="lang-assembly">00000000c0200000 &lt;_start&gt;:
+    c0200000:    00004297              auipc    t0,0x4
+    c0200004:    00028293              mv    t0,t0
+    c0200008:    00c2d293              srli    t0,t0,0xc
+    c020000c:    fff0031b              addiw    t1,zero,-1
+    c0200010:    137e                    slli    t1,t1,0x3f
+    c0200012:    0062e2b3              or    t0,t0,t1
+    c0200016:    18029073              csrw    satp,t0
+    c020001a:    12000073              sfence.vma
+    c020001e:    0000e117              auipc    sp,0xe
+    c0200022:    fe210113              addi    sp,sp,-30 # c020e000 &lt;mem_map&gt;
+    c0200026:    004000ef              jal    ra,c020002a &lt;main&gt;
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x4E24;&#x884C;&#x4EE3;&#x7801;&#x5728;&#x6C47;&#x7F16;&#x5668;&#x6C47;&#x7F16;&#x540E;&#x4F1A;&#x751F;&#x6210;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-assembly">    c020001e:    0000e117              auipc    sp,0xe
+    c0200022:    fe210113              addi    sp,sp,-30 # c020e000 &lt;mem_map&gt;
+    c0200026:    004000ef              jal    ra,c020002a &lt;main&gt;
+</code></pre>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x6C47;&#x7F16;&#x5668;&#x89C1;&#x5230; <code>la</code> &#x540E;&#x4F1A;&#x7B97;&#x51FA; <code>boot_stack_top</code> &#x4E0E;&#x5F53;&#x524D; <code>pc</code> &#x7684;&#x504F;&#x79FB;&#xFF0C;&#x968F;&#x540E;&#x751F;&#x6210; <code>auipc</code> &#x4E0E; <code>addi</code> &#x7684;&#x7EC4;&#x5408;&#x6307;&#x4EE4;&#xFF0C;&#x6307;&#x4EE4;&#x7684;&#x529F;&#x80FD;&#x5C31;&#x662F;&#x628A;&#x8FD9;&#x4E2A;&#x504F;&#x79FB;&#x52A0;&#x4E0A; <code>pc</code> &#x540E;&#x8D4B;&#x503C;&#x7ED9;&#x76EE;&#x6807;&#x5BC4;&#x5B58;&#x5668;&#xFF08;&#x6B64;&#x5904;&#x4E3A; <code>sp</code>&#xFF09;&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x504F;&#x79FB;&#x662F;&#x600E;&#x4E48;&#x7B97;&#x7684;&#x5462;&#xFF1F;&#x6C47;&#x7F16;&#x5668;&#x770B;&#x5230;&#x7B26;&#x53F7;&#x8868;&#xFF0C;&#x77E5;&#x9053; <code>boot_stack_top</code> &#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5730;&#x5740;&#x662F; <code>0xc020e000</code>&#xFF0C;&#x5F53;&#x524D;&#x8FD9;&#x884C;&#x6307;&#x4EE4;&#x5730;&#x5740;&#x5E94;&#x8BE5;&#x662F; <code>0xc020001e</code>&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x7B97;&#x51FA;&#x504F;&#x79FB;&#x4E86;&#xFF0C;&#x8FD9;&#x4E2A;&#x504F;&#x79FB;&#x662F; <code>0xc020e000 - 0xc020001e</code>&#xFF0C;&#x4E5F;&#x5C31;&#x662F; <code>0xe000 - 0x1e</code>&#xFF0C;&#x62C6;&#x6210;&#x4E24;&#x90E8;&#x5206;&#x7EC4;&#x5408;&#x6210;&#x4E86; <code>auipc</code> &#x4E0E; <code>addi</code> &#x7684;&#x7EC4;&#x5408;&#x6307;&#x4EE4;&#xFF08;&#x6211;&#x4EEC;&#x786E;&#x5B9E;&#x80FD;&#x5728;&#x4E0A;&#x9762;&#x7684;&#x53CD;&#x6C47;&#x7F16;&#x4EE3;&#x7801;&#x4E2D;&#x770B;&#x5230; <code>0xe</code> &#x4E0E; <code>0x1e</code> &#x7684;&#x5341;&#x8FDB;&#x5236; 30&#xFF09;&#xFF0C;&#x901A;&#x8FC7;&#x5B83;&#x4EEC;&#x52A0;&#x4E0A; <code>pc</code> &#x8D4B;&#x503C;&#x7ED9; <code>sp</code>&#x3002;</p>
+<p>&#x4F46;&#x662F;&#x7B49;&#x7B49;&#xFF0C;&#x6C47;&#x7F16;&#x5668;&#x8BA4;&#x4E3A;&#x5F53;&#x524D;&#x8FD9;&#x884C;&#x6307;&#x4EE4;&#x5730;&#x5740;&#x5E94;&#x8BE5;&#x662F; <code>0xc020001e</code>&#xFF0C;&#x800C;&#x5B9E;&#x9645;&#x4E0A;&#x5728;&#x5F00;&#x542F;&#x5206;&#x9875;&#x540E;&#xFF0C;<code>pc</code> &#x4F9D;&#x7136;&#x4FDD;&#x7559;&#x5728; <code>0x8020001e</code>&#xFF0C;&#x8FD9;&#x5C31;&#x5BFC;&#x81F4; <code>pc</code> &#x52A0;&#x4E0A;&#x504F;&#x79FB;&#x4E4B;&#x540E;&#xFF0C;<code>sp</code> &#x53D8;&#x6210;&#x4E86; <code>0x8020e000</code>&#xFF0C;&#x8FD9;&#x4E0E;&#x865A;&#x5B58;&#x5730;&#x5740;&#x5DEE;&#x4E86; <code>0x40000000</code>&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x624B;&#x52A8;&#x52A0;&#x4E0A; <code>0x40000000</code>&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x628A; <code>sp</code> &#x53D8;&#x6210; <code>0xc020e000</code>&#xFF0C;&#x8FD9;&#x624D;&#x7B26;&#x5408;&#x6808;&#x5728;&#x865A;&#x5B58;&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
+<p>&#x8DF3;&#x8F6C;&#x5230; <code>main</code> &#x51FD;&#x6570;&#x4E5F;&#x662F;&#x540C;&#x7406;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#x3002;&#x6CE8;&#x610F;&#x4E0D;&#x8981;&#x88AB;&#x53CD;&#x6C47;&#x7F16;&#x5F97;&#x5230;&#x7684; <code>jal    ra,c020002a &lt;main&gt;</code> &#x6B3A;&#x9A97;&#x4E86;&#x4EE5;&#x4E3A;&#x662F;&#x8DF3;&#x8F6C;&#x5230; <code>0xc020002a</code>&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x5C06;&#x6307;&#x4EE4;&#x7801; <code>004000ef</code> &#x548C; <em><a href="../reference/RISC-V-Reader-Chinese-v2p1.pdf">RISC-V Reader Chinese v2.1</a></em> &#x5BF9;&#x7167;&#x4E00;&#x4E0B;&#x5C31;&#x80FD;&#x53D1;&#x73B0;&#x5B9E;&#x9645;&#x4E0A;&#x662F; <code>pc += 4</code>&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x4F3C;&#x4E4E;&#x80FD;&#x6B63;&#x786E;&#x8FDB;&#x5165; <code>main</code> &#x51FD;&#x6570;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x80FD;&#x6267;&#x884C;&#x5B8C;&#x6240;&#x6709;&#x4EE3;&#x7801;&#xFF0C;&#x60F3;&#x60F3;&#x539F;&#x56E0;&#xFF1F;&#x53EF;&#x80FD;&#x662F;&#x540E;&#x9762;&#x957F;&#x8DF3;&#x8F6C;&#x65F6;&#x8BB0;&#x5F55;&#x7684;&#x8FD4;&#x56DE;&#x5730;&#x5740;&#x8FD8;&#x662F; <code>0x8020****</code> &#xFF0C;&#x5BFC;&#x81F4;&#x8FD4;&#x56DE;&#x51FA;&#x9519;&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x662F;&#x957F;&#x8DF3;&#x8F6C;&#x7684;&#x76EE;&#x6807;&#x5730;&#x5740;&#x672C;&#x8EAB;&#x5C31;&#x9519;&#x4E86;&#xFF0C;&#x603B;&#x4E4B; <code>main</code> &#x51FD;&#x6570;&#x7684;&#x8DF3;&#x8F6C;&#x8FD8;&#x662F;&#x8981;&#x52A0;&#x4E0A; <code>0x40000000</code> &#x7684;&#x504F;&#x79FB;&#x3002;</p>
+<p><img src="init/jal.png" alt="&#x56FE; 1">  </p>
+<p>&#x6700;&#x7EC8;&#x6211;&#x4EEC;&#x5199;&#x51FA;&#x6765;&#x7684;&#x6B63;&#x786E;&#x4EE3;&#x7801;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
+<pre><code class="lang-assembly">    li t1, 0x40000000
+    la sp, boot_stack_top
+    add sp, sp, t1
+    la t0, main
+    add t0, t0, t1
+    jr t0
+</code></pre>
+<p>&#x6574;&#x4E2A; <code>entry.s</code> &#x52A0;&#x4E0A;&#x6807;&#x7B7E;&#x4E0E;&#x5176;&#x4F59;&#x7684;&#x4F2A;&#x4EE3;&#x7801;&#xFF0C;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#x5C31;&#x662F;</p>
+<pre><code class="lang-assembly">    .globl boot_stack, boot_stack_top, _start, boot_pg_dir
+    .section .text.entry
+
+# &#x672C;&#x9879;&#x76EE;&#x6240;&#x7528;&#x4EE3;&#x7801;&#x6A21;&#x578B;&#x4E3A; medany, &#x8BE5;&#x4EE3;&#x7801;&#x6A21;&#x578B;&#x4E0B;&#x7F16;&#x8BD1;&#x5668;&#x751F;&#x6210;&#x7684;&#x4EE3;&#x7801;&#x4EE5; PC &#x76F8;&#x5BF9;&#x5BFB;&#x5740;&#x7684;&#x65B9;&#x5F0F;&#x8BBF;&#x95EE;&#x4EFB;&#x610F;&#x5730;&#x5740;&#xFF0C;&#x5730;&#x5740;&#x901A;&#x8FC7; auipc &#x548C; addi &#x6307;&#x4EE4;&#x83B7;&#x53D6;&#x3002;
+# &#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x5730;&#x5740;&#x4E0E;&#x52A0;&#x8F7D;&#x540E;&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#x76F8;&#x5DEE; 0x40000000&#xFF0C;&#x56E0;&#x6B64;&#x5904;&#x7406;&#x5668;&#x8BBF;&#x95EE;&#x5230;&#x7684;&#x5730;&#x5740;&#x52A0; 0x40000000 &#x624D;&#x662F;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x4E2D;&#x7B26;&#x53F7;&#x7684;&#x5730;&#x5740;&#x3002;
+
+_start:
+    la t0, boot_pg_dir
+    srli t0, t0, 12
+    li t1, (8 &lt;&lt; 60)
+    or t0, t0, t1
+    csrw satp, t0
+    sfence.vma
+
+    li t1, 0x40000000
+    la sp, boot_stack_top
+    add sp, sp, t1
+    la t0, main
+    add t0, t0, t1
+    jr t0
+
+    .section .bss
+boot_stack:
+    .space 4096 * 8
+boot_stack_top:
+
+    .section .data
+boot_pg_dir:
+    .zero 2 * 8
+    .quad (0x80000000 &gt;&gt; 2) | 0x0F
+    .zero 508 * 8
+</code></pre>
+<blockquote>
+<p>&#x524D;&#x9762;&#x63D0;&#x5230;&#xFF0C;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x3001;&#x51FD;&#x6570;&#x7684;&#x5730;&#x5740;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x5DF2;&#x7ECF;&#x786E;&#x5B9A;&#xFF0C;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x53D6;&#x5230;&#x7684;&#x5730;&#x5740;&#x7684;&#x503C;&#x5E94;&#x8BE5;&#x4E0E; readelf &#x8BFB;&#x53D6;&#x5230;&#x7684;&#x5730;&#x5740;&#x5B8C;&#x5168;&#x4E00;&#x6837;&#xFF0C;&#x4F46;&#x5B9E;&#x9645;&#x4E0A;&#x5E76;&#x975E;&#x5982;&#x6B64;&#x3002;&#x7B26;&#x53F7;&#x7684;&#x5730;&#x5740;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF0C;&#x53D6;&#x5730;&#x5740;&#x7684;&#x65B9;&#x5F0F;&#x5374;&#x6709;&#x591A;&#x79CD;&#xFF0C;&#x53D6;&#x51B3;&#x4E8E;&#x7F16;&#x8BD1;&#x4F7F;&#x7528;&#x7684;<em>&#x4EE3;&#x7801;&#x6A21;&#x578B;</em>&#x548C;&#x7F16;&#x8BD1;&#x9009;&#x9879;&#x3002;</p>
+<p>&#x5047;&#x8BBE;&#x7A0B;&#x5E8F;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;<code>global</code>&#xFF0C;&#x5730;&#x5740;&#x662F; 1000&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x751F;&#x6210;&#x8BBF;&#x95EE;<code>global</code>&#x7684;&#x4EE3;&#x7801;&#x65F6;&#x6709;&#x591A;&#x79CD;&#x9009;&#x62E9;&#xFF1A;</p>
+<ul>
+<li>&#x786C;&#x7F16;&#x7801;&#x5730;&#x5740;&#xFF1A;&#x76F4;&#x63A5;&#x5C06;&#x5730;&#x5740; 1000 &#x5199;&#x6B7B;&#x5230;&#x7A0B;&#x5E8F;&#x4E2D;</li>
+<li>PC &#x76F8;&#x5BF9;&#x5BFB;&#x5740;&#xFF1A;&#x5C06;<code>global</code>&#x5730;&#x5740;&#x5230;&#x8BBF;&#x95EE;&#x5B83;&#x7684;&#x6307;&#x4EE4;&#x5730;&#x5740;&#x7684;&#x5DEE;&#x503C; Offset &#x5199;&#x5165;&#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;&#x901A;&#x8FC7; PC + Offset &#x83B7;&#x53D6;&#x5730;&#x5740; 1000,</li>
+<li>&#x4F4D;&#x7F6E;&#x65E0;&#x5173;&#x4EE3;&#x7801;&#xFF1A;&#x5C06;<code>global</code>&#x7684;&#x5730;&#x5740;&#x5B58;&#x653E;&#x5230;&#x67D0;&#x4E2A;&#x56FA;&#x5B9A;&#x7684;&#x5730;&#x5740;&#x4E2D;&#xFF0C;&#x8BBF;&#x95EE;&#x65F6;&#x52A0;&#x8F7D;&#x5668;&#x67E5;&#x627E;<code>global</code>&#x7684;&#x5730;&#x5740;&#x5E76;&#x5C06;&#x5176;&#x5199;&#x5165;&#xFF0C;&#x7A0B;&#x5E8F;&#x4ECE;&#x8FD9;&#x4E2A;&#x5730;&#x5740;&#x53D6;&#x51FA;&#xFF08;&#x901A;&#x5E38;&#x662F; PC &#x76F8;&#x5BF9;&#x5BFB;&#x5740;&#xFF09;<code>global</code>&#x7684;&#x5730;&#x5740;&#xFF0C;&#x518D;&#x8BFB;&#x5199;<code>global</code>&#x3002;</li>
+</ul>
+<p>&#x4F4D;&#x7F6E;&#x65E0;&#x5173;&#x4EE3;&#x7801;&#x4E00;&#x822C;&#x7528;&#x4E8E;<em>&#x52A8;&#x6001;&#x94FE;&#x63A5;</em>&#x7684;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#xFF0C;&#x67D0;&#x4E9B; Linux &#x53D1;&#x884C;&#x7248;&#x4E0A;&#x7684; GCC &#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x52A0;&#x5165;&#x4E86;&#x7279;&#x5B9A;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x603B;&#x662F;&#x751F;&#x6210;<em>&#x4F4D;&#x7F6E;&#x65E0;&#x5173;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;</em>&#xFF0C;&#x4E3A;&#x4E86;&#x786E;&#x4FDD;&#x6240;&#x6709;&#x7684;&#x5730;&#x5740;&#x90FD;&#x901A;&#x8FC7; PC-relative &#x5BFB;&#x5740;&#x83B7;&#x53D6;&#x3002;&#x672C;&#x5185;&#x6838;&#x4F7F;&#x7528; medany &#x4EE3;&#x7801;&#x6A21;&#x578B;&#xFF0C;&#x5E76;&#x4F7F;&#x7528; -fno-pie &#x7981;&#x6B62;&#x751F;&#x6210;&#x4F4D;&#x7F6E;&#x65E0;&#x5173;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x3002;</p>
+</blockquote>
+<h2 id="&#x4ECE;&#x5927;&#x9875;&#x5230;&#x5C0F;&#x9875;"><a name="&#x4ECE;&#x5927;&#x9875;&#x5230;&#x5C0F;&#x9875;" class="anchor-navigation-ex-anchor" href="#&#x4ECE;&#x5927;&#x9875;&#x5230;&#x5C0F;&#x9875;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4ECE;&#x5927;&#x9875;&#x5230;&#x5C0F;&#x9875;</h2>
+<h3 id="&#x6211;&#x4EEC;&#x7684;&#x65B0;&#x4EFB;&#x52A1;"><a name="&#x6211;&#x4EEC;&#x7684;&#x65B0;&#x4EFB;&#x52A1;" class="anchor-navigation-ex-anchor" href="#&#x6211;&#x4EEC;&#x7684;&#x65B0;&#x4EFB;&#x52A1;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6211;&#x4EEC;&#x7684;&#x65B0;&#x4EFB;&#x52A1;</h3>
+<p><code>main</code> &#x51FD;&#x6570;&#x7684;&#x4EE3;&#x7801;&#x6CBF;&#x7528;&#x4E0A;&#x4E00;&#x4E2A;&#x5B9E;&#x9A8C;&#x7684;&#x4EE3;&#x7801;&#x4E0D;&#x53D8;&#xFF0C;&#x4F46;&#x662F; <code>mem_init()</code> &#x51FD;&#x6570;&#x548C; <code>mem_test()</code> &#x51FD;&#x6570;&#x80AF;&#x5B9A;&#x9700;&#x8981;&#x6709;&#x6240;&#x53D8;&#x5316;&#x3002;</p>
+<p>&#x5728; <code>mem_init()</code> &#x521D;&#x59CB;&#x5316;&#x5B8C;&#x7269;&#x7406;&#x5185;&#x5B58;&#x7684;&#x7BA1;&#x7406;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x9700;&#x8981;&#x5F00;&#x59CB;&#x5EFA;&#x7ACB; Sv39 &#x7684;&#x4E09;&#x7EA7;&#x9875;&#x8868;&#xFF0C;&#x5373;&#x8FDB;&#x5165;&#x5C0F;&#x9875;&#x6A21;&#x5F0F;&#x3002;&#x6574;&#x4F53;&#x7684;&#x89C4;&#x5212;&#x5C31;&#x662F;&#x5148;&#x5206;&#x914D;&#x4E00;&#x4E2A;&#x7A7A;&#x95F2;&#x7269;&#x7406;&#x9875;&#xFF0C;&#x968F;&#x540E;&#x628A;&#x5B83;&#x4F5C;&#x4E3A;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#xFF0C;&#x5EFA;&#x7ACB;&#x4E8C;&#x3001;&#x4E09;&#x7EA7;&#x9875;&#x8868;&#xFF0C;&#x5EFA;&#x7ACB;&#x5185;&#x6838;&#x90E8;&#x5206;&#x865A;&#x62DF;&#x5185;&#x5B58;&#x5230;&#x7269;&#x7406;&#x5185;&#x5B58;&#x7684;&#x5B8C;&#x6574;&#x6620;&#x5C04;&#xFF0C;&#x6700;&#x540E;&#x6FC0;&#x6D3B;&#x65B0;&#x7684;&#x9875;&#x8868;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5148;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x53D8;&#x91CF; <code>pg_dir</code> &#x6307;&#x5411;&#x5F53;&#x524D;&#x9875;&#x76EE;&#x5F55;&#xFF08;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#xFF09;&#x7684;&#x865A;&#x62DF;&#x5730;&#x5740;&#xFF0C;&#x5E76;&#x4E14;&#x8D4B;&#x503C;&#x6307;&#x5411;&#x5148;&#x524D;&#x5EFA;&#x7ACB;&#x7684;&#x5927;&#x9875;&#x9875;&#x8868;&#xFF0C;&#x4E4B;&#x540E;&#x6240;&#x6709;&#x548C;&#x9875;&#x8868;&#x6709;&#x5173;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x90FD;&#x901A;&#x8FC7; <code>pg_dir</code> &#x6765;&#x5904;&#x7406;&#x9875;&#x8868;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5199;&#x51FA;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#x6846;&#x67B6;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/* &#x8FDB;&#x5165; main() &#x65F6;&#x5F00;&#x542F;&#x4E86; SV39 &#x5927;&#x9875;&#x6A21;&#x5F0F;&#xFF0C;&#x6682;&#x65F6;&#x521B;&#x9020;&#x4E00;&#x4E2A;&#x865A;&#x62DF;&#x5730;&#x5740;&#x5230;&#x7269;&#x7406;&#x5730;&#x5740;&#x7684;&#x6620;&#x5C04;&#x8BA9;&#x7A0B;&#x5E8F;&#x8DD1;&#x8D77;&#x6765;&#x3002;
+* &#x73B0;&#x5728;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x9875;&#x76EE;&#x5F55;&#x5E76;&#x5F00;&#x542F;&#x9875;&#x5927;&#x5C0F;&#x4E3A; 4K &#x7684; SV39 &#x5206;&#x9875;&#x3002;*/</span>
+<span class="hljs-keyword">uint64_t</span> page = get_free_page();
+assert(page, <span class="hljs-string">&quot;mem_init(): fail to allocate page&quot;</span>);
+pg_dir = (<span class="hljs-keyword">uint64_t</span> *)VIRTUAL(page);
+map_kernel();
+active_mapping();
+</code></pre>
+<p>&#x6709;&#x4E86;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x6846;&#x67B6;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x505A;&#x7684;&#x81EA;&#x7136;&#x5C31;&#x662F;&#x8865;&#x5168;&#x5176;&#x4E2D;&#x7684;&#x51FD;&#x6570;&#x3002;&#x4E0A;&#x9762;&#x7684; <code>get_free_page()</code> &#x51FD;&#x6570;&#x662F;&#x4E0A;&#x4E00;&#x4E2A;&#x5B9E;&#x9A8C;&#x6240;&#x8BB2;&#x5185;&#x5BB9;&#xFF0C;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#x3002;</p>
+<h3 id="&#x5EFA;&#x7ACB;&#x5185;&#x6838;&#x7684;&#x5185;&#x5B58;&#x6620;&#x5C04;"><a name="&#x5EFA;&#x7ACB;&#x5185;&#x6838;&#x7684;&#x5185;&#x5B58;&#x6620;&#x5C04;" class="anchor-navigation-ex-anchor" href="#&#x5EFA;&#x7ACB;&#x5185;&#x6838;&#x7684;&#x5185;&#x5B58;&#x6620;&#x5C04;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5EFA;&#x7ACB;&#x5185;&#x6838;&#x7684;&#x5185;&#x5B58;&#x6620;&#x5C04;</h3>
+<p>&#x5728;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5B8C;&#x5584; <code>map_kernel()</code> &#x51FD;&#x6570;&#xFF0C;&#x6620;&#x5C04;&#x5185;&#x6838;&#x7269;&#x7406;&#x5185;&#x5B58;&#x6709;&#x4E24;&#x4E2A;&#x90E8;&#x5206;&#x9700;&#x8981;&#x8003;&#x8651;&#xFF1A;</p>
+<ul>
+<li>&#x771F;&#x5B9E;&#x7684;&#x5185;&#x5B58;&#x6240;&#x5728;&#x5730;&#x5740;&#x7A7A;&#x95F4;<ul>
+<li>&#x7269;&#x7406;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#xFF1A;<code>[MEM_START, MEM_END)</code></li>
+<li>&#x865A;&#x62DF;&#x5730;&#x5740;&#x8D77;&#x59CB;&#x5904;&#xFF1A;<code>KERNEL_ADDRESS</code></li>
+<li>&#x6807;&#x5FD7;&#x4F4D;&#xFF1A;&#x4E3A;&#x65B9;&#x4FBF;&#x5185;&#x6838;&#x8BBF;&#x95EE;&#xFF0C;&#x8BBE;&#x4E3A;&#x5185;&#x6838;&#x6001;&#x53EF;&#x8BFB;&#x53EF;&#x5199;&#x53EF;&#x6267;&#x884C;&#x4E14;&#x6709;&#x6548; <code>KERN_RWX | PAGE_VALID</code></li>
+</ul>
+</li>
+<li>&#x8BBE;&#x5907; MMIO &#x5730;&#x5740;&#x7A7A;&#x95F4;<ul>
+<li>&#x7269;&#x7406;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#xFF1A;<code>[DEVICE_START, DEVICE_END)</code></li>
+<li>&#x865A;&#x62DF;&#x5730;&#x5740;&#x8D77;&#x59CB;&#x5904;&#xFF1A;<code>DEVICE_ADDRESS</code></li>
+<li>&#x6807;&#x5FD7;&#x4F4D;&#xFF1A;&#x5185;&#x6838;&#x6001;&#x53EF;&#x8BFB;&#x53EF;&#x5199;&#x4E14;&#x6709;&#x6548; <code>KERN_RW | PAGE_VALID</code></li>
+</ul>
+</li>
+</ul>
+<p>&#x6211;&#x4EEC;&#x7528;&#x51FD;&#x6570; <code>map_pages()</code> &#x6765;&#x5B8C;&#x6210;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/**
+ * @brief &#x5EFA;&#x7ACB;&#x6240;&#x6709;&#x8FDB;&#x7A0B;&#x5171;&#x6709;&#x7684;&#x5185;&#x6838;&#x6620;&#x5C04;
+ *
+ * &#x6240;&#x6709;&#x8FDB;&#x7A0B;&#x53D1;&#x751F;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x3001;&#x4E2D;&#x65AD;&#x3001;&#x5F02;&#x5E38;&#x540E;&#x90FD;&#x4F1A;&#x8FDB;&#x5165;&#x5230;&#x5185;&#x6838;&#x6001;&#xFF0C;&#x56E0;&#x6B64;&#x6240;&#x6709;&#x8FDB;&#x7A0B;&#x7684;&#x865A;&#x62DF;&#x5730;&#x5740;&#x7A7A;&#x95F4;
+ * &#x90FD;&#x8981;&#x5305;&#x542B;&#x5185;&#x6838;&#x7684;&#x90E8;&#x5206;&#x3002;
+ *
+ * &#x672C;&#x51FD;&#x6570;&#x4EC5;&#x521B;&#x5EFA;&#x6620;&#x5C04;&#xFF0C;&#x4E0D;&#x4F1A;&#x4FEE;&#x6539; mem_map[] &#x5F15;&#x7528;&#x8BA1;&#x6570;
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">map_kernel</span><span class="hljs-params">()</span>
+</span>{
+    map_pages(DEVICE_START, DEVICE_END, DEVICE_ADDRESS, KERN_RW | PAGE_VALID);
+    map_pages(MEM_START, MEM_END, KERNEL_ADDRESS, KERN_RWX | PAGE_VALID);
+}
+</code></pre>
+<p>&#x968F;&#x540E;&#x4FBF;&#x662F;&#x5B9E;&#x73B0; <code>map_pages()</code> &#x51FD;&#x6570;&#xFF0C;&#x4F7F;&#x7528;&#x5FAA;&#x73AF;&#x4ECE;&#x7269;&#x7406;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x4ECE;&#x5934;&#x5FAA;&#x73AF;&#x5230;&#x5C3E;&#xFF0C;&#x5229;&#x7528; <code>put_page()</code> &#x5BF9;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x5185;&#x7684;&#x6BCF;&#x4E00;&#x9875;&#xFF0C;&#x90FD;&#x5EFA;&#x7ACB;&#x5176;&#x865A;&#x62DF;&#x5730;&#x5740;&#x5230;&#x7269;&#x7406;&#x5730;&#x5740;&#x7684;&#x6620;&#x5C04;&#xFF0C;&#x5373;&#x521B;&#x5EFA;&#x9875;&#x8868;&#xFF0C;&#x586B;&#x5199;&#x5BF9;&#x5E94;&#x7684;&#x9875;&#x8868;&#x9879;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/**
+ * @brief &#x5C06;&#x7269;&#x7406;&#x5730;&#x5740;&#x533A;&#x57DF;&#x6620;&#x5C04;&#x5230;&#x865A;&#x62DF;&#x5730;&#x5740;&#x533A;&#x57DF;
+ *
+ * @param paddr_start &#x8D77;&#x59CB;&#x7269;&#x7406;&#x5730;&#x5740;
+ * @param paddr_end &#x7ED3;&#x675F;&#x7269;&#x7406;&#x5730;&#x5740;
+ * @param vaddr &#x8D77;&#x59CB;&#x865A;&#x62DF;&#x5730;&#x5740;
+ * @param flag PTE &#x6807;&#x5FD7;&#x4F4D;
+ * @note
+ *      - &#x5730;&#x5740;&#x5FC5;&#x987B;&#x6309;&#x9875;&#x5BF9;&#x9F50;
+ *      - &#x4EC5;&#x5EFA;&#x7ACB;&#x6620;&#x5C04;&#xFF0C;&#x4E0D;&#x4FEE;&#x6539;&#x7269;&#x7406;&#x9875;&#x5F15;&#x7528;&#x8BA1;&#x6570;
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">map_pages</span><span class="hljs-params">(uint64_t paddr_start, uint64_t paddr_end, uint64_t vaddr, uint8_t flag)</span>
+</span>{
+    <span class="hljs-keyword">while</span> (paddr_start &lt; paddr_end) {
+        put_page(paddr_start, vaddr, flag);
+        paddr_start += PAGE_SIZE;
+        vaddr += PAGE_SIZE;
+    }
+}
+</code></pre>
+<p>&#x5728;&#x5C42;&#x5C42;&#x5C01;&#x88C5;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x7EC8;&#x4E8E;&#x6765;&#x5230;&#x6700;&#x5185;&#x5C42;&#xFF0C;&#x8981;&#x5B9E;&#x73B0; <code>put_page()</code> &#x51FD;&#x6570;&#x4E86;&#x3002;&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x6620;&#x5C04;&#x7684;&#x8FC7;&#x7A0B;&#x5C31;&#x662F;&#x904D;&#x5386;&#x9875;&#x8868;&#xFF0C;&#x82E5;&#x9875;&#x8868;&#x4E0D;&#x5B58;&#x5728;&#x5C31;&#x521B;&#x5EFA;&#xFF0C;&#x76F4;&#x5230;&#x6700;&#x540E;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#xFF0C;&#x5728;&#x904D;&#x5386;&#x8FC7;&#x7A0B;&#x4E2D;&#x5C06;&#x7269;&#x7406;&#x9875;&#x53F7;&#x548C;&#x6807;&#x5FD7;&#x4F4D;&#x5199;&#x8FDB; PTE&#x3002;</p>
+<ol>
+<li>&#x5728;&#x6620;&#x5C04;&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x9996;&#x5148;&#x8981;&#x5224;&#x5B9A;&#x7269;&#x7406;&#x5730;&#x5740;&#x662F;&#x5426;&#x6309;&#x9875;&#x5BF9;&#x9F50;<ul>
+<li>&#x5373;&#x67D0;&#x7269;&#x7406;&#x5730;&#x5740;&#x662F;&#x5426;&#x80FD;&#x4F5C;&#x4E3A;&#x4E00;&#x9875;&#x7684;&#x5F00;&#x59CB;&#xFF0C;&#x4E0D;&#x6309;&#x9875;&#x5BF9;&#x9F50;&#x65E0;&#x6CD5;&#x4F7F;&#x7528;&#x9875;&#x8868;&#x9879;&#x6765;&#x8868;&#x793A;&#x6620;&#x5C04;&#x3002;</li>
+</ul>
+</li>
+<li>&#x6839;&#x636E;&#x865A;&#x62DF;&#x5730;&#x5740;&#x7A7A;&#x95F4;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x83B7;&#x53D6;&#x4E09;&#x7EA7;&#x865A;&#x9875;&#x53F7;&#x3002;</li>
+<li>&#x4ECE;&#x9875;&#x76EE;&#x5F55;&#x5F00;&#x59CB;&#xFF0C;&#x4EE5;&#x865A;&#x9875;&#x53F7;&#x4E3A;&#x7D22;&#x5F15;&#xFF0C;&#x67E5;&#x8BE2;&#x5728;&#x7B2C;&#x4E00;&#x3001;&#x7B2C;&#x4E8C;&#x7EA7;&#x9875;&#x8868;&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x9875;&#x8868;&#x9879;&#x662F;&#x5426;&#x6709;&#x6548;&#xFF08;&#x4E0D;&#x5B58;&#x5728;&#x5373;&#x4E3A; 0&#xFF09;&#x3002;&#x82E5;&#x65E0;&#x6548;&#xFF0C;&#x5219;&#x7533;&#x8BF7;&#x4E00;&#x9875;&#x7A7A;&#x95F2;&#x7269;&#x7406;&#x9875;&#x7528;&#x4E8E;&#x5B58;&#x653E;&#x4E0B;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#xFF0C;&#x5E76;&#x5C06;&#x5176;&#x7269;&#x7406;&#x5730;&#x5740;&#x5199;&#x5165;&#x9875;&#x8868;&#x9879;&#xFF0C;&#x5C06;&#x6709;&#x6548;&#x4F4D;&#x7F6E;&#x4F4D;&#x3002;&#x968F;&#x540E;&#x6839;&#x636E;&#x5F53;&#x524D;&#x9875;&#x8868;&#x9879;&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#xFF0C;&#x91CD;&#x590D; 3</li>
+<li>&#x5C06;&#x7B2C;&#x4E09;&#x7EA7;&#x9875;&#x8868;&#x7684;&#x9875;&#x8868;&#x9879;&#x7684;&#x7269;&#x7406;&#x5730;&#x5740;&#x57DF;&#x8BBE;&#x7F6E;&#x4E3A;&#x5F85;&#x6620;&#x5C04;&#x7684;&#x7269;&#x7406;&#x5730;&#x5740;&#xFF0C;&#x6807;&#x5FD7;&#x4F4D;&#x8BBE;&#x7F6E;&#x4E3A;&#x7ED9;&#x5B9A;&#x6807;&#x5FD7;&#x4F4D;</li>
+<li>&#x8FD4;&#x56DE;&#x5B8C;&#x6210;&#x6620;&#x5C04;&#x7684;&#x7269;&#x7406;&#x5730;&#x5740;&#xFF08;&#x8FD9;&#x4E00;&#x8FD4;&#x56DE;&#x503C;&#x6682;&#x672A;&#x88AB;&#x4F7F;&#x7528;&#xFF0C;&#x4E3A;&#x4EE5;&#x540E;&#x9884;&#x7559;&#xFF09;</li>
+</ol>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x7B2C;&#x4E09;&#x6B65;&#x4E2D;&#xFF0C;&#x6839;&#x636E;&#x5F53;&#x524D;&#x9875;&#x8868;&#x9879;&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x5C06;&#x9875;&#x8868;&#x9879;&#x4E2D;&#x7684;&#x7269;&#x7406;&#x9875;&#x53F7;&#x6269;&#x5C55;&#x5230;&#x5B8C;&#x6574;&#x7269;&#x7406;&#x5730;&#x5740;&#x5E76;&#x8F6C;&#x6210;&#x865A;&#x62DF;&#x5730;&#x5740;&#xFF0C;&#x56E0;&#x4E3A;&#x867D;&#x7136; CPU &#x7684; MMU&#xFF08;&#x5185;&#x5B58;&#x5904;&#x7406;&#x5355;&#x5143;&#xFF09;&#x6BCF;&#x6B21;&#x8BFB;&#x53D6;&#x4E0B;&#x4E00;&#x7EA7;&#x9875;&#x8868;&#x5730;&#x5740;&#x65F6;&#x5C06;&#x5176;&#x89C6;&#x4F5C;&#x7269;&#x7406;&#x5730;&#x5740;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x662F;&#x4EBA;&#x5DE5;&#x8BBF;&#x95EE;&#x8FD9;&#x4E00;&#x5730;&#x5740;&#xFF0C;&#x5E76;&#x672A;&#x501F;&#x52A9; MMU &#x81EA;&#x52A8;&#x5904;&#x7406;&#x9875;&#x8868;&#x7684;&#x673A;&#x5236;&#xFF0C;&#x4E14;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x5DF2;&#x7ECF;&#x5F00;&#x542F;&#x4E86;&#x865A;&#x62DF;&#x5206;&#x9875;&#xFF0C;&#x6240;&#x6709;&#x8BBF;&#x95EE;&#x7684;&#x5730;&#x5740;&#x90FD;&#x662F;&#x6309;&#x7167;&#x865A;&#x62DF;&#x5730;&#x5740;&#x5904;&#x7406;&#xFF0C;&#x6240;&#x4EE5;&#x5C06;&#x5176;&#x8F6C;&#x4E3A;&#x865A;&#x62DF;&#x5730;&#x5740;&#x540E;&#x624D;&#x80FD;&#x8BBF;&#x95EE;&#x5230;&#x6B63;&#x786E;&#x4F4D;&#x7F6E;&#x3002;</p>
+<p>&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF0C;&#x5176;&#x4E2D; <code>tmp &gt;&gt; 2</code> &#x662F; <code>tmp &gt;&gt; 12 &lt;&lt; 10</code> &#x7684;&#x7F29;&#x5199;&#xFF0C;&#x539F;&#x56E0;&#x8BF7;&#x53C2;&#x8003; <a href="intro.html#sv39">&#x9875;&#x8868;&#x9879;</a> &#x7684;&#x683C;&#x5F0F;&#xFF0C;<code>page &gt;&gt; 2</code> &#x540C;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/**
+ * @brief &#x5EFA;&#x7ACB;&#x7269;&#x7406;&#x5730;&#x5740;&#x548C;&#x865A;&#x62DF;&#x5730;&#x5740;&#x95F4;&#x7684;&#x6620;&#x5C04;
+ *
+ * &#x672C;&#x51FD;&#x6570;&#x4EC5;&#x4EC5;&#x5EFA;&#x7ACB;&#x6620;&#x5C04;&#xFF0C;&#x4E0D;&#x4FEE;&#x6539;&#x7269;&#x7406;&#x9875;&#x5F15;&#x7528;&#x8BA1;&#x6570;
+ * &#x5F53;&#x5206;&#x914D;&#x7269;&#x7406;&#x9875;&#x5931;&#x8D25;&#xFF08;&#x521B;&#x5EFA;&#x9875;&#x8868;&#xFF09;&#x65F6; panic&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x9700;&#x8981;&#x68C0;&#x6D4B;&#x8FD4;&#x56DE;&#x503C;&#x3002;
+ *
+ * @param page   &#x7269;&#x7406;&#x5730;&#x5740;
+ * @param addr   &#x865A;&#x62DF;&#x5730;&#x5740;
+ * @param flag   &#x6807;&#x5FD7;&#x4F4D;
+ * @return &#x7269;&#x7406;&#x5730;&#x5740; page
+ * @see panic(), map_kernel()
+ */</span>
+<span class="hljs-keyword">uint64_t</span> put_page(<span class="hljs-keyword">uint64_t</span> page, <span class="hljs-keyword">uint64_t</span> addr, <span class="hljs-keyword">uint8_t</span> flag)
+{
+    assert((page &amp; (PAGE_SIZE - <span class="hljs-number">1</span>)) == <span class="hljs-number">0</span>,
+           <span class="hljs-string">&quot;put_page(): Try to put unaligned page %p to %p&quot;</span>, page, addr);
+    <span class="hljs-keyword">uint64_t</span> vpns[<span class="hljs-number">3</span>] = { GET_VPN1(addr), GET_VPN2(addr), GET_VPN3(addr) };
+    <span class="hljs-keyword">uint64_t</span> *page_table = pg_dir;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> level = <span class="hljs-number">0</span>; level &lt; <span class="hljs-number">2</span>; ++level) {
+        <span class="hljs-keyword">uint64_t</span> idx = vpns[level];
+        <span class="hljs-keyword">if</span> (!(page_table[idx] &amp; PAGE_VALID)) {
+            <span class="hljs-keyword">uint64_t</span> tmp;
+            assert(tmp = get_free_page(),
+                   <span class="hljs-string">&quot;put_page(): Memory exhausts&quot;</span>);
+            page_table[idx] = (tmp &gt;&gt; <span class="hljs-number">2</span>) | PAGE_VALID;
+        }
+        page_table =
+            (<span class="hljs-keyword">uint64_t</span> *)VIRTUAL(GET_PAGE_ADDR(page_table[idx]));
+    }
+    page_table[vpns[<span class="hljs-number">2</span>]] = (page &gt;&gt; <span class="hljs-number">2</span>) | flag;
+    <span class="hljs-keyword">return</span> page;
+}
+</code></pre>
+<h3 id="&#x6FC0;&#x6D3B;&#x65B0;&#x9875;&#x8868;"><a name="&#x6FC0;&#x6D3B;&#x65B0;&#x9875;&#x8868;" class="anchor-navigation-ex-anchor" href="#&#x6FC0;&#x6D3B;&#x65B0;&#x9875;&#x8868;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6FC0;&#x6D3B;&#x65B0;&#x9875;&#x8868;</h3>
+<p>&#x6FC0;&#x6D3B;&#x65B0;&#x9875;&#x8868;&#x5C31;&#x5F88;&#x7B80;&#x5355;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x505A;&#x7684;&#x5C31;&#x662F;&#x91CD;&#x65B0;&#x586B;&#x5199; <code>satp</code> &#x5BC4;&#x5B58;&#x5668;&#x5E76;&#x5237;&#x65B0; TLB&#xFF0C;&#x5177;&#x4F53;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x53C2;&#x8003; <code>entray.s</code> &#x4E2D;&#x7684;&#x5199;&#x6CD5;&#x4E0E; lab1 &#x4E2D;&#x5185;&#x8054;&#x6C47;&#x7F16;&#x7684;&#x5199;&#x6CD5;&#x3002;</p>
+<p>&#x4E0D;&#x8FC7;&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x987A;&#x4FBF;&#x7F6E;&#x4F4D; status &#x5BC4;&#x5B58;&#x5668; SUM &#x6807;&#x5FD7;&#x4F4D;&#xFF0C;&#x5141;&#x8BB8;&#x5185;&#x6838;&#x8BFB;&#x5199;&#x7528;&#x6237;&#x6001;&#x5185;&#x5B58;&#xFF0C;&#x4E3A;&#x4E4B;&#x540E;&#x7684;&#x7528;&#x6237;&#x6001;&#x8FDB;&#x7A0B;&#x521B;&#x5EFA;&#x505A;&#x51C6;&#x5907;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x7ED9;&#x4E86;&#x5185;&#x6838;&#x8BFB;&#x5199;&#x7528;&#x6237;&#x6001;&#x5185;&#x5B58;&#x7684;&#x7279;&#x6743;&#xFF0C;&#x8FD9;&#x6837;&#x505A;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x4E00;&#x5B9A;&#x7684;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF0C;&#x4F46;&#x65B9;&#x4FBF;&#x4E86;&#x5E94;&#x7528;&#x6001;&#x548C;&#x5185;&#x6838;&#x6001;&#x4E4B;&#x95F4;&#x7684;&#x6570;&#x636E;&#x4F20;&#x9001;&#x3002;</p>
+<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x4ECE;&#x7269;&#x7406;&#x5730;&#x5740;&#x8FC7;&#x6E21;&#x5230;&#x4E86;&#x865A;&#x62DF;&#x5730;&#x5740;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/**
+ * @brief &#x6FC0;&#x6D3B;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x9875;&#x8868;
+ * @note &#x7F6E;&#x4F4D; status &#x5BC4;&#x5B58;&#x5668; SUM &#x6807;&#x5FD7;&#x4F4D;&#xFF0C;&#x5141;&#x8BB8;&#x5185;&#x6838;&#x8BFB;&#x5199;&#x7528;&#x6237;&#x6001;&#x5185;&#x5B58;
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">active_mapping</span><span class="hljs-params">()</span>
+</span>{
+    __asm__ __volatile__(<span class="hljs-string">&quot;csrs sstatus, %0\n\t&quot;</span>
+                 <span class="hljs-string">&quot;csrw satp, %1\n\t&quot;</span>
+                 <span class="hljs-string">&quot;sfence.vma\n\t&quot;</span>
+                 : <span class="hljs-comment">/* empty output list */</span>
+                 : <span class="hljs-string">&quot;r&quot;</span>(<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">18</span>),
+                   <span class="hljs-string">&quot;r&quot;</span>((PHYSICAL((<span class="hljs-keyword">uint64_t</span>)pg_dir) &gt;&gt; <span class="hljs-number">12</span>) |
+                   ((<span class="hljs-keyword">uint64_t</span>)<span class="hljs-number">8</span> &lt;&lt; <span class="hljs-number">60</span>)));
+}
+</code></pre>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/ytf4425" target="_blank">Hanabi</a>&#xFF0C;&#x4F7F;&#x7528;<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">&#x7F72;&#x540D;-&#x975E;&#x5546;&#x4E1A;&#x6027;&#x4F7F;&#x7528;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0 &#x56FD;&#x9645;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2023-03-14 01:12:40 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="header.html" class="navigation navigation-prev " aria-label="Previous page: 基础头文件准备">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="manage.html" class="navigation navigation-next " aria-label="Next page: 其他管理过程">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"初始化过程","level":"1.6.3","depth":2,"next":{"title":"其他管理过程","level":"1.6.4","depth":2,"path":"virtualmm/manage.md","ref":"virtualmm/manage.md","articles":[]},"previous":{"title":"基础头文件准备","level":"1.6.2","depth":2,"path":"virtualmm/header.md","ref":"virtualmm/header.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","sharing-plus","github-buttons","anchor-navigation-ex","page-footer-ex","splitter","copy-code-button","expandable-chapters-small","katex"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-footer-ex":{"copyright":"By [Hanabi](https://github.com/ytf4425)，使用[署名-非商业性使用-相同方式共享 4.0 国际](http://creativecommons.org/licenses/by-nc-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"github-buttons":{"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{"all":["douban","facebook","google","instapaper","linkedin","twitter","weibo","qq","qzone","viber","whatsapp"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Hanabi","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Code an OS Handbook","language":"zh-hans","gitbook":"*"},"file":{"path":"virtualmm/init.md","mtime":"2023-03-14T01:12:40.514Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-14T01:13:16.286Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

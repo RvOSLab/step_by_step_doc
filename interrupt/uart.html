@@ -1,0 +1,1165 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>UART · Code an OS Handbook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Hanabi">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-footer-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="goldfish_RTC.html" />
+    
+    
+    <link rel="prev" href="plic.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Code an OS Project
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../ready/">
+            
+                <a href="../ready/">
+            
+                    
+                    准备
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../ready/intro.html">
+            
+                <a href="../ready/intro.html">
+            
+                    
+                    总体介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../ready/env.html">
+            
+                <a href="../ready/env.html">
+            
+                    
+                    环境部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../helloworld/">
+            
+                <a href="../helloworld/">
+            
+                    
+                    你好，世界
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../helloworld/main.html">
+            
+                <a href="../helloworld/main.html">
+            
+                    
+                    “主”函数的编写
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../helloworld/packaging.html">
+            
+                <a href="../helloworld/packaging.html">
+            
+                    
+                    ecall 指令的封装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../helloworld/boot.html">
+            
+                <a href="../helloworld/boot.html">
+            
+                    
+                    操作系统的启动
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../helloworld/make.html">
+            
+                <a href="../helloworld/make.html">
+            
+                    
+                    拼搭我们的系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../helloworld/linker_script.html">
+            
+                <a href="../helloworld/linker_script.html">
+            
+                    
+                    附录：链接脚本 Linker Script
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    中断
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="plic.html">
+            
+                <a href="plic.html">
+            
+                    
+                    PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.2" data-path="uart.html">
+            
+                <a href="uart.html">
+            
+                    
+                    UART
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="goldfish_RTC.html">
+            
+                <a href="goldfish_RTC.html">
+            
+                    
+                    RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="sunxi_plic.html">
+            
+                <a href="sunxi_plic.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 PLIC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="sunxi_RTC.html">
+            
+                <a href="sunxi_RTC.html">
+            
+                    
+                    驱动全志哪吒 D1 开发板的 RTC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    [物理内存管理]
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../virtualmm/">
+            
+                <a href="../virtualmm/">
+            
+                    
+                    虚拟内存管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../virtualmm/intro.html">
+            
+                <a href="../virtualmm/intro.html">
+            
+                    
+                    基础介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../virtualmm/header.html">
+            
+                <a href="../virtualmm/header.html">
+            
+                    
+                    基础头文件准备
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../virtualmm/init.html">
+            
+                <a href="../virtualmm/init.html">
+            
+                    
+                    初始化过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../virtualmm/manage.html">
+            
+                <a href="../virtualmm/manage.html">
+            
+                    
+                    其他管理过程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../process/">
+            
+                <a href="../process/">
+            
+                    
+                    进程管理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../process/task0_init.html">
+            
+                <a href="../process/task0_init.html">
+            
+                    
+                    初始化 0 号进程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >UART</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#&#x9A71;&#x52A8;-uart"><b></b>&#x9A71;&#x52A8; UART</a></li><ul><li><span class="title-icon "></span><a href="#&#x4ECB;&#x7ECD;"><b></b>&#x4ECB;&#x7ECD;</a></li><ul><li><span class="title-icon "></span><a href="#&#x5BC4;&#x5B58;&#x5668;&#x53CA;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;"><b></b>&#x5BC4;&#x5B58;&#x5668;&#x53CA;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;</a></li><li><span class="title-icon "></span><a href="#uart-&#x64CD;&#x4F5C;&#x6A21;&#x5F0F;"><b></b>UART &#x64CD;&#x4F5C;&#x6A21;&#x5F0F;</a></li></ul><li><span class="title-icon "></span><a href="#&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"><b></b>&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;</a></li><ul><li><span class="title-icon "></span><a href="#uart-&#x63A7;&#x5236;&#x5668;&#x521D;&#x59CB;&#x5316;"><b></b>UART &#x63A7;&#x5236;&#x5668;&#x521D;&#x59CB;&#x5316;</a></li><li><span class="title-icon "></span><a href="#&#x8F6E;&#x8BE2;&#x6A21;&#x5F0F;&#x4E0B;&#x53D1;&#x9001;&#x6570;&#x636E;"><b></b>&#x8F6E;&#x8BE2;&#x6A21;&#x5F0F;&#x4E0B;&#x53D1;&#x9001;&#x6570;&#x636E;</a></li><li><span class="title-icon "></span><a href="#&#x4E2D;&#x65AD;&#x6A21;&#x5F0F;&#x4E2D;&#x63A5;&#x6536;&#x6570;&#x636E;"><b></b>&#x4E2D;&#x65AD;&#x6A21;&#x5F0F;&#x4E2D;&#x63A5;&#x6536;&#x6570;&#x636E;</a></li></ul></ul></ul></div><a href="#&#x9A71;&#x52A8;-uart" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x9A71;&#x52A8;-uart"><a name="&#x9A71;&#x52A8;-uart" class="anchor-navigation-ex-anchor" href="#&#x9A71;&#x52A8;-uart"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9A71;&#x52A8; UART</h1>
+<h2 id="&#x4ECB;&#x7ECD;"><a name="&#x4ECB;&#x7ECD;" class="anchor-navigation-ex-anchor" href="#&#x4ECB;&#x7ECD;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4ECB;&#x7ECD;</h2>
+<p>&#x901A;&#x8FC7;&#x8BFB;&#x53D6;&#x8BBE;&#x5907;&#x6811;&#x4FE1;&#x606F;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x77E5;&#x9053; QEMU &#x4F7F;&#x7528;&#x7684; UART &#x8BBE;&#x5907;&#x4E0E; ns16550a &#x517C;&#x5BB9;&#xFF0C;&#x9605;&#x8BFB;&#x5168;&#x5FD7;&#x54EA;&#x5412; D1 &#x5F00;&#x53D1;&#x677F;&#x7684;&#x6587;&#x6863;&#x53EF;&#x77E5;&#x5B83;&#x7684; UART &#x8BBE;&#x5907;&#x4E0E; ns16550a &#x4E0D;&#x5B8C;&#x5168;&#x517C;&#x5BB9;&#xFF08;&#x8BF7;&#x6CE8;&#x610F;&#x4E0B;&#x6587;&#x5177;&#x4F53;&#x63D0;&#x5230;&#x4E4B;&#x5904;&#xFF09;&#x3002;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x53C2;&#x8003; ns16550a &#x7684;&#x6587;&#x6863;&#x7F16;&#x5199;&#x4E24;&#x8005;&#x7684;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x3002;&#x5176;&#x4E2D;&#x5BF9;&#x4E8E; D1 &#x5F00;&#x53D1;&#x677F;&#xFF0C;&#x6211;&#x4EEC;&#x6682;&#x65F6;&#x53EA;&#x5173;&#x6CE8; UART0&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4E3B;&#x677F;&#x4E0A;&#x7684;&#x8C03;&#x8BD5;&#x63A5;&#x53E3;&#x3002;</p>
+<pre><code>// QEMU Device Tree
+uart@10000000 {
+    interrupts = &lt;0x0a&gt;;
+    interrupt-parent = &lt;0x03&gt;;
+    clock-frequency = &quot;\08@&quot;;
+    reg = &lt;0x00 0x10000000 0x00 0x100&gt;;
+    compatible = &quot;ns16550a&quot;;
+};
+</code></pre><p>&#x5173;&#x4E8E; ns16550a&#xFF0C;&#x8FD9;&#x91CC;&#x4E3B;&#x8981;&#x53C2;&#x8003; <em><a href="https://www.lammertbies.nl/comm/info/serial-uart" target="_blank">Serial UART information</a></em>&#x3001;<em>D1_User_Manual_V0.1(Draft Version)</em>&#x4E0E;<em><a href="https://mirrors.aliyun.com/loongson/loongson1c_bsp/%e9%be%99%e8%8a%af1C%e5%a4%84%e7%90%86%e5%99%a8%e7%94%a8%e6%88%b7%e6%89%8b%e5%86%8cV14.pdf" target="_blank">&#x9F99;&#x82AF; 1C300 &#x5904;&#x7406;&#x5668;&#x7528;&#x6237;&#x624B;&#x518C; 1.4 &#x7248;</a></em>&#xFF0C;&#x5176;&#x4E2D;&#x9F99;&#x82AF; 1C300 &#x4E2D;&#x6240;&#x7528; UART &#x82AF;&#x7247;&#x4E5F;&#x662F; 16550a &#x517C;&#x5BB9;&#x82AF;&#x7247;&#xFF0C;&#x53EF;&#x4F9B;&#x53C2;&#x8003;&#x3002;</p>
+<p>UART &#x5168;&#x79F0;&#x901A;&#x7528;&#x5F02;&#x6B65;&#x63A5;&#x6536;&#x53D1;&#x5C04;&#x5668;&#xFF0C;&#x5B83;&#x63D0;&#x4F9B;&#x4E0E;&#x5916;&#x90E8;&#x8BBE;&#x5907;&#x3001;&#x8C03;&#x5236;&#x89E3;&#x8C03;&#x5668;&#xFF08;&#x6570;&#x636E;&#x8F7D;&#x6CE2;&#x8BBE;&#x5907;&#x3001;DCE&#xFF09;&#x7684;&#x5F02;&#x6B65;&#x4E32;&#x884C;&#x901A;&#x4FE1;&#x3002;&#x5B83;&#x5C06;&#x5916;&#x8BBE;&#x63A5;&#x6536;&#x7684;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x4E32;-&#x5E76;&#x884C;&#x8F6C;&#x6362;&#xFF0C;&#x5E76;&#x5C06;&#x8F6C;&#x6362;&#x540E;&#x7684;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x5230;&#x5185;&#x90E8;&#x603B;&#x7EBF;&#x3002;&#x5B83;&#x4E5F;&#x5C06;&#x4F20;&#x8F93;&#x5230;&#x5916;&#x8BBE;&#x7684;&#x6570;&#x636E;&#x6267;&#x884C;&#x5E76;-&#x4E32;&#x884C;&#x8F6C;&#x6362;&#x3002;</p>
+<p>FIFO &#x662F;&#x201C;First-In First-Out&#x201D;&#x7684;&#x7F29;&#x5199;&#xFF0C;&#x5728;&#x6B64;&#x5904;&#x8BED;&#x5883;&#x4E0B;&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x5177;&#x6709;&#x5148;&#x5165;&#x5148;&#x51FA;&#x7279;&#x70B9;&#x7684;&#x7F13;&#x51B2;&#x533A;&#xFF0C;&#x8BBE;&#x8BA1;&#x76EE;&#x7684;&#x662F;&#x63D0;&#x9AD8;&#x4E32;&#x53E3;&#x7684;&#x901A;&#x8BAF;&#x6027;&#x80FD;&#xFF0C;&#x907F;&#x514D;&#x9891;&#x7E41;&#x8FDB;&#x5165;&#x4E2D;&#x65AD;&#x5360;&#x7528;CPU&#x8D44;&#x6E90;&#xFF0C;&#x6216;&#x56E0;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x53CA;&#x65F6;&#x8BFB;&#x8D70;&#x6570;&#x636E;&#xFF0C;&#x4E0B;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x6570;&#x636E;&#x8986;&#x76D6;&#x5148;&#x524D;&#x6570;&#x636E;&#xFF0C;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x4E22;&#x5931;&#x3002;</p>
+<p>&#x4F7F;&#x7528; FIFO&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x8FDE;&#x7EED;&#x6536;&#x53D1;&#x82E5;&#x5E72;&#x4E2A;&#x6570;&#x636E;&#x540E;&#x624D;&#x4EA7;&#x751F;&#x4E00;&#x6B21;&#x4E2D;&#x65AD;&#xFF0C;&#x7136;&#x540E;&#x4E00;&#x8D77;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x63D0;&#x9AD8;&#x63A5;&#x6536;&#x6548;&#x7387;&#xFF0C;&#x7F3A;&#x70B9;&#x662F;&#x5B9E;&#x65F6;&#x6027;&#x53D7;&#x5F71;&#x54CD;&#x3002;&#x5982;&#x679C; FIFO &#x4E2D;&#x7684;&#x6570;&#x636E;&#x6CA1;&#x6709;&#x8FBE;&#x5230;&#x6307;&#x5B9A;&#x957F;&#x5EA6;&#x800C;&#x65E0;&#x6CD5;&#x4EA7;&#x751F;&#x4E2D;&#x65AD;&#xFF0C;&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x63A5;&#x6536;&#x8D85;&#x65F6;&#x4E2D;&#x65AD;&#xFF0C;&#x5373;&#x5728;&#x4E00;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x5185;&#x6CA1;&#x6709;&#x63A5;&#x6536;&#x5230;&#x6570;&#x636E;&#x4F1A;&#x8FDB;&#x5165;&#x4E2D;&#x65AD;&#xFF0C;&#x628A;&#x4E0D;&#x8DB3; FIFO &#x957F;&#x5EA6;&#x7684;&#x6570;&#x636E;&#x8BFB;&#x53D6;&#x5B8C;&#x3002;</p>
+<p>&#x89E3;&#x51B3;&#x5B9E;&#x65F6;&#x6027;&#x7684;&#x95EE;&#x9898;&#xFF1A;&#x4FDD;&#x6301;&#x4E00;&#x4E2A;&#x5B57;&#x8282;&#x8FDB;&#x4E00;&#x6B21;&#x63A5;&#x6536;&#x4E2D;&#x65AD;&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x5B9E;&#x65F6;&#x6027;&#x3002;&#x628A; FIFO &#x6253;&#x5F00;&#xFF0C;&#x5728;&#x63A5;&#x6536;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x5B8C;&#x540E;&#x53BB;&#x5224;&#x65AD;&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#x662F;&#x5426;&#x4ECD;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x82E5;&#x6709;&#x5219;&#x7EE7;&#x7EED;&#x8BFB;&#x5165;&#xFF0C;&#x9632;&#x6B62;&#x6570;&#x636E;&#x4E22;&#x5931;&#xFF0C;&#x6B64;&#x65F6;&#x4E0D;&#x4F1A;&#x6709;&#x6570;&#x636E;&#x8FC7;&#x77ED;&#x65E0;&#x6CD5;&#x4EA7;&#x751F;&#x4E2D;&#x65AD;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p>D1 &#x5F00;&#x53D1;&#x677F;&#x7684; UART &#x82AF;&#x7247;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x4E2A;&#x7279;&#x6027;&#xFF1A;</p>
+<ul>
+<li>&#x517C;&#x5BB9; 16550 UART</li>
+<li>&#x6709;&#x4E24;&#x4E2A;&#x72EC;&#x7ACB;&#x7684; FIFO&#xFF1A;&#x63A5;&#x6536; FIFO &#x548C;&#x53D1;&#x9001; FIFO&#xFF0C;UART0 &#x4E2D;&#x6BCF;&#x4E2A;&#x90FD;&#x662F; 64 bytes</li>
+<li>&#x4ECE; APB &#x603B;&#x7EBF;&#x65F6;&#x949F;&#x83B7;&#x5F97;&#x5DE5;&#x4F5C;&#x53C2;&#x8003;&#x65F6;&#x949F;&#xFF08;&#x5FFD;&#x7565;&#xFF09;</li>
+<li>RS-232 &#x5B57;&#x7B26;&#x7684; 5 &#x5230; 8 &#x4F4D;&#x6570;&#x636E;&#x4F4D;&#xFF0C;&#x6216; RS-485 &#x683C;&#x5F0F;&#x7684; 9 &#x4F4D;</li>
+<li>&#x652F;&#x6301; 1&#x3001;1.5 &#x6216; 2 &#x4F4D;&#x505C;&#x6B62;&#x4F4D;</li>
+<li>&#x53EF;&#x7F16;&#x7A0B;&#x7684;&#x6821;&#x9A8C;&#xFF08;&#x5947;&#x6821;&#x9A8C;&#x3001;&#x5076;&#x6821;&#x9A8C;&#x6216;&#x4E0D;&#x6821;&#x9A8C;&#xFF09;</li>
+<li>&#x652F;&#x6301; DMA</li>
+<li>&#x652F;&#x6301;&#x8F6F;&#x4EF6;/&#x786C;&#x4EF6;&#x6D41;&#x63A7;&#x5236;</li>
+</ul>
+<h3 id="&#x5BC4;&#x5B58;&#x5668;&#x53CA;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;"><a name="&#x5BC4;&#x5B58;&#x5668;&#x53CA;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;" class="anchor-navigation-ex-anchor" href="#&#x5BC4;&#x5B58;&#x5668;&#x53CA;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5BC4;&#x5B58;&#x5668;&#x53CA;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x8BBE;&#x8BA1;</h3>
+<p>&#x5BC4;&#x5B58;&#x5668;&#x53C2;&#x8003; D1 &#x6587;&#x6863;&#x7B2C; 9.2.5 &#x8282;&#x5BC4;&#x5B58;&#x5668;&#x5217;&#x8868;&#x4E0E; 9.2.6 &#x8282;&#x5BC4;&#x5B58;&#x5668;&#x63CF;&#x8FF0;&#x3002;</p>
+<ul>
+<li>QEMU&#xFF1A;&#x53EA;&#x6709;&#x4ECE; <code>UART_RBR</code> &#x5230; <code>UART_LSR</code> &#x7684;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x5168;&#x90E8;&#x8FD9;&#x4E9B;&#x5BC4;&#x5B58;&#x5668;&#x3002;<ul>
+<li>&#x5BC4;&#x5B58;&#x5668;&#x5BBD;&#x5EA6;&#x4E3A; 8bit</li>
+<li>&#x5176;&#x4F59;&#x5BC4;&#x5B58;&#x5668;&#x5747;&#x4E3A;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;</li>
+</ul>
+</li>
+<li>&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#xFF1A;&#x5BF9;&#x4E8E;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x6211;&#x4EEC;&#x53EA;&#x4F7F;&#x7528;&#x4ECE; <code>UART_RBR</code> &#x5230; <code>UART_LSR</code> &#x7684;&#x5BC4;&#x5B58;&#x5668;&#x4E0E; <code>UART_HALT</code> &#x5BC4;&#x5B58;&#x5668;&#x3002;<ul>
+<li>&#x5BC4;&#x5B58;&#x5668;&#x5BBD;&#x5EA6;&#x4E3A; 32bit&#xFF0C;&#x4F46;&#x6B64;&#x5904;&#x6240;&#x4F7F;&#x7528;&#x7684;&#x5BC4;&#x5B58;&#x5668;&#x5747;&#x53EA;&#x6709;&#x4F4E; 8 &#x4F4D;&#x6709;&#x6548;&#xFF08;&#x517C;&#x5BB9; 16550a&#xFF09;</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-c"><span class="hljs-comment">// QEMU</span>
+<span class="hljs-keyword">struct</span> uart_16550a_regs {
+    <span class="hljs-keyword">uint8_t</span> RBR_THR_DLL; <span class="hljs-comment">// 0x00, Receiver Buffer Register/Transmitter Holding Register/Divisor Latch LSB</span>
+    <span class="hljs-keyword">uint8_t</span> IER_DLM; <span class="hljs-comment">// 0x01, Interrupt Enable Register/Divisor Latch MSB</span>
+    <span class="hljs-keyword">uint8_t</span> IIR_FCR; <span class="hljs-comment">// 0x02, Interrupt Identification Register/FIFO Control Register</span>
+    <span class="hljs-keyword">uint8_t</span> LCR; <span class="hljs-comment">// 0x03, Line Control Register</span>
+    <span class="hljs-keyword">uint8_t</span> MCR; <span class="hljs-comment">// 0x04, Modem Control Register</span>
+    <span class="hljs-keyword">uint8_t</span> LSR; <span class="hljs-comment">// 0x05, Line Status Register</span>
+};
+</code></pre>
+<pre><code class="lang-c"><span class="hljs-comment">// D1 board</span>
+<span class="hljs-keyword">struct</span> uart_sunxi_regs {
+    <span class="hljs-keyword">uint32_t</span> RBR_THR_DLL; <span class="hljs-comment">// 0x00, Receiver Buffer Register/Transmitter Holding Register/Divisor Latch LSB</span>
+    <span class="hljs-keyword">uint32_t</span> IER_DLM; <span class="hljs-comment">// 0x04, Interrupt Enable Register/Divisor Latch MSB</span>
+    <span class="hljs-keyword">uint32_t</span> IIR_FCR; <span class="hljs-comment">// 0x08, Interrupt Identification Register/FIFO Control Register</span>
+    <span class="hljs-keyword">uint32_t</span> LCR; <span class="hljs-comment">// 0x0c, Line Control Register</span>
+    <span class="hljs-keyword">uint32_t</span> MCR; <span class="hljs-comment">// 0x10, Modem Control Register</span>
+    <span class="hljs-keyword">uint32_t</span> LSR; <span class="hljs-comment">// 0x14, Line Status Register</span>
+    <span class="hljs-keyword">uint32_t</span> padding1[(<span class="hljs-number">0x007C</span><span class="hljs-number">-0x18</span>)/<span class="hljs-number">4</span>];
+    <span class="hljs-keyword">uint32_t</span> USR; <span class="hljs-comment">// 0x007C, UART Status Register</span>
+    <span class="hljs-keyword">uint32_t</span> padding2[(<span class="hljs-number">0x00A4</span><span class="hljs-number">-0x80</span>)/<span class="hljs-number">4</span>];
+    <span class="hljs-keyword">uint32_t</span> HALT; <span class="hljs-comment">// 0x00A4, UART Halt TX Register</span>
+};
+</code></pre>
+<p>&#x5177;&#x4F53;&#x5BC4;&#x5B58;&#x5668;&#x683C;&#x5F0F;&#x8BF7;&#x53C2;&#x8003; <em>D1_User_Manual_V0.1(Draft Version)</em> &#x7B2C; 899 &#x81F3; 927 &#x9875;&#x3002;&#x8FD9;&#x91CC;&#x6839;&#x636E;&#x51E0;&#x4E2A;&#x6BD4;&#x8F83;&#x91CD;&#x8981;&#x7684;&#x529F;&#x80FD;&#x548C;&#x8BBE;&#x7F6E;&#x6765;&#x4ECB;&#x7ECD;&#x4E00;&#x4E9B;&#x5BC4;&#x5B58;&#x5668;&#x3002;</p>
+<p>RBR &#x662F; UART &#x6A21;&#x5F0F;&#x4E0B;&#x4E32;&#x884C;&#x8F93;&#x5165;&#x7AEF;&#x53E3;&#x4E0A;<strong>&#x63A5;&#x6536;</strong>&#x7684;&#x6570;&#x636E;&#x3002;&#x4EC5;&#x5F53; UART_LSR &#x4E2D;&#x7684;&#x6570;&#x636E;&#x5C31;&#x7EEA;&#xFF08;DR&#xFF09;&#x4F4D;&#x4E3A; 1 &#x65F6;&#x6570;&#x636E;&#x6709;&#x6548;&#x3002;&#x5982;&#x679C;&#x5728; FIFO &#x6A21;&#x5F0F;&#xFF0C;&#x5219;&#x8BE5;&#x5BC4;&#x5B58;&#x5668;&#x8BBF;&#x95EE;&#x63A5;&#x6536; FIFO &#x7684;&#x5934;&#x90E8;&#x3002;THR &#x662F;&#x5728; UART &#x6A21;&#x5F0F;&#x4E0B;&#x7684;&#x4E32;&#x884C;&#x8F93;&#x51FA;&#x7AEF;&#x53E3;&#x4E0A;<strong>&#x53D1;&#x9001;</strong>&#x7684;&#x6570;&#x636E;&#x3002;&#x5BF9;&#x4E8E;&#x8FD9;&#x4E24;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5F53; FIFO &#x5DF2;&#x6EE1;&#x65F6;&#xFF0C;&#x540E;&#x7EED;&#x5230;&#x6765;&#x7684;&#x6570;&#x636E;&#x4F1A;&#x4E22;&#x5931;&#x3002;</p>
+<p>DLL &#x5BC4;&#x5B58;&#x5668;&#x5B58;&#x653E;&#x5206;&#x9891;&#x9664;&#x6570;&#x7684;&#x4F4E;&#x4F4D;&#xFF0C;DLM &#x5BC4;&#x5B58;&#x5668;&#x5B58;&#x653E;&#x5206;&#x9891;&#x9664;&#x6570;&#x7684;&#x9AD8;&#x4F4D;&#x3002;</p>
+<h4 id="&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;&#x5BC4;&#x5B58;&#x5668;&#xFF08;ier&#xFF09;"><a name="&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;&#x5BC4;&#x5B58;&#x5668;&#xFF08;ier&#xFF09;" class="anchor-navigation-ex-anchor" href="#&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;&#x5BC4;&#x5B58;&#x5668;&#xFF08;ier&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;&#x5BC4;&#x5B58;&#x5668;&#xFF08;IER&#xFF09;</h4>
+<p>&#x8981;&#x60F3;&#x4F7F; 16550a &#x80FD;&#x4EA7;&#x751F;&#x4E2D;&#x65AD;&#xFF0C;&#x9700;&#x8981;&#x5C06; IER &#x5BC4;&#x5B58;&#x5668;&#x7684;&#x5BF9;&#x5E94;&#x4E3A;&#x7F6E; 1&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x4F4D;&#x57DF;</th>
+<th>&#x4F4D;&#x57DF;&#x540D;&#x79F0;</th>
+<th>&#x4F4D;&#x5BBD;</th>
+<th>&#x8BBF;&#x95EE;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7:4</td>
+<td>Reserved</td>
+<td>4</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x4FDD;&#x7559;(&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x6709;&#x989D;&#x5916;&#x529F;&#x80FD;&#xFF0C;&#x5FFD;&#x7565;)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>EDSSI</td>
+<td>1</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>Modem &#x72B6;&#x6001;&#x6539;&#x53D8;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ELSI</td>
+<td>1</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x63A5;&#x6536;&#x5668;&#x7EBF;&#x8DEF;&#x72B6;&#x6001;&#x6539;&#x53D8;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>ETBEI</td>
+<td>1</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x53D1;&#x9001;&#x4FDD;&#x5B58;&#x5BC4;&#x5B58;&#x5668;&#x4E3A;&#x7A7A;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</td>
+</tr>
+<tr>
+<td>0</td>
+<td>ERBFI</td>
+<td>1</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x63A5;&#x6536;&#x6709;&#x6548;&#x6570;&#x636E;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="&#x4E2D;&#x65AD;&#x6807;&#x8BC6;&#x5BC4;&#x5B58;&#x5668;&#xFF08;iir&#xFF09;"><a name="&#x4E2D;&#x65AD;&#x6807;&#x8BC6;&#x5BC4;&#x5B58;&#x5668;&#xFF08;iir&#xFF09;" class="anchor-navigation-ex-anchor" href="#&#x4E2D;&#x65AD;&#x6807;&#x8BC6;&#x5BC4;&#x5B58;&#x5668;&#xFF08;iir&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E2D;&#x65AD;&#x6807;&#x8BC6;&#x5BC4;&#x5B58;&#x5668;&#xFF08;IIR&#xFF09;</h4>
+<p>&#x4E2D;&#x65AD;&#x6807;&#x8BC6;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x683C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x4F4D;&#x57DF;</th>
+<th>&#x4F4D;&#x57DF;&#x540D;&#x79F0;</th>
+<th>&#x4F4D;&#x5BBD;</th>
+<th>&#x8BBF;&#x95EE;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7:6</td>
+<td>FEFLAG</td>
+<td>2</td>
+<td>&#x8BFB;</td>
+<td>00:&#x672A;&#x542F;&#x7528; FIFO, 11:&#x5DF2;&#x542F;&#x7528; FIFO, 01: FIFO &#x4E0D;&#x53EF;&#x7528;</td>
+</tr>
+<tr>
+<td>5:4</td>
+<td>Reserved</td>
+<td>2</td>
+<td>&#x8BFB;</td>
+<td>&#x4FDD;&#x7559;</td>
+</tr>
+<tr>
+<td>3:1</td>
+<td>IID</td>
+<td>3</td>
+<td>&#x8BFB;</td>
+<td>&#x4E2D;&#x65AD;&#x6E90;&#x8868;&#x793A;&#x4F4D;&#xFF0C;&#x8BE6;&#x89C1;&#x4E0B;&#x8868;</td>
+</tr>
+<tr>
+<td>0</td>
+<td>INTp</td>
+<td>1</td>
+<td>&#x8BFB;</td>
+<td>&#x4E2D;&#x65AD;&#x5F85;&#x5904;&#x7406;&#x4F4D;&#xFF0C;0 &#x8868;&#x793A;&#x6709;&#x4E2D;&#x65AD;&#x5F85;&#x5904;&#x7406;(&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x914D;&#x5408; IID &#x57DF;&#x6709;&#x989D;&#x5916;&#x529F;&#x80FD;&#xFF0C;&#x5982; 3:0 &#x4E3A; 0111 &#x5219;&#x8868;&#x793A; UART &#x63A7;&#x5236;&#x5668;&#x6B63;&#x5FD9;&#xFF0C;&#x65E0;&#x6CD5;&#x5199;&#x5165;&#x914D;&#x7F6E;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528; CHCFG_AT_BUSY&#xFF0C;&#x89C1;&#x4E0B;&#x6587;)</td>
+</tr>
+</tbody>
+</table>
+<p>16550a &#x53EF;&#x4EA7;&#x751F; 5 &#x79CD;&#x4E2D;&#x65AD;&#xFF0C;&#x8FD9; 5 &#x79CD;&#x4E2D;&#x65AD;&#x7684;&#x53D1;&#x751F;&#x7531;&#x4E0A;&#x8FF0; IER &#x5BC4;&#x5B58;&#x5668;&#x7684;&#x4F4D;&#x63A7;&#x5236;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x4E2D;&#x65AD;&#x6E90;&#x8868;&#x793A;&#x4F4D;</th>
+<th>&#x4F18;&#x5148;&#x7EA7;&#xFF08;1 &#x4E3A;&#x6700;&#x9AD8;&#xFF09;</th>
+<th>&#x4E2D;&#x65AD;&#x7C7B;&#x578B;</th>
+<th>&#x4E2D;&#x65AD;&#x6E90;</th>
+<th>&#x6E05;&#x9664;&#x4E2D;&#x65AD;&#x65B9;&#x6CD5;</th>
+<th>&#x9700;&#x5F00;&#x542F;&#x7684; IER &#x4E2D;&#x65AD;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>011</td>
+<td>1</td>
+<td>&#x63A5;&#x6536;&#x7EBF;&#x8DEF;&#x72B6;&#x6001;&#x6539;&#x53D8; (Receiver line status interrupt)</td>
+<td>&#x7EBF;&#x8DEF;&#x72B6;&#x6001;&#x6539;&#x53D8;&#xFF08;&#x5947;&#x5076;&#x3001;&#x6EA2;&#x51FA;&#x6216;&#x5E27;&#x9519;&#x8BEF;&#xFF0C;&#x6216;&#x6253;&#x65AD;&#x4E2D;&#x65AD;&#xFF09;</td>
+<td>&#x8BFB; LSR</td>
+<td>&#x63A5;&#x6536;&#x5668;&#x7EBF;&#x8DEF;&#x72B6;&#x6001;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</td>
+</tr>
+<tr>
+<td>010</td>
+<td>2</td>
+<td>&#x63A5;&#x6536;&#x5230;&#x6709;&#x6548;&#x6570;&#x636E; (Receiver data interrupt)</td>
+<td>&#x63A5;&#x6536; FIFO &#x5B57;&#x7B26;&#x4E2A;&#x6570;&#x8FBE;&#x5230;&#x89E6;&#x53D1;&#x9608;&#x503C;</td>
+<td>&#x63A5;&#x6536; FIFO &#x7684;&#x5B57;&#x7B26;&#x4E2A;&#x6570;&#x4F4E;&#x4E8E;&#x89E6;&#x53D1;&#x9608;&#x503C;</td>
+<td>&#x63A5;&#x6536;&#x6709;&#x6548;&#x6570;&#x636E;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</td>
+</tr>
+<tr>
+<td>110</td>
+<td>2</td>
+<td>&#x63A5;&#x6536;&#x8D85;&#x65F6; (Character Timeout Indication)</td>
+<td>&#x5728;FIFO &#x81F3;&#x5C11;&#x6709;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x4F46;&#x5728; 4 &#x4E2A;&#x5B57;&#x7B26;&#x65F6;&#x95F4;&#x5185;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x64CD;&#x4F5C;&#xFF0C;&#x5305;&#x62EC;&#x8BFB;&#x548C;&#x5199;&#x64CD;&#x4F5C;</td>
+<td>&#x8BFB;&#x63A5;&#x6536; FIFO</td>
+<td>&#x63A5;&#x6536;&#x6709;&#x6548;&#x6570;&#x636E;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</td>
+</tr>
+<tr>
+<td>001</td>
+<td>3</td>
+<td>&#x53D1;&#x9001;&#x4FDD;&#x5B58;&#x5BC4;&#x5B58;&#x5668;&#x4E3A;&#x7A7A; (Transmitter holding register empty)</td>
+<td>&#x53D1;&#x9001;&#x4FDD;&#x5B58;&#x5BC4;&#x5B58;&#x5668;&#x4E3A;&#x7A7A;</td>
+<td>&#x5199;&#x6570;&#x636E;&#x5230; THR &#x6216;&#x8BFB; IIR</td>
+<td>&#x53D1;&#x9001;&#x4FDD;&#x5B58;&#x5BC4;&#x5B58;&#x5668;&#x4E3A;&#x7A7A;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</td>
+</tr>
+<tr>
+<td>000</td>
+<td>4</td>
+<td>Modem &#x72B6;&#x6001;&#x6539;&#x53D8; (Modem status interrupt)</td>
+<td>MSR &#x5BC4;&#x5B58;&#x5668;&#x6539;&#x53D8;</td>
+<td>&#x8BFB; MSR</td>
+<td>Modem &#x72B6;&#x6001;&#x4E2D;&#x65AD;&#x4F7F;&#x80FD;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fifo-&#x63A7;&#x5236;&#x5BC4;&#x5B58;&#x5668;&#xFF08;fcr&#xFF09;"><a name="fifo-&#x63A7;&#x5236;&#x5BC4;&#x5B58;&#x5668;&#xFF08;fcr&#xFF09;" class="anchor-navigation-ex-anchor" href="#fifo-&#x63A7;&#x5236;&#x5BC4;&#x5B58;&#x5668;&#xFF08;fcr&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>FIFO &#x63A7;&#x5236;&#x5BC4;&#x5B58;&#x5668;&#xFF08;FCR&#xFF09;</h4>
+<p>&#x8FD9;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x4E3B;&#x8981;&#x63A7;&#x5236; FIFO &#x7684;&#x8BBE;&#x7F6E;&#x4E0E;&#x6E05;&#x9664;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x4F4D;&#x57DF;</th>
+<th>&#x4F4D;&#x57DF;&#x540D;&#x79F0;</th>
+<th>&#x4F4D;&#x5BBD;</th>
+<th>&#x8BBF;&#x95EE;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7:6</td>
+<td>TL</td>
+<td>2</td>
+<td>&#x5199;</td>
+<td>&#x63A5;&#x6536; FIFO &#x4E2D;&#x65AD;&#x7684;&#x53D1;&#x751F;&#x9608;&#x503C;&#xFF0C;&apos;00&apos;: 1 &#x5B57;&#x8282;, &apos;01&apos;: 1/4&#x6EE1;(QEMU: 4B, &#x5168;&#x5FD7;: 16B), &apos;10&apos;: 1/2&#x6EE1;(QEMU: 8B, &#x5168;&#x5FD7;: 32B), &apos;11&apos;:&#x8DDD;&#x6EE1;&#x5DEE; 2 &#x5B57;&#x8282;(QEMU: 14B, &#x5168;&#x5FD7;: 62B)</td>
+</tr>
+<tr>
+<td>5:3</td>
+<td>Reserved</td>
+<td>3</td>
+<td>&#x5199;</td>
+<td>&#x4FDD;&#x7559;(&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x6709;&#x989D;&#x5916;&#x529F;&#x80FD;&#xFF0C;&#x5FFD;&#x7565;)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Txset</td>
+<td>1</td>
+<td>&#x5199;</td>
+<td>&#x5199; 1 &#x4EE5;&#x6E05;&#x9664;&#x53D1;&#x9001; FIFO &#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x590D;&#x4F4D;&#x5176;&#x903B;&#x8F91;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Rxset</td>
+<td>1</td>
+<td>&#x5199;</td>
+<td>&#x5199; 1 &#x4EE5;&#x6E05;&#x9664;&#x63A5;&#x6536; FIFO &#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x590D;&#x4F4D;&#x5176;&#x903B;&#x8F91;</td>
+</tr>
+<tr>
+<td>0</td>
+<td>FIFOE</td>
+<td>1</td>
+<td>&#x5199;</td>
+<td>FIFO &#x4F7F;&#x80FD;&#x4F4D;&#xFF0C;&apos;1&apos;: &#x5F00;&#x542F; FIFO, &apos;0&apos;: &#x5173;&#x95ED; FIFO&#x3002;&#x6539;&#x53D8;&#x6B64;&#x4F4D;&#x4F1A;&#x81EA;&#x52A8;&#x590D;&#x4F4D; FIFO</td>
+</tr>
+</tbody>
+</table>
+<h4 id="&#x7EBF;&#x8DEF;&#x63A7;&#x5236;&#x5BC4;&#x5B58;&#x5668;&#xFF08;lcr&#xFF09;"><a name="&#x7EBF;&#x8DEF;&#x63A7;&#x5236;&#x5BC4;&#x5B58;&#x5668;&#xFF08;lcr&#xFF09;" class="anchor-navigation-ex-anchor" href="#&#x7EBF;&#x8DEF;&#x63A7;&#x5236;&#x5BC4;&#x5B58;&#x5668;&#xFF08;lcr&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7EBF;&#x8DEF;&#x63A7;&#x5236;&#x5BC4;&#x5B58;&#x5668;&#xFF08;LCR&#xFF09;</h4>
+<p>&#x8FD9;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x4E3B;&#x8981;&#x63A7;&#x5236;&#x5BC4;&#x5B58;&#x5668;&#x8BBF;&#x95EE;&#x4E0E;&#x6536;&#x53D1;&#x65F6;&#x6570;&#x636E;&#x5E27;&#x7684;&#x683C;&#x5F0F;&#xFF0C;&#x5305;&#x62EC;&#x6821;&#x9A8C;&#x3001;&#x505C;&#x6B62;&#x4F4D;&#x4E0E;&#x5B57;&#x7B26;&#x7684;&#x957F;&#x5EA6;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x4F4D;&#x57DF;</th>
+<th>&#x4F4D;&#x57DF;&#x540D;&#x79F0;</th>
+<th>&#x4F4D;&#x5BBD;</th>
+<th>&#x8BBF;&#x95EE;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>dlab</td>
+<td>1</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x5206;&#x9891;&#x9501;&#x5B58;&#x5668;&#x8BBF;&#x95EE;&#x4F4D;, &apos;1&apos;: &#x8BBF;&#x95EE;&#x64CD;&#x4F5C;&#x5206;&#x9891;&#x9501;&#x5B58;&#x5668;, &apos;0&apos;: &#x8BBF;&#x95EE;&#x64CD;&#x4F5C;&#x6B63;&#x5E38;&#x5BC4;&#x5B58;&#x5668;</td>
+</tr>
+<tr>
+<td>6</td>
+<td>bcb</td>
+<td>1</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x6253;&#x65AD;&#x63A7;&#x5236;&#x4F4D;, &apos;1&apos;: &#x6B64;&#x65F6;&#x4E32;&#x53E3;&#x7684;&#x8F93;&#x51FA;&#x88AB;&#x7F6E;&#x4E3A; 0(&#x6253;&#x65AD;&#x72B6;&#x6001;), &apos;0&apos;: &#x6B63;&#x5E38;&#x64CD;&#x4F5C;</td>
+</tr>
+<tr>
+<td>5</td>
+<td>spb</td>
+<td>1</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x6307;&#x5B9A;&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;, &apos;0&apos;: &#x6B63;&#x5E38;&#x5947;&#x5076;&#x6821;&#x9A8C;, &apos;1&apos;: &#x6821;&#x9A8C;&#x4F4D;&#x6052;&#x4E3A; LCR[4] &#x53D6;&#x53CD;</td>
+</tr>
+<tr>
+<td>4</td>
+<td>eps</td>
+<td>1</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;&#x9009;&#x62E9;, &apos;0&apos;: &#x5947;&#x6821;&#x9A8C;, &apos;1&apos;: &#x5076;&#x6821;&#x9A8C;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>pe</td>
+<td>1</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;&#x4F7F;&#x80FD;, &apos;0&apos;: &#x6CA1;&#x6709;&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;, &apos;1&apos;: &#x5728;&#x53D1;&#x9001;&#x65F6;&#x751F;&#x6210;&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;&#xFF0C;&#x63A5;&#x6536;&#x65F6;&#x68C0;&#x67E5;&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>sb</td>
+<td>1</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x505C;&#x6B62;&#x4F4D;&#x7684;&#x4F4D;&#x6570;, &apos;0&apos;: 1 &#x4E2A;&#x505C;&#x6B62;&#x4F4D;, &apos;1&apos;: &#x5728; 5 &#x4F4D;&#x5B57;&#x7B26;&#x957F;&#x5EA6;&#x65F6;&#x662F; 1.5 &#x4E2A;&#x505C;&#x6B62;&#x4F4D;&#xFF0C;&#x5176;&#x4ED6;&#x957F;&#x5EA6;&#x662F; 2 &#x4E2A;&#x505C;&#x6B62;&#x4F4D;</td>
+</tr>
+<tr>
+<td>1:0</td>
+<td>bec</td>
+<td>2</td>
+<td>&#x8BFB;/&#x5199;</td>
+<td>&#x8BBE;&#x5B9A;&#x6BCF;&#x4E2A;&#x5B57;&#x7B26;&#x7684;&#x4F4D;&#x6570;, &apos;00&apos;: 5 &#x4F4D;, &apos;01&apos;: 6 &#x4F4D;, &apos;10&apos;: 7 &#x4F4D;, &apos;11&apos;: 8 &#x4F4D;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="&#x7EBF;&#x8DEF;&#x72B6;&#x6001;&#x5BC4;&#x5B58;&#x5668;&#xFF08;lsr&#xFF09;"><a name="&#x7EBF;&#x8DEF;&#x72B6;&#x6001;&#x5BC4;&#x5B58;&#x5668;&#xFF08;lsr&#xFF09;" class="anchor-navigation-ex-anchor" href="#&#x7EBF;&#x8DEF;&#x72B6;&#x6001;&#x5BC4;&#x5B58;&#x5668;&#xFF08;lsr&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7EBF;&#x8DEF;&#x72B6;&#x6001;&#x5BC4;&#x5B58;&#x5668;&#xFF08;LSR&#xFF09;</h4>
+<table>
+<thead>
+<tr>
+<th>&#x4F4D;&#x57DF;</th>
+<th>&#x4F4D;&#x57DF;&#x540D;&#x79F0;</th>
+<th>&#x4F4D;&#x5BBD;</th>
+<th>&#x8BBF;&#x95EE;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7</td>
+<td>ERROR</td>
+<td>1</td>
+<td>R</td>
+<td>&#x9519;&#x8BEF;&#x8868;&#x793A;&#x4F4D;, &apos;1&apos;: &#x81F3;&#x5C11;&#x6709;&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;&#x9519;&#x8BEF;&#xFF0C;&#x5E27;&#x9519;&#x8BEF;&#x6216;&#x6253;&#x65AD;&#x4E2D;&#x65AD;&#x7684;&#x4E00;&#x4E2A;, &apos;0&apos;: &#x6CA1;&#x6709;&#x9519;&#x8BEF;</td>
+</tr>
+<tr>
+<td>6</td>
+<td>TE</td>
+<td>1</td>
+<td>R</td>
+<td>&#x53D1;&#x9001;&#x4E3A;&#x7A7A;&#x4E14;&#x7EBF;&#x8DEF;&#x7A7A;&#x95F2;&#x8868;&#x793A;&#x4F4D;, &apos;1&apos;: &#x53D1;&#x9001;&#x5BC4;&#x5B58;&#x5668;/FIFO &#x548C;&#x53D1;&#x9001;&#x79FB;&#x4F4D;&#x5BC4;&#x5B58;&#x5668;&#x90FD;&#x4E3A;&#x7A7A;, &apos;0&apos;: &#x6709;&#x6570;&#x636E;</td>
+</tr>
+<tr>
+<td>5</td>
+<td>THRE</td>
+<td>1</td>
+<td>R</td>
+<td>&#x53D1;&#x9001;&#x5BC4;&#x5B58;&#x5668;/FIFO &#x4E3A;&#x7A7A;&#x8868;&#x793A;&#x4F4D;, &apos;1&apos;: &#x5F53;&#x524D;&#x53D1;&#x9001;&#x5BC4;&#x5B58;&#x5668;/FIFO &#x4E3A;&#x7A7A;, &apos;0&apos;: &#x6709;&#x6570;&#x636E;</td>
+</tr>
+<tr>
+<td>4</td>
+<td>BI</td>
+<td>1</td>
+<td>R</td>
+<td>&#x6253;&#x65AD;&#x4E2D;&#x65AD;&#x8868;&#x793A;&#x4F4D;, &apos;1&apos;: &#x63A5;&#x6536;&#x5230; &#x8D77;&#x59CB;&#x4F4D;&#xFF0B;&#x6570;&#x636E;&#xFF0B;&#x5947;&#x5076;&#x4F4D;&#xFF0B;&#x505C;&#x6B62;&#x4F4D;&#x90FD;&#x662F; 0&#xFF0C;&#x5373;&#x6709;&#x6253;&#x65AD;&#x4E2D;&#x65AD;, &apos;0&apos;: &#x6CA1;&#x6709;&#x6253;&#x65AD;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>FE</td>
+<td>1</td>
+<td>R</td>
+<td>&#x5E27;&#x9519;&#x8BEF;&#x8868;&#x793A;&#x4F4D;, &apos;1&apos;: &#x63A5;&#x6536;&#x7684;&#x6570;&#x636E;&#x6CA1;&#x6709;&#x505C;&#x6B62;&#x4F4D;, &apos;0&apos;: &#x6CA1;&#x6709;&#x9519;&#x8BEF;, &#x8BFB;&#x53D6; LSR &#x5BC4;&#x5B58;&#x5668;&#x540E;&#x81EA;&#x52A8;&#x6E05;&#x7A7A;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>PE</td>
+<td>1</td>
+<td>R</td>
+<td>&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;&#x9519;&#x8BEF;&#x8868;&#x793A;&#x4F4D;, &apos;1&apos;: &#x5F53;&#x524D;&#x63A5;&#x6536;&#x6570;&#x636E;&#x6709;&#x5947;&#x5076;&#x9519;&#x8BEF;, &apos;0&apos;: &#x6CA1;&#x6709;&#x5947;&#x5076;&#x9519;&#x8BEF;, &#x8BFB;&#x53D6; LSR &#x5BC4;&#x5B58;&#x5668;&#x540E;&#x81EA;&#x52A8;&#x6E05;&#x7A7A;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>OE</td>
+<td>1</td>
+<td>R</td>
+<td>&#x6570;&#x636E;&#x6EA2;&#x51FA;&#x8868;&#x793A;&#x4F4D;, &apos;1&apos;: &#x6709;&#x6570;&#x636E;&#x6EA2;&#x51FA;, &apos;0&apos;: &#x65E0;&#x6EA2;&#x51FA;, &#x8BFB;&#x53D6; LSR &#x5BC4;&#x5B58;&#x5668;&#x540E;&#x81EA;&#x52A8;&#x6E05;&#x7A7A;</td>
+</tr>
+<tr>
+<td>0</td>
+<td>DR</td>
+<td>1</td>
+<td>R</td>
+<td>&#x63A5;&#x6536;&#x6570;&#x636E;&#x6709;&#x6548;&#x8868;&#x793A;&#x4F4D;, &apos;0&apos;: &#x5728; FIFO &#x4E2D;&#x65E0;&#x6570;&#x636E;, &apos;1&apos;: &#x5728; FIFO &#x4E2D;&#x6709;&#x6570;&#x636E;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5176;&#x4F59;&#x5BC4;&#x5B58;&#x5668;&#x5982; MCR&#x3001;MSR &#x6211;&#x4EEC;&#x7528;&#x4E0D;&#x5230;&#xFF0C;&#x5C31;&#x4E0D;&#x518D;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h3 id="uart-&#x64CD;&#x4F5C;&#x6A21;&#x5F0F;"><a name="uart-&#x64CD;&#x4F5C;&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#uart-&#x64CD;&#x4F5C;&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>UART &#x64CD;&#x4F5C;&#x6A21;&#x5F0F;</h3>
+<h4 id="&#x6570;&#x636E;&#x5E27;&#x683C;&#x5F0F;"><a name="&#x6570;&#x636E;&#x5E27;&#x683C;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#&#x6570;&#x636E;&#x5E27;&#x683C;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6570;&#x636E;&#x5E27;&#x683C;&#x5F0F;</h4>
+<p>UART_LCR &#x5BC4;&#x5B58;&#x5668;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x6570;&#x636E;&#x5E27;&#x7684;&#x57FA;&#x672C;&#x53C2;&#x6570;&#xFF1A;&#x6570;&#x636E;&#x5BBD;&#x5EA6;(5-8 bits)&#x3001;&#x505C;&#x6B62;&#x4F4D;&#xFF08;1&#x3001;1.5 &#x6216; 2 &#x4F4D;&#x505C;&#x6B62;&#x4F4D;&#xFF09;&#x3001;&#x6821;&#x9A8C;&#x5F62;&#x5F0F;&#x3002;</p>
+<p>UART &#x7684;&#x5E27;&#x4F20;&#x8F93;&#x5305;&#x62EC;&#x542F;&#x52A8;&#x4FE1;&#x53F7;&#x3001;&#x6570;&#x636E;&#x4FE1;&#x53F7;&#x3001;&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;&#x548C;&#x505C;&#x6B62;&#x4FE1;&#x53F7;&#x3002;&#x6700;&#x4F4E;&#x6709;&#x6548;&#x4F4D;&#xFF08;LSB&#xFF09;&#x9996;&#x5148;&#x4F20;&#x8F93;&#x3002;</p>
+<ul>
+<li>&#x5F00;&#x59CB;&#x4FE1;&#x53F7;&#xFF08;&#x5F00;&#x59CB;&#x4F4D;&#xFF09;&#xFF1A;&#x6570;&#x636E;&#x5E27;&#x7684;&#x5F00;&#x59CB;&#x6807;&#x5FD7;&#x3002;&#x6839;&#x636E; UART &#x534F;&#x8BAE;&#xFF0C;&#x5F00;&#x59CB;&#x4F4D;&#x4F20;&#x8F93;&#x4FE1;&#x53F7;&#x4E3A;&#x4F4E;&#x7535;&#x5E73;&#x3002;</li>
+<li>&#x6570;&#x636E;&#x4FE1;&#x53F7;&#xFF08;&#x6570;&#x636E;&#x4F4D;&#xFF09;&#xFF1A;&#x6570;&#x636E;&#x4F4D;&#x5BBD;&#x5EA6;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x4E3A; 5 - 8 &#x4F4D;&#x3002;</li>
+<li>&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;&#xFF1A;1 &#x4F4D;&#x7684;&#x9519;&#x8BEF;&#x6821;&#x6B63;&#x4FE1;&#x53F7;&#x3002;&#x5947;&#x5076;&#x6821;&#x9A8C;&#x4F4D;&#x53EF;&#x901A;&#x8FC7; UART_LCR &#x8BBE;&#x7F6E;&#x5947;&#x6821;&#x9A8C;&#x3001;&#x5076;&#x6821;&#x9A8C;&#x6216;&#x65E0;&#x6821;&#x9A8C;&#x3002;</li>
+<li>&#x505C;&#x6B62;&#x4FE1;&#x53F7;&#xFF08;&#x505C;&#x6B62;&#x4F4D;&#xFF09;&#xFF1A;&#x6570;&#x636E;&#x5E27;&#x7684;&#x505C;&#x6B62;&#x4F4D;&#x3002;UART_LCR &#x5BC4;&#x5B58;&#x5668;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x505C;&#x6B62;&#x4F4D;&#x4E3A; 1 &#x4F4D;&#x3001;1.5 &#x4F4D;&#x6216; 2 &#x4F4D;&#x3002;&#x7ED3;&#x675F;&#x4F4D;&#x4F20;&#x8F93;&#x4FE1;&#x53F7;&#x4E3A;&#x9AD8;&#x7535;&#x5E73;&#x3002;</li>
+</ul>
+<h4 id="&#x6CE2;&#x7279;&#x7387;"><a name="&#x6CE2;&#x7279;&#x7387;" class="anchor-navigation-ex-anchor" href="#&#x6CE2;&#x7279;&#x7387;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6CE2;&#x7279;&#x7387;</h4>
+<p>&#x6CE2;&#x7279;&#x7387;&#x8BA1;&#x7B97;&#x5982;&#x4E0B;&#xFF1A;&#x6CE2;&#x7279;&#x7387; = SCLK /&#xFF08;16 <em> &#x9664;&#x6570;&#xFF09;&#x3002;</em>D1 &#x5F00;&#x53D1;&#x677F;&#x4E2D;&#xFF0C;SCLK &#x901A;&#x5E38;&#x662F; APB1&#xFF0C;&#x53EF;&#x5728; CCU &#x4E2D;&#x8BBE;&#x7F6E;&#x3002;*</p>
+<p>&#x5176;&#x4E2D;&#x9664;&#x6570;&#xFF08;divisor, &#x5206;&#x9891;&#xFF09;&#x6709; 16 &#x4F4D;&#xFF0C;&#x4F4E; 8 &#x4F4D;&#x5728; UART_DLL &#x5BC4;&#x5B58;&#x5668;&#x4E2D;&#xFF0C;&#x9AD8; 8 &#x4F4D;&#x5728; UART_DLH &#x5BC4;&#x5B58;&#x5668;&#x4E2D;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8981;&#x8BBE;&#x7F6E;&#x6CE2;&#x7279;&#x7387;&#x4E3A; 115200&#xFF0C;&#x65F6;&#x949F;&#x6E90;&#x7684;&#x9891;&#x7387;&#x4E3A; 24 MHz&#xFF0C;&#x6839;&#x636E;&#x516C;&#x5F0F;&#x53EF;&#x5F97;&#x9664;&#x6570;&#x7EA6;&#x4E3A; 13.</p>
+<h4 id="dlab-&#x5B9A;&#x4E49;"><a name="dlab-&#x5B9A;&#x4E49;" class="anchor-navigation-ex-anchor" href="#dlab-&#x5B9A;&#x4E49;"><i class="fa fa-link" aria-hidden="true"></i></a>DLAB &#x5B9A;&#x4E49;</h4>
+<p>UART_LCR &#x7684;&#x7B2C; 7 &#x4F4D;&#x4E3A; DLAB(Divisor Latch Access Bit)&#xFF0C;&#x63A7;&#x5236;&#x5206;&#x9891;&#x9501;&#x5B58;&#x5668;&#x7684;&#x8BBF;&#x95EE;&#x3002;</p>
+<ul>
+<li>DLAB = 0&#xFF0C;&#x7B2C;&#x4E00;&#x3001;&#x4E8C;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x662F; UART_RBR/UART_THR (RX/TX FIFO) &#x5BC4;&#x5B58;&#x5668;&#x3001;UART_IER &#x5BC4;&#x5B58;&#x5668;&#x3002;</li>
+<li>DLAB = 1&#xFF0C;&#x7B2C;&#x4E00;&#x3001;&#x4E8C;&#x4E2A;&#x5BC4;&#x5B58;&#x5668;&#x662F; UART_DLL&#xFF08;&#x9664;&#x6570;&#x4F4E;&#x4F4D;&#xFF09;&#x5BC4;&#x5B58;&#x5668;&#x3001;UART_DLH&#xFF08;&#x9664;&#x6570;&#x9AD8;&#x4F4D;&#xFF09;&#x5BC4;&#x5B58;&#x5668;</li>
+</ul>
+<p>&#x521D;&#x59CB;&#x5316;&#x8BBE;&#x7F6E;&#x9664;&#x6570;&#x65F6;&#x987B;&#x8BBE; DLAB = 1&#xFF0C;&#x7ED3;&#x675F;&#x914D;&#x7F6E;&#x65F6;&#x987B;&#x8BBE; DLAB = 0 &#x4EE5;&#x4FBF;&#x8BBF;&#x95EE;&#x6570;&#x636E;&#x3002;</p>
+<h4 id="chcfgatbusy-&#x5B9A;&#x4E49;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF0C;&#x4E0D;&#x80FD;&#x5FFD;&#x7565;&#xFF0C;&#x5426;&#x5219;&#x521D;&#x59CB;&#x5316;&#x4F1A;&#x51FA;&#x9519;&#xFF09;"><a name="chcfgatbusy-&#x5B9A;&#x4E49;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF0C;&#x4E0D;&#x80FD;&#x5FFD;&#x7565;&#xFF0C;&#x5426;&#x5219;&#x521D;&#x59CB;&#x5316;&#x4F1A;&#x51FA;&#x9519;&#xFF09;" class="anchor-navigation-ex-anchor" href="#chcfgatbusy-&#x5B9A;&#x4E49;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF0C;&#x4E0D;&#x80FD;&#x5FFD;&#x7565;&#xFF0C;&#x5426;&#x5219;&#x521D;&#x59CB;&#x5316;&#x4F1A;&#x51FA;&#x9519;&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>CHCFG_AT_BUSY &#x5B9A;&#x4E49;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF0C;&#x4E0D;&#x80FD;&#x5FFD;&#x7565;&#xFF0C;&#x5426;&#x5219;&#x521D;&#x59CB;&#x5316;&#x4F1A;&#x51FA;&#x9519;&#xFF09;</h4>
+<p>CHCFG_AT_BUSY&#xFF08;UART_HALT[1]&#xFF09;&#x548C; CHANGE_UPDATE&#xFF08;UART_HALT[2]&#xFF09;&#x7684;&#x529F;&#x80FD;&#x5982;&#x4E0B;&#x3002;</p>
+<p>CHCFG_AT_BUSY&#xFF1A;&#x542F;&#x7528;&#x8BE5;&#x4F4D;&#xFF0C;&#x5219;&#x8F6F;&#x4EF6;&#x53EF;&#x4EE5;&#x5728; UART &#x7E41;&#x5FD9;&#x65F6;&#x4F9D;&#x7136;&#x8BBE;&#x7F6E; UART &#x63A7;&#x5236;&#x5668;&#xFF0C;&#x4F8B;&#x5982; UART_LCR&#x3001;UART_DLH&#x3001;UART_DLL &#x5BC4;&#x5B58;&#x5668;&#x3002;</p>
+<p>CHANGE_UPDATE&#xFF1A;&#x5982;&#x679C;&#x542F;&#x7528;&#x4E86; CHCFG_AT_BUSY&#xFF0C;&#x5E76;&#x5C06; CHANGE_UPDATE &#x5199;&#x5165; 1&#xFF0C;&#x5219; UART &#x63A7;&#x5236;&#x5668;&#x7684;&#x8BBE;&#x7F6E;&#x4F1A;&#x88AB;&#x66F4;&#x65B0;&#x3002;&#x5B8C;&#x6210;&#x66F4;&#x65B0;&#x540E;&#xFF0C;&#x4F4D;&#x4F1A;&#x81EA;&#x52A8;&#x6E05;&#x9664;&#x5230; 0&#x3002;</p>
+<p>&#x8BBE;&#x7F6E;&#x9664;&#x6570;&#x5E94;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ol>
+<li>&#x8BBE; CHCFG_AT_BUSY = 1</li>
+<li>&#x8BBE; DLAB = 1 &#x5E76;&#x8BBE;&#x7F6E; UART_DLH &#x4E0E; UART_DLL &#x5BC4;&#x5B58;&#x5668;</li>
+<li>&#x8BBE; CHANGE_UPDATE = 1 &#x4EE5;&#x66F4;&#x65B0;&#x914D;&#x7F6E;&#xFF0C;&#x66F4;&#x65B0;&#x5B8C;&#x6210;&#x540E;&#x5C06;&#x4F1A;&#x81EA;&#x52A8;&#x88AB;&#x8BBE;&#x4E3A; 0</li>
+</ol>
+<h4 id="uart-&#x5FD9;&#x6807;&#x5FD7;&#x4F4D;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;"><a name="uart-&#x5FD9;&#x6807;&#x5FD7;&#x4F4D;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;" class="anchor-navigation-ex-anchor" href="#uart-&#x5FD9;&#x6807;&#x5FD7;&#x4F4D;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>UART &#x5FD9;&#x6807;&#x5FD7;&#x4F4D;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</h4>
+<p>UART_USR[0] &#x662F; UART &#x63A7;&#x5236;&#x5668;&#x7684;&#x5FD9;&#x6807;&#x5FD7;&#x4F4D;&#x3002;&#x5F53;&#x6709;&#x6536;&#x53D1;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x6216; FIFO &#x4E0D;&#x4E3A;&#x7A7A;&#x65F6;&#xFF0C;&#x5FD9;&#x6807;&#x5FD7;&#x4F4D;&#x5C31;&#x4F1A;&#x88AB;&#x81EA;&#x52A8;&#x8BBE;&#x4E3A; 1&#xFF0C;&#x8868;&#x660E; UART &#x63A7;&#x5236;&#x5668;&#x6B63;&#x5FD9;&#x3002;</p>
+<h2 id="&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"><a name="&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;" class="anchor-navigation-ex-anchor" href="#&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;</h2>
+<h3 id="uart-&#x63A7;&#x5236;&#x5668;&#x521D;&#x59CB;&#x5316;"><a name="uart-&#x63A7;&#x5236;&#x5668;&#x521D;&#x59CB;&#x5316;" class="anchor-navigation-ex-anchor" href="#uart-&#x63A7;&#x5236;&#x5668;&#x521D;&#x59CB;&#x5316;"><i class="fa fa-link" aria-hidden="true"></i></a>UART &#x63A7;&#x5236;&#x5668;&#x521D;&#x59CB;&#x5316;</h3>
+<p>I/O &#x914D;&#x7F6E;(&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF0C;&#x5FFD;&#x7565;)&#xFF1A;&#x5C06; GPIO &#x591A;&#x8DEF;&#x590D;&#x7528;&#x914D;&#x7F6E;&#x4E3A; UART &#x529F;&#x80FD;&#xFF0C;&#x5E76;&#x5C06; UART &#x5F15;&#x811A;&#x8BBE;&#x7F6E;&#x4E3A;&#x5185;&#x90E8;&#x4E0A;&#x62C9;&#x6A21;&#x5F0F;&#x3002;</p>
+<ol>
+<li>&#x7B49;&#x5F85;&#x53D1;&#x9001;&#x7F13;&#x51B2;&#x533A;&#x6E05;&#x7A7A;&#xFF08;&#x6240;&#x6709;&#x6570;&#x636E;&#x53D1;&#x9001;&#x5B8C;&#xFF09;</li>
+<li>&#x8BBE;&#x7F6E; UART_IER = 0 &#x4EE5;&#x5173;&#x95ED;&#x6240;&#x6709; UART &#x4E2D;&#x65AD;&#xFF0C;&#x907F;&#x514D;&#x5728;&#x672A;&#x8BBE;&#x7F6E;&#x5B8C;&#x6210;&#x65F6;&#x5C31;&#x89E6;&#x53D1;&#x4E2D;&#x65AD;&#x3002;</li>
+</ol>
+<p>&#x6CE2;&#x7279;&#x7387;&#x914D;&#x7F6E;:</p>
+<ol>
+<li>&#x8BA1;&#x7B97; UART &#x6CE2;&#x7279;&#x7387;</li>
+<li>&#x8BBE;&#x7F6E; UART_HALT[HALT_TX] = 1 &#x4EE5;&#x7981;&#x7528;&#x53D1;&#x9001;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</li>
+<li>&#x8BBE;&#x7F6E; UART_HALT[CHCFG_AT_BUSY] = 1 &#x4F7F;&#x5F97; DLL &#x548C; DLM &#x53EF;&#x4EE5;&#x88AB;&#x5199;&#x5165;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</li>
+<li>&#x8BBE;&#x7F6E; UART_LCR[DLAB] = 1&#xFF0C;&#x5176;&#x4ED6;&#x4F4D;&#x4FDD;&#x7559;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#xFF0C;&#x4F7F;&#x7B2C;&#x4E00;&#x7B2C;&#x4E8C;&#x4E2A;&#x7AEF;&#x53E3;&#x8FDB;&#x5165;&#x6CE2;&#x7279;&#x7387;&#x8BBE;&#x7F6E;&#x6A21;&#x5F0F;&#x4EE5;&#x8BBF;&#x95EE;&#x5206;&#x9891;&#x9501;&#x5B58;&#x5668;</li>
+<li>&#x8BBF;&#x95EE; UART_USR[BUSY] &#x4F4D;&#xFF0C;&#x76F4;&#x5230;&#x5176;&#x53D8;&#x4E3A; 0&#xFF0C;&#x7B49;&#x5F85;&#x5230; UART &#x63A7;&#x5236;&#x5668;&#x4E0D;&#x5FD9;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</li>
+<li>&#x5411; UART_DLH &#x5BC4;&#x5B58;&#x5668;&#x5199;&#x5165;&#x5206;&#x9891;&#x7684;&#x9AD8;&#x516B;&#x4F4D;&#xFF0C;&#x5411; UART_DLL &#x5BC4;&#x5B58;&#x5668;&#x5199;&#x5165;&#x5206;&#x9891;&#x7684;&#x4F4E;&#x516B;&#x4F4D;</li>
+<li>&#x8BBE;&#x7F6E; HALT[CHANGE_UPDATE] = 1&#xFF0C;&#x4F7F;&#x5F97; DLL &#x548C; DLM &#x88AB;&#x66F4;&#x65B0;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</li>
+<li>&#x7B49;&#x5F85; HALT[CHANGE_UPDATE] &#x4F4D;&#x7F6E; 0&#xFF0C;&#x8868;&#x793A; DLL &#x548C; DLM &#x5DF2;&#x7ECF;&#x88AB;&#x8BFB;&#x53D6;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</li>
+<li>&#x8BBE;&#x7F6E; UART_HALT[HALT_TX] = 0 &#x4EE5;&#x542F;&#x7528;&#x53D1;&#x9001;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</li>
+</ol>
+<p>&#x63A7;&#x5236;&#x53C2;&#x6570;&#x914D;&#x7F6E;&#xFF1A;</p>
+<ol>
+<li>&#x5199;&#x5165; UART_LCR &#x4EE5;&#x8BBE;&#x7F6E;&#x6570;&#x636E;&#x5BBD;&#x5EA6;&#x3001;&#x505C;&#x6B62;&#x4F4D;&#x3001;&#x5947;&#x5076;&#x6821;&#x9A8C;&#x65B9;&#x5F0F;&#xFF0C;&#x5E76;&#x5199; UART_LCR[DLAB] = 0&#xFF0C;&#x6062;&#x590D;&#x6B63;&#x5E38;&#x6A21;&#x5F0F;</li>
+<li>&#x5199;&#x5165; UART_FCR &#x5BC4;&#x5B58;&#x5668;&#x8BBE;&#x7F6E; FIFO &#x89E6;&#x53D1;&#x6761;&#x4EF6;&#x5E76;&#x542F;&#x7528; FIFO</li>
+</ol>
+<p>&#x4E2D;&#x65AD;&#x914D;&#x7F6E;&#xFF1A;</p>
+<ol>
+<li>&#x8BBE;&#x7F6E; UART_IER[ERBFI] = 1 &#x4EE5;&#x6253;&#x5F00;&#x63A5;&#x6536;&#x6709;&#x6548;&#x4E2D;&#x65AD;</li>
+</ol>
+<p>&#x4E0A;&#x9762;&#x7684;&#x7B49;&#x5F85;&#x90E8;&#x5206;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x8F6E;&#x8BE2;&#x6765;&#x67E5;&#x8BE2;&#x72B6;&#x6001;&#xFF0C;&#x5426;&#x5219;&#x51E0;&#x4E4E;&#x5FC5;&#x7136;&#x4F1A;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x7531;&#x6B64;&#x53EF;&#x89C1; D1 &#x5F00;&#x53D1;&#x677F;&#x7684; UART &#x901F;&#x5EA6;&#x5F88;&#x6162;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4E0D;&#x65AD;&#x5730;&#x786E;&#x4FDD;&#x6240;&#x6709;&#x64CD;&#x4F5C;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x3002;</p>
+<p>&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">// QEMU init</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">uart_16550a_init</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">struct</span> uart_qemu_regs *regs = (<span class="hljs-keyword">struct</span> uart_qemu_regs *)uart_device.uart_start_addr;
+
+    regs-&gt;IER_DLM = <span class="hljs-number">0</span>; <span class="hljs-comment">// &#x5173;&#x95ED; 16550a &#x7684;&#x6240;&#x6709;&#x4E2D;&#x65AD;&#xFF0C;&#x907F;&#x514D;&#x521D;&#x59CB;&#x5316;&#x672A;&#x5B8C;&#x6210;&#x5C31;&#x53D1;&#x751F;&#x4E2D;&#x65AD;</span>
+    <span class="hljs-keyword">while</span>(!(regs-&gt;LSR &amp; (<span class="hljs-number">1</span> &lt;&lt; LSR_THRE))); <span class="hljs-comment">// &#x7B49;&#x5F85;&#x53D1;&#x9001;&#x7F13;&#x51B2;&#x533A;&#x4E3A;&#x7A7A;</span>
+
+    <span class="hljs-comment">// &#x8BBE;&#x7F6E;&#x6CE2;&#x7279;&#x7387;</span>
+    <span class="hljs-keyword">uint8_t</span> divisor_least = uart_device.divisor &amp; <span class="hljs-number">0xFF</span>;
+    <span class="hljs-keyword">uint8_t</span> divisor_most = uart_device.divisor &gt;&gt; <span class="hljs-number">8</span>;
+    regs-&gt;LCR |= <span class="hljs-number">1</span> &lt;&lt; LCR_DLAB; <span class="hljs-comment">// &#x8BBE;&#x7F6E; DLAB=1&#xFF0C;&#x8FDB;&#x5165;&#x6CE2;&#x7279;&#x7387;&#x8BBE;&#x7F6E;&#x6A21;&#x5F0F;&#xFF0C;&#x8BBF;&#x95EE; DLL &#x548C; DLM &#x5BC4;&#x5B58;&#x5668;&#x8BBE;&#x7F6E;&#x6CE2;&#x7279;&#x7387;</span>
+    regs-&gt;IER_DLM = divisor_most; <span class="hljs-comment">// &#x8BBE;&#x7F6E; DLM</span>
+    regs-&gt;RBR_THR_DLL = divisor_least; <span class="hljs-comment">// &#x8BBE;&#x7F6E; DLL</span>
+
+    regs-&gt;LCR = <span class="hljs-number">0</span>b00000011; <span class="hljs-comment">// &#x4E00;&#x6B21;&#x4F20;&#x8F93; 8bit&#xFF08;1&#x5B57;&#x8282;&#xFF09;&#xFF0C;&#x65E0;&#x6821;&#x9A8C;&#xFF0C;1 &#x4F4D;&#x505C;&#x6B62;&#x4F4D;&#xFF0C;&#x7981;&#x7528; break &#x4FE1;&#x53F7;&#xFF0C;&#x8BBE;&#x7F6E; DLAB=0&#xFF0C;&#x8FDB;&#x5165;&#x6570;&#x636E;&#x4F20;&#x8F93;/&#x4E2D;&#x65AD;&#x8BBE;&#x7F6E;&#x6A21;&#x5F0F;</span>
+    regs-&gt;IIR_FCR |= <span class="hljs-number">0</span>b00000001; <span class="hljs-comment">// &#x8BBE;&#x7F6E; FCR[TL]=00&#xFF0C;&#x8BBE;&#x7F6E;&#x4E2D;&#x65AD;&#x9608;&#x503C;&#x4E3A; 1 &#x5B57;&#x8282;&#xFF0C;&#x8BBE;&#x7F6E; FCR[FIFOE]=1&#xFF0C;&#x542F;&#x52A8; FIFO</span>
+    regs-&gt;IER_DLM |= <span class="hljs-number">1</span> &lt;&lt; IER_ERBFI; <span class="hljs-comment">// &#x8BBE;&#x7F6E; IER&#xFF0C;&#x542F;&#x7528;&#x63A5;&#x6536;&#x6570;&#x636E;&#x65F6;&#x53D1;&#x751F;&#x7684;&#x4E2D;&#x65AD;</span>
+
+    uart_device.ops = uart_16550a_ops;
+}
+</code></pre>
+<pre><code class="lang-c"><span class="hljs-comment">// D1 board init</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">uart_16550a_init</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">struct</span> uart_sunxi_regs *regs = (<span class="hljs-keyword">struct</span> uart_sunxi_regs *)uart_device.uart_start_addr;
+    regs-&gt;IER_DLM = <span class="hljs-number">0</span>; <span class="hljs-comment">// &#x5173;&#x95ED; 16550a &#x7684;&#x6240;&#x6709;&#x4E2D;&#x65AD;&#xFF0C;&#x907F;&#x514D;&#x521D;&#x59CB;&#x5316;&#x672A;&#x5B8C;&#x6210;&#x5C31;&#x53D1;&#x751F;&#x4E2D;&#x65AD;</span>
+    <span class="hljs-keyword">while</span>(!(regs-&gt;LSR &amp; (<span class="hljs-number">1</span> &lt;&lt; LSR_THRE))); <span class="hljs-comment">// &#x7B49;&#x5F85;&#x53D1;&#x9001;&#x7F13;&#x51B2;&#x533A;&#x4E3A;&#x7A7A;</span>
+
+    <span class="hljs-comment">// &#x8BBE;&#x7F6E;&#x6CE2;&#x7279;&#x7387;</span>
+    <span class="hljs-keyword">uint8_t</span> divisor_least = uart_device.divisor &amp; <span class="hljs-number">0xFF</span>;
+    <span class="hljs-keyword">uint8_t</span> divisor_most = uart_device.divisor &gt;&gt; <span class="hljs-number">8</span>;
+    regs-&gt;HALT |= <span class="hljs-number">1</span> &lt;&lt; HALT_HALT_TX; <span class="hljs-comment">// &#x5173;&#x95ED;&#x53D1;&#x9001;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</span>
+    regs-&gt;HALT |= <span class="hljs-number">1</span> &lt;&lt; HALT_CHCFG_AT_BUSY; <span class="hljs-comment">// &#x5148;&#x8BBE;&#x7F6E; HALT &#x4E2D;&#x7684; CHCFG_AT_BUSY &#x4F4D;&#xFF0C;&#x4F7F;&#x5F97; DLL &#x548C; DLM &#x53EF;&#x4EE5;&#x88AB;&#x5199;&#x5165;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</span>
+    regs-&gt;LCR |= <span class="hljs-number">1</span> &lt;&lt; LCR_DLAB; <span class="hljs-comment">// &#x8BBE;&#x7F6E; DLAB=1&#xFF0C;&#x8FDB;&#x5165;&#x6CE2;&#x7279;&#x7387;&#x8BBE;&#x7F6E;&#x6A21;&#x5F0F;&#xFF0C;&#x8BBF;&#x95EE; DLL &#x548C; DLM &#x5BC4;&#x5B58;&#x5668;&#x8BBE;&#x7F6E;&#x6CE2;&#x7279;&#x7387;</span>
+    <span class="hljs-keyword">while</span> (regs-&gt;USR &amp; <span class="hljs-number">1</span> &lt;&lt; USR_BUSY); <span class="hljs-comment">// &#x7B49;&#x5F85; USR &#x4E2D;&#x7684; BUSY &#x4F4D;&#x4E3A; 0&#xFF0C;&#x5373;&#x7A7A;&#x95F2;</span>
+    regs-&gt;RBR_THR_DLL = divisor_least; <span class="hljs-comment">// &#x8BBE;&#x7F6E; DLL</span>
+    regs-&gt;IER_DLM = divisor_most; <span class="hljs-comment">// &#x8BBE;&#x7F6E; DLM</span>
+    regs-&gt;HALT |= <span class="hljs-number">1</span> &lt;&lt; HALT_CHANGE_UPDATE; <span class="hljs-comment">// &#x5C06; HALT &#x4E2D;&#x7684; CHANGE_UPDATE &#x4F4D;&#x7F6E; 1&#xFF0C;&#x4F7F;&#x5F97; DLL &#x548C; DLM &#x88AB;&#x66F4;&#x65B0;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</span>
+    <span class="hljs-keyword">while</span> (regs-&gt;HALT &amp; (<span class="hljs-number">1</span> &lt;&lt; HALT_CHANGE_UPDATE)); <span class="hljs-comment">// &#x7B49;&#x5F85; HALT &#x4E2D;&#x7684; CHANGE_UPDATE &#x4F4D;&#x7F6E; 0&#xFF0C;&#x8868;&#x793A; DLL &#x548C; DLM &#x5DF2;&#x7ECF;&#x88AB;&#x8BFB;&#x53D6;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</span>
+    regs-&gt;HALT &amp;= ~(<span class="hljs-number">1</span> &lt;&lt; HALT_HALT_TX); <span class="hljs-comment">// &#x5F00;&#x542F;&#x53D1;&#x9001;&#xFF08;&#x5168;&#x5FD7;&#x5E73;&#x53F0;&#x7279;&#x6709;&#xFF09;</span>
+
+    regs-&gt;LCR = <span class="hljs-number">0</span>b00000011; <span class="hljs-comment">// &#x4E00;&#x6B21;&#x4F20;&#x8F93; 8bit&#xFF08;1&#x5B57;&#x8282;&#xFF09;&#xFF0C;&#x65E0;&#x6821;&#x9A8C;&#xFF0C;1 &#x4F4D;&#x505C;&#x6B62;&#x4F4D;&#xFF0C;&#x7981;&#x7528; break &#x4FE1;&#x53F7;&#xFF0C;&#x8BBE;&#x7F6E; DLAB=0&#xFF0C;&#x8FDB;&#x5165;&#x6570;&#x636E;&#x4F20;&#x8F93;/&#x4E2D;&#x65AD;&#x8BBE;&#x7F6E;&#x6A21;&#x5F0F;</span>
+    regs-&gt;IIR_FCR |= <span class="hljs-number">0</span>b00000001; <span class="hljs-comment">// &#x8BBE;&#x7F6E; FCR[TL]=00&#xFF0C;&#x8BBE;&#x7F6E;&#x4E2D;&#x65AD;&#x9608;&#x503C;&#x4E3A; 1 &#x5B57;&#x8282;&#xFF0C;&#x8BBE;&#x7F6E; FCR[FIFOE]=1&#xFF0C;&#x542F;&#x52A8; FIFO</span>
+    regs-&gt;IER_DLM |= <span class="hljs-number">1</span> &lt;&lt; IER_ERBFI; <span class="hljs-comment">// &#x8BBE;&#x7F6E; IER&#xFF0C;&#x542F;&#x7528;&#x63A5;&#x6536;&#x6570;&#x636E;&#x65F6;&#x53D1;&#x751F;&#x7684;&#x4E2D;&#x65AD;</span>
+
+    uart_device.ops = uart_16550a_ops;
+}
+</code></pre>
+<h3 id="&#x8F6E;&#x8BE2;&#x6A21;&#x5F0F;&#x4E0B;&#x53D1;&#x9001;&#x6570;&#x636E;"><a name="&#x8F6E;&#x8BE2;&#x6A21;&#x5F0F;&#x4E0B;&#x53D1;&#x9001;&#x6570;&#x636E;" class="anchor-navigation-ex-anchor" href="#&#x8F6E;&#x8BE2;&#x6A21;&#x5F0F;&#x4E0B;&#x53D1;&#x9001;&#x6570;&#x636E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F6E;&#x8BE2;&#x6A21;&#x5F0F;&#x4E0B;&#x53D1;&#x9001;&#x6570;&#x636E;</h3>
+<p>&#x5728;&#x6211;&#x4EEC;&#x7684;&#x5B9E;&#x9A8C;&#x4E2D; UART &#x4E00;&#x6B21;&#x53D1;&#x9001;&#x7684;&#x91CF;&#x901A;&#x5E38;&#x8F83;&#x5C0F;&#xFF0C;&#x56E0;&#x6B64;&#x9009;&#x62E9;&#x7B80;&#x5355;&#x7684;&#x8F6E;&#x8BE2;&#x6A21;&#x5F0F;&#x53D1;&#x9001;&#x6570;&#x636E;&#x3002;</p>
+<ol>
+<li>&#x68C0;&#x67E5; UART_LSR[THRE] &#x4EE5;&#x68C0;&#x67E5;&#x53D1;&#x9001; FIFO &#x662F;&#x5426;&#x4E3A;&#x7A7A;&#x3002;&#x82E5; UART_LSR[THRE] = 0&#xFF0C;&#x5219;&#x8868;&#x660E;&#x53D1;&#x9001; FIFO &#x4E2D;&#x7684;&#x4ECD;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x7B49;&#x5F85;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x5B8C;&#x6210;</li>
+<li>&#x5199;&#x5165;&#x5C06;&#x8981;&#x88AB;&#x4F20;&#x9001;&#x7684;&#x6570;&#x636E;&#x81F3; UART_THR &#x5BC4;&#x5B58;&#x5668;</li>
+</ol>
+<p>&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">uart_16550a_directly_write</span><span class="hljs-params">(int8_t c)</span>
+</span>{
+    regs-&gt;RBR_THR_DLL = c; <span class="hljs-comment">/* write THR */</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">uart_16550a_putc</span><span class="hljs-params">(int8_t c)</span>
+</span>{
+    <span class="hljs-keyword">while</span> (!(regs-&gt;LSR &amp; (<span class="hljs-number">1</span> &lt;&lt; LSR_THRE)))
+        ;
+    uart_16550a_directly_write(c);
+}
+</code></pre>
+<h3 id="&#x4E2D;&#x65AD;&#x6A21;&#x5F0F;&#x4E2D;&#x63A5;&#x6536;&#x6570;&#x636E;"><a name="&#x4E2D;&#x65AD;&#x6A21;&#x5F0F;&#x4E2D;&#x63A5;&#x6536;&#x6570;&#x636E;" class="anchor-navigation-ex-anchor" href="#&#x4E2D;&#x65AD;&#x6A21;&#x5F0F;&#x4E2D;&#x63A5;&#x6536;&#x6570;&#x636E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E2D;&#x65AD;&#x6A21;&#x5F0F;&#x4E2D;&#x63A5;&#x6536;&#x6570;&#x636E;</h3>
+<ol>
+<li>&#x8BBE;&#x7F6E; UART_IER[ERBFI] = 1 &#x4EE5;&#x542F;&#x7528; UART &#x63A5;&#x6536;&#x4E2D;&#x65AD;</li>
+<li>&#x5F53;&#x63A5;&#x6536; FIFO &#x7684;&#x6570;&#x636E;&#x8FBE;&#x5230;&#x89E6;&#x53D1;&#x6761;&#x4EF6;&#x65F6;&#xFF08;&#x5982;&#x8FBE;&#x5230;&#x89E6;&#x53D1;&#x9608;&#x503C;&#x6216;&#x8D85;&#x65F6;)&#xFF0C;UART &#x63A5;&#x53D7;&#x4E2D;&#x65AD;&#x4FE1;&#x53F7;&#x5C06;&#x4F1A;&#x4EA7;&#x751F;</li>
+<li>&#x8BFB;&#x53D6; UART_LSR[DR] &#x68C0;&#x67E5; RX_FIFO &#x72B6;&#x6001;&#xFF0C;&#x82E5;&#x8BE5;&#x4F4D;&#x4E3A; 1&#xFF0C;&#x7EE7;&#x7EED;&#x4ECE; UART_RBR &#x8BFB;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x76F4;&#x81F3;&#x8BE5;&#x4F4D;&#x53D8;&#x4E3A; 0&#xFF0C;&#x63A5;&#x6536;&#x7ED3;&#x675F;</li>
+</ol>
+<p>&#x540C;&#x65F6;&#x6211;&#x4EEC;&#x5728;&#x4E2D;&#x65AD;&#x53D1;&#x751F;&#x65F6;&#x53D1;&#x9001;&#x63A5;&#x6536;&#x5230;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">int8_t</span> uart_16550a_read()
+{
+    <span class="hljs-keyword">return</span> regs-&gt;RBR_THR_DLL; <span class="hljs-comment">/* read RBR */</span>
+}
+
+<span class="hljs-comment">// QEMU interrupt handler</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">uart_16550a_interrupt_handler</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">while</span> (regs-&gt;LSR &amp; (<span class="hljs-number">1</span> &lt;&lt; LSR_DR)) {
+        <span class="hljs-keyword">int8_t</span> c = uart_read();
+        <span class="hljs-keyword">if</span> (c &gt; <span class="hljs-number">-1</span>)
+            uart_16550a_putc(c);
+    }
+}
+</code></pre>
+<p>&#x5BF9;&#x4E8E; D1 &#x5F00;&#x53D1;&#x677F;&#xFF0C;&#x5728;&#x521D;&#x59CB;&#x5316;&#x5199;&#x5165;&#x5206;&#x9891;&#x9664;&#x6570;&#x65F6;&#x4F1A;&#x4EA7;&#x751F;&#x4E00;&#x4E2A; UART busy &#x4E2D;&#x65AD;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x4E2D;&#x5904;&#x7406;&#xFF1A;</p>
+<pre><code class="lang-c"><span class="hljs-comment">// D1 board interrupt handler</span>
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">uart_16550a_interrupt_handler</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">struct</span> uart_sunxi_regs *regs = (<span class="hljs-keyword">struct</span> uart_sunxi_regs *)uart_device.uart_start_addr;
+    <span class="hljs-keyword">if</span> ((regs-&gt;IIR_FCR &amp; IIR_IID_MASK) == UART_BUSY_VALUE)     <span class="hljs-comment">// &#x5904;&#x7406;&#x6709;&#x65F6;&#x4ECD;&#x53EF;&#x80FD;&#x4F1A;&#x53D1;&#x751F;&#x7684; UART busy &#x4E2D;&#x65AD;&#xFF0C;&#x6807;&#x5FD7;&#x662F; UART_IIR &#x5BC4;&#x5B58;&#x5668;&#x7684;&#x4F4E; 4 &#x4F4D;&#x4E3A; 0111</span>
+        regs-&gt;USR;  <span class="hljs-comment">// &#x5904;&#x7406;&#x65B9;&#x6CD5;&#x662F;&#x8BFB;&#x53D6; regs-&gt;USR &#x4EE5;&#x6E05;&#x9664;&#x4E2D;&#x65AD;</span>
+    <span class="hljs-keyword">while</span> (regs-&gt;LSR &amp; (<span class="hljs-number">1</span> &lt;&lt; LSR_DR)) {
+        <span class="hljs-keyword">int8_t</span> c = uart_read();
+        <span class="hljs-keyword">if</span> (c &gt; <span class="hljs-number">-1</span>)
+            uart_16550a_putc(c);
+    }
+}
+</code></pre>
+<footer class="page-footer-ex"> <span class="page-footer-ex-copyright"> By <a href="https://github.com/ytf4425" target="_blank">Hanabi</a>&#xFF0C;&#x4F7F;&#x7528;<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">&#x7F72;&#x540D;-&#x975E;&#x5546;&#x4E1A;&#x6027;&#x4F7F;&#x7528;-&#x76F8;&#x540C;&#x65B9;&#x5F0F;&#x5171;&#x4EAB; 4.0 &#x56FD;&#x9645;</a>&#x53D1;&#x5E03; </span> &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; <span class="page-footer-ex-footer-update"> &#x6B64;&#x9875;&#x9762;&#x4FEE;&#x8BA2;&#x4E8E;&#xFF1A; 2023-03-14 01:12:40 </span> </footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="plic.html" class="navigation navigation-prev " aria-label="Previous page: PLIC">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="goldfish_RTC.html" class="navigation navigation-next " aria-label="Next page: RTC">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"UART","level":"1.4.2","depth":2,"next":{"title":"RTC","level":"1.4.3","depth":2,"path":"interrupt/goldfish_RTC.md","ref":"interrupt/goldfish_RTC.md","articles":[]},"previous":{"title":"PLIC","level":"1.4.1","depth":2,"path":"interrupt/plic.md","ref":"interrupt/plic.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","-search","search-pro","-sharing","sharing-plus","github-buttons","anchor-navigation-ex","page-footer-ex","splitter","copy-code-button","expandable-chapters-small","katex"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"page-footer-ex":{"copyright":"By [Hanabi](https://github.com/ytf4425)，使用[署名-非商业性使用-相同方式共享 4.0 国际](http://creativecommons.org/licenses/by-nc-sa/4.0/)发布","markdown":true,"update_format":"YYYY-MM-DD HH:mm:ss","update_label":"此页面修订于："},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"katex":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":false},"github-buttons":{"buttons":[{"user":"LZU-OSLab","repo":"step_by_step_doc","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"copy-code-button":{},"sharing":{"all":["douban","facebook","google","instapaper","linkedin","twitter","weibo","qq","qzone","viber","whatsapp"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Hanabi","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Code an OS Handbook","language":"zh-hans","gitbook":"*"},"file":{"path":"interrupt/uart.md","mtime":"2023-03-14T01:12:40.462Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-03-14T01:13:16.286Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-expandable-chapters-small/expandable-chapters-small.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
